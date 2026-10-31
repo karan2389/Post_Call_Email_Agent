@@ -1,6 +1,6 @@
 # handoff.md
 
-_Last updated: 2026-10-31 — Phase 0 complete and approved; Phase 1 decisions recorded._
+_Last updated: 2026-10-31 — Phase 0 complete and approved; repository moved to `C:\dev\post-call-email-agent`._
 
 ## Completed work
 
@@ -21,6 +21,12 @@ _Last updated: 2026-10-31 — Phase 0 complete and approved; Phase 1 decisions r
   - D-019 wait window 1 day after first deferral (OD-25 resolved). Clarified the rule: eligibility is rechecked **before** expiry, and waiting records past `pending_until` are still pulled into the queue once more. Added EV-52b and EV-52c; rewrote EV-52.
   - D-020 Python 3.12 + `uv`; repo to move out of OneDrive (OD-21 mostly resolved).
 
+### Task 4 — Repository move
+- Copied the repository (including `.git`) from `C:\Users\karan\OneDrive\Documents\POST-CALL-EMAIL-AGENT` to `C:\dev\post-call-email-agent`.
+- Verified: `git fsck --full` clean, both commits present, working tree clean, all 33 tracked files byte-identical (SHA-256).
+- Updated location references in CLAUDE.md, memory.md, ROADMAP.md, docs/security-privacy.md, docs/open-decisions.md, docs/decisions/decision-log.md.
+- The OneDrive copy was **not** deleted. It is obsolete and should not be edited.
+
 ## Files modified in Task 3
 
 ```
@@ -36,22 +42,21 @@ Phase 0 complete and approved. Documentation only: **no application code, no API
 
 ## Pending work
 
-- Choose the target folder outside OneDrive and move the repository (D-020).
 - Install Python 3.12 and `uv`.
+- User decides whether to delete the obsolete OneDrive copy.
 - Explicit go-ahead for Phase 1.
 
 ## Errors / blockers
 
 - **Python 3.12 not installed.** It blocks Phase 1. On Windows, add `tzdata` as a dependency for `zoneinfo`.
-- Repository still inside OneDrive until moved.
 - Open decisions by phase (full list in `docs/open-decisions.md`):
-  - Phase 1: none blocking (remaining OD-21 detail: target folder).
+  - Phase 1: none blocking.
   - Phase 2: OD-05, OD-08, OD-09, OD-11, OD-12, OD-13.
   - Phase 3: OD-01, OD-02, OD-04, OD-10, OD-18, OD-20, OD-26, OD-28.
 
 ## Exact next steps
 
-1. User picks a non-synced folder (e.g. `C:\dev\post-call-email-agent`). Move the repo there (`git` history moves with the folder) and open the new folder as the Claude Code working directory. Afterwards, delete the OneDrive copy (or leave it as a read-only backup).
+1. Work only in `C:\dev\post-call-email-agent` from now on. Optionally delete the obsolete OneDrive copy.
 2. Install Python 3.12 (python.org) and `uv`; verify `python --version` and `uv --version`.
 3. On go-ahead, start Phase 1:
    - `pyproject.toml` (Python 3.12, `tzdata`, `pytest`);

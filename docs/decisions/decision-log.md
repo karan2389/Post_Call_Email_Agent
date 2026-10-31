@@ -78,4 +78,5 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 **Consequences:** A call is normally either emailed or closed by the second run after its call date (e.g. call 30 Oct → closed by the 2 Nov run).
 
 ### D-020 — Python 3.12 with uv; repository outside OneDrive (2026-10-31)
-**Decision:** Python 3.12 from python.org, dependencies managed with `uv`. Move the repository out of OneDrive to a non-synced folder before Phase 1 code is written. Resolves the main part of OD-21 (target folder and remote hosting still open).
+**Decision:** Python 3.12 from python.org, dependencies managed with `uv`. Move the repository out of OneDrive to a non-synced folder before Phase 1 code is written. Resolves the main part of OD-21 (remote hosting still open).
+**Update (2026-10-31):** Repository moved to `C:\dev\post-call-email-agent`.

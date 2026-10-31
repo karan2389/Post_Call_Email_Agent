@@ -15,7 +15,7 @@ Each phase requires explicit user approval before it starts. Exit criteria must 
 **Exit:** user approves documentation and skills.
 
 ## Phase 1 — Local foundations (no external services)
-- Move the repository out of OneDrive (D-020); install Python 3.12 and `uv`; `pyproject.toml` (include `tzdata`).
+- ~~Move the repository out of OneDrive~~ (done: `C:\dev\post-call-email-agent`); install Python 3.12 and `uv`; `pyproject.toml` (include `tzdata`).
 - Package skeleton under `src/post_call_agent/`.
 - Typed models (`CallRecord`, `AnalysisResult`, `CustomerSummary`, `EmailDraft`, `ValidationResult`, `TrackingRecord`).
 - Configuration loader (env + YAML), injectable clock and timezone utilities (Asia/Kolkata).

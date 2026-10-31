@@ -12,12 +12,11 @@ Status: **Approved principles.** Retention periods and access lists are open (OD
 | Credentials (Anthropic key, Google credentials) | Secret | Secret Manager (prod); local `.env`/key file **outside OneDrive** (dev) | Git, OneDrive, logs, docs, chat |
 | Call IDs, statuses, reason codes, counts | Low | Tracking sheet, logs | — |
 
-## 2. Workspace rules (OneDrive)
+## 2. Workspace rules
 
-- The repository is inside OneDrive, which syncs to the cloud. Treat everything in it as potentially shared.
+- The repository lives at `C:\dev\post-call-email-agent`, outside OneDrive (D-020). OneDrive sync can corrupt `.git` internals and sync files mid-write, and it uploads content to the cloud.
 - Only synthetic data in `tests/fixtures/` and `outputs/`.
-- Local credential files, when they exist (Phase 3+), must be stored **outside** the OneDrive folder and referenced by path in `.env`.
-- The Git repository will be moved out of OneDrive before Phase 1 code (D-020): OneDrive sync can corrupt `.git` internals and sync files mid-write.
+- Local credential files, when they exist (Phase 3+), must be stored outside the repository and outside OneDrive, and referenced by path in `.env`.
 
 ## 3. Logging rules
 

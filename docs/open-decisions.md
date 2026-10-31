@@ -51,7 +51,7 @@ Every unresolved decision lives here with a recommendation. When one is decided:
 |---|---|---|---|
 | OD-18 | `POST_CALL_EMAIL_LOGS` (and `POST_CALL_EMAIL_EVENTS`) in the same spreadsheet as the source, or a separate spreadsheet? *(Partly resolved: logs hold the final email body — D-014.)* | Separate spreadsheet, so access to email bodies can be restricted without affecting the source sheet | Phase 3 |
 | OD-19 | Retention period for log data and email bodies; who can access `POST_CALL_EMAIL_LOGS` | Define with management; restrict to support leads | Phase 5 |
-| OD-21 | ~~Python setup and repo location~~ — **Resolved → D-020:** Python 3.12 + `uv`; move the repo out of OneDrive. Still open: exact target folder, and remote Git hosting (recommend a private GitHub repo) | Choose a non-synced folder, e.g. `C:\dev\post-call-email-agent` | Phase 1 (folder); remote hosting before Phase 6 |
+| OD-21 | ~~Python setup and repo location~~ — **Resolved → D-020:** Python 3.12 + `uv`; repo moved to `C:\dev\post-call-email-agent`. Still open: remote Git hosting | Private GitHub repository | Before Phase 6 |
 | OD-17 | Cloud Run Job vs Service; exact daily run time *(Partly resolved: once-daily previous-day processing — D-013)* | Cloud Run Job at 09:00 IST, so previous-evening transcripts have arrived and customers receive the email in the morning | Phase 6 |
 | OD-27 | Add a second daily run (e.g. 15:00 IST) so transcripts that arrive late are picked up the same day instead of the next morning? Same code, same target date, idempotent | Optional; start with one run, add the second if pilot data shows many deferrals | Phase 6 |
 | OD-22 | GCP project, region, billing, service accounts | Dedicated project; region decided with IT | Phase 6 |

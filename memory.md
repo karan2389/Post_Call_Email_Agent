@@ -6,7 +6,8 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - 2026-10-31 — Phase 0 initialisation complete: structure, Git, documentation, four SKILL.md specs.
 - 2026-10-31 — Previous-day processing requirement designed (D-013 … D-016, `docs/pipeline.md`).
-- 2026-10-31 — User approved the Phase 0 documentation and previous-day design; initial commit `642f7ea`. Then decided D-017 … D-020. Phase 1 not yet started (needs Python 3.12, repo move, go-ahead).
+- 2026-10-31 — User approved the Phase 0 documentation and previous-day design; initial commit `642f7ea`. Then decided D-017 … D-020. Phase 1 not yet started (needs Python 3.12 + uv, go-ahead).
+- 2026-10-31 — Repository moved (copied with full Git history, verified by `git fsck` and file hashes) to `C:\dev\post-call-email-agent`. The old OneDrive copy at `C:\Users\karan\OneDrive\Documents\POST-CALL-EMAIL-AGENT` is obsolete.
 
 ## Accepted decisions (D-001 … D-016)
 
@@ -45,5 +46,5 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 ## Environment
 
-- Workspace is currently inside OneDrive (syncs to cloud) — synthetic data only; decided to move it out (D-020), target folder not yet chosen.
+- Repository lives at `C:\dev\post-call-email-agent` (not synced). Synthetic data only still applies.
 - Python is **not installed** on the dev machine (Store alias only). Git 2.55 available. Repo initialised on `main`, no commits yet.

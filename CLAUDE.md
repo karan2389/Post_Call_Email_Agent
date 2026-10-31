@@ -36,7 +36,7 @@ The current phase is recorded in `ROADMAP.md` and `handoff.md`. Until the user e
 - **Data source:** Google Sheets is the only source of customer info, transcripts and Fathom URLs in the MVP. No Fathom API/MCP integration.
 - **Call ID:** stable and immutable. Verified Fathom recording ID if available, otherwise a generated UUID assigned once. **Never** use spreadsheet row numbers for identity or duplicate prevention. See `docs/call-id-strategy.md`.
 - **Delivery state machine:** `PENDING → PROCESSING → VALIDATING → SENDING → SENT`, plus terminal `SKIPPED` and retryable `FAILED`. See `docs/delivery-state-machine.md`.
-- **Environment:** Python 3.12 managed with `uv`. The repository is to live outside OneDrive (D-020).
+- **Environment:** Python 3.12 managed with `uv`. The repository lives at `C:\dev\post-call-email-agent`, outside OneDrive (D-020).
 - **Idempotency:** a send may only happen from `SENDING`, after the tracking row records the planned `rfc822_message_id`. Ambiguous sends are reconciled against Gmail; when still ambiguous, never auto-resend.
 - **Skills:** `skills/*/SKILL.md` are the single source of truth for LLM instructions and are **explicitly loaded by the Python runtime** (`docs/skills-runtime.md`). Claude Code does not execute them in production.
 - **Models:** never hardcode Anthropic model IDs. They come from configuration/environment and are unset until confirmed (OD-12).
@@ -49,7 +49,7 @@ The current phase is recorded in `ROADMAP.md` and `handoff.md`. Until the user e
 
 ## 6. Data protection rules
 
-- This workspace lives inside OneDrive. **Never** store real customer transcripts, names, emails or credentials in this folder, in Git, or in ordinary logs.
+- **Never** store real customer transcripts, names, emails or credentials in this folder, in Git, in OneDrive or in ordinary logs.
 - Test data must be synthetic: obviously fake names, `@example.com` addresses, invented companies.
 - Logs contain identifiers and codes (`call_id`, status, reason codes, counts) — never transcript text, email bodies or customer email addresses.
 - `.env`, credential files, `outputs/` and `logs/` contents are git-ignored. Verify with `git check-ignore` when adding new file types.
