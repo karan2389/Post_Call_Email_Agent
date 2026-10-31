@@ -43,7 +43,7 @@ Phase 0 complete and approved. Documentation only: **no application code, no API
 ## Pending work
 
 - Install Python 3.12 and `uv`.
-- User decides whether to delete the obsolete OneDrive copy.
+- The obsolete OneDrive copy is kept for now as a backup (user decision, 2026-10-31). Do not edit it.
 - Explicit go-ahead for Phase 1.
 
 ## Errors / blockers
@@ -56,7 +56,7 @@ Phase 0 complete and approved. Documentation only: **no application code, no API
 
 ## Exact next steps
 
-1. Work only in `C:\dev\post-call-email-agent` from now on. Optionally delete the obsolete OneDrive copy.
+1. Work only in `C:\dev\post-call-email-agent` from now on. The OneDrive copy stays as a backup until the user says otherwise.
 2. Install Python 3.12 (python.org) and `uv`; verify `python --version` and `uv --version`.
 3. On go-ahead, start Phase 1:
    - `pyproject.toml` (Python 3.12, `tzdata`, `pytest`);
