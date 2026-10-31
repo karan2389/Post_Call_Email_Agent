@@ -12,8 +12,8 @@ Every unresolved decision lives here with a recommendation. When one is decided:
 | OD-02 | Where generated Call IDs are stored: agent writes a `call_id` column in the source sheet (A), or upstream generates it (B) | **A**, with the column protected from manual edits | Phase 3 |
 | OD-03 | Is a verified Fathom recording ID available (dedicated column, or confirmed URL pattern)? | Use a dedicated column if the upstream can provide it; otherwise generated IDs only | Phase 3 (non-blocking: falls back to generated IDs) |
 | OD-04 | How is "shareable" determined without the Fathom API: (a) upstream `recording_shareable` column, (b) a confirmed share-link URL pattern, or (c) a Fathom workspace setting that makes all recordings viewable by link | (a) if upstream can provide it; otherwise (c) confirmed in writing plus (b) as a format check. Until decided, eligibility check E10 defers (`FATHOM_NOT_SHAREABLE`) | Phase 3 |
-| OD-24 | Discovery lookback: strictly previous day (`0`) or also re-scan the last N days for calls missed by a failed/skipped run | `2` days. Duplicates are impossible either way; lookback only self-heals missed runs | Phase 1 (config default) |
-| OD-25 | Wait window for late data (`transcript_wait_days`) — how long a call waits for a transcript or missing details before being skipped | `3` days after the call date | Phase 1 (config default) |
+| OD-24 | ~~Discovery lookback~~ | **Resolved → D-018:** 2 days | — |
+| OD-25 | ~~Wait window for late data~~ | **Resolved → D-019:** 1 day after the first deferral | — |
 | OD-26 | Does the source sheet have (or can it get) a `call_status` column, and what are the exact values for cancelled and no-show? | Add `call_status` with `completed` / `cancelled` / `no_show`; transcript analysis remains the fallback for no-shows | Phase 3 |
 | OD-28 | How call dates are stored in the sheet (date cells vs text, format, separate date/time columns) and the spreadsheet's timezone setting | Real date cells; spreadsheet timezone set to Asia/Kolkata; if text, ISO `YYYY-MM-DD HH:MM` | Phase 3 |
 
@@ -41,7 +41,7 @@ Every unresolved decision lives here with a recommendation. When one is decided:
 | ID | Decision | Recommendation | Blocks |
 |---|---|---|---|
 | OD-14 | Retry policy: max attempts, backoff; whether a verified-absent `SEND_UNCONFIRMED` may auto-retry | 3 attempts; `SEND_UNCONFIRMED` always manual in MVP | Phase 4 |
-| OD-15 | Add `SENDING` state to the approved six states | **Yes** (see `delivery-state-machine.md` §1) | Phase 1 |
+| OD-15 | ~~Add `SENDING` state~~ | **Resolved → D-017:** yes | — |
 | OD-16 | Does Gmail API preserve a client-supplied `Message-ID` header? (technical verification) | Verify in Phase 4 with a test mailbox; fallback is header-based Sent search | Phase 4 |
 | OD-20 | Manual reprocess mechanism for `SKIPPED`/`FAILED` rows (e.g. operator sets a `reprocess` flag) | Add a `reprocess_requested` column in tracking, processed only for non-`SENT` rows | Phase 3 |
 
@@ -51,7 +51,7 @@ Every unresolved decision lives here with a recommendation. When one is decided:
 |---|---|---|---|
 | OD-18 | `POST_CALL_EMAIL_LOGS` (and `POST_CALL_EMAIL_EVENTS`) in the same spreadsheet as the source, or a separate spreadsheet? *(Partly resolved: logs hold the final email body — D-014.)* | Separate spreadsheet, so access to email bodies can be restricted without affecting the source sheet | Phase 3 |
 | OD-19 | Retention period for log data and email bodies; who can access `POST_CALL_EMAIL_LOGS` | Define with management; restrict to support leads | Phase 5 |
-| OD-21 | Python installation method, package manager (uv vs pip+venv), remote Git hosting, moving repo out of OneDrive | Python 3.12 from python.org; `uv`; GitHub private repo; move repo out of OneDrive | Phase 1 |
+| OD-21 | ~~Python setup and repo location~~ — **Resolved → D-020:** Python 3.12 + `uv`; move the repo out of OneDrive. Still open: exact target folder, and remote Git hosting (recommend a private GitHub repo) | Choose a non-synced folder, e.g. `C:\dev\post-call-email-agent` | Phase 1 (folder); remote hosting before Phase 6 |
 | OD-17 | Cloud Run Job vs Service; exact daily run time *(Partly resolved: once-daily previous-day processing — D-013)* | Cloud Run Job at 09:00 IST, so previous-evening transcripts have arrived and customers receive the email in the morning | Phase 6 |
 | OD-27 | Add a second daily run (e.g. 15:00 IST) so transcripts that arrive late are picked up the same day instead of the next morning? Same code, same target date, idempotent | Optional; start with one run, add the second if pilot data shows many deferrals | Phase 6 |
 | OD-22 | GCP project, region, billing, service accounts | Dedicated project; region decided with IT | Phase 6 |

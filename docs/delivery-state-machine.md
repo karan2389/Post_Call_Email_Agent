@@ -1,6 +1,6 @@
 # Delivery State Machine, Idempotency and Recovery
 
-Status: **Approved design**, except `SENDING`, which is a proposed addition pending confirmation (OD-15).
+Status: **Approved design**, including the `SENDING` state (D-017).
 
 ## 1. States
 
@@ -9,7 +9,7 @@ Status: **Approved design**, except `SENDING`, which is a proposed addition pend
 | `PENDING` | Call discovered, Call ID assigned, waiting to be processed. If `pending_reason` is set, the record is **waiting for data** (e.g. transcript not yet available) and is rechecked each run until `pending_until` | No |
 | `PROCESSING` | Claimed by a run: eligibility, analysis, summary, generation | No |
 | `VALIDATING` | Draft exists; deterministic and semantic validation running | No |
-| `SENDING` *(proposed)* | Validation passed; planned Message-ID recorded; Gmail send in progress | No |
+| `SENDING` | Validation passed; planned Message-ID recorded; Gmail send in progress | No |
 | `SENT` | Gmail accepted the message; Gmail message ID recorded | **Yes** |
 | `SKIPPED` | Not sent for a data, policy or content reason | **Yes** (manual reprocess only, OD-20) |
 | `FAILED` | Technical failure; may be retried | No, until retry limit |
@@ -43,7 +43,7 @@ Status: **Approved design**, except `SENDING`, which is a proposed addition pend
 |---|---|---|---|
 | — | `PENDING` | New Call ID seen for the target date | identity and customer columns, `call_date`, `target_date`, `first_seen_at` |
 | `PENDING` | `PENDING` | Eligibility returns `DEFER` (data not yet available) | `pending_reason`, `pending_until` (first time), `recheck_count += 1`, `last_checked_at`, `reason_detail`; event `DEFERRED` |
-| `PENDING` | `SKIPPED` | Eligibility/duplicate `SKIP`, or `pending_until` passed with data still missing | `reason_code`, `reason_detail`; pending fields kept for audit |
+| `PENDING` | `SKIPPED` | Eligibility/duplicate `SKIP`, or the run starts after `pending_until` and the recheck still finds data missing (event `WAIT_EXPIRED`) | `reason_code`, `reason_detail`; pending fields kept for audit |
 | `PENDING` | `PROCESSING` | Eligible, not duplicate; run claims row | clear `pending_reason`; `run_id`, `lease_expires_at`, `processing_started_at`, `attempt_count += 1` |
 | `FAILED` | `PENDING` | Retryable reason and `attempt_count < max_attempts` and backoff elapsed and call within `max_followup_age_days` | clear `run_id`, lease |
 | `FAILED` | `SKIPPED` | Retryable, but call older than `max_followup_age_days` | `CALL_TOO_OLD` |

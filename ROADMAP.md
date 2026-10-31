@@ -2,7 +2,7 @@
 
 Each phase requires explicit user approval before it starts. Exit criteria must be met before moving on.
 
-**Current phase: Phase 0 — Initialisation (complete, awaiting approval for Phase 1).**
+**Current phase: Phase 0 — Initialisation (complete and approved 2026-10-31). Phase 1 awaits go-ahead and prerequisites.**
 
 ---
 
@@ -15,7 +15,7 @@ Each phase requires explicit user approval before it starts. Exit criteria must 
 **Exit:** user approves documentation and skills.
 
 ## Phase 1 — Local foundations (no external services)
-- Install Python 3.12; choose package manager (OD-21); `pyproject.toml`.
+- Move the repository out of OneDrive (D-020); install Python 3.12 and `uv`; `pyproject.toml` (include `tzdata`).
 - Package skeleton under `src/post_call_agent/`.
 - Typed models (`CallRecord`, `AnalysisResult`, `CustomerSummary`, `EmailDraft`, `ValidationResult`, `TrackingRecord`).
 - Configuration loader (env + YAML), injectable clock and timezone utilities (Asia/Kolkata).

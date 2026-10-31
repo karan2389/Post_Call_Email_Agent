@@ -19,7 +19,7 @@ Accepted decisions. Newest last. Each entry: ID, date, decision, rationale, cons
 **Rationale:** The main risk of a follow-up email is telling a customer something is fixed when it is not, or assigning work to the wrong party.
 
 ### D-004 — Delivery state machine with idempotency and recovery (2026-10-31)
-**Decision:** States `PENDING`, `PROCESSING`, `VALIDATING`, `SENT`, `FAILED`, `SKIPPED`; write-ahead before send; deterministic Message-ID; Gmail reconciliation; no automatic resend when ambiguous. `SENDING` proposed as an additional state (OD-15).
+**Decision:** States `PENDING`, `PROCESSING`, `VALIDATING`, `SENT`, `FAILED`, `SKIPPED`; write-ahead before send; deterministic Message-ID; Gmail reconciliation; no automatic resend when ambiguous. `SENDING` proposed as an additional state (OD-15) — accepted in D-017.
 **Rationale:** Prevent duplicates, including Gmail-succeeded/tracking-failed.
 
 ### D-005 — SKILL.md files are loaded explicitly by Python (2026-10-31)
@@ -62,3 +62,20 @@ Accepted decisions. Newest last. Each entry: ID, date, decision, rationale, cons
 
 ### D-016 — Per-record failure isolation (2026-10-31)
 **Decision:** Each record runs in its own error boundary; a failure marks only that record `FAILED`. The run stops claiming new records only on config errors, unreadable sheets at fetch, `GMAIL_AUTH_ERROR`, or the LLM circuit breaker. Unclaimed records are left untouched as `PENDING`.
+
+_The Phase 0 documentation and the previous-day design (D-001 … D-016) were approved by the user on 2026-10-31._
+
+### D-017 — `SENDING` state adopted (2026-10-31)
+**Decision:** The state machine has seven states: `PENDING`, `PROCESSING`, `VALIDATING`, `SENDING`, `SENT`, `FAILED`, `SKIPPED`. Resolves OD-15.
+**Rationale:** Lets recovery tell "an email may have left" apart from "validation unfinished", which is the duplicate-send risk.
+
+### D-018 — Discovery lookback of 2 days (2026-10-31)
+**Decision:** `discovery_lookback_days = 2`. Each run also discovers unlogged calls dated up to 2 days before `target_date`. Resolves OD-24.
+**Rationale:** A missed or failed daily run fixes itself; duplicates stay impossible.
+
+### D-019 — Wait window of 1 day for late data (2026-10-31)
+**Decision:** `transcript_wait_days = 1`. `pending_until` = run date of the first deferral + 1 day, at 23:59:59 IST. Eligibility is always rechecked before expiry, so data arriving any time before the next run after `pending_until` is still used. Resolves OD-25.
+**Consequences:** A call is normally either emailed or closed by the second run after its call date (e.g. call 30 Oct → closed by the 2 Nov run).
+
+### D-020 — Python 3.12 with uv; repository outside OneDrive (2026-10-31)
+**Decision:** Python 3.12 from python.org, dependencies managed with `uv`. Move the repository out of OneDrive to a non-synced folder before Phase 1 code is written. Resolves the main part of OD-21 (target folder and remote hosting still open).

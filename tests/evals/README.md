@@ -101,14 +101,16 @@ Built from EV-10 / EV-16 analysis.
 
 ## J. Previous-day selection, deferral and run safety (multi-run, fakes, `FixedClock`)
 
-Example dates are synthetic. Default config: `discovery_lookback_days=2`, `transcript_wait_days=3`, `max_followup_age_days=7`.
+Example dates are synthetic. Default config: `discovery_lookback_days=2`, `transcript_wait_days=1`, `max_followup_age_days=7`.
 
 | ID | Scenario | Expected |
 |---|---|---|
 | EV-49 | Run 31 Oct 2026 09:00 IST | `target_date = 2026-10-30` |
 | EV-50 | Run 31 Oct 2026 00:30 IST with process timezone UTC (UTC date still 30 Oct) | `target_date = 2026-10-30` (not 29 Oct) |
 | EV-51 | Calls at 30 Oct 00:00:00, 30 Oct 23:59:59, 31 Oct 00:00:01, 1 Nov (future) IST | First two selected; last two ignored |
-| EV-52 | Transcript missing on 31 Oct, 1 Nov, 2 Nov, 3 Nov runs; `pending_until = 2 Nov 23:59:59` | `PENDING` with `recheck_count` 0→1→2, then `SKIPPED` `MISSING_TRANSCRIPT` on 3 Nov run with event `WAIT_EXPIRED` |
+| EV-52 | Call 30 Oct; transcript missing on 31 Oct, 1 Nov and 2 Nov runs; `pending_until = 1 Nov 23:59:59` | `PENDING` with `recheck_count` 0→1, then `SKIPPED` `MISSING_TRANSCRIPT` on the 2 Nov run with event `WAIT_EXPIRED` |
+| EV-52b | Same, but transcript added on 1 Nov at 22:00 (after the 1 Nov run) | 2 Nov run rechecks eligibility before expiry → processed → `SENT` |
+| EV-52c | Call 28 Oct found late via lookback on 31 Oct run, transcript missing | `pending_until = 1 Nov 23:59:59` (based on first deferral, not call date); same lifecycle |
 | EV-53 | Transcript missing on 31 Oct run, added before 1 Nov run | 31 Oct: `PENDING`; 1 Nov: processed → `SENT`; exactly one email |
 | EV-54 | Customer email added later (missing on first run) | Deferred, then sent on the run after it appears |
 | EV-55 | `call_status = cancelled` | `SKIPPED` `CALL_CANCELLED`; no LLM call; no email |

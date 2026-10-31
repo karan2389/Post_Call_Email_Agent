@@ -41,8 +41,8 @@ Builds the run's **work queue** from three sources:
 
 | Source | Selection |
 |---|---|
-| **A. New target-date calls** | Source rows whose call date = `target_date` (or within the lookback range, OD-24) and whose Call ID is not yet in the logs |
-| **B. Waiting records** | Log rows in `PENDING` with a `pending_reason` (e.g. transcript not yet available) whose `pending_until` has not passed |
+| **A. New target-date calls** | Source rows whose call date = `target_date` (or within the lookback range, D-018) and whose Call ID is not yet in the logs |
+| **B. Waiting records** | All log rows in `PENDING` with a `pending_reason` (e.g. transcript not yet available) — including those whose `pending_until` has passed, so they are rechecked one last time and then closed |
 | **C. Retry records** | Log rows returned to `PENDING` by Stage 1b |
 
 Rules:
@@ -50,7 +50,7 @@ Rules:
 - Source rows with a missing or unparseable call date cannot be matched to a date. They are assigned a Call ID and logged once as `SKIPPED` `MISSING_CALL_DATETIME`, so they are visible rather than silently dropped. (Only rows added since go-live are considered — historical rows are not back-filled.)
 - **Terminal guard:** a Call ID whose log status is `SENT` or `SKIPPED` is never added to the queue. `SENT` rows are never re-read for processing.
 - Queue order: oldest call date first, then call time. A per-run cap (`max_records_per_run`) protects the job timeout; records beyond the cap stay `PENDING` for the next run.
-- Optional discovery lookback (OD-24): with `discovery_lookback_days = N`, source A also includes call dates from `target_date − N` to `target_date`. This self-heals a missed or failed daily run. With `N = 0` the behaviour is strictly previous-day, and a missed day needs a manual `TARGET_DATE` rerun.
+- Discovery lookback (D-018, default 2 days): with `discovery_lookback_days = N`, source A also includes call dates from `target_date − N` to `target_date`. This self-heals a missed or failed daily run. With `N = 0` the behaviour is strictly previous-day, and a missed day needs a manual `TARGET_DATE` rerun.
 
 ### Stage 3 — CHECK ELIGIBILITY
 A dedicated, deterministic component (no LLM). Each record is checked **independently**, and returns exactly one result:
@@ -80,10 +80,11 @@ Checks (all evaluated; every failure is listed in `reason_detail`; a terminal fa
 | E15 | Recipient allowed (allowlist mode in test/pilot only) | `RECIPIENT_NOT_ALLOWLISTED` | Terminal |
 
 **Deferral lifecycle (waiting for late transcripts or other data):**
-- First deferral sets `pending_reason`, `pending_until = call_date + transcript_wait_days` (end of that day, IST; OD-25), and `recheck_count = 0`.
-- Each later run re-reads the **current** source row and re-runs eligibility; `recheck_count += 1`, `last_checked_at` updated.
-- Data arrives → `ELIGIBLE` → processing continues in the same run (pending fields cleared).
-- `pending_until` passes and data is still missing → `SKIPPED` with the same code (e.g. `MISSING_TRANSCRIPT`), `reason_detail` noting the wait window expired after N checks.
+- First deferral sets `pending_reason`, `pending_until = (run_date of first deferral + transcript_wait_days)` at 23:59:59 IST (D-019: `transcript_wait_days = 1`), and `recheck_count = 0`. Basing it on the first deferral rather than the call date gives calls found late (lookback) the same waiting time.
+- Each later run re-reads the **current** source row and re-runs eligibility **first**; `recheck_count += 1`, `last_checked_at` updated.
+- Data arrives → `ELIGIBLE` → processing continues in the same run (pending fields cleared). This applies even if `pending_until` has just passed: eligibility is always checked before expiry.
+- Still missing and the run starts after `pending_until` → `SKIPPED` with the same code (e.g. `MISSING_TRANSCRIPT`), event `WAIT_EXPIRED`, `reason_detail` noting the wait window expired after N checks.
+- Example (wait = 1 day): call on 30 Oct. The 31 Oct run defers it (`pending_until = 1 Nov 23:59:59`). The 1 Nov run rechecks it (and so would an optional 15:00 run). If the transcript lands any time before the 2 Nov run, that run sends the email; otherwise the 2 Nov run closes it as `SKIPPED` `MISSING_TRANSCRIPT`.
 - Missing transcripts are therefore **recorded as pending, never silently discarded**, and a transcript that arrives later is processed in a later run.
 
 **Cancelled calls and no-shows** are detected in two places:
@@ -167,8 +168,8 @@ The job is safe to run any number of times for the same day, or concurrently by 
 |---|---|---|
 | `timezone` | `Asia/Kolkata` | D-009 |
 | `target_date_offset_days` | `1` (previous day) | D-013 |
-| `discovery_lookback_days` | `2` | OD-24 (0 = strictly previous day) |
-| `transcript_wait_days` | `3` | OD-25 |
+| `discovery_lookback_days` | `2` | D-018 (0 would mean strictly previous day) |
+| `transcript_wait_days` | `1` | D-019 |
 | `max_followup_age_days` | `7` | OD-10 |
 | `max_records_per_run` | `50` | Phase 1 |
 | `llm_failure_threshold` | `3` | Phase 2 |

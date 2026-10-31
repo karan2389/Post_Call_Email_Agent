@@ -17,7 +17,7 @@ Status: **Approved principles.** Retention periods and access lists are open (OD
 - The repository is inside OneDrive, which syncs to the cloud. Treat everything in it as potentially shared.
 - Only synthetic data in `tests/fixtures/` and `outputs/`.
 - Local credential files, when they exist (Phase 3+), must be stored **outside** the OneDrive folder and referenced by path in `.env`.
-- Consider moving the Git repository out of OneDrive: OneDrive sync can corrupt `.git` internals and sync files mid-write (OD-21).
+- The Git repository will be moved out of OneDrive before Phase 1 code (D-020): OneDrive sync can corrupt `.git` internals and sync files mid-write.
 
 ## 3. Logging rules
 

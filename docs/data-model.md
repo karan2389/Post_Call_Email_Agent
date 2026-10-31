@@ -50,7 +50,7 @@ The current state and final record of each call: customer information, status, r
 |---|---|---|
 | `status` | enum | `PENDING` `PROCESSING` `VALIDATING` `SENDING` `SENT` `FAILED` `SKIPPED` |
 | `pending_reason` | enum | Set while `PENDING` and waiting for data (e.g. `MISSING_TRANSCRIPT`); empty otherwise |
-| `pending_until` | timestamp | End of the wait window (`call_date + transcript_wait_days`, 23:59:59 IST) |
+| `pending_until` | timestamp | End of the wait window: run date of first deferral + `transcript_wait_days` (1), 23:59:59 IST |
 | `recheck_count` | int | Number of runs that rechecked a waiting record |
 | `last_checked_at` | timestamp | Last eligibility check |
 | `reason_code` | enum | Final reason for `SKIPPED` / `FAILED`, from `skip-reasons.md` |
