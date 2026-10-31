@@ -2,7 +2,7 @@
 
 Revised for the Claude Code scheduled tasks + native Google connectors architecture (D-026). Each phase needs explicit user approval before it starts, and its exit criteria must be met before moving on. **Phase 0 is complete; Phase 1 is partly done (2026-10-31, read-only).**
 
-**Current phase: Phase 1 — Connector and scheduled-execution validation — PARTIAL.** Results and blockers: `docs/phase1-results.md`. Done: Sheets connector verified locally and in one manually triggered cloud run (reads only). Not done: instructions in cloud runs (**untested: private remote `karan2389/Post_Call_Email_Agent` now exists, not yet attached to a routine**), Gmail in cloud, connector-account identity, protected-range verification, deterministic helpers, usage at volume. No recurring schedule exists.
+**Current phase: Phase 1 — Connector and scheduled-execution validation — PARTIAL.** Results and blockers: `docs/phase1-results.md`. Done: Sheets connector verified locally and in one manually triggered cloud run (reads only). Not done: instructions in cloud runs (**Test 2 verified file and skill availability via private remote `karan2389/Post_Call_Email_Agent`; full runbook run and automatic `CLAUDE.md` loading not yet shown**), Gmail in cloud, connector-account identity, protected-range verification, deterministic helpers, usage at volume. No recurring schedule exists.
 
 Phase mapping to the previous roadmap: the old Phase 1 (local Python foundations) and old Phase 6 (Cloud Run deployment) are dropped from the primary path and kept in `docs/future-alternatives.md`.
 

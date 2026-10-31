@@ -11,6 +11,8 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - 2026-10-31 — **Phase 1 partly done (read-only), D-027.** Yesterday (2026-10-30 IST) = 9 records. Sheets connector verified locally and in one manual cloud run (reads). Instructions in cloud runs **blocked** (no remote repo). `Calls DONE` has no protected ranges. Details: `docs/phase1-results.md`.
 
+- 2026-10-31 — **Phase 1 Test 2:** with private repo `karan2389/Post_Call_Email_Agent` as the routine source, a manual cloud run cloned it, read `CLAUDE.md`, runbook, settings, Phase 1 results and all four skills, and read the `Calls DONE` header (read-only). R-02 partly verified. Older repo `flexifunnels-post-call-email-agent` is a stale copy.
+
 ## Phase 1 discoveries (verified 2026-10-31)
 
 - Cloud routines run in an Anthropic sandbox (`/home/user`, empty unless a git source is configured); cron/`run_once_at` are **UTC**, minimum interval 1 h (09:00 IST = `30 3 * * *`). `Bash` is available there.

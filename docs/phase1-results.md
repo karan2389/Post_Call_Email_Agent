@@ -63,7 +63,7 @@ Earlier inspection (before today's test) saw one cell containing two Fathom URLs
 | C1 | Is cloud scheduling available here? | The routines API responds (HTTP 200); a cloud environment exists; one routine was created and run successfully. Desktop tasks (`scheduled-tasks`) and session crons also exist but were not used | VERIFIED (available) |
 | C2 | Can a cloud run use the native **Google Sheets** connector? | **Yes, for reads.** The run (session `cse_01FMKRNXJ9UTJA8LUr5tBe8x`, 17 s, success) called `get_values` and returned the same 29 headers (AD1 empty) and the same count (9) | VERIFIED (manual trigger, reads only) |
 | C3 | Can a cloud run use the native **Gmail** connector? | **Not tested.** Gmail was deliberately removed from the routine (and not called). It was attached by default, with URL `gmailmcp.googleapis.com/mcp/v1`, before being removed | UNVERIFIED |
-| C4 | Are the **project instructions** (CLAUDE.md, workflows, skills, config) available in a cloud run? | **No.** "No sources configured"; working directory `/home/user` empty; `CLAUDE.md` absent. This repository has **no remote**, so a cloud session cannot reach it | **BLOCKED** (R-02) |
+| C4 | Are the **project instructions** (CLAUDE.md, workflows, skills, config) available in a cloud run? | **No.** "No sources configured"; working directory `/home/user` empty; `CLAUDE.md` absent. This repository has **no remote**, so a cloud session cannot reach it | **BLOCKED** at test 1 (R-02); resolved for file availability in Test 2 (§5a) |
 | C5 | Can a routine's connector be limited to read tools? | The API **accepted** `permitted_tools: ["get_spreadsheet","get_values"]`, but the cloud session still **listed all nine Sheets tools** including `update_values`, `append_values`, `batch_clear_values`, `insert_dimension`, `update_formulas`, `update_spreadsheet`, `copy_sheet_to_another_spreadsheet`. Whether a write would have been blocked at call time was **not tested** (it would need a write attempt) | PARTIAL → treat as **not enforced** |
 | C6 | Do routine tool settings restrict built-in tools? | `allowed_tools` was `["Read","Glob","Grep"]`, yet the run used `Bash` successfully. So `allowed_tools` pre-approves; it does not restrict | VERIFIED (not a restriction) |
 | C7 | Connector attachment defaults | A routine created through the API **attached all seven of the account's connectors by default** (Claude Docs, FlexiFunnels, FlexiMembership, affiliate testing, Gmail, Google Sheets, Claude Code Remote). Narrowing to one connector worked via `update` | VERIFIED |
@@ -72,6 +72,23 @@ Earlier inspection (before today's test) saw one cell containing two Fathom URLs
 | C10 | Failure/run visibility | `list_runs` and `get_run_log` return the run's events and final result through the API | PARTIAL (notifications not tested) |
 | C11 | Usage | 17 s, 6 turns for this trivial test | one data point only (R-09) |
 | C12 | Scheduled `live`-style sending without approval | Not tested | UNVERIFIED (R-04) |
+
+### 5a. Test 2 — repository instructions in a cloud run (2026-10-31, manual, read-only)
+
+Same routine (`trig_017psPj1c1uxCuPDXDw9rvXu`, disabled, no cron, Google Sheets connector only), now with the private repository `karan2389/Post_Call_Email_Agent` as its git source. Run session `cse_01FMKRNUMdkCQiLUP6QhNLB4`: success, 6 turns, about 33 s. The repository named in the request (`flexifunnels-post-call-email-agent`) was a stale copy at `39b1fc2` (no runbook, settings or Phase 1 results), so the current repository was used on the user's decision.
+
+| # | Question | Result | Status |
+|---|---|---|---|
+| T2-1 | Is the private repository reachable from the cloud environment? | Run log: "Cloning repository karan2389/Post_Call_Email_Agent", "Finished processing sources"; working directory `/home/user/Post_Call_Email_Agent` | VERIFIED |
+| T2-2 | Are `CLAUDE.md`, `docs/architecture.md`, `docs/scheduled-execution.md`, `workflows/daily-post-call-run.md`, `config/run-settings.yaml`, `docs/phase1-results.md` present? | All six present (89, 140, 92, 87, 31, 103 lines) | VERIFIED (R-02 for file availability) |
+| T2-3 | Are the four skills discoverable? | `customer-summary` 1.0.0, `email-generation` 1.1.0, `email-validation` 1.1.0, `transcript-analysis` 1.2.0 | VERIFIED |
+| T2-4 | Was `config/run-settings.yaml` readable? | Yes (`delivery_mode: dry_run`) | VERIFIED |
+| T2-5 | Does the session follow the business rules? | The session's report said the files agree on delivery modes (only `live` emails customers) and that instructions do not enforce AD-only writes. The rest of the report (rules 3–8, contradictions) was truncated in the run log and was **not** reviewed. The session grepped for rules rather than reading every file in full | PARTIAL |
+| T2-6 | Sheets read | `get_values` on `'Calls DONE'!A1:AI1` succeeded. Header-cell count and AB1/AC1/AD1 text were truncated in the log | PARTIAL (read works with the repository source attached) |
+| T2-7 | Connectors available | Routine configuration lists Google Sheets only. The session's own tool-family listing was not seen | PARTIAL |
+| T2-8 | Writes | Logged calls: Bash `ls`/`wc`/`cat`/`head`/`grep`, ToolSearch, one Sheets read. No writes, Gmail calls or transcript reads seen. Bash again ran despite `allowed_tools` = Read/Glob/Grep (C6) | VERIFIED from the visible log |
+
+Not done: whether the cloud session loads `CLAUDE.md` automatically as project instructions (the log shows it was read by a command); full text of the final report (open the session at https://claude.ai/code/session_01FMKRNUMdkCQiLUP6QhNLB4).
 
 ## 6. Side effects and leftovers (all non-destructive; please review)
 
@@ -95,7 +112,7 @@ Earlier inspection (before today's test) saw one cell containing two Fathom URLs
 
 | # | Blocker | Needed from |
 |---|---|---|
-| B1 | **Remote created after this test** (2026-10-31: private `karan2389/Post_Call_Email_Agent`); R-02 still untested until it is attached as a routine source. Original blocker: no remote repository, so R-02 (instructions in cloud runs) cannot be tested. Needs a **private** remote (e.g. GitHub), the claude.ai GitHub access for that repository, and approval to push instructions-only content (OD-21, OD-12) | You |
+| B1 | **Remote created after this test** (2026-10-31: private `karan2389/Post_Call_Email_Agent`); attached as the routine source and verified in Test 2 (§5a). Original blocker: no remote repository, so R-02 (instructions in cloud runs) cannot be tested. Needs a **private** remote (e.g. GitHub), the claude.ai GitHub access for that repository, and approval to push instructions-only content (OD-21, OD-12) | You |
 | B2 | Identify the Google account behind the Sheets connector and the Gmail connector, and whether it is the sheet owner or an editor (R-13, OD-36, OD-39) | You / sheet owner |
 | B3 | Decide protected ranges on `Calls DONE` and verify Google rejects a forbidden write from the connector account **on a test copy** (R-03). Needs a test copy of the spreadsheet | You / sheet owner |
 | B4 | Gmail in cloud runs (R-01, R-04): needs a test mailbox plan and approval before any Gmail call | You |

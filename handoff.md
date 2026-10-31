@@ -42,10 +42,10 @@ EDIT    CLAUDE.md, README.md, ROADMAP.md, memory.md, handoff.md, config/README.m
 Phase 1 partial. **No application code, no recurring schedule, no spreadsheet write (AD untouched), no worksheet, no Gmail call, no draft, no email, no Google Cloud resource, no commit.**
 
 ## Remaining blockers (see `docs/phase1-results.md` §8)
-B1 **remote now exists** (private `karan2389/Post_Call_Email_Agent`, pushed 2026-10-31); still needed: connect it to claude.ai and run a second manual cloud test (R-02) · B2 connector Google accounts unidentified (R-13) · B3 protected ranges absent/unverified, needs a test copy (R-03) · B4 Gmail in cloud untested, needs test-mailbox plan and approval (R-01, R-04) · B5 helpers undecided (OD-38) · B6 data-handling approval for cloud session history (R-12, OD-12).
+B1 **resolved**: private `karan2389/Post_Call_Email_Agent` attached to the test routine; Test 2 cloned it and read all files and skills (R-02 partly verified) · B2 connector Google accounts unidentified (R-13) · B3 protected ranges absent/unverified, needs a test copy (R-03) · B4 Gmail in cloud untested, needs test-mailbox plan and approval (R-01, R-04) · B5 helpers undecided (OD-38) · B6 data-handling approval for cloud session history (R-12, OD-12).
 
 ## Exact next steps
 1. Review `docs/phase1-results.md`; decide whether to commit Tasks 6–8, and whether to delete the test routine / default environment at claude.ai.
-2. **B1:** the private remote exists (https://github.com/karan2389/Post_Call_Email_Agent; instructions only, no customer data; created with the `gh` CLI). Next: connect it to claude.ai as a routine source, then run a second manual cloud test that only reads `CLAUDE.md` and the runbook (R-02). Needs your approval before the test runs.
+2. **B1 / Test 2 done (2026-10-31):** the routine (disabled, Sheets only) ran once against https://github.com/karan2389/Post_Call_Email_Agent and read all six files, four skills and the `Calls DONE` header (`docs/phase1-results.md` §5a). Open items: the final report was truncated in the run log (rule checks 3–8, header details); review session https://claude.ai/code/session_01FMKRNUMdkCQiLUP6QhNLB4. The older repo `karan2389/flexifunnels-post-call-email-agent` is a stale copy (`39b1fc2`): archive or delete it, or tell me to fast-forward it.
 3. Tell me which Google accounts authorise the Sheets and Gmail connectors (B2), and agree a test copy of the spreadsheet for the R-03 protection test (B3).
 4. Do not enable any schedule until R-01 … R-04 and R-12 are resolved.
