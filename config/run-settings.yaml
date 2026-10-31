@@ -1,0 +1,31 @@
+# Run settings read by the scheduled task at PREFLIGHT (workflows/daily-post-call-run.md §1).
+# Non-secret only. No API keys or credentials exist in the primary architecture (connectors use OAuth).
+# Status: proposed values; nothing reads this file yet (no scheduled task is configured).
+
+delivery_mode: dry_run            # dry_run | test | shadow | live  (D-022) — only live emails customers
+go_live_date: null                # YYYY-MM-DD call date from which the agent is the designated sender; required for live
+recipient_allowlist: []           # internal addresses; required for test mode
+target_date_override: null        # YYYY-MM-DD for manual reruns; must be before today (Asia/Kolkata)
+
+timezone: Asia/Kolkata
+target_date_offset_days: 1        # previous calendar day (D-013)
+discovery_lookback_days: 2        # D-018
+transcript_wait_days: 1           # D-019
+max_followup_age_days: 7          # OD-10
+max_records_per_run: 25           # bounds context and Claude plan usage (R-09)
+fetch_window_rows: 300            # bounded read from the end of Calls DONE (Phase 1 F2); extended if the coverage check fails
+max_attempts: 3                   # OD-14
+lease_minutes: 30
+run_lock_minutes: 120             # R-08
+
+source:
+  spreadsheet_id: 1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI
+  worksheet: Calls DONE
+  call_id_column: AD
+  call_id_header: POST_CALL_CALL_ID
+  protected_ranges_verified: false  # must be true before ANY write to Calls DONE (R-03, OD-36); set only after Google is seen to reject a forbidden write from the connector account
+
+logs:
+  spreadsheet_id: null            # OD-18 (same spreadsheet or separate); worksheets not yet created
+  logs_worksheet: POST_CALL_EMAIL_LOGS
+  events_worksheet: POST_CALL_EMAIL_EVENTS

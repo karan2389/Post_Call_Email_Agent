@@ -15,17 +15,19 @@ Type column: **D** = deferrable (waits, then skips on expiry), **T** = terminal 
 | Code | Type | Stage | Meaning |
 |---|---|---|---|
 | `MISSING_CALL_DATETIME` | T | Filter | Call date empty, unparseable or ambiguous; cannot be matched to a target date |
-| `INVALID_CALL_ID` | T | Filter | `call_id` cell present but malformed; never auto-overwritten |
-| `DUPLICATE_SOURCE_ROW` | T | Duplicates | Same `source_fingerprint` or Fathom ID as another call already sent or in progress |
+| `INVALID_CALL_ID` | — | Filter | `POST_CALL_CALL_ID` cell holds a malformed value; never overwritten. Recorded as an event, not a log row (no valid key) |
+| `DUPLICATE_CALL_ID_IN_SOURCE` | T | Filter / Duplicates / pre-send | The same Call ID appears in more than one source row (e.g. a copied row); none is processed; human review |
+| `DUPLICATE_SOURCE_ROW` | T | Duplicates | Same `source_fingerprint` (email + date + time) as another call already sent, in progress, or earlier in the snapshot — the same booking entered twice |
+| `RECORDING_URL_CONFLICT` | T | Duplicates | A recording URL in this row also appears in another row with a different fingerprint; rows are not assumed to be the same call; human review (OD-31) |
 | `DUPLICATE_ALREADY_SENT` | T | Duplicates | Defensive: Call ID already `SENT` (should be unreachable because of the terminal guard) |
-| `SOURCE_ROW_MISSING` | T | Eligibility | Log row exists but its source row can no longer be found by Call ID |
+| `SOURCE_ROW_MISSING` | T | Eligibility / pre-send | Log row exists but its source row can no longer be found by Call ID, and a cleared ID could not be safely restored |
 
 ## 2. Call outcome (cancelled / no-show)
 
 | Code | Type | Stage | Meaning |
 |---|---|---|---|
-| `CALL_CANCELLED` | T | Eligibility | Source `call_status` says cancelled |
-| `CUSTOMER_NO_SHOW` | T | Eligibility or Analysis | Source `call_status` says no-show, or the transcript shows the customer never joined |
+| `CALL_CANCELLED` | T | Eligibility | `Meeting Notes` matches a cancelled pattern (OD-26) |
+| `CUSTOMER_NO_SHOW` | T | Eligibility or Analysis | `Meeting Notes` matches a no-show pattern, or the transcript shows the customer never joined |
 
 ## 3. Data completeness
 
@@ -34,9 +36,9 @@ Type column: **D** = deferrable (waits, then skips on expiry), **T** = terminal 
 | `MISSING_CUSTOMER_NAME` | D | Name empty (no generic greeting in MVP) |
 | `MISSING_CUSTOMER_EMAIL` | D | Email empty |
 | `INVALID_CUSTOMER_EMAIL` | D | Not a single syntactically valid address (may be corrected in the sheet) |
-| `MISSING_FATHOM_URL` | D | URL empty |
-| `INVALID_FATHOM_URL` | D | Not an HTTPS URL on an allowed Fathom host |
-| `FATHOM_NOT_SHAREABLE` | D | Recording is not confirmed as viewable by the customer (OD-04) |
+| `MISSING_FATHOM_URL` | D | `Recording URL` empty or whitespace-only |
+| `INVALID_FATHOM_URL` | D | At least one token in `Recording URL` is not a valid `https://fathom.video/share/<token>` URL; flagged for review, never silently dropped; no partial-recording email (D-025) |
+| `FATHOM_NOT_SHAREABLE` | D | A recording segment is not confirmed as viewable by the customer (OD-04) |
 | `MISSING_TRANSCRIPT` | D | Transcript not yet available — the most common deferral |
 | `TRANSCRIPT_POSSIBLY_TRUNCATED` | T | Length at/near the 50,000-character cell limit, or ends abruptly at the limit |
 | `TRANSCRIPT_TOO_SHORT` | T | Below minimum length (threshold OD-10); usually a no-show or failed recording |
@@ -45,11 +47,14 @@ Type column: **D** = deferrable (waits, then skips on expiry), **T** = terminal 
 
 | Code | Type | Meaning |
 |---|---|---|
-| `RECORDING_ALREADY_SENT` | T | *Proposed (OD-29):* source `Recording Sent` is `yes` (any case), so an agent already emailed the recording manually |
+| `RECORDING_ALREADY_SENT` | T | Source `Recording Sent` is `yes` (any case): a support executive already emailed the recording (D-022). Checked at eligibility and again right before sending |
+| `RECORDING_SENT_STATUS_UNCLEAR` | T | `Recording Sent` holds a value other than yes / no / empty; human review (D-022) |
+| `BEFORE_GO_LIVE` | T | `live` mode and the call date is before `GO_LIVE_DATE`; the call belongs to the manual process (D-022) |
+| `DRAFT_ONLY_MODE` | T | `shadow` or `dry_run` mode: the email was generated and validated but intentionally not sent; draft kept in `email_body` (D-022) |
 | `CUSTOMER_OPTED_OUT` | T | `email_opt_out` is true (inactive: no opt-out column in the verified sheet) |
-| `CALL_TYPE_EXCLUDED` | T | `call_type` not in the eligible list (OD-10) |
+| `CALL_TYPE_EXCLUDED` | T | `call_type` not in the eligible list (inactive: no call-type column; OD-10) |
 | `CALL_TOO_OLD` | T | Call older than `max_followup_age_days`; applies to retries of failed records |
-| `RECIPIENT_NOT_ALLOWLISTED` | T | Allowlist mode active and recipient not on it (test/pilot only) |
+| `RECIPIENT_NOT_ALLOWLISTED` | T | `test` mode and recipient not on `RECIPIENT_ALLOWLIST` |
 
 ## 5. Analysis outcomes
 
@@ -74,23 +79,26 @@ Produced by the transcript-analysis skill's `skip_recommendation`. All terminal 
 
 ## 7. Technical
 
+Code names are kept stable for the log schema and dashboard. Their meanings now refer to the scheduled-task runtime (D-026).
+
 | Code | Type | Meaning |
 |---|---|---|
-| `LLM_API_ERROR` | R | Anthropic API error (5xx, connection) |
-| `LLM_RATE_LIMITED` | R | 429 / overloaded |
-| `LLM_TIMEOUT` | R | Request exceeded timeout |
-| `LLM_OUTPUT_INVALID` | R | Output not valid JSON / schema mismatch after in-run retry |
-| `SHEETS_API_ERROR` | R | Read/write failure on Google Sheets (record-level), or run abort at fetch |
-| `GMAIL_TRANSIENT_ERROR` | R | 5xx / quota; message not accepted |
-| `UNEXPECTED_ERROR` | R | Unhandled exception inside a record's error boundary (sanitised detail); the run continues with other records |
+| `LLM_API_ERROR` | R | The Claude model was unavailable or errored during a skill stage |
+| `LLM_RATE_LIMITED` | R | Claude plan usage limit reached during the run (R-09) |
+| `LLM_TIMEOUT` | R | A stage did not complete (session time limit, interrupted session) |
+| `LLM_OUTPUT_INVALID` | R | Stage output not valid JSON / schema mismatch after one in-run retry |
+| `SHEETS_API_ERROR` | R | Google Sheets connector read/write failure (record-level), or run abort at fetch |
+| `GMAIL_TRANSIENT_ERROR` | R | Gmail connector error where the message was **not** accepted |
+| `UNEXPECTED_ERROR` | R | Any other error inside one record's processing (sanitised detail); the run continues with other records |
 | `GMAIL_SEND_ERROR` | F | Definite rejection (e.g. invalid recipient) |
-| `GMAIL_AUTH_ERROR` | F | Credentials/permission problem; no further records claimed this run |
-| `SEND_UNCONFIRMED` | F | Could not confirm whether the email was sent; manual review |
-| `CONFIG_ERROR` | F | Missing/invalid configuration, skill file or `TARGET_DATE`; run aborts |
+| `GMAIL_AUTH_ERROR` | F | Gmail connector authorisation or permission problem (incl. a send blocked pending approval, R-04); no further records claimed this run |
+| `SEND_UNCONFIRMED` | F | Delivery could not be positively confirmed. **Human review required**; the Call ID is blocked from any further send until a person records `CONFIRMED_SENT` or `CONFIRMED_NOT_SENT` (OD-41, `delivery-state-machine.md` §5) |
+| `CONFIG_ERROR` | F | Invalid run settings, missing skill/runbook file, header guard failure or bad `target_date_override`; run aborts |
+| `CONNECTOR_UNAVAILABLE` | F | A required native Google connector is not available in the scheduled session (R-01); run aborts before touching records |
 | `RETRY_LIMIT_EXCEEDED` | F | Retryable failure hit `max_attempts` |
 
 ## 8. Event types (not reason codes)
 
 Recorded in `POST_CALL_EMAIL_EVENTS.event_type`:
 
-`RUN_STARTED`, `RUN_FINISHED`, `RUN_ABORTED`, `PROCESSING_HALTED` (circuit breaker or Gmail auth), `TRANSITION`, `DEFERRED` (recheck of a waiting record), `WAIT_EXPIRED`, `LEASE_EXPIRED`, `RECONCILED_SENT`, `TRACKING_WRITE_ERROR`.
+`RUN_STARTED` (also the run lock), `RUN_FINISHED`, `RUN_ABORTED`, `PROCESSING_HALTED` (circuit breaker or Gmail auth), `TRANSITION`, `DEFERRED` (recheck of a waiting record), `WAIT_EXPIRED`, `LEASE_EXPIRED`, `RECONCILED_SENT`, `TRACKING_WRITE_ERROR`, `CALL_ID_ASSIGNED`, `CALL_ID_ADOPTED` (valid ID found without a log row), `CALL_ID_RESTORED` (cleared ID written back), `INVALID_CALL_ID`, `ROW_SHIFTED` (row changed between read and write; nothing written), `SOURCE_CHANGED` (source changed between generation and send), `SEND_REVIEW_REQUIRED` (an unconfirmed send was handed to a human), `REVIEW_RESOLVED` (a human decision was applied).

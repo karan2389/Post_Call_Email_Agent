@@ -1,112 +1,140 @@
 # Architecture
 
-Status: **Approved design (Phase 0).** Items marked *OD-xx* depend on `open-decisions.md`.
+Status: **Proposed (D-026), pending Phase 1 validation.** The primary design runs as a **Claude Code scheduled task** using the user's Claude subscription and **native Google connectors** (Sheets, Gmail). Every capability marked *(validate)* has not been verified in a scheduled execution yet; see `scheduled-execution.md` §4. The earlier Python / Anthropic API / Cloud Run design is kept in `future-alternatives.md`.
+
+Business rules, safety controls and data rules (D-001 … D-025) are unchanged by this pivot unless stated.
 
 ## 1. Goals
 
 1. Send a concise, accurate, personalised follow-up email after each eligible support call.
 2. Never send an email that is inaccurate, incomplete or a duplicate.
 3. Record every outcome (sent, skipped, failed) with reasons and timestamps.
-4. Run unattended on a schedule; recover safely from crashes and partial failures.
+4. Run unattended once a day; recover safely from interrupted runs.
 5. Provide a tracking schema a future dashboard can read without changing the agent.
+6. **Avoid separately billed infrastructure:** no Anthropic API billing, no deployed backend, no Google Cloud resources for the initial workflow (D-026).
 
-## 2. Non-goals (MVP)
+## 2. Non-goals (initial workflow)
 
-- Fathom API/MCP integration (Fathom URL and transcript come from Google Sheets).
-- Human approval of each email (only during the pilot, Phase 5).
-- Replying to customer responses or continuing threads.
-- Dashboard (future, Phase 8).
-- Agent frameworks.
+- Fathom API/MCP integration (recording URLs and transcripts come from Google Sheets).
+- Human approval of each email. Before go-live the agent runs in `shadow` mode while the manual process continues (D-022).
+- Generating or modifying transcripts. The existing transcript automation stays independent (D-023).
+- Replying to customer responses.
+- Dashboard (future).
+- A separately deployed Python backend, Cloud Run, Cloud Scheduler, Secret Manager (see `future-alternatives.md`).
 
 ## 3. Components
 
 ```
-                    ┌─────────────────── Cloud Scheduler (Asia/Kolkata) ───────────────────┐
-                    ▼
-┌─────────────────────────────── Cloud Run (single execution) ───────────────────────────────┐
-│ main / run orchestrator                                                                     │
-│   ├─ config            env + YAML, model IDs, policy                                        │
-│   ├─ sources           SourceSheetReader: read rows, write Call IDs                         │
-│   ├─ identity          CallIdAssigner, SourceFingerprint                                    │
-│   ├─ tracking          TrackingStore: POST_CALL_EMAIL_LOGS + POST_CALL_EMAIL_EVENTS         │
-│   ├─ state             StateMachine: allowed transitions, leases, retry policy              │
-│   ├─ selection         TargetDateCalculator (Asia/Kolkata), CallDateParser, WorkQueue       │
-│   ├─ eligibility       EligibilityChecker: ELIGIBLE / DEFER / SKIP (no LLM)                 │
-│   ├─ duplicates        DuplicateChecker: Call ID, fingerprint, Fathom ID                    │
-│   ├─ skills            SkillLoader: reads skills/*/SKILL.md, versions                       │
-│   ├─ llm               LlmClient: Anthropic wrapper, structured output, retries             │
-│   ├─ pipeline          analyse → summarise → generate → validate                            │
-│   ├─ validation        deterministic checks + semantic validator result                     │
-│   ├─ delivery          GmailSender + GmailReconciler                                        │
-│   └─ logging           structured, redacted logs                                            │
-└─────────────────────────────────────────────────────────────────────────────────────────────┘
-        │ read/write                      │ HTTPS                     │ send / search
-        ▼                                 ▼                           ▼
-  Google Sheets                     Anthropic API                  Gmail API
-  (source + tracking)
+┌──────────────── Claude Code scheduled task (daily 09:00 Asia/Kolkata) ────────────────┐
+│  Claude model from the user's Claude plan (consumes plan usage; not unlimited)          │
+│                                                                                          │
+│  Instructions loaded from the repository:                                                │
+│    CLAUDE.md ─ project rules            workflows/daily-post-call-run.md ─ the runbook   │
+│    skills/*/SKILL.md ─ analysis, summary, generation, validation                          │
+│    config/run-settings.yaml ─ delivery mode, go-live date, windows, limits               │
+│    docs/ ─ reference rules (pipeline, Call ID, validation, reason codes)                 │
+│                                                                                          │
+│  Optional deterministic helpers run inside the session (OD-38, validate)                 │
+│    date maths · URL parsing · row signatures · hashes · UUIDs                             │
+└──────────────┬──────────────────────────────────────────┬────────────────────────────────┘
+               │ native Google Sheets connector (OAuth)   │ native Gmail connector (OAuth)
+               ▼                                          ▼
+   Google spreadsheet "CSC  Booking - All Agents"     Sender mailbox (the authorising
+     Calls DONE      ─ read; write AD only            Google account, OD-39)
+     POST_CALL_EMAIL_LOGS    ─ read/write               search · drafts · send (live only)
+     POST_CALL_EMAIL_EVENTS  ─ append
+               ▲
+               │ writes Transcript / AI Summary (independent; never touched by the agent)
+   Existing transcript automation (OD-33)
 ```
 
-Each external service sits behind a small interface (`SourceSheetReader`, `TrackingStore`, `LlmClient`, `GmailSender`) so the pipeline and state machine are tested with in-memory fakes.
+| Component | Role | Status |
+|---|---|---|
+| Claude Code scheduled task | Starts the daily run and executes the workflow | Proposed; cloud variant to be tested first, desktop as fallback (OD-37) *(validate)* |
+| Claude model (subscription) | Transcript analysis, summary, email generation, semantic validation | Proposed; usage limits *(validate, R-09)* |
+| Repository instructions | `CLAUDE.md`, `workflows/`, `skills/`, `config/`, `docs/` | Exists; availability in scheduled sessions *(validate, R-02)* |
+| Google Sheets connector | Read `Calls DONE`; write empty AD cells; read/write logs | Tools observed in an interactive session; scheduled access *(validate, R-01)* |
+| Gmail connector | Reconciliation search; test drafts; sends in `live` mode | Tools observed in an interactive session; scheduled access and unattended sending *(validate, R-01, R-04)* |
+| `POST_CALL_EMAIL_LOGS` / `POST_CALL_EMAIL_EVENTS` | Persistent state across independent sessions | Designed; not created |
+| Column AD `POST_CALL_CALL_ID` | Stable Call ID per call | Approved (D-024); not created |
+
+**Observed connector tools (interactive session, 2026-10-31).** Sheets: `get_spreadsheet`, `get_values`, `update_values`, `append_values`, `batch_clear_values`, `insert_dimension`, `update_spreadsheet`, `update_formulas`, `copy_sheet_to_another_spreadsheet`. Gmail: `search_threads`, `get_thread`, `get_message`, `create_draft`, `send_message`, `reply`, label tools, and others. This shows what exists in an interactive session only. It says nothing about scheduled runs, and some tools are **forbidden** for this agent (see §5).
 
 ## 4. Run flow (one scheduled execution)
 
-The full stage-by-stage specification is in **`pipeline.md`**. In summary, one daily run (Asia/Kolkata):
+The runbook is `workflows/daily-post-call-run.md`; the rules it applies are in `pipeline.md`.
 
 ```
-FETCH RECORDS → (RECOVER) → FILTER PREVIOUS-DAY CALLS → CHECK ELIGIBILITY → CHECK DUPLICATES
-   → ANALYSE TRANSCRIPT → GENERATE EMAIL → VALIDATE → SEND → UPDATE TRACKING → (RUN SUMMARY)
+PREFLIGHT → FETCH → RECOVER → FILTER PREVIOUS-DAY → ELIGIBILITY → DUPLICATES
+   → ANALYSE → GENERATE → VALIDATE → PRE-SEND RE-CHECK → SEND (live only) → LOG → RUN SUMMARY
 ```
 
-1. **Fetch** — load config and skills (`CONFIG_ERROR` aborts); snapshot the source worksheet and `POST_CALL_EMAIL_LOGS`.
-2. **Recover** — reconcile `SENDING` rows with Gmail; return expired leases and retryable failures to `PENDING`.
-3. **Filter previous-day calls** — `target_date = today(Asia/Kolkata) − 1`. Work queue = new calls dated `target_date` (plus optional lookback) + `PENDING` records still waiting for data + retries. Assign Call IDs; `SENT`/`SKIPPED` never enter the queue.
-4. **Check eligibility** — deterministic, per record: `ELIGIBLE`, `DEFER` (e.g. transcript not yet available → stays `PENDING`, rechecked next run) or `SKIP` (e.g. cancelled, no-show, opted out).
-5. **Check duplicates** — Call ID, fingerprint, Fathom ID; then claim `PENDING → PROCESSING`.
-6. **Analyse transcript** → **generate email** (summary + generation) → **validate** → **send** (write-ahead `SENDING`) → **update tracking** (`SENT` with final body, customer info, timestamps).
-7. **Run summary** — counts by status and reason for `target_date`.
+How the user's 9-step workflow maps onto these stages:
 
-Each record runs inside its own error boundary: one failed record never stops the others (`pipeline.md` §3).
+| User workflow step | Stage(s) |
+|---|---|
+| 1 Scheduled task starts | PREFLIGHT (connectors, instructions, settings, run lock) |
+| 2 Read eligible records from `Calls DONE` | FETCH, FILTER PREVIOUS-DAY |
+| 3 Identify pending calls and late transcripts | FILTER (waiting and retry records), RECOVER |
+| 4 Validate customer information and recording links | ELIGIBILITY |
+| 5 Analyse transcripts | ANALYSE |
+| 6 Generate customer-focused emails | GENERATE, VALIDATE |
+| 7 Check duplicate status and transcript changes | DUPLICATES (before analysis, cheap) **and** PRE-SEND RE-CHECK (transcript hash, `Recording Sent`, URLs) |
+| 8 Log results in `POST_CALL_EMAIL_LOGS` | Every state change, plus LOG and RUN SUMMARY |
+| 9 Send only in live mode with permissions | SEND gate: `delivery_mode: live`, `go_live_date`, connector permission confirmed in PREFLIGHT |
 
-## 5. LLM pipeline and data contracts
+Each record is processed on its own; one failed record never stops the others (`pipeline.md` §3).
 
-| Stage | Skill | Input | Output |
-|---|---|---|---|
-| Analysis | `transcript-analysis` | transcript, call metadata | `AnalysisResult`: transcript status, sentiment, issues, classified items (`discussed`, `explained`, `completed`, `pending_customer_action`, `pending_support_action`) with evidence |
-| Summary | `customer-summary` | `AnalysisResult`, customer first name | `CustomerSummary`: customer-facing sections, each item traceable to an analysis item ID |
-| Generation | `email-generation` | `CustomerSummary`, recipient, Fathom URL, sender/signature policy | `EmailDraft`: subject, plain-text body, referenced item IDs |
-| Validation | `email-validation` | `EmailDraft`, `AnalysisResult`, `CustomerSummary`, policy | `ValidationResult`: pass/fail, issue codes, evidence |
+## 5. Agent boundaries (enforced by instructions, not by infrastructure)
 
-Every stage returns JSON matching a schema defined in its SKILL.md. Invalid JSON or schema mismatch → one retry, then `FAILED` (`LLM_OUTPUT_INVALID`).
+**Instructions and agent checks do NOT enforce these limits.** The connectors act with the authorising Google user's permissions. The runbook, the pre/post-write checks and the forbidden-tool list only describe intended behaviour; a mistake, a prompt-injection in sheet content or a changed connector could still write anywhere that account can edit. The only real enforcement of the AD-only rule is **Google Sheets protected-range permissions that have been verified** (R-03, OD-36), and that verification is a **precondition for any write to the real source sheet** (AD header or Call IDs). Until it is done, writes are limited to a test copy. Instruction-level rules stay in place as defence in depth, never as the control.
 
-Traceability is the core safety property: every statement in the email must map to an item ID in the summary, and every summary item maps to an analysis item with transcript evidence.
+| Allowed | Forbidden |
+|---|---|
+| `get_values` / `get_spreadsheet` on the source spreadsheet | Any write to `Calls DONE` other than a single empty AD cell |
+| `update_values` on exactly one `Calls DONE!AD{row}` cell, after the pre-write check | `insert_dimension`, `batch_clear_values`, `update_formulas`, `update_spreadsheet`, `copy_sheet_to_another_spreadsheet` on the source worksheet |
+| Read/write/append on `POST_CALL_EMAIL_LOGS` and `POST_CALL_EMAIL_EVENTS` (once created with approval) | Writing `Transcript`, `AI Summary`, `Recording Sent` |
+| Gmail search/read on the sender mailbox for reconciliation | Gmail delete, trash, spam, label changes on unrelated mail, forwarding |
+| `create_draft` in `test` mode (internal recipients only) | `send_message` / `reply` in any mode other than `live`, or to any recipient other than the record's customer |
+| `send_message` in `live` mode after every gate passes | Sending more than one email per Call ID |
 
-## 6. Key design decisions
+## 6. LLM stages and data contracts
 
-See `decisions/decision-log.md`. Summary:
+The four stages are now steps the scheduled Claude session performs while following each SKILL.md. They are no longer separate API calls. Contracts are unchanged:
 
-- Google Sheets is the only data source in the MVP.
-- Stable, immutable Call IDs; never row numbers.
-- Explicit delivery state machine with leases and Gmail reconciliation.
-- SKILL.md files are runtime prompt sources, loaded and versioned by Python.
-- Anthropic API; model IDs from configuration only.
-- Plain Python 3.12.
-- Asia/Kolkata timestamps everywhere.
-- Daily run processes the previous calendar day's calls (Asia/Kolkata), with deferral for late transcripts.
-- Eligibility is a separate deterministic component before any LLM call.
+| Stage | Skill | Output |
+|---|---|---|
+| Analysis | `transcript-analysis` | `AnalysisResult` with classified items and evidence |
+| Summary | `customer-summary` | `CustomerSummary`, each entry traceable to analysis items |
+| Generation | `email-generation` | `EmailDraft` (all recording segments, in order) |
+| Validation | `email-validation` + deterministic checks | `ValidationResult` |
 
-## 7. Concurrency
+Each stage writes its JSON result into the session's working notes before the next stage. Traceability stays the core safety property. Long transcripts and many records per run affect context and plan usage (R-09); per-record isolation is OD-40.
 
-MVP assumes **one execution at a time** (Cloud Run max instances / job parallelism = 1, OD-17). Leases on tracking rows add protection if two executions ever overlap, but Google Sheets has no transactions, so single execution is the primary guarantee.
+## 7. Key design decisions
 
-## 8. Configuration
+See `decisions/decision-log.md`. Still in force: D-001 … D-005, D-009 … D-025. Changed by D-026: D-006 (Python runtime), D-007 (Anthropic API), D-008 (Cloud Run / Cloud Scheduler) and D-020 (Python + uv) are superseded for the primary architecture and kept as future alternatives.
 
-- Secrets (Anthropic key, Google credentials): environment / Secret Manager only.
-- Non-secret settings (sheet IDs, worksheet names, batch size, lease duration, retry limits, email policy): YAML in `config/` plus environment overrides.
-- `DRY_RUN` and `RECIPIENT_ALLOWLIST` safety switches exist from the first Gmail integration.
+## 8. Concurrency
 
-## 9. Failure philosophy
+The initial assumption is one scheduled run per day. Whether the scheduler can start a second run while one is still active is unknown (R-08). Protection, in order:
 
-- Data that may still arrive (transcript, Fathom URL, customer details) → stays `PENDING` with a `pending_reason`, rechecked each run until a wait window expires, then `SKIPPED`.
-- Data or content problem that will not change (cancelled, no-show, opted out, failed validation) → `SKIPPED` (terminal, reason recorded). The system does not guess.
-- Transient technical problem → `FAILED` (retryable up to a limit).
-- Unknown whether an email went out → reconcile; if still unknown, `FAILED` with `SEND_UNCONFIRMED` and **no automatic resend**.
+1. One scheduled task, one daily trigger, no manual runs while it is active.
+2. A **run lock** row in `POST_CALL_EMAIL_EVENTS` (`RUN_STARTED` without `RUN_FINISHED` less than *N* minutes old means another run is active) checked in PREFLIGHT.
+3. Per-record leases in `POST_CALL_EMAIL_LOGS`.
+
+Google Sheets has no transactions, so these reduce the risk without eliminating it. Validate in Phase 1.
+
+## 9. Configuration
+
+- **No API keys or service-account credentials** in the primary architecture. Access comes from connector OAuth grants made by the user (R-01, OD-39).
+- Run settings (delivery mode, go-live date, allowlist, windows, limits, worksheet names) live in `config/run-settings.yaml`, read at PREFLIGHT. Changing the mode (e.g. back to `shadow`) is a one-line edit.
+- Model choice is a scheduled-task setting. The model name is recorded per record if the session can report it.
+
+## 10. Failure philosophy (unchanged)
+
+- Data that may still arrive → `PENDING` with `pending_reason`, rechecked each run until the wait window expires, then `SKIPPED`.
+- Data or content problem that will not change → `SKIPPED` with a reason. The agent does not guess.
+- Transient technical problem (connector, model, interrupted session) → `FAILED`, retryable up to a limit.
+- Unknown whether an email went out → reconcile; if still unknown, `FAILED` `SEND_UNCONFIRMED`, **never** resent automatically.
+- If PREFLIGHT cannot confirm connectors, instructions or settings, the run stops before touching any record (`CONFIG_ERROR` / `CONNECTOR_UNAVAILABLE`).

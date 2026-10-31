@@ -1,72 +1,96 @@
 # Call ID Strategy
 
-Status: **Approved principle.** Implementation details depend on OD-02 and OD-03.
+Status: **Approved (D-024).** The Call ID is stored in source column **AD**, header **`POST_CALL_CALL_ID`**. That is the only approved modification to the source worksheet.
 
 ## 1. Rules
 
-1. Every call has exactly one Call ID for its whole lifetime.
-2. A Call ID is **immutable** once assigned. It is never regenerated, re-derived or replaced — even if a Fathom recording ID is added to the row later.
-3. **Spreadsheet row numbers are never used** for identity, lookups or duplicate prevention. Rows can be inserted, deleted, sorted or filtered at any time.
-4. The Call ID is the primary key of `POST_CALL_EMAIL_LOGS` and the link between source row, tracking row, events and the sent Gmail message.
+1. Every call record has exactly one Call ID for its whole lifetime.
+2. The Call ID identifies the **customer call**, not a recording segment. A row with two or more Fathom recording URLs is still one call, one Call ID and one email (D-025).
+3. A Call ID is generated **once** and is **immutable**. An existing valid Call ID is **never overwritten**, regenerated or replaced.
+4. **Spreadsheet row numbers are never used** for identity or duplicate prevention. They are only a hint for where to look, and every use is verified against row content.
+5. The **Fathom URL is never used as the identity**, alone or as part of the key, because the same URL can appear in different rows (verified).
+6. The agent writes **only** to column AD of `Calls DONE`, one cell at a time. No other source column is ever written (`Transcript` and `AI Summary` in particular, D-023).
+7. The Call ID is the primary key of `POST_CALL_EMAIL_LOGS` and links the source row, log row, events and the sent Gmail message.
 
 ## 2. Format
 
-| Source | Format | Example (synthetic) |
-|---|---|---|
-| Verified Fathom recording ID | `fathom:{recording_id}` | `fathom:123456789` |
-| Generated | `gen:{uuid4}` | `gen:3f2a9c1e-7b4d-4e8a-9c2f-1a2b3c4d5e6f` |
+`gen:{uuid4}` — for example `gen:3f2a9c1e-7b4d-4e8a-9c2f-1a2b3c4d5e6f` (synthetic).
 
-The prefix makes the origin visible and prevents collisions between the two namespaces. `call_id_source` (`fathom` | `generated`) is also stored in tracking.
+- Validation regex: `^gen:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$`.
+- The `fathom:` namespace from the original design is not used: the sheet has no Fathom recording IDs (D-021). `call_id_source` is always `generated`.
 
-## 3. Assignment algorithm
+## 3. Column contract (AD)
 
-Applied in the FILTER PREVIOUS-DAY CALLS stage (`pipeline.md`) to every source row selected for the run (target date, lookback range) and to rows with an unparseable call date. Historical rows from before go-live are not touched.
+| Item | Rule |
+|---|---|
+| Header cell AD1 | Exactly `POST_CALL_CALL_ID` |
+| Location check | Every run reads row 1. Run aborts with `CONFIG_ERROR` if AD1 is anything other than `POST_CALL_CALL_ID`, if `POST_CALL_CALL_ID` appears in any other column, or if the verified headers A–AC have changed |
+| Header creation | One-time setup step, run only with explicit user approval: writes `POST_CALL_CALL_ID` to AD1 if AD1 is empty. Never overwrites a non-empty AD1 |
+| Cell writes | One Sheets-connector `update_values` call per ID, with range exactly `Calls DONE!AD{row}` and a single value. Never a multi-cell range, `append_values`, `insert_dimension`, `batch_clear_values`, sort or format change on the source worksheet |
+| Write guard | **None that is enforced.** The runbook allows only this one write pattern after the pre-write check, but instructions and agent checks do not prevent other writes (D-026). A code-level guard exists only in the future-alternatives design |
+| Protection (required before any real-sheet write) | Google Sheets protected ranges such that the connector's account can edit AD but **not** A–AC or AE+, **verified** (R-03, OD-36). This works only if that account is not the owner or an allowed editor of A–AC. Until verified, the AD header and Call IDs are written only on a test copy |
 
-1. If the row's `call_id` cell is non-empty → use it as is. Validate format; if malformed → row is skipped with `INVALID_CALL_ID` (never overwritten automatically).
-2. Else if a **verified** Fathom recording ID is available → `fathom:{id}`.
-3. Else → `gen:{uuid4}`.
-4. Write the Call ID into the source row's `call_id` column **and** create the `PENDING` row in `POST_CALL_EMAIL_LOGS`. Re-read the row to confirm the write landed in the intended row: match on the row's content (call datetime plus whichever of customer email, customer name and Fathom URL are present), never on row number. If it no longer matches (rows moved during the run), restore that cell to its previous value (empty), do not create the log row, log the anomaly, and leave the call for the next run.
+## 4. Which rows get a Call ID
 
-A row's Call ID is assigned even when the row is not yet eligible (e.g. the transcript is missing), so a late transcript is matched to the same call.
+A row is a **call record** if it has a parseable `Date` and at least one of `Customer Name` or `Email`.
 
-## 4. What counts as a "verified" Fathom recording ID
+| Row | Call ID? |
+|---|---|
+| Call record dated within the selection window (`target_date − discovery_lookback_days` … `target_date`) | **Yes**, assigned in the FILTER stage, even if not yet eligible (so a late transcript joins the same call) |
+| Call record dated today or in the future (booked, not yet happened) | No — assigned on the day after the call |
+| Placeholder row (date only, no name or email) | No — counted in the run summary as `placeholder_rows` |
+| Row with unparseable `Date` but with name or email, inside the scanned area | Yes, then logged `SKIPPED` `MISSING_CALL_DATETIME` once |
+| Historical rows (dated before the window) | **No backfill.** Existing records are never touched |
 
-A Fathom recording ID is verified only if one of these holds (OD-03):
+## 5. Row signature (for matching, never for identity)
 
-- (a) It comes from a dedicated `fathom_recording_id` column populated by the upstream integration that writes the sheet; **or**
-- (b) It is parsed from the Fathom URL using a pattern that has been confirmed against real Fathom URLs and documented in this file.
+`row_signature = sha256( Date serial | Time serial | lower(trim(Email)) | normalised(Customer Name) | trim(Meeting URL) )`
 
-Until (a) or (b) is confirmed, the agent uses generated IDs. It does not guess an ID from an unverified URL format. Note: Fathom share links may contain a share token rather than the recording ID; a share token is not a recording ID.
+- Uses the booking-level columns A, B, D, C and L. The Zoom `Meeting URL` (L) is per booking and differs between bookings, so it separates rows that share a Fathom URL.
+- Deliberately excludes `Recording URL`, `Transcript`, `Meeting Notes` and other fields that change after the call.
+- Stored in the log as `source_signature` at assignment time.
+- **Scheduled-task note (D-026, R-11, OD-38).** Hashing and UUID generation need a deterministic helper run inside the session; the model must not invent hashes or UUIDs. Without a helper, the row match compares the **normalised field values directly** (Date and Time as formatted by the connector, email, name, Meeting URL), which needs no hashing. Call ID generation then requires a helper or another verified source of randomness. Phase 1 decides which (OD-38).
 
-**Verified 2026-10-31 (D-021):** the source sheet has no recording-ID column, and `Recording URL` holds `https://fathom.video/share/<token>` links (share tokens only). So the `fathom:` namespace will not be used in the MVP. A share-token-derived ID (`fathom-share:<token>`) is one of the OD-02 options. It is stable while the URL is unchanged, but it does not exist for rows without a recording, and some cells contain two URLs (OD-31).
+## 6. Assignment algorithm (write-safe)
 
-## 5. Where generated IDs live
+Runs per call record that has an empty AD cell, in the FILTER stage. Each record is handled on its own, and a failure affects only that record.
 
-A generated ID is only immutable if it is stored with the row. Options (OD-02):
+1. **Snapshot.** The full-sheet read (Stage 1) gives each row its values and current row number.
+2. **Ambiguity check.** If another call record in the snapshot has the same `row_signature` **and** an empty AD, both are an exact duplicate entry. Assign each its own ID (steps 3–7), then the duplicate check (Stage 4) skips the later one as `DUPLICATE_SOURCE_ROW`. Their identical content means a swap between them is harmless.
+3. **Generate** `gen:{uuid4}`.
+4. **Pre-write check.** Re-read `A{row}:AD{row}`. Proceed only if its `row_signature` equals the snapshot signature **and** AD is still empty. Otherwise do not write: event `ROW_SHIFTED`, and retry on the next run.
+5. **Write** the ID to `AD{row}` (single cell).
+6. **Post-write verify.** Re-read `A{row}:AD{row}`. Success requires the signature to match and AD to equal the new ID.
+   - Signature mismatch (the row moved in the instant between steps 4 and 5): search column AD for the new ID. If it sits on a row whose signature differs, clear **that cell only, and only if it still holds exactly this new ID** (restoring it to empty). Event `ROW_SHIFTED`, no log row, retry next run.
+   - AD holds a different value (someone typed at the same moment): leave it, event `ROW_SHIFTED`, no log row.
+7. **Create the log row** (`PENDING`) with `call_id`, `source_signature`, `source_row_hint` (row number, informational) and customer fields. If creating the log row fails, the ID stays in AD. The next run finds a valid ID with no log row and creates the log row then (step 1 of §7).
 
-| Option | Description | Assessment |
-|---|---|---|
-| **A (recommended)** | Agent writes the ID into a `call_id` column in the source sheet | Simple; requires write access to one column of the source sheet; column must be protected from manual edits |
-| B | Upstream process (e.g. the automation that fills the sheet) generates the ID | Best separation; requires changing the upstream process |
-| C | Content fingerprint only | Rejected as the primary key: changes when data is corrected, so it is not immutable |
+## 7. Existing IDs and later runs
 
-## 6. Source fingerprint (secondary duplicate guard)
+| Found in AD | Action |
+|---|---|
+| Valid ID, log row exists | Use it. Refresh `source_row_hint`. Never rewrite AD |
+| Valid ID, no log row (crash after write, or log row lost) | Create the log row for that ID (`CALL_ID_ADOPTED` event) |
+| Invalid value (not matching the regex) | **Never overwritten**, never processed. No log row (there is no valid key). Recorded as an `INVALID_CALL_ID` event with the row hint, and counted in the run summary for human review |
+| Same valid ID in two or more rows (e.g. a row copied with AD) | **None of those rows is processed.** If the log row is not `SENT`: `SKIPPED` `DUPLICATE_CALL_ID_IN_SOURCE` for human review. If already `SENT`: nothing is sent again; event noted |
+| Log row exists but its ID is no longer in AD (cell cleared) | If **exactly one** call record has an empty AD and a `row_signature` equal to the stored `source_signature`, write the **same** ID back (event `CALL_ID_RESTORED`, same pre/post checks). Otherwise `SOURCE_ROW_MISSING` (terminal unless already `SENT`) |
 
-`source_fingerprint = sha256( lower(trim(customer_email)) + "|" + normalised(fathom_url) )`
+## 8. Duplicate entries vs shared recording URLs
 
-- Stored in tracking; used to detect the same call appearing twice (copy-pasted row, re-import) with different Call IDs.
-- If a new Call ID has the same fingerprint as an existing tracking row that is `SENT` or in progress → new row is `SKIPPED` with `DUPLICATE_SOURCE_ROW`.
-- The fingerprint is never the primary key.
-- URL normalisation: lowercase scheme and host, strip trailing slash, strip tracking query parameters (exact rules finalised in Phase 1).
+The fingerprint and URL rules live in `pipeline.md` Stage 4. In short:
 
-## 7. Edge cases
+- `source_fingerprint = sha256( lower(trim(Email)) | Date serial | Time serial )` detects the **same booking entered twice**. The later row → `DUPLICATE_SOURCE_ROW`.
+- A Fathom URL that appears in **another row** does **not** make the rows the same call. Each row keeps its own Call ID and is investigated separately. Unless the rows are an exact duplicate entry (same fingerprint), sending a recording that may belong to a different customer is a privacy risk, so the not-yet-sent rows are skipped with `RECORDING_URL_CONFLICT` for human review (OD-31).
+
+## 9. Edge cases
 
 | Case | Behaviour |
 |---|---|
-| Row sorted / moved | Call ID travels with row; no effect |
-| Row deleted after `SENT` | Tracking row remains; nothing re-sent |
-| Row deleted before processing | Tracking row stays `PENDING`; next run cannot find source → `SKIPPED` `SOURCE_ROW_MISSING` |
-| Someone edits a `call_id` cell | Treated as a new call; fingerprint check catches the duplicate |
-| Fathom ID added after a `gen:` ID was assigned | Keep `gen:`; store the Fathom ID in tracking for reference |
-| Two rows with the same Fathom ID | Second gets `DUPLICATE_SOURCE_ROW` |
+| Rows sorted, inserted or deleted | Call ID travels with its row in AD; row numbers are only hints |
+| Row moved between read and write | Pre/post-write checks prevent mis-assignment (§6) |
+| Row deleted after `SENT` | Log row remains; nothing re-sent |
+| Row deleted before processing | `SOURCE_ROW_MISSING` |
+| Someone edits an ID in AD | Invalid → `INVALID_CALL_ID`; changed to another valid ID → treated as a different call, and the fingerprint check catches the duplicate |
+| Customer details corrected after assignment | Same Call ID (identity is AD, not the signature). Signature drift only matters when restoring a cleared ID, which then fails safely to `SOURCE_ROW_MISSING` |
+| Recording URL added, changed or extended to two segments later | Same Call ID; the URL list is re-read on every run (D-025) |
 | Customer details corrected after `SENT` | No resend (OD-20 covers manual reprocess) |

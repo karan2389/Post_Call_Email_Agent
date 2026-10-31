@@ -1,80 +1,51 @@
 # handoff.md
 
-_Last updated: 2026-10-31 — source sheet inspected and documented; awaiting user review._
+_Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
 ## Completed work
 
-### Task 1 — Initialisation
-- Local Git repo (`main`), `.gitignore` verified with `git check-ignore`.
-- Folder structure, project docs, design docs, four SKILL.md specs, planning READMEs.
+### Tasks 1–5 (committed): `642f7ea`, `39b1fc2`, `1f0dddb`, `6d9c76d`
+- Phase 0 docs, repository move, previous-day design, source-sheet inspection.
 
-### Task 2 — Previous-day call processing design
-- `docs/pipeline.md` (Asia/Kolkata target date, work queue, eligibility E1–E15, deferral, duplicates, failure isolation, rerun safety).
-- `POST_CALL_EMAIL_LOGS` / `POST_CALL_EMAIL_EVENTS`; new reason codes and event types; transcript-analysis skill v1.1.0; evaluation cases EV-49 … EV-67; D-013 … D-016.
+### Tasks 6–7 (uncommitted)
+- Business decisions D-022 … D-025; architecture pivot D-026 (Claude Code scheduled tasks + native Google connectors); future-alternatives; runbook; run settings.
 
-### Task 3 — Approval, commit and Phase 1 decisions (this task)
-- User approved all Phase 0 documentation and the previous-day design.
-- Initial commit `642f7ea` "Phase 0: project initialisation and previous-day pipeline design" (33 files).
-- Recorded user decisions:
-  - D-017 `SENDING` state adopted (OD-15 resolved).
-  - D-018 discovery lookback 2 days (OD-24 resolved).
-  - D-019 wait window 1 day after first deferral (OD-25 resolved). Clarified the rule: eligibility is rechecked **before** expiry, and waiting records past `pending_until` are still pulled into the queue once more. Added EV-52b and EV-52c; rewrote EV-52.
-  - D-020 Python 3.12 + `uv`; repo to move out of OneDrive (OD-21 mostly resolved).
+### Task 8 — Corrections and Phase 1 read-only test (this task, uncommitted)
+**Corrections**
+1. AD-only restriction: docs now state that instructions and agent checks **do not enforce** it; only verified protected ranges do; **no write to the real sheet until verified** (`source.protected_ranges_verified: false` in `config/run-settings.yaml`). Updated architecture §5, security §6, call-id-strategy §3, R-03, OD-36, runbook §0, ROADMAP, CLAUDE.md, decision log.
+2. OD-41 reworked: footer reference **withdrawn**; internal `send_attempt_id`; `SENT` only on positive confirmation; otherwise `SEND_UNCONFIRMED` → **human review** (`review_decision`, `reviewed_by`, `reviewed_at`) → no auto-resend. Updated delivery-state-machine §4–§7, data-model, pipeline, runbook, validation-rules (conditional check removed), skip-reasons (`SEND_REVIEW_REQUIRED`, `REVIEW_RESOLVED`), tests (EV-112, EV-114 … EV-117).
+3. OD-37: cloud-first test (if available), desktop as fallback, nothing assumed.
 
-### Task 4 — Repository move
-- Copied the repository (including `.git`) from `C:\Users\karan\OneDrive\Documents\POST-CALL-EMAIL-AGENT` to `C:\dev\post-call-email-agent`.
-- Verified: `git fsck --full` clean, both commits present, working tree clean, all 33 tracked files byte-identical (SHA-256).
-- Updated location references in CLAUDE.md, memory.md, ROADMAP.md, docs/security-privacy.md, docs/open-decisions.md, docs/decisions/decision-log.md.
-- The OneDrive copy was **not** deleted. It is obsolete and should not be edited.
+**Phase 1 read-only results** → full detail in `docs/phase1-results.md`
+- Sheets connector available (local and one manual cloud run, reads only). Header A–AC validated; AD empty.
+- **Yesterday (2026-10-30 IST) = 9 records** (rows 15441–15449); today 6; future 0. Aggregates for those 9: recording URL single 5 / empty 4 / multi 0; `Recording Sent` no 8, empty 1, yes 0; transcripts present 4, missing 5 (1 with a recording URL).
+- Cloud routine created **disabled and manual-only**, narrowed to the Sheets connector, run once (17 s, success).
+- Findings: no protected ranges on `Calls DONE`; routine tool settings not enforced; API routines attach all connectors by default; instructions unreachable in cloud (no remote repo); date-format quirks; full-column reads overflow; transcript checks pull content.
+- New docs: `docs/phase1-results.md`; new OD-42, D-027; EV-118 … EV-123; `fetch_window_rows` setting; windowed read + coverage check in pipeline and runbook.
 
-### Task 5 — Source sheet inspection (this task)
-- Used the Google Sheets MCP connector (`get_spreadsheet`, `get_values`) **read-only** on spreadsheet `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, worksheet `Calls DONE` (GID 1314582701). Nothing was written.
-- Read: workbook metadata (timezone, locale, sheets), header row, sample rows for 30–31 Oct 2026, cell types for one row, a `Recording URL` slice (≈60 rows), the `Customer Not Came`/`Cancel` columns (rows 15000–15455), and transcript structure (profiled by length/format only).
-- A transcript read exceeded the tool output limit and was saved to a local tool-results file. It was profiled without printing content, then **deleted**.
-- Wrote `docs/source-sheet-profile.md` (verified columns, formats, data-quality issues, implications; no customer data or share tokens).
-- Updated data-model §1 (verified / never-use / missing / assumptions), pipeline (date + time columns, E1/E2 from `Meeting Notes`, E3/E4 inactive, E9/E10 URL rules), call-id-strategy, skip-reasons (proposed `RECORDING_ALREADY_SENT`), open-decisions (OD-03 and OD-28 resolved; OD-01/02/04/08/10/26 updated; new OD-29 … OD-32), decision-log D-021, README, config/README, `.env.example`.
-
-## Files modified in Task 5
-
+## Files modified (uncommitted, vs HEAD)
 ```
-NEW   docs/source-sheet-profile.md
-EDIT  docs/data-model.md, pipeline.md, call-id-strategy.md, skip-reasons.md, open-decisions.md,
-      decisions/decision-log.md
-EDIT  README.md, config/README.md, .env.example, memory.md, handoff.md
+NEW     docs/future-alternatives.md, docs/phase1-results.md, workflows/daily-post-call-run.md, config/run-settings.yaml
+RENAME  docs/deployment.md -> docs/scheduled-execution.md
+DELETE  .env.example
+EDIT    CLAUDE.md, README.md, ROADMAP.md, memory.md, handoff.md, config/README.md, src/README.md, tests/*,
+        skills/*, docs/* (architecture, pipeline, state machine, data model, call-id, security, skip-reasons,
+        validation, source profile, open decisions, decision log, testing, skills-runtime, scheduled-execution)
 ```
+
+## External changes made (outside the repository)
+- Anthropic cloud environment "Default" `env_01Cs49hSdGFEfboTPFSfY4Ty` **auto-created** by the scheduling skill.
+- Cloud routine `trig_017psPj1c1uxCuPDXDw9rvXu` (disabled, manual-only, Sheets connector only) and one run session `cse_01FMKRNXJ9UTJA8LUr5tBe8x`. Contains headers, dates and counts only; no customer data.
+- No spreadsheet, Gmail, Google Cloud or connector-permission changes. Local temporary tool-result files were deleted.
 
 ## Current status
+Phase 1 partial. **No application code, no recurring schedule, no spreadsheet write (AD untouched), no worksheet, no Gmail call, no draft, no email, no Google Cloud resource, no commit.**
 
-Phase 0 complete and approved; source sheet verified and documented. Documentation only: **no application code, no production integration, no credentials, no cloud resources, no emails sent, no writes to the source sheet.** Awaiting user review of the source mapping. Phase 1 has not started.
-
-## Pending work
-
-- Install Python 3.12 and `uv`.
-- The obsolete OneDrive copy is kept for now as a backup (user decision, 2026-10-31). Do not edit it.
-- Explicit go-ahead for Phase 1.
-
-## Errors / blockers
-
-- **Python 3.12 not installed.** It blocks Phase 1. On Windows, add `tzdata` as a dependency for `zoneinfo`.
-- Open decisions by phase (full list in `docs/open-decisions.md`):
-  - Phase 1: none blocking.
-  - Phase 2: OD-05, OD-08, OD-09, OD-11, OD-12, OD-13.
-  - Phase 2: also OD-30 (Meeting Notes as context), OD-32 (name normalisation).
-  - Phase 3: OD-01 (automation owner), OD-02 (Call ID storage — the sheet is shared and has no ID column), OD-04, OD-10, OD-18, OD-20, OD-26 (cancel/no-show patterns), OD-29 (existing automation and manual recording emails), OD-31 (URL anomalies).
-- **Highest-risk finding:** the team may already email recordings manually (`Recording Sent`). Customers could receive two emails unless OD-29 is settled before go-live.
+## Remaining blockers (see `docs/phase1-results.md` §8)
+B1 no remote repository (R-02) · B2 connector Google accounts unidentified (R-13) · B3 protected ranges absent/unverified, needs a test copy (R-03) · B4 Gmail in cloud untested, needs test-mailbox plan and approval (R-01, R-04) · B5 helpers undecided (OD-38) · B6 data-handling approval for cloud session history (R-12, OD-12).
 
 ## Exact next steps
-
-1. User reviews `docs/source-sheet-profile.md` and the updated `docs/data-model.md` §1.
-2. User answers or delegates OD-02, OD-26 and OD-29 (they shape Phase 3; none block Phase 1).
-3. Work only in `C:\dev\post-call-email-agent`. The OneDrive copy stays as a backup.
-4. Install Python 3.12 (python.org) and `uv`; verify `python --version` and `uv --version`.
-5. On go-ahead, start Phase 1 (synthetic fixtures should mirror the verified header names and formats):
-   - `pyproject.toml` (Python 3.12, `tzdata`, `pytest`);
-   - package skeleton under `src/post_call_agent/`;
-   - `Clock` and target-date logic, call-date parser, work queue;
-   - eligibility checker with D-019 wait logic, duplicate checker;
-   - Call ID and fingerprint, state machine with `SENDING`;
-   - deterministic validation, skill loader;
-   - synthetic fixtures EV-01 … EV-67;
-   - unit tests with fakes, run under a non-IST process timezone.
+1. Review `docs/phase1-results.md`; decide whether to commit Tasks 6–8, and whether to delete the test routine / default environment at claude.ai.
+2. Decide on **B1**: create a **private** remote repository (instructions only, no customer data) and connect it to claude.ai, then run a second manual cloud test that only reads `CLAUDE.md` and the runbook (R-02). Needs your approval before anything is pushed.
+3. Tell me which Google accounts authorise the Sheets and Gmail connectors (B2), and agree a test copy of the spreadsheet for the R-03 protection test (B3).
+4. Do not enable any schedule until R-01 … R-04 and R-12 are resolved.

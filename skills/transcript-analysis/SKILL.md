@@ -1,6 +1,6 @@
 ---
 name: transcript-analysis
-version: 1.1.0
+version: 1.2.0
 stage: analysis
 output_schema: AnalysisResult
 ---
@@ -15,7 +15,7 @@ Read one FlexiFunnels customer support call transcript and produce a precise, ev
 
 Provided by the runtime in tagged blocks:
 
-- `<call_metadata>`: `call_id`, `call_datetime`, `support_agent_name` (may be empty), `customer_first_name`.
+- `<call_metadata>`: `call_id`, `call_datetime`, `support_agent_name` (may be empty), `customer_first_name`, `recording_count` (number of recording segments; more than 1 means the call was extended and recorded in parts).
 - `<transcript>`: raw transcript text with speaker labels where available.
 
 ## Instructions
@@ -169,6 +169,8 @@ Transcript ends: `Support: So the reason your funnel isn't publishing is that th
 
 | Situation | Handling |
 |---|---|
+| `recording_count > 1` and the transcript restarts its timestamps at `[00:00:00]` or has a short break between segments | Treat as one continuous call; a segment boundary alone is **not** `INCOMPLETE` |
+| `recording_count > 1` but the transcript clearly covers only one segment (ends mid-conversation, later topics referenced but missing) | `INCOMPLETE` → `TRANSCRIPT_INCOMPLETE` (dependency on the transcript automation, OD-33) |
 | Transcript has no speaker labels | Infer from context; lower confidence; skip with `ANALYSIS_LOW_CONFIDENCE` if outcomes cannot be attributed |
 | Customer never joins (support waits, leaves a message, or says "no-show") | `INSUFFICIENT_CONTENT`, skip with `CUSTOMER_NO_SHOW` |
 | Call was cancelled or rescheduled at the start, no support discussion | `INSUFFICIENT_CONTENT`, skip with `INSUFFICIENT_CONTENT` (the runtime's `CALL_CANCELLED` comes from the sheet, not the model) |
@@ -198,5 +200,6 @@ Acceptance criteria (used by evaluation cases):
 
 ## Changelog
 
+- 1.2.0 (2026-10-31) — `recording_count` input and multi-segment transcript edge cases (D-025).
 - 1.1.0 (2026-10-31) — Added `CUSTOMER_NO_SHOW` skip recommendation and cancelled/no-show edge cases (previous-day processing requirement).
 - 1.0.0 (2026-10-31) — Initial specification.

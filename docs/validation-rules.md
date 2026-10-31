@@ -20,19 +20,23 @@ Every analysed item has exactly one category. The email must preserve it.
 
 Timelines may appear only if stated in the transcript, and only as stated.
 
-## 2. Deterministic checks (code)
+## 2. Deterministic checks (explicit checklist steps)
+
+Applied by the scheduled session as literal checklist steps (or by a helper if OD-38 allows one), never as free-form judgement. Each check is pass/fail against exact values (D-026).
 
 | Code | Check |
 |---|---|
-| `FATHOM_URL_MISSING` | Body contains the exact `fathom_url` from the source row |
-| `FATHOM_URL_MISMATCH` | No other Fathom URL, and the URL is unmodified |
+| `FATHOM_URL_MISSING` | Body contains **every** URL in `fathom_urls`, exactly as parsed (one call may have several recording segments, D-025) |
+| `FATHOM_URL_MISMATCH` | No Fathom URL other than those in `fathom_urls`; none modified; none repeated |
+| `RECORDING_ORDER_MISMATCH` | The URLs appear in the body in the same order as in `fathom_urls` |
+| `RECORDING_SEGMENT_LABELS_MISSING` | When `recording_count > 1`: each URL sits on its own line labelled `Part 1`, `Part 2`, … in order. When `recording_count = 1`: no `Part` label is used |
 | `RECIPIENT_MISMATCH` | `To` equals the source `customer_email` exactly (single recipient) |
 | `NAME_MISMATCH` | Greeting uses the customer's first name as derived from `customer_name` |
 | `SUBJECT_INVALID` | Subject present, 20–90 characters (proposal), no placeholders, no ALL CAPS, no emoji |
 | `LENGTH_OUT_OF_RANGE` | Body 80–250 words (proposal) excluding signature |
 | `PLACEHOLDER_PRESENT` | No `[`…`]`, `{{`, `}}`, `<name>`, `TBD`, `XXX`, `Lorem` |
 | `BANNED_PHRASE` | None of the configured banned phrases (e.g. "as an AI", "I hope this email finds you well", "guarantee", "100%") |
-| `UNAPPROVED_LINK` | Only the Fathom URL and configured allowlisted URLs (e.g. help centre) |
+| `UNAPPROVED_LINK` | Only the call's Fathom URLs and configured allowlisted URLs (e.g. help centre) |
 | `UNAPPROVED_CONTACT_DETAIL` | No phone numbers or email addresses other than configured support contacts |
 | `SIGNATURE_MISSING` | Configured signature block present |
 | `FORMAT_INVALID` | Plain text, UTF-8, no markdown syntax (`**`, `#`), no HTML (unless OD-09 chooses HTML) |
@@ -51,6 +55,7 @@ Timelines may appear only if stated in the transcript, and only as stated.
 | `OFF_TOPIC_CONTENT` | Marketing, upsell or content unrelated to the call |
 | `LANGUAGE_MISMATCH` | Language differs from policy (OD-08) |
 | `INSTRUCTION_INJECTION_FOLLOWED` | Email reflects instructions embedded in the transcript rather than the conversation |
+| `SEGMENTS_NOT_EXPLAINED` | `recording_count > 1` but the email does not say, naturally and briefly, that the call continued across several recordings, or implies they are separate calls |
 
 Cross-reference (code, using the generator's `referenced_item_ids`): every pending item ID must be referenced; no referenced ID may be unknown. This backs up `PENDING_ACTION_OMITTED` and `UNSUPPORTED_CLAIM` without relying only on the LLM.
 
@@ -68,8 +73,8 @@ See `skills/email-validation/SKILL.md`. Summary:
 }
 ```
 
-`outcome` is recomputed in code: `FAIL` if any deterministic or semantic issue exists, regardless of what the model says.
+`outcome` is recomputed by the runbook rule, not taken from the validator's own verdict: `FAIL` if any deterministic or semantic issue exists. Because the validator runs in the same session as the generator (OD-40), the deterministic checklist is the stronger gate.
 
 ## 5. Policy configuration
 
-Lengths, banned phrases, allowlisted links/contacts, signature and language live in `config/` (email policy), not in code or skills, so the support team can adjust them without code changes. The email-generation and email-validation skills receive the same policy values at runtime.
+Lengths, banned phrases, allowlisted links/contacts, signature and language live in `config/` (email policy), not in skills, so the support team can adjust them by editing configuration only. The email-generation and email-validation skills receive the same policy values at runtime.
