@@ -2,7 +2,7 @@
 
 Revised for the Claude Code scheduled tasks + native Google connectors architecture (D-026). Each phase needs explicit user approval before it starts, and its exit criteria must be met before moving on. **Phase 0 is complete; Phase 1 is partly done (2026-10-31, read-only).**
 
-**Current phase: Phase 1 — Connector and scheduled-execution validation — PARTIAL.** Results and blockers: `docs/phase1-results.md`. Done: Sheets connector verified locally and in one manually triggered cloud run (reads only). Not done: instructions in cloud runs (**blocked, no remote repository**), Gmail in cloud, connector-account identity, protected-range verification, deterministic helpers, usage at volume. No recurring schedule exists.
+**Current phase: Phase 1 — Connector and scheduled-execution validation — PARTIAL.** Results and blockers: `docs/phase1-results.md`. Done: Sheets connector verified locally and in one manually triggered cloud run (reads only). Not done: instructions in cloud runs (**untested: private remote `karan2389/Post_Call_Email_Agent` now exists, not yet attached to a routine**), Gmail in cloud, connector-account identity, protected-range verification, deterministic helpers, usage at volume. No recurring schedule exists.
 
 Phase mapping to the previous roadmap: the old Phase 1 (local Python foundations) and old Phase 6 (Cloud Run deployment) are dropped from the primary path and kept in `docs/future-alternatives.md`.
 
@@ -19,7 +19,7 @@ Phase mapping to the previous roadmap: the old Phase 1 (local Python foundations
 - Start **read-only**: a scheduled `dry_run` that runs PREFLIGHT and reads `Calls DONE` headers and yesterday's rows, and reports counts only. No writes, no email.
 - Assess R-03 with the sheet owner (OD-36): which Google account the connector uses, and what protected ranges exist. Instructions and agent checks do **not** enforce AD-only writes; only verified protected-range permissions do. No write of any kind to the real sheet in this phase.
 - **Done so far:** one disabled, manual-only cloud routine with the Sheets connector only (OD-42). No recurring schedule.
-- **Remaining:** private remote repository and a second manual cloud run that reads `CLAUDE.md` and the runbook (R-02); identify the connector accounts (R-13); inspect/verify protected ranges on a test copy (R-03); Gmail availability in cloud only with a test mailbox plan and approval (R-01, R-04); decide helpers (OD-38); data-handling approval (R-12, OD-12).
+- **Remaining:** (remote created) attach it to a routine and run a second manual cloud run that reads `CLAUDE.md` and the runbook (R-02); identify the connector accounts (R-13); inspect/verify protected ranges on a test copy (R-03); Gmail availability in cloud only with a test mailbox plan and approval (R-01, R-04); decide helpers (OD-38); data-handling approval (R-12, OD-12).
 - **Exit:** validation results recorded; go/no-go on the scheduled architecture, or escalation to `future-alternatives.md`.
 
 ## Phase 2 — Transcript processing and email generation (no sending)

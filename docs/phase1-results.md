@@ -95,7 +95,7 @@ Earlier inspection (before today's test) saw one cell containing two Fathom URLs
 
 | # | Blocker | Needed from |
 |---|---|---|
-| B1 | **No remote repository**, so R-02 (instructions in cloud runs) cannot be tested. Needs a **private** remote (e.g. GitHub), the claude.ai GitHub access for that repository, and approval to push instructions-only content (OD-21, OD-12) | You |
+| B1 | **Remote created after this test** (2026-10-31: private `karan2389/Post_Call_Email_Agent`); R-02 still untested until it is attached as a routine source. Original blocker: no remote repository, so R-02 (instructions in cloud runs) cannot be tested. Needs a **private** remote (e.g. GitHub), the claude.ai GitHub access for that repository, and approval to push instructions-only content (OD-21, OD-12) | You |
 | B2 | Identify the Google account behind the Sheets connector and the Gmail connector, and whether it is the sheet owner or an editor (R-13, OD-36, OD-39) | You / sheet owner |
 | B3 | Decide protected ranges on `Calls DONE` and verify Google rejects a forbidden write from the connector account **on a test copy** (R-03). Needs a test copy of the spreadsheet | You / sheet owner |
 | B4 | Gmail in cloud runs (R-01, R-04): needs a test mailbox plan and approval before any Gmail call | You |

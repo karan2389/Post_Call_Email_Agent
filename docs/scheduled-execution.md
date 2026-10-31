@@ -55,7 +55,7 @@ Any behaviour not yet validated is described in the docs as *proposed* or *(vali
 | ID | Status after the read-only Phase 1 test |
 |---|---|
 | R-01 | **PARTIAL.** Google Sheets: verified in a manually triggered cloud run (reads only). Gmail: untested in cloud (deliberately not attached or called) |
-| R-02 | **BLOCKED.** Cloud run saw an empty working directory and no `CLAUDE.md`: no sources configured; this repository has no remote (blocker B1) |
+| R-02 | **BLOCKED.** Cloud run saw an empty working directory and no `CLAUDE.md`: no sources configured; the repository had no remote at test time. A private remote now exists (`karan2389/Post_Call_Email_Agent`); re-test with it as a routine source |
 | R-03 | **Not met.** `Calls DONE` has **no protected ranges**; the connector account is unidentified; routine `permitted_tools` was accepted but **not enforced** (all nine Sheets tools listed in the cloud run). Only verified protected ranges count |
 | R-04 | UNVERIFIED (no Gmail calls made) |
 | R-05, R-06, R-07 | UNVERIFIED (need test copy, logs worksheets, Gmail) |

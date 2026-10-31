@@ -2,7 +2,7 @@
 
 An automated agent for the FlexiFunnels Customer Success / Support team. Every day it picks up the previous day's support calls (Asia/Kolkata) from Google Sheets, understands each conversation, writes a concise, personalised follow-up email that includes the Fathom recording link(s), validates it, and (only in `live` mode) sends it through Gmail. Every outcome is recorded in the `POST_CALL_EMAIL_LOGS` worksheet.
 
-> **Status:** Phase 1 partly done (read-only, `docs/phase1-results.md`). The architecture below is **proposed** (D-026): the Sheets connector works in a cloud run, but project instructions are not yet reachable from the cloud (no remote repository), Gmail in the cloud is untested, and AD-only writes are not yet enforceable. No recurring schedule, spreadsheet change, application code or email exists. See `ROADMAP.md` and `handoff.md`.
+> **Status:** Phase 1 partly done (read-only, `docs/phase1-results.md`). The architecture below is **proposed** (D-026): the Sheets connector works in a cloud run, but project instructions are not yet verified as reachable from the cloud (a private GitHub remote now exists but has not been tested as a routine source), Gmail in the cloud is untested, and AD-only writes are not yet enforceable. No recurring schedule, spreadsheet change, application code or email exists. See `ROADMAP.md` and `handoff.md`.
 
 ## Architecture in brief
 

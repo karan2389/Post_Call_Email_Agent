@@ -58,5 +58,5 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 ## Environment
 
-- Repository: `C:\dev\post-call-email-agent`, branch `main`, local only (remote hosting open, OD-21). Python is not installed and is not needed unless helpers (OD-38) are approved.
+- Repository: `C:\dev\post-call-email-agent`, branch `main`, remote `origin` = private GitHub repo `karan2389/Post_Call_Email_Agent` (created and pushed 2026-10-31 via `gh`; OD-21 resolved; instructions only, never customer data). Python is not installed and is not needed unless helpers (OD-38) are approved.
 - A Google Sheets MCP connector and a Gmail connector are available in interactive Claude Code sessions. They are development tools here; scheduled-run access is what Phase 1 must validate.
