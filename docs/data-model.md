@@ -1,29 +1,50 @@
 # Data Model
 
-Status: **Proposed schema.** Source sheet columns must be confirmed against the real sheet (OD-01). Whether the logs live in the same spreadsheet as the source is OD-18.
+Status: Source mapping **verified against the real sheet on 2026-10-31** (see `source-sheet-profile.md`). Log/event schemas are proposed. Whether the logs live in the same spreadsheet as the source is OD-18.
 
 All timestamps: ISO 8601 with offset, Asia/Kolkata, e.g. `2026-10-31T14:05:00+05:30`. All dates (`call_date`, `target_date`): `YYYY-MM-DD` in Asia/Kolkata.
 
-## 1. Source worksheet (read; one column written)
+## 1. Source worksheet
 
-Owned by the support team / upstream process. The agent reads it and writes only `call_id`.
+- Spreadsheet ID `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, worksheet `Calls DONE` (GID `1314582701`). It is the CSC team's shared workbook and is owned by the team.
+- The agent reads it. Writing anything to it (e.g. a Call ID column) is **not approved** (OD-02).
+- Headers in row 1. Columns are mapped by **exact header text** through `config/` (never by letter), so a moved column needs no code change. Letters below are as of inspection.
 
-| Column | Required | Written by | Notes |
+### 1.1 Verified fields
+
+| Logical field | Header (exact) | Col | Format / handling |
 |---|---|---|---|
-| `call_id` | — | **Agent** (or upstream, OD-02) | Immutable. See `call-id-strategy.md`. Should be a protected range. |
-| `fathom_recording_id` | Optional | Upstream | Only used if verified (OD-03) |
-| `fathom_url` | Yes | Upstream | Must be a valid HTTPS Fathom URL |
-| `recording_shareable` | Optional | Upstream | `TRUE`/`FALSE` — whether the customer can open the recording (OD-04) |
-| `customer_name` | Yes | Upstream | Used for greeting (first name derived) |
-| `customer_email` | Yes | Upstream | Single valid address |
-| `call_datetime` | Yes | Upstream | Date cell (read as serial number) or ISO text. Interpreted in Asia/Kolkata. Its date part decides previous-day selection (`pipeline.md` §1). A separate date column can be mapped instead (OD-28). |
-| `call_status` | Recommended | Upstream | e.g. `completed`, `cancelled`, `no_show` — drives `CALL_CANCELLED` / `CUSTOMER_NO_SHOW` (OD-26) |
-| `support_agent_name` | Recommended | Upstream | For signature / context (OD-06) |
-| `transcript` | Yes (may arrive late) | Upstream | Plain text with speaker labels. Empty → record waits as `PENDING` (`MISSING_TRANSCRIPT`). Cell limit 50,000 characters → see `TRANSCRIPT_POSSIBLY_TRUNCATED`. |
-| `call_type` | Optional | Upstream | e.g. support / onboarding / sales (OD-10) |
-| `email_opt_out` | Optional | Upstream | `TRUE` → skip with `CUSTOMER_OPTED_OUT` |
+| `call_date` | `Date` | A | Date serial (format `mmmm d, yyyy`) → date in Asia/Kolkata. Decides previous-day selection. |
+| `call_time` | `Time of the call` | B | Time serial (format `h:mm am/pm`). `call_datetime = call_date + call_time`. May be empty → `call_datetime` = date only. |
+| `customer_name` | `Customer Name` | C | Free text; normalise casing for the greeting (OD-32) |
+| `customer_email` | `Email` | D | Trim whitespace; must be one valid address |
+| `support_agent_name` | `Call lead by(who took the call)` | F | Agent first name; empty until the agent fills the row |
+| `fathom_url` | `Recording URL` | M | Trim; must be `https://fathom.video/share/<token>`; whitespace-only = empty; two URLs in one cell → OD-31 |
+| `meeting_notes` | `Meeting Notes` | Q | Free text. Used for the call-outcome check (cancelled / no-show, OD-26). Use as extra LLM context is OD-30. |
+| `transcript` | `Transcript` | AB | Direct text, lines `[HH:MM:SS] Speaker: text`. Empty → `PENDING` (`MISSING_TRANSCRIPT`). 50,000-character cell limit → `TRANSCRIPT_POSSIBLY_TRUNCATED`. |
 
-Column names are mapped through `config/` (sheet schema mapping), so renaming a column in the sheet needs only a config change.
+Optional context (verified, not required): `Answer in Booking Form` (J), `Customer Type` (O), `In which Industry he/ She working` (P), `Meeting Duration` (K).
+
+### 1.2 Verified columns the agent must never read into prompts or logs
+
+`Mistakes that you made & what steps you will take to improve those mistakes.` (R), `Bugs your getting in CSC` (Z), `Suggetions your getting in CSC` (AA), `Phone` (E). Also not used: `AI Summary` (AC, written by an existing automation) and `Recording Sent` (N) — see OD-29.
+
+### 1.3 Missing fields (do not exist in the sheet)
+
+| Logical field | Status | Current handling |
+|---|---|---|
+| `call_id` | **Missing** | OD-02 (no write access agreed yet) |
+| `fathom_recording_id` | **Missing** | Only share tokens are available; a share token is not a recording ID (OD-03) |
+| `call_status` | **Missing as structured data** | `Customer Not Came` (W) and `Cancel` (X) headers exist but are empty in all recent rows. Outcome derived from `Meeting Notes` text (OD-26) |
+| `recording_shareable` | **Missing** | All recent URLs are `/share/` links; public visibility unconfirmed (OD-04) |
+| `email_opt_out` | **Missing** | Check E3 is inactive until a column exists |
+| `call_type` | **Missing** | Closest is `Customer Type` (O); check E4 inactive (OD-10) |
+
+### 1.4 Assumptions (not verified)
+
+- Rows are not moved from `Calls DONE` to `Old Calls DONE` / `Calls Backup` within the processing window. If they are, `SOURCE_ROW_MISSING` applies.
+- The existing automation that fills `Transcript` keeps doing so for new calls, and its timing is roughly "after the call, within a day".
+- The spreadsheet timezone (`Asia/Calcutta`) stays unchanged.
 
 ## 2. `POST_CALL_EMAIL_LOGS` worksheet (agent-owned, one row per Call ID)
 
@@ -42,7 +63,7 @@ The current state and final record of each call: customer information, status, r
 | `call_datetime` | timestamp | |
 | `call_date` | date | Date part in Asia/Kolkata |
 | `target_date` | date | The run's target date when the record was first discovered |
-| `call_status` | string | Copied from source, if provided |
+| `call_status` | string | Derived outcome: `completed` \| `cancelled` \| `no_show` \| `unknown` (from `Meeting Notes`, OD-26) |
 | `fathom_url` | string | |
 
 ### State

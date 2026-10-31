@@ -38,6 +38,8 @@ A Fathom recording ID is verified only if one of these holds (OD-03):
 
 Until (a) or (b) is confirmed, the agent uses generated IDs. It does not guess an ID from an unverified URL format. Note: Fathom share links may contain a share token rather than the recording ID; a share token is not a recording ID.
 
+**Verified 2026-10-31 (D-021):** the source sheet has no recording-ID column, and `Recording URL` holds `https://fathom.video/share/<token>` links (share tokens only). So the `fathom:` namespace will not be used in the MVP. A share-token-derived ID (`fathom-share:<token>`) is one of the OD-02 options. It is stable while the URL is unchanged, but it does not exist for rows without a recording, and some cells contain two URLs (OD-31).
+
 ## 5. Where generated IDs live
 
 A generated ID is only immutable if it is stored with the row. Options (OD-02):

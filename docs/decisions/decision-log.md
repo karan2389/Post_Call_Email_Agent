@@ -80,3 +80,8 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 ### D-020 — Python 3.12 with uv; repository outside OneDrive (2026-10-31)
 **Decision:** Python 3.12 from python.org, dependencies managed with `uv`. Move the repository out of OneDrive to a non-synced folder before Phase 1 code is written. Resolves the main part of OD-21 (remote hosting still open).
 **Update (2026-10-31):** Repository moved to `C:\dev\post-call-email-agent`.
+
+### D-021 — Verified source: `Calls DONE` worksheet (2026-10-31)
+**Decision:** The source is spreadsheet `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, worksheet `Calls DONE` (GID `1314582701`), with columns mapped by exact header text: `Date`, `Time of the call`, `Customer Name`, `Email`, `Call lead by(who took the call)`, `Recording URL`, `Meeting Notes`, `Transcript`. The sheet is read-only for the agent unless OD-02 approves a Call ID column.
+**Basis:** Read-only inspection through the Google Sheets MCP connector; details in `docs/source-sheet-profile.md`.
+**Consequences:** Resolves OD-03 (no recording IDs) and OD-28 (date cells, IST). Updates OD-01, OD-02, OD-04, OD-26. Adds OD-29 … OD-32. Internal columns (`Mistakes…`, `Bugs…`, `Suggetions…`) are excluded from prompts and logs.

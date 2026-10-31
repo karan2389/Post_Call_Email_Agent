@@ -17,8 +17,8 @@ Two supporting steps wrap this sequence: **RECOVER** (reconcile uncertain sends 
   - Example: run at 31 Oct 2026 00:30 IST (= 30 Oct 19:00 UTC) → `target_date = 2026-10-30` (a UTC-based calculation would wrongly give 29 Oct).
 - `target_date` is computed **once** at run start and used for the whole run, even if the run crosses midnight.
 - Manual override: `TARGET_DATE=YYYY-MM-DD` (environment/CLI) for reruns and backfills. It must be earlier than `run_date`; today or future dates are rejected (`CONFIG_ERROR`).
-- **Call date** = the date part of the record's call datetime, interpreted in Asia/Kolkata:
-  - Read Sheets values with `valueRenderOption=UNFORMATTED_VALUE` and `dateTimeRenderOption=SERIAL_NUMBER`, so real date cells arrive as serial numbers (no dd/mm vs mm/dd ambiguity). Serial numbers are interpreted in the spreadsheet's timezone, which must be set to Asia/Kolkata (OD-28).
+- **Call date** = the value of the `Date` column (A), interpreted in Asia/Kolkata. The time comes from the separate `Time of the call` column (B) and does not affect selection (verified, `source-sheet-profile.md`):
+  - Read Sheets values with `valueRenderOption=UNFORMATTED_VALUE` and `dateTimeRenderOption=SERIAL_NUMBER`, so real date cells arrive as serial numbers (no dd/mm vs mm/dd ambiguity). Verified: `Date` and `Time of the call` are real date/time cells, and the spreadsheet timezone is `Asia/Calcutta` (= Asia/Kolkata), so serials map directly to IST.
   - Text dates are accepted only in ISO format (`YYYY-MM-DD`, optionally with time and offset) or one explicitly configured format. Anything ambiguous or unparseable → `MISSING_CALL_DATETIME`.
   - A value with an explicit offset is converted to Asia/Kolkata before taking the date.
 - Calls dated `run_date` (today) or in the future are **ignored** in this run; they become targets tomorrow.
@@ -63,16 +63,16 @@ Checks (all evaluated; every failure is listed in `reason_detail`; a terminal fa
 
 | # | Check | Fails as | Type |
 |---|---|---|---|
-| E1 | `call_status` is cancelled | `CALL_CANCELLED` | Terminal |
-| E2 | `call_status` is no-show | `CUSTOMER_NO_SHOW` | Terminal |
-| E3 | Customer opted out | `CUSTOMER_OPTED_OUT` | Terminal |
-| E4 | Call type is eligible (OD-10) | `CALL_TYPE_EXCLUDED` | Terminal |
+| E1 | `Meeting Notes` matches a cancelled pattern (e.g. "call cancel") | `CALL_CANCELLED` | Terminal |
+| E2 | `Meeting Notes` matches a no-show pattern (e.g. "customer not came") | `CUSTOMER_NO_SHOW` | Terminal |
+| E3 | Customer opted out — *inactive: no opt-out column exists* | `CUSTOMER_OPTED_OUT` | Terminal |
+| E4 | Call type is eligible — *inactive: no call-type column exists* (OD-10) | `CALL_TYPE_EXCLUDED` | Terminal |
 | E5 | Customer name present | `MISSING_CUSTOMER_NAME` | Deferrable |
 | E6 | Customer email present | `MISSING_CUSTOMER_EMAIL` | Deferrable |
 | E7 | Customer email valid (single address, valid syntax) | `INVALID_CUSTOMER_EMAIL` | Deferrable |
 | E8 | Fathom URL present | `MISSING_FATHOM_URL` | Deferrable |
-| E9 | Fathom URL valid (HTTPS, allowed Fathom host) | `INVALID_FATHOM_URL` | Deferrable |
-| E10 | Fathom recording shareable with the customer (OD-04) | `FATHOM_NOT_SHAREABLE` | Deferrable |
+| E9 | Fathom URL valid: exactly one `https://fathom.video/share/<token>` after trimming. A cell with two URLs fails here until OD-31 is decided | `INVALID_FATHOM_URL` | Deferrable |
+| E10 | Fathom recording shareable with the customer — verified links are `https://fathom.video/share/<token>`; public visibility unconfirmed (OD-04) | `FATHOM_NOT_SHAREABLE` | Deferrable |
 | E11 | Transcript present | `MISSING_TRANSCRIPT` | Deferrable |
 | E12 | Transcript not truncated (near the 50,000-character cell limit or ends mid-word at the limit) | `TRANSCRIPT_POSSIBLY_TRUNCATED` | Terminal |
 | E13 | Transcript meets minimum length (OD-10) | `TRANSCRIPT_TOO_SHORT` | Terminal |
@@ -88,7 +88,7 @@ Checks (all evaluated; every failure is listed in `reason_detail`; a terminal fa
 - Missing transcripts are therefore **recorded as pending, never silently discarded**, and a transcript that arrives later is processed in a later run.
 
 **Cancelled calls and no-shows** are detected in two places:
-1. Deterministically via the source `call_status` column (E1, E2), if the sheet provides it (OD-26).
+1. Deterministically from the `Meeting Notes` text (E1, E2). The sheet has no structured status: `Customer Not Came` and `Cancel` columns exist but are unused. Patterns are listed in `source-sheet-profile.md` §6 and need confirmation (OD-26). Matching is case-insensitive on the trimmed text; anything not matching is `unknown` and proceeds.
 2. By transcript analysis (Stage 5): a transcript showing the customer never joined → `CUSTOMER_NO_SHOW`; greetings only / wrong number → `INSUFFICIENT_CONTENT`.
 
 A no-show with no transcript and no `call_status` waits for the deferral window and then ends `SKIPPED` `MISSING_TRANSCRIPT`. It never receives an email.

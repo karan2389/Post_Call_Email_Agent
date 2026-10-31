@@ -7,7 +7,8 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 - 2026-10-31 — Phase 0 initialisation complete: structure, Git, documentation, four SKILL.md specs.
 - 2026-10-31 — Previous-day processing requirement designed (D-013 … D-016, `docs/pipeline.md`).
 - 2026-10-31 — User approved the Phase 0 documentation and previous-day design; initial commit `642f7ea`. Then decided D-017 … D-020. Phase 1 not yet started (needs Python 3.12 + uv, go-ahead).
-- 2026-10-31 — Repository moved (copied with full Git history, verified by `git fsck` and file hashes) to `C:\dev\post-call-email-agent`. The old OneDrive copy at `C:\Users\karan\OneDrive\Documents\POST-CALL-EMAIL-AGENT` is obsolete.
+- 2026-10-31 — Repository moved (copied with full Git history, verified by `git fsck` and file hashes) to `C:\dev\post-call-email-agent`. The old OneDrive copy at `C:\Users\karan\OneDrive\Documents\POST-CALL-EMAIL-AGENT` is obsolete and kept as a backup.
+- 2026-10-31 — Real source sheet inspected read-only (D-021, `docs/source-sheet-profile.md`).
 
 ## Accepted decisions (D-001 … D-016)
 
@@ -18,7 +19,7 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 - Per-record error boundary; the run stops claiming only on config error, unreadable sheets, Gmail auth error or the LLM circuit breaker.
 
 - Google Sheets is the only MVP source (customer info, transcript, Fathom URL). No Fathom API/MCP.
-- Call ID: `fathom:{id}` if verified, else `gen:{uuid4}`; immutable; stored with the row. Never row numbers. `source_fingerprint` (email + normalised URL) is a secondary duplicate guard.
+- Call ID: `fathom:{id}` if verified, else `gen:{uuid4}`; immutable; stored with the row. The real sheet has no recording IDs and no ID column, so storage is OD-02. Never row numbers. `source_fingerprint` (email + normalised URL) is a secondary duplicate guard.
 - Five outcome categories: `discussed`, `explained`, `completed`, `pending_customer_action`, `pending_support_action`. When unsure, choose the less complete category.
 - States: `PENDING`, `PROCESSING`, `VALIDATING`, `SENDING`, `SENT`, `FAILED`, `SKIPPED`. Gmail is called only from `SENDING` after a write-ahead of the planned `rfc822_message_id`. Ambiguous sends → `SEND_UNCONFIRMED`, never auto-resent.
 - SKILL.md files are loaded explicitly by Python with a fixed section contract; versions recorded per email.
@@ -40,11 +41,18 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 - Gmail `gmail.metadata` scope does not support search queries; reconciliation needs `gmail.readonly` (OD-07).
 - Whether Gmail preserves a client-supplied `Message-ID` is unverified (OD-16).
 - Claude Code auto-discovers skills only under `.claude/skills/`; this repo's `skills/` is application content.
-- Read Sheets dates with `UNFORMATTED_VALUE` + `SERIAL_NUMBER` to avoid dd/mm vs mm/dd ambiguity; serials are in the spreadsheet's timezone, which must be Asia/Kolkata (OD-28).
+- Read Sheets dates with `UNFORMATTED_VALUE` + `SERIAL_NUMBER` to avoid dd/mm vs mm/dd ambiguity. Verified: the source sheet's `Date` and `Time of the call` are real date/time cells, and the sheet timezone is `Asia/Calcutta` (= Asia/Kolkata).
+- **Source sheet (verified):** spreadsheet `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, worksheet `Calls DONE` (GID 1314582701), a shared CSC team workbook. Mapping: `Date`, `Time of the call`, `Customer Name`, `Email`, `Call lead by(who took the call)`, `Recording URL` (Fathom `/share/` links), `Meeting Notes`, `Transcript` (direct text, `[HH:MM:SS] Speaker: text`).
+- Missing in the sheet: Call ID, Fathom recording ID, structured call status (`Customer Not Came` / `Cancel` columns unused; outcome is free text in `Meeting Notes`), opt-out, call type.
+- An existing automation fills `Transcript` and `AI Summary`; `Recording Sent` suggests manual recording emails (OD-29). Transcripts can be empty the day after a call. Some transcripts contain Hindi.
+- Data issues: trailing spaces in emails, whitespace-only URLs, two URLs in one cell, the same URL in two rows, inconsistent name casing, rows created before the call, date-only placeholder rows.
+- Internal columns (`Mistakes…`, `Bugs…`, `Suggetions…`) must never reach prompts or logs.
+- The Sheets MCP `get_values` result for transcripts can exceed the tool output limit and spill to a file under `~/.claude/projects/.../tool-results/`. Delete such files after use (they contain real customer data).
 - Python's `zoneinfo` on Windows needs the `tzdata` package (no system tz database); add it as a dependency in Phase 1.
 - A run between 00:00 and 05:30 IST has a different UTC date — the main reason target-date logic must never use server/UTC time.
 
 ## Environment
 
 - Repository lives at `C:\dev\post-call-email-agent` (not synced). Synthetic data only still applies.
-- Python is **not installed** on the dev machine (Store alias only). Git 2.55 available. Repo initialised on `main`, no commits yet.
+- Python is **not installed** on the dev machine (Store alias only). Git 2.55 available. Repo on `main` with commits.
+- A Google Sheets MCP connector is available in Claude Code for read-only inspection. It is a development tool, not the production integration.

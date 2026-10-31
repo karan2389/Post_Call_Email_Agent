@@ -45,7 +45,8 @@ Type column: **D** = deferrable (waits, then skips on expiry), **T** = terminal 
 
 | Code | Type | Meaning |
 |---|---|---|
-| `CUSTOMER_OPTED_OUT` | T | `email_opt_out` is true |
+| `RECORDING_ALREADY_SENT` | T | *Proposed (OD-29):* source `Recording Sent` is `yes` (any case), so an agent already emailed the recording manually |
+| `CUSTOMER_OPTED_OUT` | T | `email_opt_out` is true (inactive: no opt-out column in the verified sheet) |
 | `CALL_TYPE_EXCLUDED` | T | `call_type` not in the eligible list (OD-10) |
 | `CALL_TOO_OLD` | T | Call older than `max_followup_age_days`; applies to retries of failed records |
 | `RECIPIENT_NOT_ALLOWLISTED` | T | Allowlist mode active and recipient not on it (test/pilot only) |

@@ -65,6 +65,7 @@ logs/              Local logs (git-ignored)
 |---|---|
 | `docs/architecture.md` | Components, data flow, module boundaries |
 | `docs/pipeline.md` | Daily previous-day selection, eligibility, deferral, failure isolation, rerun safety |
+| `docs/source-sheet-profile.md` | Verified source spreadsheet, worksheet, column mapping and data-quality findings |
 | `docs/delivery-state-machine.md` | States, transitions, leases, idempotency, recovery |
 | `docs/call-id-strategy.md` | How Call IDs are assigned and protected |
 | `docs/data-model.md` | Source sheet, tracking and events worksheet schemas |
