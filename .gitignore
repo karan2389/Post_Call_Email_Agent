@@ -1,0 +1,48 @@
+# ---- Secrets and credentials (never commit) ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+credentials*.json
+client_secret*.json
+service-account*.json
+service_account*.json
+token*.json
+*-sa.json
+secrets/
+
+# ---- Generated customer data and logs ----
+outputs/*
+!outputs/.gitkeep
+logs/*
+!logs/.gitkeep
+*.log
+
+# ---- Real data must never live in the repo ----
+data/
+real_data/
+*.csv
+*.xlsx
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# ---- Local tooling ----
+.claude/settings.local.json
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

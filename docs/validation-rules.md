@@ -1,0 +1,75 @@
+# Email Validation Rules
+
+Status: **Approved design.** Numeric limits are proposals pending OD-09.
+
+An email is sent only if **every** check passes. In the MVP all issues are blocking. Validation produces `validation_outcome` (`PASS`/`FAIL`) and `validation_issue_codes`. A failure → `SKIPPED` with `VALIDATION_FAILED`. Optional single regeneration on failure is OD-13 (default: none).
+
+Validation runs in two layers, deterministic first (cheap, certain), then semantic (LLM, using the `email-validation` skill). The semantic layer receives the draft, the `AnalysisResult` and the `CustomerSummary` — never just the email alone.
+
+## 1. Outcome categories (the core distinction)
+
+Every analysed item has exactly one category. The email must preserve it.
+
+| Category | Definition | Allowed email phrasing | Forbidden |
+|---|---|---|---|
+| `discussed` | Topic raised; no guidance or outcome | "We talked about…", "You mentioned…" | Implying it was solved or explained |
+| `explained` | Support gave information, guidance or steps; not confirmed done | "We walked through…", "As explained, you can…" | "We fixed", "resolved", "done" |
+| `completed` | Action finished during the call **and** confirmed in the transcript | "We resolved…", "…is now working" | Using it without transcript confirmation |
+| `pending_customer_action` | The customer agreed or was asked to do something after the call | "Your next steps: …" | Attributing it to support; turning it into a demand not made on the call |
+| `pending_support_action` | FlexiFunnels/support committed to do something after the call | "Our team will…" | Inventing a deadline; presenting as done; assigning to the customer |
+
+Timelines may appear only if stated in the transcript, and only as stated.
+
+## 2. Deterministic checks (code)
+
+| Code | Check |
+|---|---|
+| `FATHOM_URL_MISSING` | Body contains the exact `fathom_url` from the source row |
+| `FATHOM_URL_MISMATCH` | No other Fathom URL, and the URL is unmodified |
+| `RECIPIENT_MISMATCH` | `To` equals the source `customer_email` exactly (single recipient) |
+| `NAME_MISMATCH` | Greeting uses the customer's first name as derived from `customer_name` |
+| `SUBJECT_INVALID` | Subject present, 20–90 characters (proposal), no placeholders, no ALL CAPS, no emoji |
+| `LENGTH_OUT_OF_RANGE` | Body 80–250 words (proposal) excluding signature |
+| `PLACEHOLDER_PRESENT` | No `[`…`]`, `{{`, `}}`, `<name>`, `TBD`, `XXX`, `Lorem` |
+| `BANNED_PHRASE` | None of the configured banned phrases (e.g. "as an AI", "I hope this email finds you well", "guarantee", "100%") |
+| `UNAPPROVED_LINK` | Only the Fathom URL and configured allowlisted URLs (e.g. help centre) |
+| `UNAPPROVED_CONTACT_DETAIL` | No phone numbers or email addresses other than configured support contacts |
+| `SIGNATURE_MISSING` | Configured signature block present |
+| `FORMAT_INVALID` | Plain text, UTF-8, no markdown syntax (`**`, `#`), no HTML (unless OD-09 chooses HTML) |
+
+## 3. Semantic checks (LLM validator + cross-reference)
+
+| Code | Check |
+|---|---|
+| `UNSUPPORTED_CLAIM` | A statement in the email has no matching analysis item / transcript evidence |
+| `STATUS_MISREPRESENTED` | An item's category is changed (e.g. `explained` or pending presented as `completed`; `discussed` presented as `explained`) |
+| `OWNER_MISATTRIBUTED` | A customer action presented as a support action or vice versa |
+| `PENDING_ACTION_OMITTED` | Any `pending_customer_action` or `pending_support_action` from the summary is missing |
+| `INVENTED_COMMITMENT` | Deadline, refund, discount, credit, feature, escalation or promise not stated in the transcript |
+| `TONE_INAPPROPRIATE` | Defensive, blaming, dismissive, over-familiar, or ignoring clear frustration |
+| `INTERNAL_INFO_LEAKED` | Internal notes, tooling names, other customers, staff-only remarks |
+| `OFF_TOPIC_CONTENT` | Marketing, upsell or content unrelated to the call |
+| `LANGUAGE_MISMATCH` | Language differs from policy (OD-08) |
+| `INSTRUCTION_INJECTION_FOLLOWED` | Email reflects instructions embedded in the transcript rather than the conversation |
+
+Cross-reference (code, using the generator's `referenced_item_ids`): every pending item ID must be referenced; no referenced ID may be unknown. This backs up `PENDING_ACTION_OMITTED` and `UNSUPPORTED_CLAIM` without relying only on the LLM.
+
+## 4. Validator output contract
+
+See `skills/email-validation/SKILL.md`. Summary:
+
+```json
+{
+  "outcome": "PASS | FAIL",
+  "issues": [
+    {"code": "STATUS_MISREPRESENTED", "item_id": "I3", "email_excerpt": "…", "explanation": "…"}
+  ],
+  "checked_item_ids": ["I1", "I2", "I3"]
+}
+```
+
+`outcome` is recomputed in code: `FAIL` if any deterministic or semantic issue exists, regardless of what the model says.
+
+## 5. Policy configuration
+
+Lengths, banned phrases, allowlisted links/contacts, signature and language live in `config/` (email policy), not in code or skills, so the support team can adjust them without code changes. The email-generation and email-validation skills receive the same policy values at runtime.
