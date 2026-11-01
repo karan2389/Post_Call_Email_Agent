@@ -21,6 +21,7 @@ const E = require('./lib/eligibility');
 const D = require('./lib/destination');
 const P = require('./lib/policy');
 const T = require('./lib/transcript');
+const G = require('./lib/guard');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -89,6 +90,14 @@ async function main() {
   if (cmd === 'plan') return out(D.plan(json.sources, D.parseDestination(json.dest)));
   if (cmd === 'build-row') return out({ values: D.buildRow(json) });
   if (cmd === 'review') return out(P.reviewDecision(json));
+  if (cmd === 'guard-write') {   // exit code 0 = allowed, 4 = rejected; the session must call this before every spreadsheet write
+    let t = ''; try { t = fs.readFileSync(path.join(ROOT, 'config', 'run-settings.yaml'), 'utf8'); } catch (e) { /* gates stay closed */ }
+    const block = (t.match(/^draft_destination:[\s\S]*?(?=^\S|(?![\s\S]))/m) || [''])[0];
+    const gates = { writes_enabled: setting(block, 'writes_enabled', false), destination_sharing_verified: setting(block, 'destination_sharing_verified', false),
+      headers_verified: setting(block, 'headers_verified', false), configuredDestinationId: setting(block, 'spreadsheet_id', null) };
+    const r = G.authorizeWrite(json, gates);
+    out(r); if (!r.allowed) process.exit(4); return;
+  }
   process.stderr.write('unknown command\n'); process.exit(2);
 }
 main().catch((e) => { process.stderr.write(String(e && e.message ? e.message : e) + '\n'); process.exit(1); });

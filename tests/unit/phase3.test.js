@@ -226,4 +226,44 @@ t('read-back comparison without retyping', () => {
   assert.strictEqual(bad.ok, false); assert.deepStrictEqual(bad.mismatches, [{ row: 1, column: 3 }]);
   assert.strictEqual(T.compareRows([['a']], exp).ok, false);
 });
+t('write guard: destination allowed only when every gate passes', () => {
+  const G = require('../../src/lib/guard');
+  const gates = { writes_enabled: true, destination_sharing_verified: true, headers_verified: true, configuredDestinationId: G.DESTINATION_ID };
+  const ok = G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID, tool: 'mcp__x__update_values', path: 'connector' }, gates);
+  assert.strictEqual(ok.allowed, true); assert.strictEqual(ok.target, 'destination');
+  const off = G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID }, Object.assign({}, gates, { writes_enabled: false }));
+  assert.deepStrictEqual(off.reasons, ['WRITES_DISABLED']);
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID }, Object.assign({}, gates, { destination_sharing_verified: false })).reasons.includes('DESTINATION_SHARING_NOT_CONFIRMED'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID }, Object.assign({}, gates, { headers_verified: false })).reasons.includes('HEADERS_NOT_VERIFIED'));
+  assert.strictEqual(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID }, undefined).allowed, false);
+});
+t('write guard: source, backup and unknown targets are rejected even with all gates open', () => {
+  const G = require('../../src/lib/guard');
+  const gates = { writes_enabled: true, destination_sharing_verified: true, headers_verified: true };
+  const s = G.authorizeWrite({ spreadsheetId: G.SOURCE_ID, tool: 'update_values', path: 'connector' }, gates);
+  assert.strictEqual(s.allowed, false); assert.ok(s.reasons.includes('SOURCE_WRITE_FORBIDDEN')); assert.strictEqual(s.target, 'source');
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.BACKUP_ID }, gates).reasons.includes('BACKUP_WRITE_FORBIDDEN'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: 'unknown-id-123' }, gates).reasons.includes('TARGET_NOT_APPROVED'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: '' }, gates).reasons.includes('TARGET_MISSING'));
+  assert.ok(G.authorizeWrite({}, gates).reasons.includes('TARGET_MISSING'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: ' ' + G.SOURCE_ID + ' ' }, gates).reasons.includes('SOURCE_WRITE_FORBIDDEN')); // whitespace cannot disguise it
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.SOURCE_ID.toLowerCase() + 'x' }, gates).reasons.includes('TARGET_NOT_APPROVED'));
+});
+t('write guard: unauthorised fallback paths, copy targets and config redirects are rejected', () => {
+  const G = require('../../src/lib/guard');
+  const gates = { writes_enabled: true, destination_sharing_verified: true, headers_verified: true };
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID, path: 'fallback' }, gates).reasons.includes('UNAUTHORIZED_WRITE_PATH'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID, path: 'direct_api' }, gates).reasons.includes('UNAUTHORIZED_WRITE_PATH'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID, tool: 'get_values' }, gates).reasons.includes('NOT_A_KNOWN_WRITE_TOOL'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID, tool: 'copy_sheet_to_another_spreadsheet', destinationSpreadsheetId: G.SOURCE_ID }, gates).reasons.includes('COPY_TARGET_NOT_APPROVED'));
+  assert.ok(G.authorizeWrite({ spreadsheetId: G.DESTINATION_ID }, Object.assign({}, gates, { configuredDestinationId: G.SOURCE_ID })).reasons.includes('CONFIG_DESTINATION_MISMATCH'));
+});
+t('write guard CLI reads the real config and rejects with exit code 4 while writes are disabled or the target is the source', () => {
+  const cp = require('child_process'); const G = require('../../src/lib/guard');
+  const run = (o) => cp.spawnSync(process.execPath, [require('path').join(__dirname, '..', '..', 'src', 'p3.js'), 'guard-write'], { input: JSON.stringify(o), encoding: 'utf8' });
+  const src = run({ spreadsheetId: G.SOURCE_ID, tool: 'update_values', path: 'connector' });
+  assert.strictEqual(src.status, 4); assert.ok(JSON.parse(src.stdout).reasons.includes('SOURCE_WRITE_FORBIDDEN'));
+  const dst = run({ spreadsheetId: G.DESTINATION_ID, tool: 'update_values', path: 'connector' });
+  const j = JSON.parse(dst.stdout); assert.ok(!j.reasons.includes('CONFIG_DESTINATION_MISMATCH') && !j.reasons.includes('HEADERS_NOT_VERIFIED')); // config block parsed
+});
 console.log(`phase3 helpers: ${n} test groups passed`);

@@ -141,6 +141,12 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-048 — Deterministic spreadsheet write guard (2026-11-01)
+
+**Decision (user instruction, Phase 4 master task):** every spreadsheet write must pass `authorizeWrite()` (`src/lib/guard.js`, CLI `node src/p3.js guard-write`, exit 4 = rejected) before the connector call. Only the destination ID `1_TxhedZ...` is approved; the source, the backup and any unknown ID are rejected whatever the gates say; non-connector paths, non-write tools, a copy target outside the destination, and a config destination that differs from the approved ID are rejected; `writes_enabled`, `destination_sharing_verified` and `headers_verified` must all be true.
+
+**Limits (stated honestly):** the guard is a code check the session is instructed to call; it cannot stop a connector call made without it. The connector account is Editor on the source, so source read-only is enforced by instructions plus this guard, not by Google. Destination sharing remains user-confirmed, not verified. Tests: `tests/unit/phase3.test.js` (28 groups).
+
 ### D-047 — Three older-skill drafts replaced on the user's explicit authorisation (2026-11-01)
 
 The user authorised replacing the stored drafts of source rows 15451, 15448 and 15442 (written by email-generation 1.4.0 and 1.5.0) with the validated coverage-first drafts. Overwriting a stored body is normally forbidden (D-036 rule: never overwrite a draft automatically); this was an explicit, one-time authorisation for these three rows only. Done with pre-write identity checks and a program read-back (0 mismatches over 7 rows). The previous bodies are not retained; the notes keep their skill version, word count and the reason. Rule unchanged for the future: no automatic overwrite. `writes_enabled` is `false` again. All 7 stored drafts now come from ta 1.6.0 / cs 1.4.0 / eg 1.6.0 / ev 1.5.0.
