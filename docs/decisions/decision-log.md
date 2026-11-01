@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-052 — Controlled storage test passed; Phase 3 closed with limitations (2026-11-01)
+
+**Decision:** on the user's authorisation ("Authorise test") one synthetic row was written to the destination through the guard, read back with 0 mismatches, the 15 existing rows were shown unchanged, the planner re-ran as idempotent on the stored rows, and the test row was cleared; `writes_enabled` was set back to false. Phase 3 is marked complete with the limitations in `docs/phase3-acceptance-report.md` section 12. No real record was written, replaced or deleted; nothing was sent.
+
 ### D-051 — Three stale test expectations aligned to D-044 (2026-11-01)
 
 **Decision (user instruction "Update them"):** F2, P2-07 and P2-13 expectations and three Phase 2 check rules were aligned to the coverage-first policy (D-044); originals kept in `tests/fixtures/_history/2026-11-01-before-d044-alignment/`; changed after the failures were seen, so disclosed as not a blind re-test (report section 10.1). Scores after: nine cases 9/9, Phase 2 harness 25/25.

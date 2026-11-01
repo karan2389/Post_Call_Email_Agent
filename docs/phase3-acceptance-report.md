@@ -259,3 +259,30 @@ Changed (originals preserved in `tests/fixtures/_history/2026-11-01-before-d044-
 Final scores on the latest outputs (ta 1.6.0, cs 1.4.1, eg 1.6.1, ev 1.5.0): nine focused cases **9/9** (F1 and F5 taken from the 1.6.1 rerun, the rest from the first run); Phase 2 harness **25/25** (13 cases + 12 adversarial; the adversarial validations are the stored ones from `phase2-final/run2`). One sample per case.
 
 Phase 3 remains **open**: controlled destination storage test, read-back and actual idempotency checks are still to be run after the user authorises `writes_enabled` for that run.
+
+## 11. Controlled destination storage test, read-back and idempotency (2026-11-01, authorised by the user: "Authorise test"; D-052)
+
+**Method.** `writes_enabled` was turned on for this test only and turned off straight after. Every write was preceded by `node src/p3.js guard-write` (D-048). One clearly synthetic row (`@example.com`, call date 2099-01-01, run ID `p4-storage-test-2026-11-01`) was written to `Sheet1!A17:U17` of the destination (21 cells), read back, checked, and then cleared (`batch_clear_values` on that row only). No real customer record was written, replaced or deleted. Nothing was sent. The comparisons used the connector results recorded in the session log (`extractRange`), not retyped data; the check script is a scratch file outside the repository.
+
+| Check | Result |
+|---|---|
+| Guard with the gate open: destination write | allowed |
+| Guard: source write (same gate) | rejected, `SOURCE_WRITE_FORBIDDEN` (exit 4) |
+| Guard: destination write via a fallback path | rejected, `UNAUTHORIZED_WRITE_PATH` (exit 4) |
+| Guard with the gate closed (before and after) | rejected, `WRITES_DISABLED` |
+| Snapshot before the write | 15 data rows (rows 2 to 16), row 17 empty |
+| Read-back of the written row against the intended 21 values | 0 cell mismatches |
+| Existing rows 2 to 16 after the write | identical to the snapshot (0 changed rows); rows 18 and later empty |
+| Re-plan from the stored rows (16 records, including the 7 real drafts) | 8 `NOOP_ALREADY_PROCESSED`, 6 `NOOP_TERMINAL`, 2 `PROCESS_UPDATE` (the two deferred rows, which update in place when transcripts arrive); 0 `PROCESS_NEW`, so no duplicate rows and no stored draft would be overwritten |
+| Same fingerprint with a different recording-URL set | `FLAG_COLLISION_APPEND` (flagged, never overwrites) |
+| A record not yet stored | `PROCESS_NEW` (the planner does not wrongly skip new records) |
+| After clearing the test row | rows 2 to 16 identical to the original, row 17 and later empty |
+| `writes_enabled` afterwards | `false`; `config/run-settings.yaml` has no diff against HEAD |
+
+**What this does and does not show.** It shows the guard, the write path, cell-exact read-back, non-overwrite of existing drafts and the planner's idempotency on real stored rows. Idempotency was demonstrated through the planner and the unchanged rows, not by repeating a real run of the full pipeline.
+
+## 12. Phase 3 closing assessment (2026-11-01)
+
+Acceptance items: current destination configuration verified (headers earlier, sheet state now); nine synthetic cases 9/9 and Phase 2 harness 25/25 on the latest skills (section 10.1, with the disclosure that three expectations were aligned after failures); the complete Phase 3 unit suite passes (28 groups, plus 10 for Phase 4 logic); exact transcript hashing verified earlier (D-043, section 9); destination write protection and source write rejection verified (section 11); controlled storage test, read-back and idempotency passed (section 11); existing drafts not overwritten (section 11). Human review: the user stated on 2026-11-01 that they reviewed the newly generated real-data drafts and that they look correct; no further review approval is recorded or implied.
+
+**Phase 3 is marked COMPLETE with these documented limitations:** destination sharing and the source being read-only are user-confirmed, not verifiable by the agent (the source connector account is Editor, so source read-only rests on instructions and the code guard); the sensitive-topic path (OD-11) has been exercised on synthetic data only (F8), never on a real record; transcripts for source rows 15453 and 15454 are still empty (deferred); a retention period is not decided; OD-10 and OD-32 remain unconfirmed; validators are LLM-based; outputs vary from run to run.
