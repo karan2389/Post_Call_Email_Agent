@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## Second Brevo test: links preserved, pixel and unsubscribe header remain (2026-11-02, D-064)
+Production-style email keeps Fathom URLs exactly in text and HTML (no anchors). Open pixel and tracked List-Unsubscribe still added; DMARC fails until DNS. Tracking flag still false pending your decision. Suggested: refuse anchors in the adapter; ask Brevo support about pixel/unsubscribe.
+
 ## Brevo tracking opt-out added, mocked only (2026-11-02, D-063)
 Adapter sends `contactPixelTrackingConsent:false` per recipient; Brevo per-contact consent is on in the account. Suites pass (brevo 26/26). **Needs you:** confirm the Brevo setting was saved, then approve ONE repeat internal test; the tracking flag stays false until its raw message is clean.
 

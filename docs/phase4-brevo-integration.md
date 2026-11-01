@@ -73,3 +73,7 @@ One synthetic internal email (`p4-brevotest-1`) was sent with a plain-text and a
 ## 11. Tracking opt-out field (D-063, mocked only)
 Every request now carries `contactPixelTrackingConsent: false` on the single recipient (requires the account setting in Settings > Contacts > Per-contact pixel tracking consent). It is an attempt to stop the click rewriting, open pixel and tracked unsubscribe link seen in D-062 and is unproven until a second raw message confirms it.
 
+
+## 12. Second real test result (2026-11-02, D-064)
+Production-style HTML twin with the opt-out field: Fathom-style URLs preserved exactly in text and HTML (only & entity-escaped in HTML); no anchors, so no click wrapping; open pixels and a tracked one-click `List-Unsubscribe` header still added; DMARC still fails (Brevo-domain DKIM/SPF only). Open items: decision on the tracking flag, pixel and unsubscribe header (ask Brevo support), DNS for flexifunnels.com.
+
