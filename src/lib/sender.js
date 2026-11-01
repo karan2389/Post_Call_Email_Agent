@@ -17,7 +17,7 @@ const MAX_RETRIES = 2;
 async function emit(deps, ctx, rec, from, to, extra) {
   const x = extra || {};
   const ev = { eventId: L.nextEventId(ctx.runId, deps.log.events()), at: deps.now(), runId: ctx.runId, sendKey: rec.send_key, draftHash: x.draftHash || rec.draft_hash,
-    fingerprint: rec.fingerprint, destinationRow: rec.destination_row, email: rec.stored_recipient || rec.recipient, subject: rec.stored_subject || rec.subject,
+    fingerprint: rec.fingerprint, destinationRow: rec.destination_row, email: rec.log_email || rec.stored_recipient || rec.recipient, subject: rec.log_subject || rec.stored_subject || rec.subject,
     bodyHash: x.bodyHash || rec.body_hash, from, to, actor: x.actor || 'agent', reason: x.reason, gmailMessageId: x.gmailMessageId, gmailThreadId: x.gmailThreadId,
     deliveryMode: ctx.delivery_mode, retryCount: x.retryCount, error: x.error };
   if (from && !S.canTransition(from, to)) throw new Error('invalid transition ' + from + ' -> ' + to);   // the log can only record valid transitions
@@ -48,10 +48,13 @@ async function reconcileAttempt(rec, ctx, deps) {
 // draft: stored draft + source facts ({stored_recipient, stored_subject, stored_body, validation_status, validated_draft_hash, source_email, stored,
 //        auto_send_eligible, sensitive_review_required, fingerprint, url_set_key, destination_row}); folded: record from sendlog.fold() or undefined.
 async function sendOne(draft, folded, ctx, deps) {
-  const sendKey = S.sendKey(draft.fingerprint, draft.url_set_key);
+  let sendKey = S.sendKey(draft.fingerprint, draft.url_set_key);
   if (!sendKey) return { outcome: 'BLOCKED', failed: ['NO_SOURCE_FINGERPRINT'] };
+  const testing = ctx.delivery_mode === 'test' && ctx.test_recipient;   // explicit internal test: own send key, marked text, internal recipient
+  if (testing) sendKey = S.testSendKey(sendKey, ctx.test_recipient);
   const dHash = S.draftHash(draft.stored_recipient, draft.stored_subject, draft.stored_body);
-  const rec = Object.assign({}, draft, folded || {}, { send_key: sendKey, draft_hash: dHash, body_hash: L.bodyHash(draft.stored_body || ''), state: (folded && folded.state) || 'STORED' });
+  const rec = Object.assign({}, draft, folded || {}, { send_key: sendKey, draft_hash: dHash, body_hash: L.bodyHash(testing ? S.testEnvelope(draft, ctx.test_recipient).body : (draft.stored_body || '')), state: (folded && folded.state) || 'STORED' });
+  if (testing) { const e0 = S.testEnvelope(draft, ctx.test_recipient); rec.log_email = e0.to; rec.log_subject = e0.subject; }   // every log row of a test carries the internal address and marked subject
   // an interrupted or uncertain earlier attempt is reconciled first, never re-sent
   if (rec.state === 'SEND_IN_PROGRESS' || rec.state === 'SEND_OUTCOME_UNKNOWN') return reconcileAttempt(rec, ctx, deps);
   if (rec.state === 'RECONCILIATION_REQUIRED') return { outcome: 'BLOCKED', failed: ['UNRESOLVED_SEND_ATTEMPT'], send_key: sendKey };
@@ -76,10 +79,11 @@ async function sendOne(draft, folded, ctx, deps) {
     return { outcome: 'TRACKING_WRITE_FAILED', send_key: sendKey, sent: false };   // nothing was sent
   }
   const started = deps.now();
-  rec.started_at = started; rec.attempt_body_hash = rec.body_hash; rec.attempt_subject = rec.stored_subject; rec.attempt_recipient = rec.stored_recipient; rec.state = 'SEND_IN_PROGRESS';
+  const env = testing ? S.testEnvelope(rec, ctx.test_recipient) : null;
+  rec.started_at = started; rec.attempt_body_hash = rec.body_hash; rec.attempt_subject = env ? env.subject : rec.stored_subject; rec.attempt_recipient = env ? env.to : rec.stored_recipient; rec.state = 'SEND_IN_PROGRESS';
 
   let res;
-  try { res = await deps.gmail.send(G.buildSendRequest(rec)); }
+  try { res = await deps.gmail.send(G.buildSendRequest(rec, ctx)); }
   catch (err) {
     if (err && err.definite === true) {
       const n = (rec.retry_count || 0) + 1;

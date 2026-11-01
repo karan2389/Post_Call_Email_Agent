@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-056 — Explicit internal test mode: marked text, internal recipient, own send key (2026-11-01)
+
+**Decision (user instruction: use the stored draft in Sheet1 row 2 for the internal test):** in `delivery_mode: test` with `test_recipient` set, a stored customer draft is sent to an approved internal address instead of the customer. The subject is prefixed `INTERNAL TEST - ` and the body starts with a one-line banner saying it is a test copy that was NOT sent to the customer; the stored text is otherwise unchanged. The test send uses its OWN key (`test_` + hash), so it is never recorded as the real send of that call, which stays unsent. Every log row of a test carries the internal address and marked subject, never the customer's address. Tests: 22 mocked-Gmail groups (4 new). A test found and fixed a defect: the first two log rows were written before the test addressing was applied.
+
 ### D-055 — Send Log worksheet created; Gmail identity checked; internal test send held (2026-11-01)
 
 **Done on the user's explicit authorisation (two operations only):** (1) worksheet `Send Log` (sheet ID 1001) created in the destination spreadsheet through the write guard with the gate open only for that step and closed straight after; 19 headers written and verified by read-back; `Sheet1` untouched; source untouched. (2) Gmail identity checked read-only (no profile endpoint exists; converging sent-sender and delivered-to evidence, `docs/phase4-gmail-integration.md` section 5). **Held:** the internal test send, because no stored, validated draft addressed to `karan.s@flexifunnels.com` exists, and creating one would write to `Sheet1` and needs a stored validation, neither of which was authorised. Nothing was sent; no scheduled task created; customer sending still disabled.

@@ -8,7 +8,12 @@ const N = require('./normalize');
 const S = require('./sendstate');
 
 // rec: the stored draft ({stored_recipient, stored_subject, stored_body}); returns the send_message arguments.
-function buildSendRequest(rec) {
+function buildSendRequest(rec, ctx) {
+  if (ctx && ctx.delivery_mode === 'test' && ctx.test_recipient) {   // explicit internal test: marked text, approved internal recipient only
+    const e = S.testEnvelope(rec, ctx.test_recipient); const v = N.normalizeEmail(e.to);
+    if (!v.valid) throw new Error('test recipient invalid');
+    return { to: [v.value], subject: e.subject, body: e.body, includeSignature: false };
+  }
   const to = N.normalizeEmail(rec.stored_recipient);
   if (!to.valid) throw new Error('recipient invalid');
   if (!rec.stored_subject || !rec.stored_body) throw new Error('subject and body are required');

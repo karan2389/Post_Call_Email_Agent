@@ -51,6 +51,13 @@ function sendKey(fingerprint, urlSetKey) {
   if (!fingerprint) return null;
   return 'send_' + N.sha256('send|' + fingerprint + '|' + (urlSetKey || '')).slice(0, 24);
 }
+// ---- explicit internal test mode (D-056): a stored draft may be sent to an APPROVED INTERNAL recipient instead of the customer. The text is marked
+// as a test and the send gets its OWN key, so a test can never be mistaken for the real send of that call (which stays unsent).
+const TEST_SUBJECT_PREFIX = 'INTERNAL TEST - ';
+const TEST_BODY_BANNER = 'INTERNAL TEST: this is a test copy of a stored draft. It was NOT sent to the customer.';
+function testSendKey(realKey, recipient) { return realKey ? 'test_' + N.sha256('test|' + realKey + '|' + em(recipient)).slice(0, 24) : null; }
+function testEnvelope(rec, recipient) { return { to: em(recipient), subject: TEST_SUBJECT_PREFIX + rec.stored_subject, body: TEST_BODY_BANNER + '\n\n' + rec.stored_body }; }
+
 // Version of the exact text that would be sent (recipient + subject + body, no normalisation of the text itself).
 function draftHash(recipient, subject, body) { return N.sha256('draft|' + em(recipient) + '|' + subject + '|' + body).slice(0, 24); }
 
@@ -81,7 +88,8 @@ function preSendChecks(rec, ctx) {
     if (Number.isFinite(c.pilot_limit) && (c.pilot_sent_today || 0) >= c.pilot_limit) fail.push('PILOT_LIMIT_REACHED');
   } else if (mode === 'test') {
     const list = (c.internal_recipients || []).map(em);
-    if (!list.length || list.indexOf(to) < 0) fail.push('TEST_RECIPIENT_NOT_APPROVED');   // test mode may only reach approved internal addresses
+    const eff = c.test_recipient !== undefined ? em(c.test_recipient) : to;   // explicit override: the effective recipient must be an approved internal address
+    if (!list.length || !eff || list.indexOf(eff) < 0) fail.push('TEST_RECIPIENT_NOT_APPROVED');   // test mode may only reach approved internal addresses
   } else fail.push('MODE_DOES_NOT_PERMIT_SEND');                                             // dry_run, shadow, anything else
   const blocking = fail.filter((x) => x !== 'RESEND_AUTHORISED_EXPLICITLY');
   return { ok: blocking.length === 0 && fail.indexOf('RESEND_AUTHORISED_EXPLICITLY') < 0, failed: fail };
@@ -115,4 +123,4 @@ function resolveReconciliation(record, decision) {
   return { ok: false, code: 'UNKNOWN_VERDICT' };
 }
 
-module.exports = { STATES, TRANSITIONS, canTransition, transition, sendKey, draftHash, preSendChecks, reconcile, resolveReconciliation };
+module.exports = { TEST_SUBJECT_PREFIX, TEST_BODY_BANNER, testSendKey, testEnvelope, STATES, TRANSITIONS, canTransition, transition, sendKey, draftHash, preSendChecks, reconcile, resolveReconciliation };

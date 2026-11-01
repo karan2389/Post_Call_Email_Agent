@@ -155,6 +155,38 @@ t('request and search builders: plain text, one recipient, no cc/bcc/html/signat
   assert.ok(q.startsWith('in:sent to:a@example.com subject:"Hello  x"') && /after:2026\/11\/01 before:2026\/11\/04$/.test(q), q);
 });
 
+// ---- explicit internal test mode (D-056): a stored CUSTOMER draft goes to an approved internal address, marked, under its own send key ----
+const ctxOverride = (extra) => Object.assign({ runId: 'run-t', delivery_mode: 'test', internal_recipients: ['karan.s@example.com'], test_recipient: 'karan.s@example.com' }, extra || {});
+t('test override: marked text to the approved internal recipient only; the customer is never addressed', async () => {
+  const env = mkEnv(); const d = draft(5);
+  const r = await X.sendOne(d, undefined, ctxOverride(), env.deps);
+  assert.strictEqual(r.outcome, 'SENT'); assert.strictEqual(env.sendCalls, 1);
+  assert.deepStrictEqual(env.lastRequest.to, ['karan.s@example.com']);
+  assert.ok(env.lastRequest.subject.startsWith('INTERNAL TEST - ') && env.lastRequest.subject.endsWith(SUBJ));
+  assert.ok(env.lastRequest.body.startsWith('INTERNAL TEST: this is a test copy of a stored draft. It was NOT sent to the customer.') && env.lastRequest.body.endsWith(BODY));
+  assert.ok(env.events.every((e) => e.email === 'karan.s@example.com' && /^INTERNAL TEST - /.test(e.subject)));   // the log never carries the customer's address for a test
+  assert.ok(env.events.every((e) => e.deliveryMode === 'test'));
+});
+t('test override: the test send has its OWN key, so the real send of that call stays unsent and is still possible later', async () => {
+  const env = mkEnv(); const d = draft(5);
+  await X.sendOne(d, undefined, ctxOverride(), env.deps);
+  const realKey = S.sendKey(d.fingerprint, d.url_set_key); const f = folded(env);
+  assert.ok(!f.has(realKey)); assert.ok(f.has(S.testSendKey(realKey, 'karan.s@example.com'))); assert.notStrictEqual(S.testSendKey(realKey, 'karan.s@example.com'), realKey);
+  assert.deepStrictEqual(S.preSendChecks(Object.assign({}, d, { state: 'STORED' }), { delivery_mode: 'live', live_authorized: true }), { ok: true, failed: [] });   // the live send is not blocked by the test
+});
+t('test override: an unapproved or missing override recipient is blocked; a second test run does not resend', async () => {
+  const env = mkEnv(); const d = draft(5);
+  const bad = await X.sendOne(d, undefined, ctxOverride({ test_recipient: 'someone@example.com' }), env.deps);
+  assert.strictEqual(bad.outcome, 'BLOCKED'); assert.ok(bad.failed.includes('TEST_RECIPIENT_NOT_APPROVED')); assert.strictEqual(env.sendCalls, 0);
+  await X.sendOne(d, undefined, ctxOverride(), env.deps);
+  const again = await X.sendOne(d, folded(env).get(S.testSendKey(S.sendKey(d.fingerprint, d.url_set_key), 'karan.s@example.com')), ctxOverride({ runId: 'run-t2' }), env.deps);
+  assert.strictEqual(again.outcome, 'BLOCKED'); assert.strictEqual(env.sendCalls, 1);
+});
+t('test override: a timeout is reconciled against the MARKED message, never retried', async () => {
+  const env = mkEnv({ sendMode: 'timeout_delivered' }); const r = await X.sendOne(draft(5), undefined, ctxOverride(), env.deps);
+  assert.deepStrictEqual([r.outcome, r.via], ['SENT', 'RECONCILIATION']); assert.strictEqual(env.sendCalls, 1);
+});
+
 (async () => {
   for (const [name, fn] of tests) { try { await fn(); n += 1; } catch (e) { console.error('FAIL: ' + name + '\n' + (e && e.stack ? e.stack.split('\n').slice(0, 4).join('\n') : e)); process.exitCode = 1; } }
   console.log(`phase4 sender (mocked Gmail): ${n}/${tests.length} test groups passed`);
