@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-059 — Draft-route test: rewriting occurs at message construction; no send; customer sending stays blocked (2026-11-01)
+
+**Done on the user's authorisation:** one synthetic draft created, read back as raw MIME, found already wrapped (plain part and all HTML `href`s), so by the user's own rule nothing was sent; the draft was deleted and the final state verified (no drafts, Sent unchanged). **Finding:** the connector rewrites URLs when it builds the message (both `create_draft` and `send_message`), so the draft route cannot avoid it; no input form tested delivers original URLs. **Options for the user (none implemented):** verify expiry behaviour of the wrapped links after their `ust` time; a different sending mechanism (needs credentials: separate decision); or accept wrapped links with updated validation. Details: `docs/phase4-gmail-integration.md` section 8.
+
 ### D-058 — Link-rewriting investigation: cause located, no fix demonstrated; customer sending stays blocked (2026-11-01)
 
 **Done on the user's authorisation (max 3 synthetic internal tests):** two sends (plain-text and HTML), one authorised send unused. **Result:** the connector's send path rewrites every URL in both the plain and HTML parts into a Google redirect with a 24-hour `ust` parameter; no tested input form avoids it; the redirect works now behind a Redirect Notice page; behaviour after expiry unverified. **No fix was demonstrated.** Evidence and recommendation: `docs/phase4-gmail-integration.md` section 7. **Not implemented, not enabled:** no production change, no customer sending, no scheduling; draft-route test and any sending-mechanism change need the user's separate approval.

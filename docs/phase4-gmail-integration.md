@@ -78,3 +78,25 @@ Authorised by the user: at most 3 marked internal test emails to `karan.s@flexif
 2. **Safest next test (needs the user's approval):** create one synthetic draft, read it back without sending (a draft is not an email), and only if its links are original, send it by `draftId` as the remaining test send, verify the raw message, delete the synthetic draft. If the draft already shows wrapping, nothing is sent and the draft route is ruled out.
 3. **If the draft route also wraps:** the options are a different sending mechanism outside this connector (this needs credentials, which the project forbids creating without a separate decision), or accepting wrapped links with documented mitigations (not recommended). Either needs the user's decision.
 4. Whichever route is chosen, add a deterministic post-send check that the delivered body, with a known wrapper removed, equals the validated body (`unwrapGoogleLinks` already supports reconciliation) and that every Fathom URL in the delivered message is the original or a verified redirect to it.
+
+## 8. Draft-route test (2026-11-01, D-059): rewriting happens when the message is built, not when it is transmitted
+
+Authorised by the user: exactly one synthetic draft in `supportcore@flexifunnels.com`, read back as raw MIME; send it by draft ID only if every URL was unchanged; otherwise send nothing; delete the draft and verify. Sender verified before the operation (recent Sent messages all from `supportcore@flexifunnels.com`); baseline `list_drafts` was empty; unique test key `test_8bc737792fc20fdfec6b5e5c` (no customer key); recipient `karan.s@flexifunnels.com`; only `example.org` URLs.
+
+| Item | Observed |
+|---|---|
+| Draft created | draft ID `r5004069450795491372`, message ID `1a19736db9095ca8` (one creation only) |
+| Raw MIME read back from the draft (`get_draft` RAW) | `From: Support team flexifunnels <supportcore@flexifunnels.com>`, `To: karan.s@flexifunnels.com`, `multipart/alternative` |
+| `text/plain` URLs (3) | all 3 already wrapped as `google.com/url?q=<original>&source=gmail&ust=<time>&sa=E` |
+| `text/html` links (3) | all 3 `href`s wrapped; the two raw `example.org` URLs that remain in the HTML are only visible anchor text |
+| Send | **none** (the URLs were already rewritten, as the authorisation required) |
+| Cleanup | draft deleted; `list_drafts` empty again (matches the baseline); Sent still contains exactly the 3 earlier messages |
+| Send Log | no rows written for this test (no send happened); the write gate stayed closed |
+
+**Conclusion.** The rewriting is applied when the connector builds the message (`create_draft` and `send_message` both do it), **not** during transmission. So sending a draft by ID cannot avoid it: the draft already contains the wrapped links. Across the three link tests, none of these inputs delivers original URLs through this connector: plain `body`, `htmlBody` with anchors, bare and scheme-less URLs, angle-bracket URLs, and the draft route. All three authorised test sends/tests are now used up.
+
+**What this leaves (decisions for the user; nothing is implemented):**
+1. **Check expiry first (no new send needed):** open a wrapped link after its `ust` time. The test-3 draft was deleted, but the test-1 and test-2 links from sent messages remain; test-1 links expire after 2026-11-02 12:54 UTC, test-2 links after 13:56 UTC. If an expired link still reaches its destination (even behind a Redirect Notice page), accepting wrapped links with documented limits becomes a real option; if it dead-ends, it is not acceptable for recording links.
+2. **A different sending mechanism outside this connector** (for example a direct Gmail API or SMTP route) would deliver the original URLs, but it needs credentials, which the project does not allow creating or configuring without a separate explicit decision (CLAUDE.md section 4).
+3. **Accepting wrapped links** changes the validated text on delivery; if chosen, the validator and the post-send check must be updated to accept the known wrapper, and the user must accept the Redirect Notice page and the 24-hour expiry risk.
+Customer sending stays blocked until the user decides.

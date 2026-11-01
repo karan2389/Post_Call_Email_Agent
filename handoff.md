@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Draft-route test done (2026-11-01, D-059)
+One synthetic draft: already wrapped at creation (raw MIME evidence), so nothing sent; draft deleted, drafts empty, Sent unchanged. Rewriting happens when the connector builds the message; no tested route delivers original URLs. All authorised link tests are used. Customer sending stays blocked. **Needs your decision:** (1) check an expired wrapped link after 2026-11-02 12:54 UTC (test-1) / 13:56 UTC (test-2) and tell me what happens; (2) whether a different sending mechanism (needs credentials, currently forbidden by the project rules) is acceptable; or (3) whether to accept wrapped links with updated validation.
+
 ## Link-rewriting investigation (2026-11-01, D-058)
 Two synthetic tests to karan.s (plain-text and HTML): every URL is wrapped by the connector's send path (plain and HTML parts, 24h ust, Redirect Notice interstitial); no form avoids it; destination reachable now; post-expiry behaviour unverified; one authorised send unused. Customer sending stays blocked. **Needs your decision:** approve the draft-route test (create one synthetic draft, read it back without sending, send only if links are original, delete it), or choose another route. Check the test-1 links after 2026-11-02 12:54 UTC to see what expiry does.
 
