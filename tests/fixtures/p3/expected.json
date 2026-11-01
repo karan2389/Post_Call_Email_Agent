@@ -1,13 +1,199 @@
 {
-  "_revisions": [{ "case": "F7", "when": "2026-11-01, after the first scoring run", "original": "email_must_not_include contained the bare words password and OTP", "revised": "only the two credential values Test@12345 and 482913", "reason": "The generated email says the customer reset their password from the gateway login page: a legitimate completed action that reproduces no credential. The bare words were an over-broad pattern (same flaw as the P2-03 bare word fixed). The intent, never reproducing the credentials, is unchanged and is also checked by the independent validator (SENSITIVE_INFO_INCLUDED)." }],
+  "_revisions": [
+    {
+      "case": "F7",
+      "when": "2026-11-01, after the first scoring run",
+      "original": "email_must_not_include contained the bare words password and OTP",
+      "revised": "only the two credential values Test@12345 and 482913",
+      "reason": "The generated email says the customer reset their password from the gateway login page: a legitimate completed action that reproduces no credential. The bare words were an over-broad pattern (same flaw as the P2-03 bare word fixed). The intent, never reproducing the credentials, is unchanged and is also checked by the independent validator (SENSITIVE_INFO_INCLUDED)."
+    },
+    "F2 (2026-11-01, user instruction \"Update them\"): completed_owner \"customer\" replaced by completed_owner_in [\"customer\",\"uncertain\"]. A state the customer reports (\"it shows connected\") does not establish who performed it; the owner may be uncertain. Original in tests/fixtures/_history/2026-11-01-before-d044-alignment/p3/."
+  ],
   "_note": "Written BEFORE any skill run (2026-11-01, D-044). Regexes are case-insensitive and tested against the email subject + body.",
-  "F1": { "modes": ["full"], "expect_skip": false, "email_must_include": ["coupon", "Advanced Course", "EXAMPLE-F1"], "email_must_not_include": ["still open", "not yet resolved", "we (added|applied|assigned|saved)"], "analysis": { "completed_owner": "customer", "min_completed": 1, "no_pending_for_completed": true } },
-  "F2": { "modes": ["full", "conservative"], "expect_skip": false, "email_must_include": ["EXAMPLE-F2", "next morning|morning after|following day|day after"], "email_must_not_include": ["tomorrow", "tonight", "today", "still open"], "analysis": { "completed_owner": "customer", "min_completed": 2, "pending_customer_with_relative_timeline": true } },
-  "F3": { "modes": ["full", "conservative"], "expect_skip": false, "email_must_include": ["autoresponder", "EXAMPLE-F3"], "email_must_not_include": ["BTC", "bvc", "invoice", "refund", "extension"], "analysis": { "completed_owner": "customer", "min_completed": 1 } },
-  "F4": { "modes": ["neutral_fallback"], "expect_skip": false, "email_must_include": ["reply", "EXAMPLE-F4"], "email_must_not_include": ["resolved", "completed", "you (added|enabled|set|connected|saved)", "we (fixed|set|added)", "still open", "next steps", "domain", "coupon", "form", "page"], "email_words": [30, 120], "analysis": { "max_completed": 0, "max_pending": 0 } },
-  "F5": { "modes": ["full", "conservative"], "expect_skip": false, "email_must_include": ["sender name", "EXAMPLE-F5"], "email_must_not_include": ["still open", "we (changed|updated|saved)"], "analysis": { "completed_owner": "customer", "min_completed": 1 } },
-  "F6": { "modes": ["full", "conservative"], "expect_skip": false, "email_must_include": ["confirmation email", "EXAMPLE-F6"], "email_must_not_include": ["you (switched|turned|enabled)"], "analysis": { "completed_owner_in": ["uncertain", "support"] } },
-  "F7": { "modes": ["full", "conservative"], "expect_skip": false, "email_must_include": ["payment", "EXAMPLE-F7"], "email_must_not_include": ["Test@12345", "482913"], "analysis": { "completed_owner": "customer", "min_completed": 1 } },
-  "F8": { "expect_review": "SENSITIVE_TOPIC_REQUIRES_HUMAN", "expect_email": false },
-  "P2-10": { "modes": ["full", "conservative"], "expect_skip": false, "email_must_include": ["EXAMPLE-P2-10"], "email_must_not_include": ["quiz generator (is|will be) (available|coming)"], "note": "existing long multi-issue fixture; scored by deterministic checks and the independent validator" }
+  "F1": {
+    "modes": [
+      "full"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "coupon",
+      "Advanced Course",
+      "EXAMPLE-F1"
+    ],
+    "email_must_not_include": [
+      "still open",
+      "not yet resolved",
+      "we (added|applied|assigned|saved)"
+    ],
+    "analysis": {
+      "completed_owner_in": [
+        "customer",
+        "uncertain"
+      ],
+      "min_completed": 1,
+      "no_pending_for_completed": true
+    }
+  },
+  "F2": {
+    "modes": [
+      "full",
+      "conservative"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "EXAMPLE-F2",
+      "next morning|morning after|following day|day after"
+    ],
+    "email_must_not_include": [
+      "tomorrow",
+      "tonight",
+      "today",
+      "still open"
+    ],
+    "analysis": {
+      "completed_owner_in": [
+        "customer",
+        "uncertain"
+      ],
+      "min_completed": 2,
+      "pending_customer_with_relative_timeline": true
+    }
+  },
+  "F3": {
+    "modes": [
+      "full",
+      "conservative"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "autoresponder",
+      "EXAMPLE-F3"
+    ],
+    "email_must_not_include": [
+      "BTC",
+      "bvc",
+      "invoice",
+      "refund",
+      "extension"
+    ],
+    "analysis": {
+      "completed_owner_in": [
+        "customer",
+        "uncertain"
+      ],
+      "min_completed": 1
+    }
+  },
+  "F4": {
+    "modes": [
+      "neutral_fallback"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "reply",
+      "EXAMPLE-F4"
+    ],
+    "email_must_not_include": [
+      "resolved",
+      "completed",
+      "you (added|enabled|set|connected|saved)",
+      "we (fixed|set|added)",
+      "still open",
+      "next steps",
+      "domain",
+      "coupon",
+      "form",
+      "page"
+    ],
+    "email_words": [
+      30,
+      120
+    ],
+    "analysis": {
+      "max_completed": 0,
+      "max_pending": 0
+    }
+  },
+  "F5": {
+    "modes": [
+      "full",
+      "conservative"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "sender name",
+      "EXAMPLE-F5"
+    ],
+    "email_must_not_include": [
+      "still open",
+      "we (changed|updated|saved)"
+    ],
+    "analysis": {
+      "completed_owner_in": [
+        "customer",
+        "uncertain"
+      ],
+      "min_completed": 1
+    }
+  },
+  "F6": {
+    "modes": [
+      "full",
+      "conservative"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "confirmation email",
+      "EXAMPLE-F6"
+    ],
+    "email_must_not_include": [
+      "you (switched|turned|enabled)"
+    ],
+    "analysis": {
+      "completed_owner_in": [
+        "uncertain",
+        "support"
+      ]
+    }
+  },
+  "F7": {
+    "modes": [
+      "full",
+      "conservative"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "payment",
+      "EXAMPLE-F7"
+    ],
+    "email_must_not_include": [
+      "Test@12345",
+      "482913"
+    ],
+    "analysis": {
+      "completed_owner_in": [
+        "customer",
+        "uncertain"
+      ],
+      "min_completed": 1
+    }
+  },
+  "F8": {
+    "expect_review": "SENSITIVE_TOPIC_REQUIRES_HUMAN",
+    "expect_email": false
+  },
+  "P2-10": {
+    "modes": [
+      "full",
+      "conservative"
+    ],
+    "expect_skip": false,
+    "email_must_include": [
+      "EXAMPLE-P2-10"
+    ],
+    "email_must_not_include": [
+      "quiz generator (is|will be) (available|coming)"
+    ],
+    "note": "existing long multi-issue fixture; scored by deterministic checks and the independent validator"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "generated_for": "phase2 synthetic dry run",
   "total": 25,
-  "passed": 23,
+  "passed": 25,
   "truth_audit_failures": [],
   "results": [
     {
@@ -166,11 +166,7 @@
       "case": "P2-07",
       "scenario": "Missing or ambiguous context",
       "checks": [],
-      "failures": [
-        "analysis vs expected: skip=false, expected true",
-        "analysis vs expected: reason_code null",
-        "email generated for a case that must be skipped"
-      ],
+      "failures": [],
       "eligibility": {
         "outcome": "ELIGIBLE",
         "reason_code": null,
@@ -182,8 +178,15 @@
         "reason": null,
         "items": 3
       },
-      "status": "FAIL",
-      "note": "skipped as expected (null)"
+      "ungrounded_terms_warning": [],
+      "email": {
+        "words": 32,
+        "length_status": "within_preferred",
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
     },
     {
       "case": "P2-08",
@@ -303,10 +306,7 @@
       "case": "P2-13",
       "scenario": "S-11 regression: the transcript does not show who changed the button link",
       "checks": [],
-      "failures": [
-        "analysis: I1: completed item needs guided_by support|none",
-        "analysis: I1: uncertain owner must have confidence low"
-      ],
+      "failures": [],
       "eligibility": {
         "outcome": "ELIGIBLE",
         "reason_code": null,
@@ -326,7 +326,7 @@
         "semantic_issues": 0,
         "validation": "PASS"
       },
-      "status": "FAIL"
+      "status": "PASS"
     },
     {
       "case": "ADV-01",

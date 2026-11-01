@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-051 — Three stale test expectations aligned to D-044 (2026-11-01)
+
+**Decision (user instruction "Update them"):** F2, P2-07 and P2-13 expectations and three Phase 2 check rules were aligned to the coverage-first policy (D-044); originals kept in `tests/fixtures/_history/2026-11-01-before-d044-alignment/`; changed after the failures were seen, so disclosed as not a blind re-test (report section 10.1). Scores after: nine cases 9/9, Phase 2 harness 25/25.
+
 ### D-050 — Regression findings fixed in two skills; Gmail connector facts recorded (2026-11-01)
 
 **Decision:** the Phase 4 regression found two skill defects, fixed in email-generation 1.6.1 (owner-neutral done heading) and customer-summary 1.4.1 (a pending item is never cited in `covered`). Three expectations are stale against D-042/D-044 (F2 completed-owner, P2-07 skip, P2-13 uncertain-owner confidence) and were NOT edited; they need the user's decision (`docs/phase3-acceptance-report.md` section 10). Gmail connector facts (schemas only, one read-only metadata lookup) are in `docs/phase4-gmail-integration.md`.

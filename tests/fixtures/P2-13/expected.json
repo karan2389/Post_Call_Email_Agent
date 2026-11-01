@@ -1,24 +1,49 @@
 {
   "case_id": "P2-13",
   "scenario": "S-11 regression: the transcript does not show who changed the button link",
-  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "eligibility": {
+    "outcome": "ELIGIBLE",
+    "reason_code": null
+  },
   "analysis": {
     "transcript_status": "COMPLETE",
     "skip": "either",
-    "reason_code_allowed": [null, "ANALYSIS_LOW_CONFIDENCE"],
+    "reason_code_allowed": [
+      null
+    ],
     "language": "en",
-    "sentiment_allowed": ["neutral", "positive"],
-    "issue_count": {"min": 1, "max": 2},
+    "sentiment_allowed": [
+      "neutral",
+      "positive"
+    ],
+    "issue_count": {
+      "min": 1,
+      "max": 2
+    },
     "required_items": [],
-    "forbidden_categories": {"pending_support_action": "no support commitment was made", "pending_customer_action": "nothing was left for the customer"},
-    "stated_timelines_allowed": [null]
+    "forbidden_categories": {
+      "pending_support_action": "no support commitment was made",
+      "pending_customer_action": "nothing was left for the customer"
+    },
+    "stated_timelines_allowed": [
+      null
+    ]
   },
   "email": {
     "generated": "either",
-    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-13"],
+    "recording_urls": [
+      "https://fathom.video/share/EXAMPLE-P2-13"
+    ],
     "must_include": [],
-    "must_not_include": ["guarantee", "soon", "shortly", "tomorrow", "today"],
-    "notes": "The transcript never shows whether Riya or Uday changed the link. Correct behaviour (S-11 rule): owner 'uncertain', ownership_review_required true, low confidence; because it is the only outcome of the call, skip ANALYSIS_LOW_CONFIDENCE is the expected result. If an email is nevertheless produced it must credit neither 'we' nor 'you' for the change. Ownership truth: tests/fixtures/ownership-truth.json."
+    "must_not_include": [
+      "guarantee",
+      "soon",
+      "shortly",
+      "tomorrow",
+      "today"
+    ],
+    "notes": "The transcript never shows whether Riya or Uday changed the link. Correct behaviour: the completed item has owner \"uncertain\", ownership_review_required true, confidence low or medium (statement-level, D-044), neutral wording crediting neither \"we\" nor \"you\". A skip is no longer expected (ANALYSIS_LOW_CONFIDENCE retired, D-044); an email is generated. Ownership truth: tests/fixtures/ownership-truth.json."
   },
-  "validation_expected": "PASS_IF_GENERATED"
+  "validation_expected": "PASS_IF_GENERATED",
+  "_revision": "2026-11-01: aligned to D-044/D-042 on the user's instruction (\"Update them\"); originals in tests/fixtures/_history/2026-11-01-before-d044-alignment/."
 }

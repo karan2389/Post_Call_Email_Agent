@@ -1,19 +1,30 @@
 {
   "case_id": "P2-07",
   "scenario": "Missing or ambiguous context",
-  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "eligibility": {
+    "outcome": "ELIGIBLE",
+    "reason_code": null
+  },
   "analysis": {
     "transcript_status": "COMPLETE|INCOMPLETE",
-    "skip": true,
-    "reason_code_allowed": ["ANALYSIS_LOW_CONFIDENCE", "TRANSCRIPT_INCOMPLETE"],
+    "skip": false,
+    "reason_code_allowed": [
+      null
+    ],
     "language": "en",
-    "overall_confidence_allowed": ["low"],
+    "overall_confidence_allowed": [
+      "low"
+    ],
     "required_items": [],
-    "forbidden_categories": {"completed": "nothing can be confirmed"}
+    "forbidden_categories": {
+      "completed": "nothing can be confirmed"
+    }
   },
   "email": {
-    "generated": false,
-    "notes": "The transcript has no named problem, product, setting or action, and speakers are unlabelled. No email may be generated. The dry-run result is SKIPPED with a skip code. Summary and email stages must not run (or must return the skipped safeguard)."
+    "generated": true,
+    "mode": "neutral_fallback",
+    "notes": "D-044 coverage-first: a call with no named problem, setting or action is not skipped; it gets a neutral fallback email that claims nothing (no completed items, no commitments), validated like any other. The old expectation (skip ANALYSIS_LOW_CONFIDENCE) is retired."
   },
-  "validation_expected": "N/A"
+  "validation_expected": "PASS",
+  "_revision": "2026-11-01: aligned to D-044/D-042 on the user's instruction (\"Update them\"); originals in tests/fixtures/_history/2026-11-01-before-d044-alignment/."
 }

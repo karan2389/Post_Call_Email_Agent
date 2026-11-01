@@ -1,0 +1,42 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I3",
+      "email_excerpt": "",
+      "explanation": "Support's step to check the GST company name with the billing team and report back is missing."
+    },
+    {
+      "code": "KEY_OUTCOME_OMITTED",
+      "item_id": "I3",
+      "email_excerpt": "a wrong company name on your invoice",
+      "explanation": "Unresolved issue S2 is mentioned only in the opening and never stated as not yet resolved, with no follow-up described."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "We guided you to assign your coupon to the Advanced Course, and you confirmed the discount now shows at checkout.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that you can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Extend the coupon's expiry date in the coupon settings (you mentioned you would do this that night, the night of our call).",
+      "item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3",
+    "I5"
+  ]
+}

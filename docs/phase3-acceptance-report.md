@@ -251,3 +251,11 @@ Skills at the start of the run: ta 1.6.0, cs 1.4.0, eg 1.6.0, ev 1.5.0. Syntheti
 - All 10 regenerated emails (and the 8 other cases) passed independent validation on the first try except F5 (see above).
 
 **Limits.** One sample per case; model output varies from run to run. Validators are LLM-based. Phase 3 is NOT closed: the controlled destination storage test, read-back and idempotency checks have not been run in this session and need your authorisation to enable `writes_enabled`.
+
+### 10.1 Expectations aligned to D-044 on the user's instruction ("Update them", 2026-11-01) and final scores
+
+Changed (originals preserved in `tests/fixtures/_history/2026-11-01-before-d044-alignment/`): F2 (`completed_owner` customer -> `completed_owner_in` customer|uncertain); P2-07 (skip expected -> neutral fallback email expected, validation PASS); P2-13 (retired `ANALYSIS_LOW_CONFIDENCE` skip removed from the allowed reasons); `tests/unit/checks.js` (an uncertain owner may have confidence low or medium, and `guided_by` null is accepted for it; a `neutral_fallback` summary may have empty `call_purpose_issue_ids`). **Disclosure:** these expectations were changed after the failures were seen, so the pass counts below are not a blind re-test; they show that the generated outputs satisfy the D-044 policy as now written.
+
+Final scores on the latest outputs (ta 1.6.0, cs 1.4.1, eg 1.6.1, ev 1.5.0): nine focused cases **9/9** (F1 and F5 taken from the 1.6.1 rerun, the rest from the first run); Phase 2 harness **25/25** (13 cases + 12 adversarial; the adversarial validations are the stored ones from `phase2-final/run2`). One sample per case.
+
+Phase 3 remains **open**: controlled destination storage test, read-back and actual idempotency checks are still to be run after the user authorises `writes_enabled` for that run.

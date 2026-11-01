@@ -1,0 +1,19 @@
+{
+  "case_id": "P2-07",
+  "scenario": "Missing or ambiguous context",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE|INCOMPLETE",
+    "skip": true,
+    "reason_code_allowed": ["ANALYSIS_LOW_CONFIDENCE", "TRANSCRIPT_INCOMPLETE"],
+    "language": "en",
+    "overall_confidence_allowed": ["low"],
+    "required_items": [],
+    "forbidden_categories": {"completed": "nothing can be confirmed"}
+  },
+  "email": {
+    "generated": false,
+    "notes": "The transcript has no named problem, product, setting or action, and speakers are unlabelled. No email may be generated. The dry-run result is SKIPPED with a skip code. Summary and email stages must not run (or must return the skipped safeguard)."
+  },
+  "validation_expected": "N/A"
+}

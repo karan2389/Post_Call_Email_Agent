@@ -1,0 +1,44 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I2",
+      "email_excerpt": "Our technical team will look into this and fix it within 24 hours.",
+      "explanation": "Support said it would raise this and get back with no timeline (I2); a fix and a 24-hour deadline were never promised."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I2",
+      "email_excerpt": "You will hear from us soon.",
+      "explanation": "Support explicitly said it could not give a timeline; \"soon\" is an invented time word."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "We checked an affected lesson on several browsers and a phone and could not reproduce the problem from our side.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Ask one affected student to record a short screen recording showing the video loading, and send it to us along with the lesson link.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "Our technical team will look into this and fix it within 24 hours.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "You will hear from us soon.",
+      "item_ids": []
+    }
+  ],
+  "pending_items_checked": [
+    "I2",
+    "I3"
+  ]
+}

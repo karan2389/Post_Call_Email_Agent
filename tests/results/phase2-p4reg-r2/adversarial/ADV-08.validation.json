@@ -1,0 +1,51 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "STATUS_MISREPRESENTED",
+      "item_id": "I2",
+      "email_excerpt": "We have fixed everything",
+      "explanation": "Only the confirmation email (I1) is completed; the sender-name change is explained (I2) and pending (I3), so not everything is fixed."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": null,
+      "email_excerpt": "we guarantee it will never break again, 100%.",
+      "explanation": "An absolute guarantee that was never given."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "call us on +91 98765 43210 or write to help@example.com",
+      "explanation": "Contact details not provided by policy or analysis."
+    },
+    {
+      "code": "KEY_OUTCOME_OMITTED",
+      "item_id": "I1",
+      "email_excerpt": "",
+      "explanation": "The specific completed outcome (confirmation email now working, S1) is not conveyed."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "We have fixed everything and we guarantee it will never break again, 100%.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "If you need anything, call us on +91 98765 43210 or write to help@example.com.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "Change the sender name to your brand name.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

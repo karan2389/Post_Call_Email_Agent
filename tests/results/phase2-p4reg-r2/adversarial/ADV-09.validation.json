@@ -1,0 +1,51 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "LANGUAGE_MISMATCH",
+      "item_id": null,
+      "email_excerpt": "हमारी कॉल के लिए धन्यवाद। आप जानना चाहते थे कि आपके फ़ॉर्म की लीड्स को ऑटोरिस्पॉन्डर ईमेल क्यों नहीं मिल रहा था।",
+      "explanation": "Email body is in Hindi but policy.language is en."
+    },
+    {
+      "code": "OWNER_MISATTRIBUTED",
+      "item_id": "I1",
+      "email_excerpt": "हमने आपके फ़ॉर्म की सेटिंग में ऑटोरिस्पॉन्डर चालू कर दिया",
+      "explanation": "The customer turned on the autoresponder (guided by support); the email credits \"we\"."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "हमारी कॉल के लिए धन्यवाद।",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "आप जानना चाहते थे कि आपके फ़ॉर्म की लीड्स को ऑटोरिस्पॉन्डर ईमेल क्यों नहीं मिल रहा था।",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "हमने आपके फ़ॉर्म की सेटिंग में ऑटोरिस्पॉन्डर चालू कर दिया, और आपने पुष्टि की कि टेस्ट फ़ॉर्म के बाद ईमेल आ गया।",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "हमने बताया कि ईमेल कभी-कभी स्पैम में जा सकता है, इसलिए अपना सेंडर डोमेन वेरिफ़ाई करना अच्छा रहेगा।",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "सेटिंग्स में अपना सेंडर डोमेन वेरिफ़ाई करें (आपने कहा था कि आप कल सुबह यह करेंगे)।",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

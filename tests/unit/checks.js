@@ -190,9 +190,9 @@ function analysisChecks(analysis, transcript) {
       (it.category === 'discussed' && ['none', 'customer', 'support'].includes(it.owner));
     if (!ownerOk) f.push(`${it.id}: owner ${it.owner} inconsistent with ${it.category}`);
     if (!legacy) {
-      if (it.category === 'completed' && !['support', 'none'].includes(it.guided_by)) f.push(`${it.id}: completed item needs guided_by support|none`);
+      if (it.category === 'completed' && !['support', 'none'].includes(it.guided_by) && !(it.owner === 'uncertain' && it.guided_by == null)) f.push(`${it.id}: completed item needs guided_by support|none`);
       if (it.category !== 'completed' && it.guided_by !== null && it.guided_by !== undefined) f.push(`${it.id}: guided_by must be null for ${it.category}`);
-      if (it.owner === 'uncertain' && it.confidence !== 'low') f.push(`${it.id}: uncertain owner must have confidence low`);
+      if (it.owner === 'uncertain' && !['low', 'medium'].includes(it.confidence)) f.push(`${it.id}: uncertain owner must have confidence low or medium (statement-level confidence, D-044)`);
     }
     if (!it.evidence || !it.evidence.length) f.push(`${it.id}: no evidence`);
     (it.evidence || []).forEach((q) => {
@@ -266,7 +266,7 @@ function summaryGroundingChecks(analysis, summary, transcript) {
     })));
     (summary.customer_next_steps || []).forEach((e) => { if (/^\s*(We|Our team)\b/.test(e.text)) f.push('customer step phrased as our commitment: ' + e.text); });
   }
-  if (!Array.isArray(summary.call_purpose_issue_ids) || !summary.call_purpose_issue_ids.length) f.push('call_purpose_issue_ids missing');
+  if (!Array.isArray(summary.call_purpose_issue_ids) || (!summary.call_purpose_issue_ids.length && summary.mode !== 'neutral_fallback')) f.push('call_purpose_issue_ids missing');   // a neutral fallback summary has no established issue (D-044)
   else summary.call_purpose_issue_ids.forEach((id) => { if (!issueIds.has(id)) f.push(`call_purpose_issue_ids: unknown issue ${id}`); });
   if (!Array.isArray(summary.analysis_gaps)) f.push('analysis_gaps missing');
   const blob = norm(JSON.stringify(analysis));

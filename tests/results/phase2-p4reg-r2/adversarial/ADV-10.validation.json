@@ -1,0 +1,41 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "You told us you were unhappy with the product and wanted to switch to a different plan",
+      "explanation": "Customer sentiment is positive and nothing about dissatisfaction or switching plans appears in the analysis."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "you needed your confirmation emails working urgently",
+      "explanation": "No urgency is recorded in the analysis; unsupported customer-intent claim."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "Following our guidance, you switched on the order confirmation email for your product, and you confirmed the email arrived in your inbox after your test order.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the email still shows the default sender name, which can be changed in Email settings under Sender name.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Change the sender name to your brand name (you mentioned you planned to do this after the call).",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}
