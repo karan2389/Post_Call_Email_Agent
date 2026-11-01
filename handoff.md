@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## First real Brevo test done: tracking is ON, flag stays false (2026-11-01, D-062)
+One synthetic internal email sent via Brevo (Send Log rows 11-13 SENT). Raw message: text part URLs intact; HTML anchors rewritten to sendibt3 click links; open pixel added; DMARC fail for flexifunnels.com (Brevo-domain DKIM/SPF pass). **Needs you:** turn click and open tracking off in Brevo, DNS records for the domain; then approve one repeat test.
+
 ## Brevo .env loader + read-only connectivity check built, mocked only (2026-11-01, D-061)
 New: `src/lib/env.js`, `src/brevo-check.js`, `checkConnectivity()` in the adapter, `tests/unit/phase4-env.test.js` (15 groups), `approved_sender_name` and gate `connectivity_check_authorised: false`. No real request was made; all other flags unchanged. **Needs you:** authorise the first real read-only request (set the gate true, run `node src/brevo-check.js --live`); Brevo account actions (sender, domain, tracking) still open.
 
