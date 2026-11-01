@@ -6,7 +6,8 @@ language: en                      # MVP language (OD-08); Hindi / Hinglish calls
 subject_template: "Follow-up on your FlexiFunnels support call – {primary_topic}"
 subject_min_chars: 20
 subject_max_chars: 90
-min_words: 80                     # excluding signature (OD-09, proposal)
+min_words: 50                     # excluding signature (OD-09; lowered from 80 to 50 on 2026-11-01, D-044: a short call must not force filler)
+fallback_min_words: 30     # neutral_fallback emails (D-044): short by design; the 50-word minimum does not apply
 
 # Length policy (user decision 1, 2026-10-31; D-031). Used identically by the generator, the deterministic checks and the validator.
 # Count = whitespace-separated tokens of the body, excluding the signature block; the greeting, section labels, list markers and URLs count.
@@ -51,4 +52,4 @@ banned_phrases:
 allowed_links: []                 # only the call's Fathom recording URLs are allowed; no help-centre link is configured
 allowed_contacts: []              # no support phone number or email address is configured; none may appear
 
-sensitive_topics_require_human: unset   # OD-11 not decided; analysis flags topics, policy is unresolved
+sensitive_topics_require_human: true    # OD-11 decided by the user 2026-11-01 (D-039): sensitive topics => REVIEW_REQUIRED (no generated email, human review); analysis flags topics

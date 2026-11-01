@@ -45,7 +45,7 @@ Applied by the scheduled session as literal checklist steps (or by a helper if O
 | `RECIPIENT_MISMATCH` | `To` equals the source `customer_email` exactly (single recipient) |
 | `NAME_MISMATCH` | Greeting uses the customer's first name as derived from `customer_name` |
 | `SUBJECT_INVALID` | Subject present, 20–90 characters (proposal), no placeholders, no ALL CAPS, no emoji |
-| `LENGTH_OUT_OF_RANGE` | Body below the minimum (80 words) excluding signature |
+| `LENGTH_OUT_OF_RANGE` | Body below the minimum (50 words, lowered from 80 by D-044) excluding signature; for a `neutral_fallback` email the minimum is `fallback_min_words` (30), D-044 |
 | `LENGTH_REVIEW_REQUIRED` | Body above `human_review_above_words` (350). Not a PASS: the email is not sent automatically and the record is `SKIPPED` `LENGTH_REVIEW_REQUIRED` for a human. 251–350 words is allowed (declared `length_status: above_preferred`) only when needed to keep important customer information; up to 250 is normal. Words = whitespace-separated tokens of the body excluding the signature (greeting, labels, list markers and URLs count). Never omit an unresolved issue, an important completed action or a pending action only to meet the limit; remove repetition, filler and unnecessary explanations first (policy D-031) |
 | `LENGTH_STATUS_MISMATCH` | The `length_status` declared by the generator differs from the count made by the check |
 | `RELATIVE_TIME_UNANCHORED` | Bare "today", "tonight", "tomorrow", "yesterday", "this morning/evening/afternoon" in the email. Relative timing is anchored to the call date ("that evening", "the following day", "the morning after our call"); never a calendar date (policy D-031) |
@@ -63,6 +63,7 @@ Applied by the scheduled session as literal checklist steps (or by a helper if O
 | `UNSUPPORTED_CLAIM` | A statement in the email has no matching analysis item / transcript evidence. This includes statements about what the customer wanted, hoped, asked, expected or felt ("you wanted this fixed", "you were unhappy") that the analysis does not record (D-031) |
 | `STATUS_MISREPRESENTED` | An item's category is changed (e.g. `explained` or pending presented as `completed`; `discussed` presented as `explained`) |
 | `OWNER_MISATTRIBUTED` | A customer action presented as a support action or vice versa. For a `completed` item the email must credit the item's `owner` (the party who performed it; see §1a); crediting the other party, or crediting anyone when the owner is `uncertain`, is a failure |
+| `SENSITIVE_INFO_INCLUDED` | A password, authentication or verification code, token, card or bank number, or unnecessary personal data in the email (email-validation 1.5.0, D-044) |
 | `PENDING_ACTION_OMITTED` | Any `pending_customer_action` or `pending_support_action` from the summary is missing |
 | `INVENTED_COMMITMENT` | Deadline, refund, discount, credit, feature, escalation or promise not stated in the transcript |
 | `TONE_INAPPROPRIATE` | Defensive, blaming, dismissive, over-familiar, or ignoring clear frustration |

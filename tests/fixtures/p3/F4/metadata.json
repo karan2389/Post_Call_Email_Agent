@@ -1,0 +1,12 @@
+{
+    "fathom_urls":  [
+                        "https://fathom.video/share/EXAMPLE-F4"
+                    ],
+    "case":  "F4",
+    "support_agent_first_name":  "Sameer",
+    "recording_count":  1,
+    "call_time":  "16:00",
+    "call_date":  "2026-10-30",
+    "scenario":  "Substantially garbled; a support call evidently occurred; neutral fallback only",
+    "greeting_name":  "Kabir"
+}

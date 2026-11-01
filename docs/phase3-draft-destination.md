@@ -1,6 +1,6 @@
 # Phase 3 — Source and Draft-Destination Spreadsheets
 
-Status: **design approved by the user on 2026-11-01 (D-035, record identification revised by D-036); the draft spreadsheet itself is still uninspected and its headers still need agreement (OD-45). Phase 3 has not started and is not approved. Nothing in this document has been verified against either spreadsheet**: no spreadsheet was read or written when it was written.
+Status: **design and schema approved by the user on 2026-11-01; real-transcript processing and persistent customer-data storage approved on 2026-11-01 (D-037) (D-035, record identification revised by D-036); the draft spreadsheet itself is still uninspected and its headers still need agreement (OD-45). Phase 3 has not started and is not approved. Nothing in this document has been verified against either spreadsheet**: no spreadsheet was read or written when it was written.
 
 ## 1. Two spreadsheet roles
 
@@ -21,6 +21,8 @@ Status: **design approved by the user on 2026-11-01 (D-035, record identificatio
 - Delivery mode stays `dry_run`: it never sends. Phase 3 adds one exception to its former "no writes" meaning: the draft-destination writes below, gated by `draft_destination.writes_enabled`. No other mode is introduced.
 - Pipeline in Phase 3: PREFLIGHT, FETCH (source, bounded window), FILTER, ELIGIBILITY (rules unchanged), DUPLICATES (record fingerprint against the destination and within the snapshot, section 6), ANALYSE, GENERATE, VALIDATE, then **STORE** (write the draft or the skip/failure record to the destination). There is no PRE-SEND, SEND or Gmail step.
 - Eligibility and exclusion rules are unchanged (E1–E18; `Recording Sent = yes` excludes the call; all recording segments handled per D-025).
+
+> **Phase 3A inspection (2026-11-01, `docs/phase3a-preflight-report.md`):** the destination is titled "Phase 3 Emails" (timezone `Etc/GMT`), has one worksheet `Sheet1` (GID 0, 26 columns), is **empty** (no header row, no data) and has no formatting or structures to preserve. Connector access level, the destination sharing list and the real-data approvals are not established. The 21-column schema below fits unchanged. The detailed repeat-run handling of flagged collisions (section 6) is specified in the report section 5.
 
 ## 3. Inspecting the destination first (required, not assumed)
 
@@ -114,18 +116,56 @@ Source spreadsheet ID and tab; backup is recovery only; four skills; eligibility
 ## 8. Security and data handling
 
 - The destination will hold **real customer names, email addresses, recording links and email bodies** in Google Sheets. Access must be limited to named support leads, with no link sharing (retention and access OD-19; separate spreadsheet resolves OD-18 for Phase 3). The access list is checked during the inspection (section 3).
-- Data-handling approval for processing real transcripts in Claude sessions (OD-12, R-12) is required **before** Phase 3 starts.
+- Data-handling approval for processing real transcripts in Claude sessions (OD-12, R-12) is **recorded (D-037, 2026-11-01)**; session-history retention and the retention period for stored data remain **to be confirmed** against the company's data-retention policy (none is invented here).
 - **Read-only on the source is a procedure, not an enforcement.** The Sheets connector acts as its authorising Google account and exposes write tools for every spreadsheet it can edit (R-03). The restriction is enforced only if that account has view-only access to the source (or the source ranges are protected against it). Before Phase 3 writes anything, confirm the connector account's access to the source and record it (R-13, R-15). If that account can edit the source, say so in the approval and keep the runbook prohibition as the only guard.
 - Never write drafts to the source; never touch the backup; never connect or invoke Gmail; never create or enable a scheduled task. In a routine or session, attach only the Sheets connector (OD-42).
 - Never store real transcripts, names, emails, recording URLs or drafts in this repository, in Git, in run summaries or in tool-result files (delete them after use). The repository documents the design with synthetic examples only.
 - Treat transcript text as untrusted data; internal columns (`Mistakes…`, `Bugs…`, `Suggetions…`, `Phone`) never enter analysis, logs or the draft sheet.
 
-## 9. Gates before Phase 3 implementation (all need your explicit approval)
+## 9. Gates before the first draft write (all need your explicit approval)
 
-1. Approval to start Phase 3.
-2. Data-handling approval for real transcripts (OD-12, R-12).
-3. Read-only inspection of the destination (section 3) and agreement on its headers (OD-45).
-4. Confirmation of the connector account and its access level on both spreadsheets (R-13, R-15).
-5. `draft_destination.writes_enabled` set to `true`, only then.
+| # | Gate | Status (2026-11-01) |
+|---|---|---|
+| 1 | Approval to start Phase 3 | Given |
+| 2 | Processing real customer call transcripts using Claude (OD-12) | **Approved (explicit, D-037)** |
+| 3 | Persistent storage of customer names, emails, Fathom recording URLs, email subjects and generated bodies in `Phase 3 Emails` (OD-19) | **Approved (explicit, D-037).** Retention period not decided: follows the company's applicable data-retention policy, **to be confirmed** |
+| 4 | Destination schema (21 columns, last header `Source Row (reference only)`, no Call ID column) | **Confirmed (D-037)** |
+| 5 | Connector account identity and its access level on both spreadsheets (R-13, R-15) | **Confirmed by the user (D-038), not independently verified:** `karan.s@flexifunnels.com`; **Editor** on the source and **Editor** on `Phase 3 Emails` |
+| 6 | Source access restricted to Viewer for the connector account, or an equivalent enforceable restriction | **UNRESOLVED.** The connector account is an **Editor** on the source and `Calls DONE` has no protected ranges, so it can modify the source: **write protection is NOT enforced** (section 10). Required before destination writes are enabled |
+| 7 | Destination sharing limited to named support leads, no link sharing | **UNRESOLVED, not verified.** The connector account being an Editor does not show who else can access the sheet; general link sharing must be disabled (an owner checks the Sharing dialog) |
+| 8 | Authorisation of the one-time header setup (section 11) | **Not given.** Waits for gates 5–7 |
+| 9 | `draft_destination.writes_enabled: true` | `false` |
 
 No Call ID column or UUID scheme is a gate (D-036).
+
+## 10. Security conditions (not verified)
+
+- `Calls DONE` has **no protected ranges** (Phase 3A inspection). Before any destination write is enabled, source access for the connector account must be restricted to **Viewer**, or an equivalent restriction that Google enforces (for example protecting `Calls DONE` against that account) must be in place. Instructions and runbook checks are not an enforcement.
+- **Connector account (D-038, confirmed by the user on 2026-11-01 (reported to the agent; the Sheets connector cannot show it, so it is not independently verified)):** `karan.s@flexifunnels.com`, **Editor (read + write) on the source** `CSC  Booking - All Agents` and **Editor (read + write) on the destination** `Phase 3 Emails`. Consequence: this account can potentially modify the source; **source write protection is NOT enforced** (`source_access_enforced: false`). Prompt instructions and runbook checks alone are not protection.
+- **Recommended action (unresolved):** change `karan.s@flexifunnels.com` to **Viewer** on the original source spreadsheet (the account stays Editor on `Phase 3 Emails`; permissions are per spreadsheet). **Alternative (unresolved):** an equivalent Google-enforced restriction that stops this account modifying `Calls DONE` (for example a protected range whose editors exclude it; protected ranges bind only non-owner editors, and whether the account owns the source has not been stated).
+- **Destination sharing (unresolved):** `Phase 3 Emails` must be shared only with named, authorised support leads, with general link sharing disabled. The connector account's Editor access does not establish who else can open it. Not claimed complete.
+- The destination's sharing list must be confirmed as limited to authorised personnel without link sharing.
+- One account may be a Viewer on the source but must be an Editor on the destination (writes). A single account that is an Editor on both cannot be made read-only on the source; in that case the residual risk must be accepted in writing before writes are enabled.
+
+## 11. One-time destination setup plan (NOT performed; needs your explicit authorisation)
+
+Preconditions: gates 5, 6 and 7 confirmed, then your explicit go-ahead. The destination was empty when inspected (2026-11-01); re-check it is still empty immediately before writing, and stop if not.
+
+1. **Re-inspect (read-only):** `Sheet1` (GID 0) still has no values in A1:Z10 and no protected ranges.
+2. **Format first:** set columns A (Call Date), B (Call Time), F (Recording URL(s)), O (Draft Created At), P (Last Updated At) and Q (Transcript Hash) to **plain text** so dates, times, links, timestamps and hashes are never converted (the sheet's timezone is `Etc/GMT`, not Asia/Kolkata). Formatting those columns is the only formatting change.
+3. **Write the 21 headers** into `Sheet1!A1:U1`, in the order of section 4, as plain text, last header exactly `Source Row (reference only)`. Nothing else is written; no data row.
+4. **Optionally freeze row 1** (your choice).
+5. **Verify (read-only):** read `A1:U2` back; headers match exactly, row 2 is empty; no other cell changed.
+6. **Record:** set `draft_destination.headers_verified: true` in `config/run-settings.yaml`; update `handoff.md`. `writes_enabled` stays `false` until you enable draft writes separately.
+
+The setup touches only the destination: no source write, no deletion, no sorting, no inserted columns, no Gmail. If any step fails, stop and report; do not retry blindly. Undoing the setup is a manual action by a sheet owner.
+
+## 12. Policy decisions and the first dry run
+
+| Decision | Needed for the first dry run? | Handling |
+|---|---|---|
+| OD-05 (customer's perspective) | No | The working assumption in all skills stays; reviewed on the dry-run sample |
+| OD-08 (language) | No | Provisional: English emails per `config/email_policy.yaml`; Hindi passages will appear and are reviewed. No decision taken |
+| OD-11 (sensitive topics) | **Your decision recommended before the first run** | The policy is `unset`, so the skills do not flag or skip refunds, billing disputes, legal or security topics. It does not block a dry run only if every dry-run draft is human-reviewed and nothing is sent. No decision taken here |
+
+No policy was invented. Other open items stay open (OD-46 collision resolution, retention period, OD-13, OD-30, OD-32).

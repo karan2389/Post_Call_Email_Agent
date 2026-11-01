@@ -1,0 +1,12 @@
+{
+    "fathom_urls":  [
+                        "https://fathom.video/share/EXAMPLE-F2"
+                    ],
+    "case":  "F2",
+    "support_agent_first_name":  "Sameer",
+    "recording_count":  1,
+    "call_time":  "15:00",
+    "call_date":  "2026-10-30",
+    "scenario":  "Hindi-English mixed; guided completion plus a customer step with a relative timeline",
+    "greeting_name":  "Arjun"
+}

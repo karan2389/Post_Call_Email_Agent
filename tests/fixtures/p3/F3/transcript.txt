@@ -1,0 +1,10 @@
+[00:00:06] Riya (FlexiFunnels): Hi Rohan, tell me what is happening with your form.
+[00:00:14] Rohan Sample: leads are coming in uh from the form but the email the autoresponder email is is not going to them
+[00:00:30] Riya (FlexiFunnels): okay open form settings and turn on the autoresponder option then save it
+[00:00:55] Rohan Sample: yes turned on saved
+[00:01:05] Riya (FlexiFunnels): now submit a test lead from your page
+[00:01:30] Rohan Sample: done the mail came in my inbox
+[00:01:38] Riya (FlexiFunnels): good so this is now working. also we will the the exten extension for the bt bvc not provided by us uh sorry the and the invoice the g r wrong name wrong
+[00:02:02] Rohan Sample: yes yes the that thing ok
+[00:02:10] Riya (FlexiFunnels): you can verify sender domain under email domain in settings, it is good so mails do not go to spam
+[00:02:30] Rohan Sample: okay thanks bye

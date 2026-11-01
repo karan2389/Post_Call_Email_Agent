@@ -1,0 +1,10 @@
+[00:00:05] Riya (FlexiFunnels): Hi Priya, what can I help with?
+[00:00:10] Priya Sample: I want to connect my payment gateway but I cannot log in to the gateway dashboard.
+[00:00:20] Riya (FlexiFunnels): Please do not tell me your password. Just log in on your own screen.
+[00:00:28] Priya Sample: Oh sorry, my password is Test@12345 and the OTP they sent is 482913. It still fails.
+[00:00:40] Riya (FlexiFunnels): Please don't share those with anyone. Try resetting the password from the login page.
+[00:01:10] Priya Sample: Reset done, I could log in now.
+[00:01:20] Riya (FlexiFunnels): Good. Now in FlexiFunnels open Settings, Payments, choose the gateway and paste the keys from the gateway dashboard, then save.
+[00:02:00] Priya Sample: Pasted and saved. It says connected.
+[00:02:08] Riya (FlexiFunnels): Great. Please run one test order from your checkout page to confirm payments work.
+[00:02:20] Priya Sample: Okay, I will do a test order after this call.

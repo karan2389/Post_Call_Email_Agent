@@ -1,0 +1,12 @@
+{
+    "fathom_urls":  [
+                        "https://fathom.video/share/EXAMPLE-F3"
+                    ],
+    "case":  "F3",
+    "support_agent_first_name":  "Riya",
+    "recording_count":  1,
+    "call_time":  "12:00",
+    "call_date":  "2026-10-30",
+    "scenario":  "Partly garbled speech-to-text; reliable facts mixed with an unclear passage",
+    "greeting_name":  "Rohan"
+}

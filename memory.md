@@ -23,6 +23,20 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - 2026-11-01 — **D-033 Phase 2 final changes (untested by decision):** UTF-8 instruction (email-generation 1.4.0), P2-03 expectation narrowed (original kept in `_history/`), friendlier customer-facing wording (customer-summary 1.3.0, email-generation 1.4.0, email-validation 1.4.0). No regression runs were performed; business logic unchanged. Report `docs/phase2-final-report.md` §11.
 
+- 2026-11-01 — **D-043/D-044/D-045:** exact transcript hash from the recorded connector result; coverage-first pipeline (quality never means no email; neutral fallback; low-confidence items not stated; ta 1.6.0, cs 1.4.0, eg 1.6.0, ev 1.5.0); 30/31 Oct run: 7 eligible-with-transcript calls -> 7 validated drafts (100%), 2 transcripts unavailable, nothing stored because destination sharing is unverified (user reported broad Editor access).
+
+- 2026-11-01 — **D-042 transcript-analysis 1.5.0:** guided on-screen steps become `completed` with performer + completion-signal evidence (fixes the upstream cause of "still open" wording); untested; low-confidence-items rule still open.
+
+- 2026-11-01 — **D-041 second dry run (30 Oct calls) with email-generation 1.5.0:** 2 validated drafts + 1 review-required + 4 skipped stored (7 rows); transcript hashes cannot be byte-exact through the model (not stored); planner gained NOOP_REVIEW_PENDING; upstream guided-action classification gap and low-confidence-item rule still open; Phase 3 not fully accepted.
+
+- 2026-11-01 — **D-039/D-040 Phase 3 dry run:** helpers approved and built (`src/`), destination headers set up, OD-11 decided (sensitive = REVIEW_REQUIRED), OD-04 confirmed by the user; dry run of 6 source records gave 1 validated draft, 3 skipped, 2 deferred, no duplicates; Phase 3 partially complete pending human review and a second run.
+
+- 2026-11-01 — **D-038 connector identity:** connector account `karan.s@flexifunnels.com` is Editor on both spreadsheets (user-confirmed, not independently verifiable); source write protection NOT enforced; source Viewer/equivalent restriction and destination sharing check unresolved.
+
+- 2026-11-01 — **D-037 approvals:** real-transcript processing and persistent storage of customer data in `Phase 3 Emails` approved; schema confirmed; retention period undecided (company policy); connector account/source Viewer restriction/destination sharing unverified; header setup planned, not performed.
+
+- 2026-11-01 — **Phase 3A preflight (read-only):** destination `Phase 3 Emails`/`Sheet1` is empty (26 cols, Etc/GMT, no structures); source headers match docs; source time cells have inconsistent zero-padding; `Calls DONE` unprotected; connector account/level unknown; real-data and storage approvals not yet recorded. `docs/phase3a-preflight-report.md`.
+
 - 2026-11-01 — **D-036 no Call ID column in Phase 3:** calls are identified for dedup only by fingerprint (normalised date + time + email), not unique; same-day calls at different times are separate; exact collisions flagged (FINGERPRINT_COLLISION), never merged or discarded; draft schema 21 columns; supersedes the D-035 interim key; Phase 4+ persistent-ID question left open.
 
 - 2026-11-01 — **D-035 Phase 3 draft destination:** generated drafts go to spreadsheet `1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40` (GID 0); source `Calls DONE` read only; backup untouched; Gmail off; manual runs. Destination uninspected; schema and access (OD-45) are proposals (the interim Call ID key was superseded by D-036); read-only on the source is procedural unless the connector account is view-only (R-15). Design: `docs/phase3-draft-destination.md`.

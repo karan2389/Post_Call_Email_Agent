@@ -1,0 +1,12 @@
+{
+    "fathom_urls":  [
+                        "https://fathom.video/share/EXAMPLE-F5"
+                    ],
+    "case":  "F5",
+    "support_agent_first_name":  "Riya",
+    "recording_count":  1,
+    "call_time":  "10:00",
+    "call_date":  "2026-10-30",
+    "scenario":  "Short but meaningful transcript",
+    "greeting_name":  "Neha"
+}

@@ -78,7 +78,8 @@ If enforcement cannot be verified, the real source sheet receives no writes at a
 
 - In Phase 3 the source `Calls DONE` is read only and drafts go only to the dedicated draft spreadsheet; never to the source, never to the backup. Gmail is not connected or invoked and no scheduled task exists.
 - Read-only on the source is a procedure unless the connector account has view-only access (R-03, R-15); this must be confirmed and recorded before Phase 3 writes anything.
-- The draft spreadsheet will hold real customer names, emails, recording links and email bodies: restrict access, no link sharing, OD-12 approval first. Failed or unvalidated drafts are never stored as validated.
+- The draft spreadsheet will hold real customer names, emails, recording links, email subjects and bodies. Real-transcript processing and this storage are **approved (D-037, 2026-11-01)**; the retention period is not set and must follow the company's data-retention policy (to be confirmed). Restrict access to named support leads, no link sharing (not yet verified). Failed or unvalidated drafts are never stored as validated.
+- Connector account (D-038, confirmed by the user on 2026-11-01 (reported to the agent; the Sheets connector cannot show it, so it is not independently verified)): `karan.s@flexifunnels.com`, **Editor** on both the source and `Phase 3 Emails`. It can therefore modify the source: `Calls DONE` has no protected ranges and **source write protection is NOT enforced**. Recommended (unresolved): make the account **Viewer** on the source (it stays Editor on the destination), or establish an equivalent Google-enforced restriction; prompt instructions alone are not protection. Destination sharing (named, authorised support leads only; general link sharing off) is **unresolved**: the account's Editor access does not show who else can open the sheet. Neither check is complete.
 
 ## 9. Version control
 

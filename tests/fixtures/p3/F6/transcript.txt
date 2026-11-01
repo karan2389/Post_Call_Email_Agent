@@ -1,0 +1,8 @@
+[00:00:05] Speaker 1: Hello, you are on a call with FlexiFunnels support, how can I help you?
+[00:00:12] Speaker 2: My webinar registration page is not sending the confirmation email.
+[00:00:20] Speaker 1: Okay, let us look at the page settings. The confirmation email option should be switched on.
+[00:00:34] Speaker 2: Hmm.
+[00:00:41] Speaker 1: Done. It is showing now.
+[00:00:47] Speaker 2: Okay good. Can the same be done for the second webinar page?
+[00:00:55] Speaker 1: Yes, the same option exists on every page, in the page settings.
+[00:01:05] Speaker 2: Great, thank you.

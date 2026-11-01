@@ -1,0 +1,12 @@
+{
+    "fathom_urls":  [
+                        "https://fathom.video/share/EXAMPLE-F8"
+                    ],
+    "case":  "F8",
+    "support_agent_first_name":  "Sameer",
+    "recording_count":  1,
+    "call_time":  "17:00",
+    "call_date":  "2026-10-30",
+    "scenario":  "Refund dispute: sensitive topic (OD-11) must be review-required, no email",
+    "greeting_name":  "Sanjay"
+}

@@ -1,0 +1,12 @@
+[00:00:04] Sameer (FlexiFunnels): Namaste Arjun ji, kaise help kar sakta hoon?
+[00:00:10] Arjun Demo: Sir mera domain connect nahi ho raha hai, funnel sirf FlexiFunnels link par khul raha hai.
+[00:00:22] Sameer (FlexiFunnels): Theek hai. Aap apna GoDaddy account kholiye aur DNS settings mein jaiye.
+[00:00:40] Arjun Demo: Ho gaya, DNS page khul gaya.
+[00:00:48] Sameer (FlexiFunnels): Wahan jo purana A record hai, usko delete kar dijiye aur save kijiye.
+[00:01:10] Arjun Demo: Delete kar diya, save bhi kar diya.
+[00:01:18] Sameer (FlexiFunnels): Ab ek CNAME record add kijiye, value woh jo FlexiFunnels domain settings mein dikh rahi hai. Name mein www likhiye.
+[00:02:05] Arjun Demo: CNAME add ho gaya aur save ho gaya sir.
+[00:02:15] Sameer (FlexiFunnels): Ab FlexiFunnels mein domain settings refresh kijiye. Dekhiye status connected dikh raha hai?
+[00:02:30] Arjun Demo: Haan sir, connected dikh raha hai. Funnel domain par khul gaya.
+[00:02:40] Sameer (FlexiFunnels): Bahut badhiya. SSL certificate ka padlock aane mein thoda time lagta hai. Aap kal subah check kijiye, agar padlock na aaye to hamein bata dijiye.
+[00:03:00] Arjun Demo: Theek hai, main kal subah check karunga. Thank you sir.

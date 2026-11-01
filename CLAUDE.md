@@ -27,7 +27,7 @@ A **Claude Code scheduled task** (proposed: daily 09:00 Asia/Kolkata, using the 
 
 The current phase is recorded in `ROADMAP.md` and `handoff.md`. Until the user explicitly approves the next phase:
 
-- Do not write application code. (Helper scripts only if OD-38 approves them.)
+- Application code is limited to the small deterministic helpers in `src/` approved by OD-38 (D-039); no other application code. Phase 3 writes only to the draft spreadsheet, and only as `docs/phase3-draft-destination.md` and the `draft_destination` gates in `config/run-settings.yaml` allow.
 - Do not configure or modify a scheduled task.
 - Do not write to the source spreadsheet, create worksheets, send emails or create Gmail drafts.
 - Do not change connector permissions. Do not create, request or fabricate credentials or tokens.
@@ -81,7 +81,7 @@ The current phase is recorded in `ROADMAP.md` and `handoff.md`. Until the user e
 | `skills/` | The four SKILL.md files (analysis, summary, generation, validation) |
 | `config/` | `run-settings.yaml` (non-secret run settings); planned schema/policy files |
 | `tests/` | Scenario catalogue (EV-01 … EV-113), synthetic fixtures |
-| `src/` | Reserved for optional deterministic helpers (OD-38); no application code |
+| `src/` | Approved deterministic Phase 3 helpers (`p3.js`, `lib/`; OD-38, D-039); no other application code |
 | `outputs/`, `logs/` | Local synthetic outputs (git-ignored) |
 
 ## 8. Conventions

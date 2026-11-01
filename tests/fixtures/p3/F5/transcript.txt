@@ -1,0 +1,4 @@
+[00:00:04] Riya (FlexiFunnels): Hi Neha, how can I help?
+[00:00:09] Neha Sample: Where do I change the sender name on my order emails?
+[00:00:16] Riya (FlexiFunnels): Go to Email settings, then Sender name, type your brand name and save.
+[00:00:32] Neha Sample: Done, saved. It shows my brand name now. Thanks!

@@ -14,6 +14,11 @@ transcript_wait_days: 1           # D-019
 max_followup_age_days: 7          # OD-10
 max_records_per_run: 25           # bounds context and Claude plan usage (R-09)
 fetch_window_rows: 300            # bounded read from the end of Calls DONE (Phase 1 F2); extended if the coverage check fails
+# Phase 3 manual dry-run settings (D-039)
+phase3_discovery_lookback_days: 0  # previous day only (target_date); Phase 3 does not use the 2-day discovery window
+dry_run_max_records: 3             # controlled dry run: at most three eligible calls
+min_transcript_chars: 40           # a floor (an effectively empty cell), NOT a quality threshold (D-044): short transcripts are judged by the analysis on whether they hold enough to write a safe email
+fathom_shareability_confirmed: true   # OD-04 CONFIRMED BY THE USER in chat 2026-11-01 (D-039): valid /share/ links are viewable by customers without a Fathom login. Not independently verified; written confirmation from the workspace owner still advisable before any send
 max_attempts: 3                   # OD-14
 lease_minutes: 30
 run_lock_minutes: 120             # R-08
@@ -47,9 +52,21 @@ logs:
 draft_destination:
   spreadsheet_id: 1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40
   worksheet_gid: 0
-  worksheet: null                    # unknown until the read-only inspection (docs/phase3-draft-destination.md section 3)
-  schema_version: p3-draft-v1-proposed
-  headers_verified: false            # set true only after inspection matches the approved schema
-  writes_enabled: false              # set true only after Phase 3 approval, OD-12 approval, and inspection (no Call ID column is required, D-036)
+  worksheet: Sheet1                  # verified 2026-11-01 (Phase 3A): one empty worksheet, GID 0, 26 columns, spreadsheet title "Phase 3 Emails", timezone Etc/GMT
+  schema_version: p3-draft-v1           # 21 columns, confirmed 2026-11-01 (D-037); last header exactly 'Source Row (reference only)'; no Call ID column (D-036)
+  schema_confirmed: true
+  real_transcript_processing_approved: true   # explicit user approval 2026-11-01 (D-037, OD-12)
+  customer_data_storage_approved: true        # names, emails, Fathom URLs, subjects, bodies in this sheet; explicit user approval 2026-11-01 (D-037, OD-19)
+  retention_period: null                      # NOT decided: must follow the company's applicable data-retention policy; to be confirmed
+  connector_account: karan.s@flexifunnels.com  # Google account of the Sheets connector (D-038)
+  connector_access_source: editor              # read + write on CSC  Booking - All Agents
+  connector_access_destination: editor         # read + write on Phase 3 Emails
+  connector_account_verified: true             # CONFIRMED BY THE USER 2026-11-01 (identity and both access levels); the connector cannot show it, so not independently verified (R-13, R-15)
+  source_connector_access_required: viewer    # or an equivalent Google-enforced restriction, before destination writes are enabled
+  source_access_enforced: true                # CONFIRMED BY THE USER 2026-11-01 (D-039): connector account is Viewer on the source or an equivalent Google-enforced restriction exists. NOT independently verifiable by the agent (earlier state, D-038: NOT enforced: the connector account is Editor on the source and Calls DONE has no protected ranges. Unresolved: make the account Viewer on the source, or an equivalent Google-enforced restriction (D-038)
+  destination_sharing_verified: false         # RESET 2026-11-01 (D-045): the user reported broad Editor access; unresolved until independently confirmed or corrected. (Earlier user confirmation, D-039): named support leads only, link sharing off. Not independently verifiable by the agent (earlier state: UNRESOLVED: named, authorised support leads only and general link sharing disabled; not verified (the Editor access of the connector account does not establish this)
+  header_setup_authorized: true               # AUTHORISED 2026-11-01 by the Phase 3B master task after the two user-confirmed security gates (D-039); one-time setup (docs/phase3-draft-destination.md section 11) NOT authorised
+  headers_verified: true             # set 2026-11-01 after the one-time setup and a read-back of Sheet1!A1:U1 (21 headers exact, plain-text columns A B F O P Q, row 1 frozen, rows 2-3 empty); D-039
+  writes_enabled: false              # was enabled for the two controlled dry runs of 2026-11-01 (6 + 7 rows written, D-039, D-041); set back to false. Re-enable only for an approved run
   gmail_enabled: false               # Phase 3 never uses Gmail
   scheduled_execution: false         # Phase 3 is manually initiated

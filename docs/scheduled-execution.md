@@ -68,7 +68,7 @@ Any behaviour not yet validated is described in the docs as *proposed* or *(vali
 | R-12 | PARTIAL: cloud session logs are stored on claude.ai and retrievable; retention and visibility unknown; transcript reads pull content through the session (F3) |
 | R-13 | UNVERIFIED: the connector's Google account is not discoverable from within calls |
 | R-14 | UNVERIFIED: the backup has not been inspected; its synchronisation is outside this repository (`docs/backup-recovery.md`)
-| R-15 | UNVERIFIED: the draft spreadsheet has not been inspected; nothing was read or written when D-035 was recorded (`docs/phase3-draft-destination.md`)
+| R-15 | PARTLY INSPECTED (Phase 3A, 2026-11-01, read-only): the draft spreadsheet is empty (one worksheet, no header, no structures) and the source `Calls DONE` has no protected ranges. UNVERIFIED: the connector account and its Viewer/Editor level on both spreadsheets, and the destination sharing list (`docs/phase3a-preflight-report.md`) **Update (D-038): connector account `karan.s@flexifunnels.com` is Editor on both spreadsheets (confirmed by the user); source write protection NOT enforced; destination sharing unresolved.**
 
 ## 5. Cost and dependency policy (D-026)
 

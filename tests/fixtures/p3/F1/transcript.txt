@@ -1,0 +1,11 @@
+[00:00:05] Riya (FlexiFunnels): Hi Meera, thanks for joining. What can I help with today?
+[00:00:12] Meera Testwala: My coupon code SAVE20 shows "Invalid coupon" at checkout for the Advanced Course.
+[00:00:25] Riya (FlexiFunnels): Let's check. Please share your screen and open Products, then Coupons.
+[00:00:40] Meera Testwala: Done, I'm in the Coupons page.
+[00:00:48] Riya (FlexiFunnels): Open SAVE20. I can see it is assigned only to the Starter Course. Please add the Advanced Course in the Products field and click Save.
+[00:01:20] Meera Testwala: Added the Advanced Course. Saved.
+[00:01:28] Riya (FlexiFunnels): Great, the coupon now lists both courses. Now open your checkout page in a new tab and apply the code.
+[00:01:55] Meera Testwala: Yes, the discount is showing now. 20 percent off.
+[00:02:05] Riya (FlexiFunnels): Perfect. One more thing, the coupon expires on the 15th, if you want to extend it you can change the expiry date in the same coupon page. It is up to you.
+[00:02:20] Meera Testwala: Okay, I will think about that. Thank you so much, this was very helpful.
+[00:02:26] Riya (FlexiFunnels): You're welcome, take care.

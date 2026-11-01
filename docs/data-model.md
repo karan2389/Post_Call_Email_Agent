@@ -128,7 +128,7 @@ The current state and final record of each call: customer information, status, r
 | `customer_sentiment` | enum | `positive` `neutral` `frustrated` `angry` `unclear` |
 | `pending_support_actions_count` | int | Follow-up load reporting |
 | `pending_customer_actions_count` | int | |
-| `skill_versions` | string | e.g. `ta=1.4.0;cs=1.3.0;eg=1.4.0;ev=1.4.0` |
+| `skill_versions` | string | e.g. `ta=1.6.0;cs=1.4.0;eg=1.6.0;ev=1.5.0` |
 | `model_used` | string | Claude model reported by the scheduled session, if available (single model for all stages) |
 | `run_variant` | string | Scheduled-task variant that processed the record (OD-37), for audit |
 

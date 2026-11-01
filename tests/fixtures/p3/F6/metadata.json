@@ -1,0 +1,12 @@
+{
+    "fathom_urls":  [
+                        "https://fathom.video/share/EXAMPLE-F6"
+                    ],
+    "case":  "F6",
+    "support_agent_first_name":  "Sameer",
+    "recording_count":  1,
+    "call_time":  "13:00",
+    "call_date":  "2026-10-30",
+    "scenario":  "Unreliable speaker labels; the performer of the main step cannot be established",
+    "greeting_name":  "Tara"
+}

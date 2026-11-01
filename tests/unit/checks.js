@@ -31,7 +31,7 @@ function loadPolicy() {
   });
   return {
     subjectMin: num('subject_min_chars'), subjectMax: num('subject_max_chars'),
-    minWords: num('min_words'), maxWords: num('max_words'),
+    minWords: num('min_words'), fallbackMin: num('fallback_min_words') || 30, maxWords: num('max_words'),
     preferredMax: num('preferred_max_words') || num('max_words'), permittedMax: num('permitted_max_words') || num('max_words'),
     reviewAbove: num('human_review_above_words') || num('max_words'),
     banned, signatureTemplate: sig.join('\n').trim(),
@@ -77,7 +77,8 @@ function deterministicChecks({ email, meta, analysis, policy }) {
   const subject = email.subject || '';
   const body = email.body_text || '';
   const fathom = parseRecordingUrls(meta['Recording URL']);
-  const first = String(meta['Customer Name']).trim().split(/\s+/)[0];
+  const nameParts = String(meta['Customer Name']).trim().split(/\s+/).map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+  const first = nameParts[0].length === 1 && nameParts.length > 1 ? nameParts.join(' ') : nameParts[0]; // OD-32: title-case; an initial is not a greeting name
   const agentFirst = String(meta['Call lead by(who took the call)']).trim().split(/\s+/)[0];
   const signature = policy.signatureTemplate.replace('{support_agent_first_name}', agentFirst);
 
@@ -121,7 +122,8 @@ function deterministicChecks({ email, meta, analysis, policy }) {
     if (wc < policy.minWords || wc > policy.maxWords) add('LENGTH_OUT_OF_RANGE', `${wc} words (policy ${policy.minWords}-${policy.maxWords})`);
   } else {
     // policy D-031: <=250 normal; 251-350 permitted when needed; >350 needs human review (not a PASS)
-    if (wc < policy.minWords) add('LENGTH_OUT_OF_RANGE', `${wc} words (minimum ${policy.minWords})`);
+    const minW = email.mode === 'neutral_fallback' ? policy.fallbackMin : policy.minWords;
+    if (wc < minW) add('LENGTH_OUT_OF_RANGE', `${wc} words (minimum ${minW})`);
     else if (wc > policy.reviewAbove) { lengthStatus = 'review_required'; add('LENGTH_REVIEW_REQUIRED', `${wc} words, above ${policy.reviewAbove}: human review`); }
     else if (wc > policy.preferredMax) lengthStatus = 'above_preferred';
     if (email.length_status !== undefined && email.length_status !== lengthStatus) add('LENGTH_STATUS_MISMATCH', `declared ${email.length_status}, counted ${lengthStatus} (${wc} words)`);
@@ -153,7 +155,7 @@ function deterministicChecks({ email, meta, analysis, policy }) {
   if (analysis && analysis.items) {
     const ids = new Set(analysis.items.map((i) => i.id));
     const ref = new Set(email.referenced_item_ids || []);
-    analysis.items.filter((i) => /^pending_/.test(i.category) && !ref.has(i.id))
+    analysis.items.filter((i) => /^pending_/.test(i.category) && i.confidence !== 'low' && !ref.has(i.id)) // low-confidence items are intentionally not stated (D-044)
       .forEach((i) => add('PENDING_ITEM_NOT_REFERENCED', i.id));
     [...ref].filter((r) => !ids.has(r)).forEach((r) => add('UNKNOWN_REFERENCED_ITEM', r));
     // heuristic for invented timing: time words must come from a stated timeline
