@@ -24,7 +24,7 @@ Legend: [x] done with evidence, [ ] open. Owner in brackets.
 - [ ] Source spreadsheet read-only enforced by Google permissions (today only user-confirmed)
 - [ ] Destination sharing verified independently (today user-confirmed)
 - [x] `.env` ACL restricted and the unused Brevo key removed locally (D-069, blocker B7)
-- [ ] Brevo API key revoked in Brevo (user, manual)
+- [x] Brevo API key revoked in Brevo (user-confirmed in chat 2026-11-02; not independently verifiable)
 - [ ] Sensitive-topic path tested on real data (OD-11)
 
 ## D. Pilot
