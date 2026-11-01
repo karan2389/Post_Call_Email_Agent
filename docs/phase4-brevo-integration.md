@@ -62,3 +62,7 @@ Exactly-once delivery is **not** guaranteed here either: Brevo has no documented
 - HTTP behaviour for 401/403/404/405/406/422 and 5xx is not documented on the send page; the adapter classifies by HTTP semantics and treats everything not provably a rejection as uncertain.
 - Webhooks need a public receiver; none exists. Polling is the proposed method.
 - The Send Log header names still say "Gmail" (cosmetic; rename needs approval).
+## 9. `.env` loader and read-only connectivity check (D-061, mocked only)
+- `src/lib/env.js` loads only `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME` from the ignored root `.env` (a non-empty real environment variable wins). It never prints a value and never writes to `process.env`; problems are reported as codes, variable names and line numbers.
+- `node src/brevo-check.js` is an offline report (booleans and codes; no request). `node src/brevo-check.js --live` makes exactly one `GET /v3/account` and only when `brevo.connectivity_check_authorised: true`, `.env` is ignored and untracked by Git, and fetch is available. The result is a code (`CONNECTED`, `AUTHENTICATION_FAILED`, `RATE_LIMITED`, `HTTP_n`, `TIMEOUT`, `NETWORK_ERROR`); no account data is kept.
+- The check proves the key is accepted from this machine. It does **not** prove sender verification, domain authentication, or that click tracking is off; those flags stay false until evidenced. The first real request needs the user's separate authorisation (the gate is false).

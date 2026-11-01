@@ -33,6 +33,7 @@ function readiness(env, cfg) {
   if (typeof e.BREVO_API_KEY !== 'string' || !e.BREVO_API_KEY.trim() || /\s/.test(e.BREVO_API_KEY.trim())) bad.push('MISSING_API_KEY');
   if (!e.BREVO_SENDER_EMAIL) bad.push('SENDER_EMAIL_MISSING');
   else if (!c.approved_sender_email || N.normalizeEmail(e.BREVO_SENDER_EMAIL).value !== N.normalizeEmail(c.approved_sender_email).value) bad.push('SENDER_NOT_APPROVED');
+  if (c.approved_sender_name !== undefined && e.BREVO_SENDER_NAME !== c.approved_sender_name) bad.push('SENDER_NAME_NOT_APPROVED');   // only enforced once a name is on record
   if (c.sender_verified_in_brevo !== true) bad.push('SENDER_NOT_VERIFIED_IN_BREVO');
   if (c.link_tracking_disabled_confirmed !== true) bad.push('LINK_TRACKING_NOT_CONFIRMED_OFF');
   if (c.api_base !== undefined && c.api_base !== API_BASE) bad.push('API_BASE_NOT_BREVO');   // the key is only ever sent to api.brevo.com
@@ -91,6 +92,18 @@ function createClient(opts) {
         throw fail(code, true, { status, provider_code: b && typeof b.code === 'string' ? b.code : undefined, retry_after_seconds: reset ? Number(reset) : undefined });
       }
       throw fail('HTTP_' + status + '_OUTCOME_UNCERTAIN', false);   // 408, 5xx, anything unexpected
+    },
+
+    // Read-only connectivity check (D-061): GET /account, no body, no side effects. Never throws and never retries; the result holds codes only
+    // (no account data, no key). It needs only a usable key and the Brevo base URL, not the sender or tracking gates, because it sends nothing.
+    async checkConnectivity() {
+      const bad = readiness(env, cfg).filter((x) => x === 'MISSING_API_KEY' || x === 'API_BASE_NOT_BREVO'); if (bad.length) return { ok: false, status: null, code: bad[0], request_made: false };
+      let res;
+      try { res = await call('GET', '/account'); }
+      catch (e) { return { ok: false, status: null, code: (e && e.name === 'AbortError') ? 'TIMEOUT' : 'NETWORK_ERROR', request_made: true }; }
+      const status = res && res.status;
+      if (status === 200) return { ok: true, status, code: 'CONNECTED', request_made: true };
+      return { ok: false, status: typeof status === 'number' ? status : null, code: status === 401 ? 'AUTHENTICATION_FAILED' : status === 429 ? 'RATE_LIMITED' : 'HTTP_' + status, request_made: true };
     },
 
     // Reconciliation support (GET /smtp/emails needs email + a date window of at most one month; the list has no body).

@@ -89,6 +89,8 @@ email_provider:
   brevo:
     adapter_enabled: false               # no real request is made until the user enables it
     approved_sender_email: supportcore@flexifunnels.com   # the sender approved by the user (D-053); must equal BREVO_SENDER_EMAIL
+    approved_sender_name: Support Team | FlexiFunnels   # display name confirmed by the user 2026-11-01 (D-061); must equal BREVO_SENDER_NAME
+    connectivity_check_authorised: false # gate for `node src/brevo-check.js --live` (one read-only GET /account); stays false until the user authorises the first real request
     sender_verified_in_brevo: false      # set true ONLY after the sender is verified in Brevo (user-confirmed or API-evidenced)
     domain_authenticated_in_brevo: false # DKIM / Brevo code / DMARC for flexifunnels.com, confirmed in Brevo
     link_tracking_disabled_confirmed: false  # set true ONLY after Brevo click tracking is off AND a raw delivered message shows original URLs
