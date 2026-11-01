@@ -53,3 +53,7 @@ C0 pre-pilot readiness; C1 five individually approved customer emails; C2 up to 
 
 ## 7. Remaining risks
 Gmail wrapper expiry and the Redirect Notice experience; no provider idempotency key (not exactly-once); the sensitive-topic path is untested on real data; the connector's `get_message` From and body representation was only observed on internal tests; approvals live in a local file; sharing and source read-only are user-confirmed only; the first real Gmail verification of the read-back path needs an authorised internal test.
+
+## 8. First real Gmail-only test (2026-11-02, D-067)
+One synthetic internal email, read back and verified: From `supportcore@flexifunnels.com`, recipient exact, both Fathom-style URLs wrapped by Gmail and verified against the canonical URLs, result SENT (Send Log rows 17-19). Wrapper expiry (`ust` about 24 h after sending) and the Redirect Notice experience remain unverified and accepted.
+

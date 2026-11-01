@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## First Gmail-only internal test passed (2026-11-02, D-067)
+One synthetic internal email sent and read back: From supportcore@, recipient exact, both Fathom-style URLs wrapped by Gmail and verified against the canonical URLs, SENT (Send Log rows 17-19). Config unchanged (all gates false). Open: wrapper expiry (about 2026-11-02 19:40 UTC for this message) and Redirect Notice experience; pilot C0-C3 closed; scheduling not decided.
+
 ## Gmail is now the sole provider; Brevo retired (2026-11-02, D-066)
 Implemented and tested with mocks only: `src/lib/provider.js` (Gmail only, no fallback), `src/lib/urlcheck.js` (strict Google-wrapper verification against the validated Fathom URLs), read-back verification before SENT (recipient, actual From, subject, body, URLs), `src/lib/approval.js` (approvals bound to send key + recipient + draft hash; C1 5, C2 15), runBatch duplicate fix. Config: `active: gmail`, `allow_fallback: false`, `gmail_adapter_enabled: false`, `pilot.*: false`. Brevo code and `BREVO_*` secrets kept (not exposed) until migration is verified. Nothing sent, drafted, written to a sheet or scheduled. Doc: `docs/phase4-gmail-only.md`. **Needs you:** authorise a controlled Gmail internal test (to verify the read-back path and the wrapper on a real message), then C0 items for the pilot (DNS no longer needed for Gmail; consent decision; reply monitoring). Nothing starts without explicit authorisation.
 
