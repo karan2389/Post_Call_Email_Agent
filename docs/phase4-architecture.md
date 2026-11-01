@@ -13,3 +13,6 @@ Components (all pure code under `src/lib/`, no network): `guard.js` (spreadsheet
 Rollout (user's staged plan): A dry run (done for drafts) -> B internal Gmail tests to `karan.s@flexifunnels.com` only (**needs the user's go-ahead for the first real test send**) -> C limited customer pilot (cohort and limits to be set by the user) -> D full automatic delivery (only after the user's explicit final authorisation). Scheduling: not investigated further yet; no scheduled task exists.
 
 Honest limits: not exactly-once (docs/phase4-idempotency.md); the connector's behaviour on timeout and error is undocumented and untested live; the connector's sender identity is inferred until the first test send.
+
+## Provider update (D-060)
+The Gmail connector route is unusable (it rewrites every URL, D-057 to D-059). The sender is now provider-neutral (`deps.mail`); the Gmail adapter is kept but disabled; `src/lib/brevo.js` is the mocked-only Brevo adapter. Setup steps, safeguards, the delivery-verification design and open risks: `docs/phase4-brevo-integration.md`. Nothing real has been sent through Brevo.

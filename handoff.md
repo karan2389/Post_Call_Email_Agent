@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Brevo adapter built, mocked only (2026-11-01, D-060)
+New: `src/lib/brevo.js`, `tests/unit/phase4-brevo.test.js` (25 mocked-HTTP groups, mutation-checked), `.env.example`, `email_provider` flags (all false), `docs/phase4-brevo-integration.md`; sender made provider-neutral. Gmail adapter kept, disabled. No account, no credential, no real request, no email; customer sending off, dry_run, no scheduled task. **Needs you (nothing started):** Brevo account; authenticate flexifunnels.com; verify supportcore@flexifunnels.com; turn off click/open tracking in Brevo; create API key and set it only as BREVO_API_KEY; agree a raw-MIME inspection route and approve a controlled test (steps in section 6 and 7 of the Brevo doc).
+
 ## Draft-route test done (2026-11-01, D-059)
 One synthetic draft: already wrapped at creation (raw MIME evidence), so nothing sent; draft deleted, drafts empty, Sent unchanged. Rewriting happens when the connector builds the message; no tested route delivers original URLs. All authorised link tests are used. Customer sending stays blocked. **Needs your decision:** (1) check an expired wrapped link after 2026-11-02 12:54 UTC (test-1) / 13:56 UTC (test-2) and tell me what happens; (2) whether a different sending mechanism (needs credentials, currently forbidden by the project rules) is acceptable; or (3) whether to accept wrapped links with updated validation.
 

@@ -2,7 +2,8 @@
 // Reference sender for Phase 4 (D-054): the exact sequence a session follows to send ONE stored, validated draft, written as code so that
 // every failure path can be tested against mocked Gmail and log dependencies. No network here: `deps` is injected.
 //   deps.log:   { events() -> array of events so far, append(event) -> throws if the row could not be written }
-//   deps.gmail: { send(request) -> {id, threadId}, search(query) -> [{id}], read(id) -> {id, subject, to, date, body} }
+//   deps.mail (alias deps.gmail): { name?, send(request, {sendKey}) -> {id, threadId?}, buildQuery?(attempt), search(query) -> [{id}], read(id) -> {id, subject, to, date, body} }
+//   Any mail provider (Gmail connector, Brevo) implements this; `send` throws err.definite === true only for "no message was created".
 //   deps.now(): ISO timestamp (Asia/Kolkata)
 // Rules enforced: the durable SEND_IN_PROGRESS event is written BEFORE the Gmail call and a failed write means no send; only a failure the
 // connector reports as "no message created" (err.definite === true) counts as SEND_FAILED; every other error, including a timeout, is an
@@ -33,9 +34,10 @@ async function reconcileAttempt(rec, ctx, deps) {
   const attempt = { recipient: rec.attempt_recipient || rec.stored_recipient, subject: rec.attempt_subject || rec.stored_subject, started_at: rec.started_at, body_hash: rec.attempt_body_hash || rec.body_hash };
   let found;
   try {
-    const threads = await deps.gmail.search(G.buildSearchQuery(attempt));
+    const mail = deps.mail || deps.gmail;   // provider-neutral (D-060); Gmail stays supported but disabled
+    const threads = await mail.search(typeof mail.buildQuery === 'function' ? mail.buildQuery(attempt) : G.buildSearchQuery(attempt));
     const cands = [];
-    for (const t of threads || []) { const m = await deps.gmail.read(t.id); cands.push(G.toCandidate(m, L.bodyHash)); }
+    for (const t of threads || []) { const m = await mail.read(t.id); cands.push(G.toCandidate(m, L.bodyHash)); }
     found = S.reconcile(attempt, cands);
   } catch (e) {
     found = { outcome: 'RECONCILIATION_REQUIRED', code: 'SEARCH_FAILED' };
@@ -67,6 +69,8 @@ async function sendOne(draft, folded, ctx, deps) {
   const pre = Object.assign({}, rec, { state: 'READY_TO_SEND', open_attempt: false });
   const checks = S.preSendChecks(pre, ctx);
   if (!checks.ok) return { outcome: 'BLOCKED', failed: checks.failed, send_key: sendKey };
+  const prov = deps.mail || deps.gmail;
+  if (prov && typeof prov.readiness === 'function') { const bad = prov.readiness(); if (bad.length) return { outcome: 'BLOCKED', failed: bad.map((c) => 'PROVIDER_NOT_READY:' + c), send_key: sendKey }; }   // nothing logged, nothing sent
 
   try {
     if (rec.state === 'STORED') {
@@ -83,7 +87,8 @@ async function sendOne(draft, folded, ctx, deps) {
   rec.started_at = started; rec.attempt_body_hash = rec.body_hash; rec.attempt_subject = env ? env.subject : rec.stored_subject; rec.attempt_recipient = env ? env.to : rec.stored_recipient; rec.state = 'SEND_IN_PROGRESS';
 
   let res;
-  try { res = await deps.gmail.send(G.buildSendRequest(rec, ctx)); }
+  const mail = deps.mail || deps.gmail;
+  try { res = await mail.send(G.buildSendRequest(rec, ctx), { sendKey }); }   // sendKey lets a provider attach it as internal metadata (never in the email text)
   catch (err) {
     if (err && err.definite === true) {
       const n = (rec.retry_count || 0) + 1;
@@ -98,7 +103,7 @@ async function sendOne(draft, folded, ctx, deps) {
     try { await emit(deps, ctx, rec, 'SEND_IN_PROGRESS', 'SEND_OUTCOME_UNKNOWN', { reason: 'NO_MESSAGE_ID_RETURNED' }); rec.state = 'SEND_OUTCOME_UNKNOWN'; } catch (e) { /* same */ }
     return reconcileAttempt(rec, ctx, deps);
   }
-  try { await emit(deps, ctx, rec, 'SEND_IN_PROGRESS', 'SENT', { gmailMessageId: res.id, gmailThreadId: res.threadId, reason: 'CONNECTOR_CONFIRMED' }); }
+  try { await emit(deps, ctx, rec, 'SEND_IN_PROGRESS', 'SENT', { gmailMessageId: res.id, gmailThreadId: res.threadId, reason: mail.name ? 'PROVIDER_CONFIRMED:' + mail.name : 'CONNECTOR_CONFIRMED' }); }
   catch (e) { return { outcome: 'SENT_TRACKING_FAILED', send_key: sendKey, gmail_message_id: res.id }; }   // the log still says SEND_IN_PROGRESS; recovery finds the message
   return { outcome: 'SENT', send_key: sendKey, gmail_message_id: res.id };
 }

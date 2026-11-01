@@ -1,5 +1,7 @@
 # Phase 4: Gmail integration (facts and limits)
 
+> **Superseded for customer email (D-060):** the Gmail connector rewrites every URL, so the Gmail adapter is kept but disabled. See `docs/phase4-brevo-integration.md`. This page is the evidence record of the Gmail investigation.
+
 Status: **investigation only; no email has been sent and no mailbox content has been read beyond one metadata lookup.** Nothing here is marked as tested unless stated.
 
 ## 1. Connector (desktop session, tool schemas inspected 2026-11-01)

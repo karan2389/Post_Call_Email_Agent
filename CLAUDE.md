@@ -40,6 +40,7 @@ The current phase is recorded in `ROADMAP.md` and `handoff.md`. Until the user e
 ## 5. Architecture rules (see `docs/decisions/decision-log.md`)
 
 - **Runtime (D-026, proposed):** Claude Code scheduled task + native Google Sheets and Gmail connectors. No separately billed Anthropic API, no deployed backend, no Google Cloud for the initial workflow. Plan usage is limited (R-09). Do not assume Cowork or local MCP servers are equivalent to, or reachable from, scheduled tasks.
+- **Email provider (D-060):** the Gmail connector rewrites every URL (D-057 to D-059), so its adapter (`src/lib/gmail.js`) is kept but disabled. Brevo is the planned provider (`src/lib/brevo.js`, mocked-HTTP tests only until the user authorises more). The Brevo API key lives only in the `BREVO_API_KEY` environment variable, never in the repository, a config file, chat or a log. No real Brevo request, no account or credential creation, and no live sending without the user's explicit authorisation. No adapter may enable click tracking or any URL rewriting, and none may retry after an uncertain outcome.
 - **No agent frameworks.**
 - **Data source:** Google Sheets is the only source of customer info, transcripts and Fathom URLs. No Fathom API/MCP integration.
 - **Call ID:** `gen:{uuid4}`, generated once, stored in source column AD `POST_CALL_CALL_ID`, never overwritten. **Never** use row numbers or Fathom URLs as identity. If the row match is ambiguous, write nothing (`docs/call-id-strategy.md`).

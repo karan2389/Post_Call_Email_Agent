@@ -80,3 +80,17 @@ gmail:
     - karan.s@flexifunnels.com                    # APPROVED by the user 2026-11-01 for the Gmail internal tests (Stage B)
   internal_tests_authorised: false               # approving the recipient is not authorisation to send: the first internal test send needs the user's go-ahead in chat
   customer_sending_authorised: false             # live customer sending needs the user's explicit final authorisation after the pilot (Stage D)
+
+# Email provider (D-060). The Gmail connector rewrites every URL (D-057..D-059), so Brevo is the planned provider. NOTHING here enables sending:
+# delivery_mode stays dry_run and customer_sending_authorised stays false. Secrets live ONLY in environment variables (see .env.example), never here.
+email_provider:
+  active: brevo                          # brevo | gmail (informational until sending is authorised)
+  gmail_adapter_enabled: false           # Gmail adapter code is kept (src/lib/gmail.js) but disabled
+  brevo:
+    adapter_enabled: false               # no real request is made until the user enables it
+    approved_sender_email: supportcore@flexifunnels.com   # the sender approved by the user (D-053); must equal BREVO_SENDER_EMAIL
+    sender_verified_in_brevo: false      # set true ONLY after the sender is verified in Brevo (user-confirmed or API-evidenced)
+    domain_authenticated_in_brevo: false # DKIM / Brevo code / DMARC for flexifunnels.com, confirmed in Brevo
+    link_tracking_disabled_confirmed: false  # set true ONLY after Brevo click tracking is off AND a raw delivered message shows original URLs
+    api_key_provisioned: false           # the key is held only in the BREVO_API_KEY environment variable
+    delivery_status_method: poll         # poll GET /smtp/emails/{uuid} events; a webhook needs a public receiver the project does not have
