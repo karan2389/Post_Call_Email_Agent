@@ -94,3 +94,19 @@ Any behaviour not yet validated is described in the docs as *proposed* or *(vali
 6. Uncertain-send human-review process exercised end to end with a named reviewer (OD-41, OD-23); sender identity accepted (OD-39).
 7. `go_live_date` agreed; executives briefed to stop manual sends from that date.
 8. Management approval; switch `delivery_mode: live`.
+
+## 8. Phase 4 scheduling investigation (2026-11-01, read-only; no task created)
+
+Evidence is the tool descriptions of the desktop `scheduled-tasks` connector, `list_scheduled_tasks` (no tasks exist) and the machine time zone. **Nothing below has been run.**
+
+| Question | Finding | Status |
+|---|---|---|
+| Where does a desktop scheduled task run? | A new Claude Code session on this machine in the task's working folder, with the task's stored prompt, permission mode and the tool approvals already granted to that routine. The repository (`src/`, `skills/`, `config/`) is therefore available, unlike cloud routines (no remote repo in R-02 Test 1). | from description, **unverified in a run** |
+| When does it run? | Only while the Claude desktop app is open; if the app is closed when due, it runs **once on next launch** (missed days are not replayed). Recurring runs get a delay of several minutes. | from description |
+| Time zone | Cron is evaluated in the **machine's local time**; this machine is India Standard Time (UTC+05:30), the same as `Asia/Kolkata`, so `0 9 * * *` is 09:00 IST. The target date must still be computed in code (`node src/p3.js target-date`), never from the local clock alone. | verified time zone; behaviour unverified |
+| Overlapping runs | `run_scheduled_task` is refused while a run of that task is in progress (manual trigger). Overlap between a late catch-up and a fresh run is **not** prevented by the scheduler; the Send Log (SEND_IN_PROGRESS, send key) is the real safeguard, plus an explicit run lock still to be designed. | partly verified |
+| Connector access in an unattended run | Sheets and Gmail are connected in this desktop session. Whether a scheduled run gets the same connectors and approvals without a person present is **untested** (R-01, R-04). | **untested** |
+| Interruption and recovery | Each run starts fresh; the durable state is the Send Log and `Sheet1`; recovery reconciles open attempts first and never resends (`docs/phase4-idempotency.md`). | designed and mock-tested |
+| Backfill after missed days | not provided by the scheduler; `phase3_discovery_lookback_days` and the idempotent planner can cover a bounded window. | design needed |
+
+**Recommendation (for the user to decide, nothing is created):** a **local desktop scheduled task** in this repository folder, because it can reach the local helpers and skills and the connectors already attached here; a cloud routine cannot read `src/` without a cloned repository and has no tested Gmail path. Trade-offs: the laptop and app must be on at 09:00 (or the run happens at next launch, once), and unattended connector and approval behaviour must be proven first. **Proposed verification, needing the user's approval:** a dry-run-only scheduled task (no Gmail, `writes_enabled` false) that reads the previous day's records, runs `target-date` and the planner, and reports counts; run it once with `run_scheduled_task`, inspect it with `list_task_runs`, and only then consider anything that writes or sends.
