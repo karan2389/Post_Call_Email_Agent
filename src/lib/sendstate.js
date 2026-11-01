@@ -94,6 +94,7 @@ function preSendChecks(rec, ctx) {
     const eff = c.test_recipient !== undefined ? em(c.test_recipient) : to;   // explicit override: the effective recipient must be an approved internal address
     if (!list.length || !eff || list.indexOf(eff) < 0) fail.push('TEST_RECIPIENT_NOT_APPROVED');   // test mode may only reach approved internal addresses
   } else fail.push('MODE_DOES_NOT_PERMIT_SEND');                                             // dry_run, shadow, anything else
+  if (Array.isArray(c.suppressed) && c.suppressed.some((x) => { const t = String(x || '').trim().toLowerCase(); return t === to || (t.startsWith('@') && to.endsWith(t)); })) fail.push('RECIPIENT_SUPPRESSED');   // no further contact (D-068)
   if (c.require_approval === true) {   // supervised pilot (D-066): an approval bound to this send key, this recipient and this exact draft text
     const ap = A.checkApproval(c.approvals, { send_key: r.send_key, recipient: r.stored_recipient, draft_hash: draftHash(r.stored_recipient, r.stored_subject, r.stored_body) }, c);
     if (!ap.ok) fail.push(ap.code);
