@@ -34,7 +34,41 @@ function extractCell(logPath, row, column) {
   return { found: true, text: typeof cell === 'string' ? cell : '', rangeEcho: r.range, matches: hits.length };
 }
 
+// Generic: the `values` of the last recorded get_values result whose range echo equals `rangeEcho` (for read-back checks).
+function extractRange(logPath, rangeEcho) {
+  const lines = fs.readFileSync(logPath, 'utf8').split(/\r?\n/);
+  let last = null;
+  for (const l of lines) {
+    if (!l || l.indexOf(rangeEcho.split('!')[0].replace(/^'/, '')) < 0) continue;
+    let o; try { o = JSON.parse(l); } catch (e) { continue; }
+    const content = o && o.message && o.message.content;
+    if (!Array.isArray(content)) continue;
+    for (const part of content) {
+      if (!part || part.type !== 'tool_result') continue;
+      let s = part.content;
+      if (Array.isArray(s)) s = s.map((x) => (x && x.text) || '').join('');
+      if (typeof s !== 'string') continue;
+      let r; try { r = JSON.parse(s); } catch (e) { continue; }
+      if (r && r.range === rangeEcho) last = r;
+    }
+  }
+  return last ? { found: true, values: last.values || [] } : { found: false, values: [] };
+}
+
+// Compares read-back rows with the intended rows cell by cell (Sheets omits trailing empty cells). Reports positions only.
+function compareRows(readBack, expected) {
+  const mism = [];
+  expected.forEach((row, i) => {
+    const got = readBack[i] || [];
+    for (let j = 0; j < Math.max(row.length, got.length); j++) {
+      const a = row[j] == null ? '' : String(row[j]); const b = got[j] == null ? '' : String(got[j]);
+      if (a !== b) mism.push({ row: i + 1, column: j + 1 });
+    }
+  });
+  return { ok: mism.length === 0 && readBack.length === expected.length, rows_expected: expected.length, rows_read: readBack.length, mismatches: mism };
+}
+
 // canonical hash: SHA-256 over the UTF-8 bytes of the cell string as returned (no normalisation)
 const transcriptHash = (text) => N.sha256(text);
 
-module.exports = { extractCell, transcriptHash };
+module.exports = { extractCell, extractRange, compareRows, transcriptHash };

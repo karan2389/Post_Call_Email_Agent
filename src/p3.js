@@ -69,6 +69,13 @@ async function main() {
     }
     return out(res);
   }
+  if (cmd === 'verify-rows') {
+    const rangeEcho = process.argv[4]; const expectedFile = process.argv[5];
+    if (!arg || !rangeEcho || !expectedFile) { process.stderr.write('usage: verify-rows <session-log.jsonl> <rangeEcho> <expectedRows.json>\n'); process.exit(2); }
+    const r = T.extractRange(arg, rangeEcho);
+    if (!r.found) return out({ ok: false, reason: 'read-back result not found in the log', rangeEcho });
+    return out(Object.assign({ range: rangeEcho }, T.compareRows(r.values, JSON.parse(fs.readFileSync(expectedFile, 'utf8').replace(/^\uFEFF/, '')))));
+  }
   const input = await readStdin();
   const text = input.replace(/(\r?\n)+$/, ''); // a shell pipe appends a newline; the hash is of the text without it
   if (cmd === 'hash') return out({ sha256: N.sha256(text) });

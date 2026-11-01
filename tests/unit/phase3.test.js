@@ -218,4 +218,12 @@ t('exact transcript extraction from a recorded connector result (D-043)', () => 
   const e = T.extractCell(empty, 77777); assert.strictEqual(e.found, true); assert.strictEqual(e.text, '');
   fs.unlinkSync(f); fs.unlinkSync(empty);
 });
+t('read-back comparison without retyping', () => {
+  const T = require('../../src/lib/transcript');
+  const exp = [['a', 'b', 'c\n\u2013d', '', ''], ['x', '', '', '', 'z']];
+  assert.strictEqual(T.compareRows([['a', 'b', 'c\n\u2013d'], ['x', '', '', '', 'z']], exp).ok, true); // trailing empty cells omitted by Sheets
+  const bad = T.compareRows([['a', 'b', 'c\n-d'], ['x', '', '', '', 'z']], exp);
+  assert.strictEqual(bad.ok, false); assert.deepStrictEqual(bad.mismatches, [{ row: 1, column: 3 }]);
+  assert.strictEqual(T.compareRows([['a']], exp).ok, false);
+});
 console.log(`phase3 helpers: ${n} test groups passed`);

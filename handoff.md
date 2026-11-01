@@ -2,6 +2,12 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Three older drafts replaced (2026-11-01, uncommitted, D-047)
+On your authorisation, replaced the drafts of source rows 15451, 15448 and 15442 (sheet rows 3, 11, 13) with the coverage-first versions; read-back verified (7 draft rows, 0 mismatches); `writes_enabled` false. Sheet: 15 rows = 7 drafts (all new skills), 2 deferred (15453, 15454), 6 skipped. Real-record temp files deleted. Next: your review of the 7 drafts (notes column says what to check in each recording); transcripts for 15453/15454; confirm sharing for real (I cannot verify); OD-10/OD-32.
+
+## Storage done after sharing restricted (2026-11-01, uncommitted, D-046)
+You confirmed `Phase 3 Emails` is restricted (not verifiable by me). Stored 4 validated drafts: new rows for source rows 15443 and 15445, in-place updates of 15450 (neutral fallback) and 15447; read-back verified cell by cell (0 mismatches); re-plan shows 0 new/duplicate rows; `writes_enabled` false again. Sheet now: 15 rows, 7 drafts (4 new-skill, 3 old-skill: 15451, 15442, 15448 not replaced; newer versions are in the scratchpad `real` folder), 2 deferred (15453, 15454), 6 skipped. Needs: your review; decision whether to replace the 3 old-skill bodies; transcripts for 15453/15454.
+
 ## Skill optimisation + full-coverage run, 30/31 Oct (2026-11-01, uncommitted, D-043/D-044/D-045)
 All four skills optimised (ta 1.6.0, cs 1.4.0, eg 1.6.0, ev 1.5.0): coverage first, neutral fallback email, statement-level confidence, exact transcript hash (`node src/p3.js extract-transcript`). Focused tests 9/9 + validators PASS. Real run: 15 records, 9 eligible, 7 with transcripts -> 7 drafts (6 conservative, 1 neutral fallback), all validated (2 after one regeneration) = 100% draft coverage; 2 transcripts (15453, 15454) still empty. NOTHING written to the destination: sharing is unverified after your report of broad Editor access (D-045; `destination_sharing_verified` reset to false). Drafts are in the session scratchpad `real` folder (outside the repo). Needs: restrict/confirm destination sharing (13 real rows already stored there), your review of drafts, then a storage run. Report `docs/phase3-acceptance-report.md` section 9. Nothing sent or committed.
 

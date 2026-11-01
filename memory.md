@@ -23,6 +23,10 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - 2026-11-01 — **D-033 Phase 2 final changes (untested by decision):** UTF-8 instruction (email-generation 1.4.0), P2-03 expectation narrowed (original kept in `_history/`), friendlier customer-facing wording (customer-summary 1.3.0, email-generation 1.4.0, email-validation 1.4.0). No regression runs were performed; business logic unchanged. Report `docs/phase2-final-report.md` §11.
 
+- 2026-11-01 — **D-047:** on the user's authorisation the 3 older-skill drafts (15451, 15448, 15442) were replaced; all 7 stored drafts now use ta 1.6.0 / cs 1.4.0 / eg 1.6.0 / ev 1.5.0; verified by program read-back.
+
+- 2026-11-01 — **D-046:** destination sharing user-confirmed restricted; 4 coverage-first drafts stored (2 new rows, 2 in-place updates), verified by program read-back; 3 older-skill drafts (15451, 15442, 15448) not replaced.
+
 - 2026-11-01 — **D-043/D-044/D-045:** exact transcript hash from the recorded connector result; coverage-first pipeline (quality never means no email; neutral fallback; low-confidence items not stated; ta 1.6.0, cs 1.4.0, eg 1.6.0, ev 1.5.0); 30/31 Oct run: 7 eligible-with-transcript calls -> 7 validated drafts (100%), 2 transcripts unavailable, nothing stored because destination sharing is unverified (user reported broad Editor access).
 
 - 2026-11-01 — **D-042 transcript-analysis 1.5.0:** guided on-screen steps become `completed` with performer + completion-signal evidence (fixes the upstream cause of "still open" wording); untested; low-confidence-items rule still open.
