@@ -1,0 +1,23 @@
+﻿{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "conservative",
+  "call_purpose": "You told us that leads were coming in from your form, but the autoresponder email was not going to them.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you turned on the autoresponder option in your form settings and saved it.", "source_item_ids": ["I1"]},
+    {"text": "You submitted a test lead from your page and confirmed the autoresponder email arrived in your inbox.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "We explained that you can verify your sender domain under email domain in settings, so that mails do not go to spam.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [{"item_id": "I4", "reason": "low confidence"}],
+  "analysis_gaps": [{"issue_or_item_id": "I4", "missing": "A garbled support remark about an extension and an invoice could not be read reliably."}],
+  "technical_details": [{"text": "Sender domain verification is under email domain in settings.", "source_item_ids": ["I3"]}],
+  "primary_topic": "form autoresponder email"
+}

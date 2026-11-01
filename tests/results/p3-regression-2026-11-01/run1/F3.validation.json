@@ -1,0 +1,13 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "email_class": "conservative",
+  "issues": [],
+  "statement_map": [
+    {"email_excerpt": "You told us that leads were coming in from your form, but the autoresponder email was not going to them.", "item_ids": ["S1"]},
+    {"email_excerpt": "Following our guidance, you turned on the autoresponder option in your form settings and saved it.", "item_ids": ["I1"]},
+    {"email_excerpt": "You submitted a test lead from your page and confirmed the autoresponder email arrived in your inbox.", "item_ids": ["I2"]},
+    {"email_excerpt": "We explained that you can verify your sender domain under email domain in settings, so that mails do not go to spam.", "item_ids": ["I3"]}
+  ],
+  "pending_items_checked": []
+}

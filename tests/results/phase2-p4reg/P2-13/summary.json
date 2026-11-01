@@ -1,0 +1,20 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You reached out because the Buy Now button on your sales page was sending people to the wrong page.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "The Buy Now button on your sales page now goes to the right page, and you tested it and confirmed this.", "source_item_ids": ["I1"]}
+  ],
+  "covered": [],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [{"issue_or_item_id": "I1", "missing": "The analysis does not establish who made the change, so the entry is written neutrally."}],
+  "technical_details": [],
+  "primary_topic": "Buy Now button link"
+}

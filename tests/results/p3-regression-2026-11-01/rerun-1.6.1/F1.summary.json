@@ -1,0 +1,50 @@
+{
+    "call_purpose":  "You reached out because your coupon code showed \"Invalid coupon\" at checkout for the Advanced Course.",
+    "resolved":  [
+                     {
+                         "text":  "You added the Advanced Course to the coupon\u0027s Products field, which had listed only the Starter Course, and saved it.",
+                         "source_item_ids":  [
+                                                 "I1"
+                                             ]
+                     },
+                     {
+                         "text":  "You applied the coupon on your checkout page and confirmed the 20 percent discount now shows.",
+                         "source_item_ids":  [
+                                                 "I2"
+                                             ]
+                     }
+                 ],
+    "analysis_gaps":  [
+
+                      ],
+    "primary_topic":  "coupon invalid at checkout",
+    "tone_guidance":  "warm_and_concise",
+    "schema":  "CustomerSummary/1",
+    "support_next_steps":  [
+
+                           ],
+    "skipped":  false,
+    "covered":  [
+                    {
+                        "text":  "The coupon expires on the 15th. If you want to extend it, you can change the expiry date in the same coupon page; this is up to you.",
+                        "source_item_ids":  [
+                                                "I3"
+                                            ]
+                    }
+                ],
+    "call_date":  "2026-10-30",
+    "call_purpose_issue_ids":  [
+                                   "S1"
+                               ],
+    "mode":  "full",
+    "objective":  null,
+    "customer_next_steps":  [
+
+                            ],
+    "omitted_item_ids":  [
+
+                         ],
+    "technical_details":  [
+
+                          ]
+}

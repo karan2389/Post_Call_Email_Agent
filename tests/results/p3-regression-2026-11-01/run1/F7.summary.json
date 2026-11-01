@@ -1,0 +1,25 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You wanted to connect your payment gateway, but you could not log in to the gateway dashboard.",
+  "objective": "Connect your payment gateway to FlexiFunnels.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you reset your password from the gateway's login page and were then able to log in to the gateway dashboard.", "source_item_ids": ["I1"]},
+    {"text": "You opened Settings, Payments in FlexiFunnels, chose your gateway, pasted the keys from the gateway dashboard and saved, and you confirmed it showed as connected.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [],
+  "customer_next_steps": [
+    {"text": "Run one test order from your checkout page to confirm payments work.", "timeline": "after our call", "timeline_source": "after this call", "source_item_ids": ["I3"]}
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [
+    {"text": "Settings, Payments in FlexiFunnels", "source_item_ids": ["I2"]}
+  ],
+  "primary_topic": "connecting your payment gateway"
+}

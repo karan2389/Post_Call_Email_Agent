@@ -233,3 +233,21 @@ The user authorised replacing the three stored drafts written by the earlier ski
 ### 9.10 Housekeeping finding: two historical result files were overwritten and restored
 
 Before the commit I found that `tests/results/phase2/test-results.json` and `tests/results/phase2-final/run2/test-results.json` (preserved historical Phase 2 results) had been overwritten, apparently by a run of the Phase 2 harness (`run-phase2.js`) in its default mode against the changed `checks.js` rules (no instruction in this work called for it). I restored both from the committed version (`git checkout HEAD --`), so the historical results are unchanged, and kept copies of the overwritten versions outside the repository. Consequence to remember: re-running the Phase 2 harness against the old results now judges them with the newer rules (for example the 50-word minimum and the greeting rule) and must use a separate output folder.
+
+## 10. Phase 4 prerequisite regression on the latest skills (2026-11-01, D-048, D-050)
+
+Skills at the start of the run: ta 1.6.0, cs 1.4.0, eg 1.6.0, ev 1.5.0. Synthetic data only; nothing was written to any spreadsheet and nothing was sent. Evidence: `tests/results/p3-regression-2026-11-01/` (run1 = first run of the nine cases; rerun-1.6.1 = F5 and F1 after the fix) and `tests/results/phase2-p4reg*` (Phase 2 fixtures regenerated; historical result folders untouched).
+
+**Nine focused cases (F1-F8, P2-10), `tests/unit/run-p3-focused.js`: 7/9 on the first run.**
+- F5 FAILED (independent validator: `OWNER_MISATTRIBUTED`): the heading "What we completed during the call" credited a customer-performed step to support. Cause: the email-generation skill itself suggested that heading. Fix: email-generation **1.6.1** (owner-neutral heading). F5 and F1 were regenerated on 1.6.1 and both passed independent validation (not re-scored by the focused harness script, which was not re-run on the rerun folder).
+- F2 FAILED a strict expectation (`completed_owner: customer`): the worker recorded one completed item ("domain shows connected") with owner `uncertain`. The email passed validation. Not changed; the expectation was written before D-042/D-044 and it is a judgement call whether a customer-reported state is a customer action. **Needs your decision.**
+- F1, F3, F4, F6, F7, F8, P2-10 passed (F8 correctly routed to REVIEW_REQUIRED, sensitive topic).
+
+**Phase 2 regression (`tests/unit/run-phase2.js`), regenerated with ta 1.6.0 / cs 1.4.0 / eg 1.6.1 (10 fixtures plus P2-10; P2-08/P2-11 stop at eligibility): first run 22/25, after one fix 23/25.**
+- P2-05 FAILED then PASSED: the summary cited a pending support item in `covered` as well as in the next steps (repetition across sections). Fix: customer-summary **1.4.1**. Regenerated P2-05 passed the harness and independent validation.
+- P2-07 FAILS (stale expectation): expects a skip for missing or ambiguous context; since D-044 a vague call yields a neutral fallback email (32 words, validated). Not edited. **Needs your decision** to update the expectation to the D-044 policy.
+- P2-13 FAILS (stale harness rule): the harness requires an uncertain owner to have confidence `low` and `guided_by` support|none; transcript-analysis 1.6.0 (statement-level confidence, D-044) records `medium` when the result is clearly stated. Not edited. **Needs your decision** to align the check with D-044.
+- All 12 adversarial drafts were rejected, but they were judged against the stored analysis and summary of `phase2-final/run2` and their validations were not re-run on the new skills.
+- All 10 regenerated emails (and the 8 other cases) passed independent validation on the first try except F5 (see above).
+
+**Limits.** One sample per case; model output varies from run to run. Validators are LLM-based. Phase 3 is NOT closed: the controlled destination storage test, read-back and idempotency checks have not been run in this session and need your authorisation to enable `writes_enabled`.

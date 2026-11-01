@@ -1,0 +1,27 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You reached out because leads were coming in through your form, but the autoresponder email was not being sent to them.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "You turned on the autoresponder option in your form settings and saved it, following our guidance.", "source_item_ids": ["I1"]},
+    {"text": "You submitted a test form from another email address and confirmed that the autoresponder email arrived and everything is now working.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "We mentioned that these emails can sometimes land in spam, so verifying your sender domain is a good idea, and that this can be done in the email domain section of the settings.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Verify your sender domain in the email domain section of the settings.", "timeline": "the next morning", "timeline_source": "कल सुबह", "source_item_ids": ["I4"]}
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [
+    {"text": "Sender domain verification is done in the email domain section of the settings.", "source_item_ids": ["I3"]}
+  ],
+  "primary_topic": "autoresponder email setup"
+}

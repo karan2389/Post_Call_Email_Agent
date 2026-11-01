@@ -1,0 +1,25 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Sanjay Sample"], "support_speakers": ["Sameer"], "other_speakers": []},
+  "customer_sentiment": "frustrated",
+  "sentiment_evidence": "Fine, please do it quickly.",
+  "issues": [
+    {"id": "S1", "title": "Duplicate charge for annual plan", "problem_statement": "The customer said they were charged twice for their annual plan the previous week and asked for a refund of the second payment.", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "discussed", "description": "Customer reported being charged twice for the annual plan and asked for a refund of the second payment; support said two payments are visible.", "owner": "none", "guided_by": null, "evidence": ["I was charged twice for my annual plan last week.", "I can see two payments."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "pending_support_action", "description": "Support will raise the duplicate payment with the billing team for review; the billing team will check and get back to the customer.", "owner": "support", "guided_by": null, "evidence": ["I will raise it with our billing team for review.", "The billing team will check and get back to you."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": ["refund", "billing_dispute"],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": [],
+  "skip_recommendation": {"skip": true, "reason_code": "SENSITIVE_TOPIC_REQUIRES_HUMAN", "explanation": "Refund request and mention of a bank dispute are sensitive topics that require human review under policy."}
+}

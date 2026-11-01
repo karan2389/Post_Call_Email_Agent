@@ -1,0 +1,24 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Neha"], "support_speakers": ["Riya"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Thanks!",
+  "issues": [
+    {"id": "S1", "title": "Changing the sender name on order emails", "problem_statement": "The customer wanted to know where to change the sender name on their order emails.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer set the sender name on their order emails to their brand name in Email settings, Sender name, following support's guidance, saved it, and confirmed it now shows their brand name.", "owner": "customer", "guided_by": "support", "evidence": ["Go to Email settings, then Sender name, type your brand name and save.", "Done, saved. It shows my brand name now."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": [],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Short complete support call with a clear confirmed outcome."}
+}

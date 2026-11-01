@@ -1,0 +1,24 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – form autoresponder email",
+    "body_text":  "Hi Rohan,\n\nThank you for speaking with us. You told us that leads were coming in from your form, but the autoresponder email was not going to them.\n\nWhat we completed during the call:\n- Following our guidance, you turned on the autoresponder option in your form settings and saved it.\n- You submitted a test lead from your page and confirmed the autoresponder email arrived in your inbox.\n\nWhat we discussed:\n- We explained that you can verify your sender domain under email domain in settings, so that mails do not go to spam.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-F3\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  111,
+    "length_status":  "within_preferred",
+    "mode":  "conservative",
+    "caveats":  [
+                    "A garbled support remark about an extension and an invoice could not be established and was left out."
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-F3"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "covered",
+                              "recording"
+                          ]
+}

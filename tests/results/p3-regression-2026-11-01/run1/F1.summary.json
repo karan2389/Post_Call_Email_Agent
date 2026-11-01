@@ -1,0 +1,50 @@
+{
+    "call_purpose":  "You wanted your SAVE20 coupon code to work at checkout for the Advanced Course, where it showed \"Invalid coupon\".",
+    "resolved":  [
+                     {
+                         "text":  "Following our guidance, you added the Advanced Course to the SAVE20 coupon, which had been assigned only to the Starter Course, and saved it.",
+                         "source_item_ids":  [
+                                                 "I1"
+                                             ]
+                     },
+                     {
+                         "text":  "You applied the code at checkout and confirmed the 20 percent discount now shows.",
+                         "source_item_ids":  [
+                                                 "I2"
+                                             ]
+                     }
+                 ],
+    "analysis_gaps":  [
+
+                      ],
+    "primary_topic":  "coupon code at checkout",
+    "tone_guidance":  "warm_and_concise",
+    "schema":  "CustomerSummary/1",
+    "support_next_steps":  [
+
+                           ],
+    "skipped":  false,
+    "covered":  [
+                    {
+                        "text":  "We mentioned that the coupon expires on the 15th, and that you can change the expiry date on the same coupon page if you want to extend it; this is up to you.",
+                        "source_item_ids":  [
+                                                "I3"
+                                            ]
+                    }
+                ],
+    "call_date":  "2026-10-30",
+    "call_purpose_issue_ids":  [
+                                   "S1"
+                               ],
+    "mode":  "full",
+    "objective":  null,
+    "customer_next_steps":  [
+
+                            ],
+    "omitted_item_ids":  [
+
+                         ],
+    "technical_details":  [
+
+                          ]
+}

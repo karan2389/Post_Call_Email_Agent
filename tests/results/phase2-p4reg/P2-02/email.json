@@ -1,0 +1,30 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – custom domain connection",
+    "body_text":  "Hi Arjun,\n\nThank you for speaking with us. You came to us because your custom domain shop.testfunnel.example had been showing a \"site can\u0027t be reached\" error for three days, even though your funnel worked on the FlexiFunnels link.\n\nWhat was completed during the call:\n- Following our guidance, you opened the domain in an incognito window and checked its status in your dashboard, which showed \"Not connected\". The same error in incognito ruled out a browser cache issue.\n- You deleted the old A record for shop and added a CNAME record for shop. After that, the dashboard showed the domain as connected and shop.testfunnel.example loaded.\n- You then deleted the second www record and added a CNAME for www with the same target value. You confirmed that both shop.testfunnel.example and the www version now load your funnel.\n\nWhat we discussed:\n- An old A record for shop, pointing to an old server address, was blocking the connection, and a second www record pointed somewhere else. Each needed a CNAME using the target value in your FlexiFunnels domain settings.\n- The padlock for the secure certificate can take some time to appear after connecting the domain.\n\nWhat we\u0027ll do next:\n- The morning after our call, we will check that the secure certificate has been issued, and we will message you if it has not.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-02\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support\n",
+    "word_count_excluding_signature":  241,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3",
+                                "I4",
+                                "I5",
+                                "I6",
+                                "I7",
+                                "I8"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-02"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "covered",
+                              "support_next_steps",
+                              "recording"
+                          ]
+}

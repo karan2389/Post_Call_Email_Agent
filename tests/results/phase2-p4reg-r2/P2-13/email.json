@@ -1,0 +1,21 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – Buy Now button link",
+    "body_text":  "Hi Uday,\n\nThank you for speaking with us. You reached out because the Buy Now button on your sales page was sending people to the wrong page.\n\nWhat was completed during the call:\n- The Buy Now button on your sales page now goes to the right page, and you tested it and confirmed this.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-13\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  71,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+                    "Who made the change to the Buy Now button was not established; the email states the result neutrally."
+                ],
+    "referenced_item_ids":  [
+                                "I1"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-13"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "recording"
+                          ]
+}

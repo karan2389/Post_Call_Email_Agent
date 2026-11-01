@@ -1,0 +1,20 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call",
+    "body_text":  "Hi Vikram,\n\nThank you for attending your FlexiFunnels support call. If you have any remaining questions or need further help, please reply to this email.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-07\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+    "word_count_excluding_signature":  32,
+    "length_status":  "within_preferred",
+    "mode":  "neutral_fallback",
+    "caveats":  [
+                    "Transcript names no problem, setting or outcome; neutral email only. Recording may be worth a human check."
+                ],
+    "referenced_item_ids":  [
+
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-07"
+                                ],
+    "sections_included":  [
+                              "recording"
+                          ]
+}

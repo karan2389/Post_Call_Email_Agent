@@ -1,0 +1,25 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You reached out because your domain was not connecting and your funnel opened only on the FlexiFunnels link.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you deleted the old A record in your GoDaddy DNS settings and added a CNAME record (name www, with the value shown in your FlexiFunnels domain settings), saving both.", "source_item_ids": ["I1", "I2"]},
+    {"text": "Your domain now shows as connected in FlexiFunnels, and your funnel opens on it.", "source_item_ids": ["I3"]}
+  ],
+  "covered": [
+    {"text": "We explained that the SSL padlock can take a little time to appear.", "source_item_ids": ["I4"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Check whether the SSL padlock has appeared, and let us know if it has not.", "timeline": "the morning after our call", "timeline_source": "kal subah", "source_item_ids": ["I5"]}
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [],
+  "primary_topic": "domain connection"
+}

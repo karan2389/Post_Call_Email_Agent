@@ -1,0 +1,30 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "mixed",
+  "participants": {"customer_speakers": ["Sanjay Testwala"], "support_speakers": ["Sameer Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Badhiya.",
+  "issues": [
+    {"id": "S1", "title": "Coupon code not applying at checkout", "problem_statement": "The customer's coupon code was not applying at checkout for the Advanced Course and showed an \"Invalid coupon\" message.", "status": "resolved"},
+    {"id": "S2", "title": "Company name wrong on invoice", "problem_statement": "The company name shown in the GST part of the customer's invoice was wrong.", "status": "unresolved"},
+    {"id": "S3", "title": "Coupon expiry date extension", "problem_statement": "The customer wanted to extend the expiry date of the coupon.", "status": "informational"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "explained", "description": "Support explained that the coupon was assigned only to the Starter Course and not to the Advanced Course, so the Advanced Course had to be assigned to it.", "owner": "support", "guided_by": null, "evidence": ["Coupon dashboard mein ye coupon sirf Starter Course ke liye assign hai, Advanced Course ke liye nahi."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer edited the coupon, selected the Advanced Course in the Products section and saved it, following support's guidance, and confirmed the discount now shows at checkout.", "owner": "customer", "guided_by": "support", "evidence": ["Coupon ko edit karo, Products section mein Advanced Course select karo aur save kar do.", "Ho gaya. Ab test karta hoon... haan, ab checkout pe discount dikh raha hai."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S2", "category": "pending_support_action", "description": "Support will check the wrong company name in the GST part of the invoice and let the customer know.", "owner": "support", "guided_by": null, "evidence": ["main billing team se check karke aapko kal tak bata dunga."], "stated_timeline": "kal tak", "timeline_reference": "call_relative", "confidence": "high"},
+    {"id": "I4", "issue_id": "S3", "category": "explained", "description": "Support explained that the customer can extend the coupon's expiry date themselves in the coupon settings, where a date option is available.", "owner": "support", "guided_by": null, "evidence": ["Expiry aap khud coupon settings mein badha sakte ho, wahin date ka option milega."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I5", "issue_id": "S3", "category": "pending_customer_action", "description": "Customer will extend the coupon's expiry date in the coupon settings.", "owner": "customer", "guided_by": null, "evidence": ["Haan, main aaj raat badha dunga."], "stated_timeline": "aaj raat", "timeline_reference": "call_relative", "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": [],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

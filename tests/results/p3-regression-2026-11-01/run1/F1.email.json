@@ -1,0 +1,24 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – coupon code at checkout",
+    "body_text":  "Hi Meera,\n\nThank you for speaking with us. You came to us because your SAVE20 coupon code showed \"Invalid coupon\" at checkout for the Advanced Course.\n\nWhat we completed during the call:\n- You added the Advanced Course to the SAVE20 coupon, which had been assigned only to the Starter Course, and saved it.\n- You applied the code at checkout and confirmed the 20 percent discount now shows.\n\nWhat we discussed:\n- The coupon expires on the 15th. If you want to extend it, you can change the expiry date on the same coupon page; this is entirely up to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-F1\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  118,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-F1"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "covered",
+                              "recording"
+                          ]
+}

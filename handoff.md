@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Phase 4 started: guard, state machine, regression (2026-11-01, D-048/D-049/D-050)
+Committed: write guard (`src/lib/guard.js`) and sending logic (`src/lib/sendstate.js`) with tests (28 + 10 groups pass). Regression on latest skills: nine cases 7/9 first run (F5 fixed by eg 1.6.1; F2 expectation stale), Phase 2 harness 23/25 after the cs 1.4.1 fix (P2-07, P2-13 stale expectations). Report section 10. Gmail connector facts and account inference in `docs/phase4-gmail-integration.md`. **Needs you:** decide F2/P2-07/P2-13 expectations; confirm the Gmail sender (`supportcore@flexifunnels.com`, inferred); authorise the controlled destination storage test (turn `writes_enabled` on for one run) so Phase 3 can close. Nothing sent; source untouched; customer sending off.
+
 ## Three older drafts replaced (2026-11-01, uncommitted, D-047)
 On your authorisation, replaced the drafts of source rows 15451, 15448 and 15442 (sheet rows 3, 11, 13) with the coverage-first versions; read-back verified (7 draft rows, 0 mismatches); `writes_enabled` false. Sheet: 15 rows = 7 drafts (all new skills), 2 deferred (15453, 15454), 6 skipped. Real-record temp files deleted. Next: your review of the 7 drafts (notes column says what to check in each recording); transcripts for 15453/15454; confirm sharing for real (I cannot verify); OD-10/OD-32.
 

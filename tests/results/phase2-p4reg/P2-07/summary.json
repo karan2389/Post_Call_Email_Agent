@@ -1,0 +1,24 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "neutral_fallback",
+  "call_purpose": null,
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [],
+  "covered": [],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [
+    {"item_id": "I1", "reason": "low confidence"},
+    {"item_id": "I2", "reason": "low confidence"},
+    {"item_id": "I3", "reason": "low confidence"}
+  ],
+  "analysis_gaps": [
+    {"issue_or_item_id": "S1", "missing": "The transcript gave nothing reliable to report: the problem, settings and next steps are never named."}
+  ],
+  "technical_details": [],
+  "primary_topic": "your support call"
+}

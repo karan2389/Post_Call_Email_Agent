@@ -1,6 +1,6 @@
 ---
 name: customer-summary
-version: 1.4.0
+version: 1.4.1
 stage: summary
 output_schema: CustomerSummary
 ---
@@ -54,6 +54,7 @@ The transcript itself is not provided. The analysis is the only source of facts.
 - **Ownership.** Never change who performed or will perform an action. Keep the action owner separate from who guided it.
 - Never move an item to a "more complete" section (`covered` → `resolved` is forbidden).
 - Never drop a `pending_customer_action` or `pending_support_action` that has `confidence` `medium` or `high`: pending items are always included. A pending item with `confidence: low` is not stated (a promise or a customer commitment that cannot be read reliably is not turned into a commitment); it goes to `omitted_item_ids` and `analysis_gaps`.
+- **Pending items are never cited in `covered`.** An issue that is still open and has a pending customer or support action is stated by that next-step entry itself, worded so the open status is clear (for example We will check X, which is not yet corrected, and let you know.). Do not add a `covered` entry whose `source_item_ids` is a `pending_*` item: that repeats the item in two sections (found in regression, P2-05, 2026-11-01). Use `covered` for an unresolved issue only when it has no pending action (see the unresolved-issue row below).
 - **No repetition across sections.** One fact appears once. Do not put the same item in two sections; merge entries that say the same thing; keep a completed action in `resolved` only, and what was merely demonstrated in `covered` only.
 - **Relevant technical detail.** Put exact settings, button or page names, product names and non-secret URLs that the customer may need into the entry text or into `technical_details`, only when an item with `confidence` medium or high contains them. Never add a setting or instruction that is not in the analysis, and never reproduce passwords, authentication codes, tokens or other credentials.
 - Merge items only when they share the same issue, the same category **and** the same `stated_timeline` (both `null` counts as the same); keep all their IDs. Never merge items whose timelines differ, because a merged entry has a single `timeline`.
@@ -164,6 +165,7 @@ Wrong (forbidden): `"resolved": [{"text": "We fixed your domain's SSL."}]` — t
 
 ## Changelog
 
+- 1.4.1 (2026-11-01) - Found in the Phase 4 regression (P2-05): a pending item must not be cited in `covered` (it was repeated in two sections). The open status is stated by the next-step entry itself. Placement rule only; schema and meaning unchanged.
 - 1.4.0 (2026-11-01) — Coverage-first summary (D-044; refined after the 15451 validation finding: a partially resolved issue is stated as not fully settled even when the open detail was omitted for low confidence): `mode` copied from the analysis `generation_mode`; only medium and high confidence items are stated (low ones go to `omitted_item_ids` and `analysis_gaps`, never to a commitment); `neutral_fallback` returns an empty but valid summary; no repetition across sections; relevant technical details and non-secret URLs kept (`technical_details`, `objective`); never reproduce credentials. Ownership, timelines, grounding and the pending-item rule are unchanged except that unreliable pending items are not stated. **Not regression-tested before the focused tests of the same date.**
 - 1.3.0 (2026-11-01) — Phase 2 final changes, **not regression-tested** (no runs by decision). Wording guidance only: entries are natural, concise and not repetitive; unresolved issues stated once in clear everyday words using only what the analysis gives; relative timelines phrased naturally ("that evening" without the redundant "the evening of our call"). Meaning of the timeline mapping, grounding, ownership, merging and output schema unchanged.
 - 1.2.0 (2026-10-31) — Relative-timeline policy (D-031): `call_date`, call-anchored `timeline` with verbatim `timeline_source`; customer timing never becomes a support commitment. Customer-intent statements ("you wanted/hoped…") must come from the analysis.

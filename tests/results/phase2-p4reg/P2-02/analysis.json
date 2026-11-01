@@ -1,0 +1,32 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Arjun Testwala"], "support_speakers": ["Sameer Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Yes! Both shop.testfunnel.example and the www version are loading our funnel now. Thank you!",
+  "issues": [
+    {"id": "S1", "title": "Custom domain not reachable", "problem_statement": "The customer's custom domain shop.testfunnel.example had been showing a \"site can't be reached\" error for three days, while the funnel worked on the FlexiFunnels link but not on their own domain.", "status": "resolved"},
+    {"id": "S2", "title": "Secure certificate (padlock) check", "problem_statement": "After the domain was connected, support explained that the padlock for the secure certificate can take some time to appear and committed to check that it has been issued.", "status": "informational"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer opened the domain in an incognito window following support's guidance and reported the same error, ruling out a browser cache issue.", "owner": "customer", "guided_by": "support", "evidence": ["Opened in incognito. Still the same error.", "so it is not a browser cache issue"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer checked the domain status in the FlexiFunnels dashboard following support's guidance and saw that it showed \"Not connected\".", "owner": "customer", "guided_by": "support", "evidence": ["It says \"Not connected\" next to the domain."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "explained", "description": "Support explained that an old A record for shop pointing to an old server address, left by a previous developer, was blocking the connection, and that it should be replaced with a CNAME record for shop using the target value shown in the FlexiFunnels domain settings.", "owner": "support", "guided_by": null, "evidence": ["That old record is blocking the connection.", "add a CNAME record for shop, using the target value shown in your FlexiFunnels domain settings."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S1", "category": "completed", "description": "Customer deleted the old A record for shop and added a CNAME record for shop at their domain registrar following support's guidance, saved it, and the dashboard then showed the domain as connected and shop.testfunnel.example loaded.", "owner": "customer", "guided_by": "support", "evidence": ["I deleted the A record and added the CNAME. Saved.", "The dashboard now shows the domain as connected.", "It loads!"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I5", "issue_id": "S1", "category": "explained", "description": "Support explained that www.shop.testfunnel.example still showed an error page because a second record for www pointed somewhere else, and that it should be deleted and replaced with a CNAME for www with the same target value.", "owner": "support", "guided_by": null, "evidence": ["you have a second record for www pointing somewhere else"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I6", "issue_id": "S1", "category": "completed", "description": "Customer deleted the second www record and added a CNAME for www with the same target value following support's guidance, saved both changes, and confirmed that both shop.testfunnel.example and the www version load the funnel.", "owner": "customer", "guided_by": "support", "evidence": ["Done, both changes saved.", "Both shop.testfunnel.example and the www version are loading our funnel now."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I7", "issue_id": "S2", "category": "explained", "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting the domain.", "owner": "support", "guided_by": null, "evidence": ["the padlock for the secure certificate can take some time to appear after connecting"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I8", "issue_id": "S2", "category": "pending_support_action", "description": "Support will check the next morning that the secure certificate has been issued and will message the customer if it has not.", "owner": "support", "guided_by": null, "evidence": ["I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."], "stated_timeline": "tomorrow morning", "timeline_reference": "call_relative", "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": [],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

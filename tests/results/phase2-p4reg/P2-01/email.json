@@ -1,0 +1,26 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – order confirmation email",
+    "body_text":  "Hi Neha,\n\nThank you for speaking with us. You came to us because your customers were not getting the order confirmation email after buying, even though your payment gateway was connected.\n\nWhat was completed during the call:\n- Following our guidance, you switched on the order confirmation email setting for your product and saved it.\n- You placed a test order with your test coupon and confirmed the confirmation email arrived in your inbox.\n\nWhat we went through:\n- The email still shows the default sender name, and we explained you can change it under Email settings, Sender name.\n\nWhat you need to do next:\n1. Change the sender name to your brand name yourself (you mentioned you would do this after our call).\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-01\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  140,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3",
+                                "I4"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-01"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "covered",
+                              "customer_next_steps",
+                              "recording"
+                          ]
+}

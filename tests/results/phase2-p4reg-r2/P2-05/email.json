@@ -1,0 +1,12 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – coupon and invoice details",
+  "body_text": "Hi Sanjay,\n\nThank you for speaking with us. You reached out because your coupon code was not applying at checkout for the Advanced Course, your invoice showed the wrong company name in the GST part, and you wanted to extend the coupon's expiry date.\n\nWhat was completed during the call:\n- You added the Advanced Course in the coupon's Products section and saved it, and you confirmed the discount now shows at checkout.\n\nWhat we went through:\n- The coupon was assigned only to the Starter Course in the coupon dashboard, not to the Advanced Course, which is why the product needed to be assigned.\n- You can extend the expiry date yourself in the coupon settings, where the date option is available.\n\nWhat you need to do next:\n1. Extend the coupon's expiry date in the coupon settings. You mentioned you planned to do this that evening.\n\nWhat we'll do next:\n- We will check with our billing team about the wrong company name in the GST part of your invoice, which is not yet corrected, and let you know by the day after our call.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-05\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+  "word_count_excluding_signature": 203,
+  "length_status": "within_preferred",
+  "mode": "full",
+  "caveats": [],
+  "referenced_item_ids": ["I1", "I2", "I3", "I4", "I5"],
+  "recording_urls_included": ["https://fathom.video/share/EXAMPLE-P2-05"],
+  "sections_included": ["resolved", "covered", "customer_next_steps", "support_next_steps", "recording"]
+}

@@ -1,0 +1,24 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – connecting your payment gateway",
+    "body_text":  "Hi Priya,\n\nThank you for speaking with us. You reached out because you wanted to connect your payment gateway but could not log in to the gateway dashboard.\n\nWhat we completed during the call:\n- You reset your password from the gateway\u0027s login page and were then able to log in to the gateway dashboard.\n- In FlexiFunnels, you opened Settings, Payments, chose your gateway, pasted the keys from the gateway dashboard and saved, and you confirmed it showed as connected.\n\nWhat you need to do next:\n1. Run one test order from your checkout page to confirm payments work. You mentioned you planned to do this after our call.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-F7\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  126,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-F7"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "customer_next_steps",
+                              "recording"
+                          ]
+}

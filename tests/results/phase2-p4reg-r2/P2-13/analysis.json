@@ -1,0 +1,24 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Uday Testwala"], "support_speakers": ["Riya Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "No, that was the only thing. Thanks Riya.",
+  "issues": [
+    {"id": "S1", "title": "Buy Now button going to the wrong page", "problem_statement": "The Buy Now button on the customer's sales page was sending people to the wrong page.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "The Buy Now button on the sales page now goes to the right page, and the customer tested it and confirmed this.", "owner": "uncertain", "guided_by": null, "evidence": ["Done. It goes to the right page now, I just tested it."], "stated_timeline": null, "timeline_reference": null, "confidence": "medium"}
+  ],
+  "ownership_review_required": true,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "medium",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": ["Support said she would look at the page and the customer later said it was done; the transcript does not show who made the change."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with a confirmed outcome."}
+}

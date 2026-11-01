@@ -1,0 +1,26 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You wanted your webinar registration page to send the confirmation email and your products page to show the right currency.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1", "S2"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "We turned on the confirmation email for your webinar page and saved it.", "source_item_ids": ["I1"]},
+    {"text": "You registered once with another email address as a test, and the confirmation email arrived.", "source_item_ids": ["I2"]},
+    {"text": "Following our guidance, you selected Indian Rupee in Settings, then Regional, and saved it; your products page now shows rupees.", "source_item_ids": ["I4"]}
+  ],
+  "covered": [
+    {"text": "We explained that the currency is set in your account's regional settings, which only the account owner can change.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [
+    {"text": "Currency setting: Settings, then Regional.", "source_item_ids": ["I3", "I4"]}
+  ],
+  "primary_topic": "confirmation email and currency"
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Meera Testwala"], "support_speakers": ["Riya"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Thank you so much, this was very helpful.",
+  "issues": [
+    {"id": "S1", "title": "Coupon code showing invalid at checkout", "problem_statement": "The customer's coupon code showed \"Invalid coupon\" at checkout for the Advanced Course.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer added the Advanced Course to the coupon's Products field, which had listed only the Starter Course, and saved it following support's guidance; support then saw the coupon listing both courses.", "owner": "customer", "guided_by": "support", "evidence": ["Added the Advanced Course. Saved.", "the coupon now lists both courses"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer applied the coupon code on their checkout page, opened in a new tab, following support's guidance, and confirmed the 20 percent discount now shows.", "owner": "customer", "guided_by": "support", "evidence": ["Yes, the discount is showing now. 20 percent off."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "explained", "description": "Support mentioned that the coupon expires on the 15th and that the expiry date can be changed in the same coupon page if the customer wants to extend it; this is optional and up to the customer.", "owner": "support", "guided_by": null, "evidence": ["the coupon expires on the 15th", "you can change the expiry date in the same coupon page. It is up to you."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": ["The customer said they would think about extending the expiry; no commitment was made."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with a clear outcome."}
+}

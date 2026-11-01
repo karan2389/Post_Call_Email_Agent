@@ -1,0 +1,26 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Priya"], "support_speakers": ["Riya"], "other_speakers": []},
+  "customer_sentiment": "neutral",
+  "sentiment_evidence": "Pasted and saved. It says connected.",
+  "issues": [
+    {"id": "S1", "title": "Connecting a payment gateway", "problem_statement": "The customer wanted to connect their payment gateway but could not log in to the gateway dashboard; the login still failed at first.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer reset the password from the gateway's login page following support's guidance and was then able to log in to the gateway dashboard.", "owner": "customer", "guided_by": "support", "evidence": ["Try resetting the password from the login page.", "Reset done, I could log in now."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer opened Settings, Payments in FlexiFunnels, chose the gateway, pasted the keys from the gateway dashboard and saved, following support's guidance; the customer confirmed it showed as connected.", "owner": "customer", "guided_by": "support", "evidence": ["open Settings, Payments, choose the gateway and paste the keys from the gateway dashboard, then save.", "Pasted and saved. It says connected."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "pending_customer_action", "description": "Customer will run one test order from their checkout page to confirm payments work.", "owner": "customer", "guided_by": null, "evidence": ["Please run one test order from your checkout page to confirm payments work.", "Okay, I will do a test order after this call."], "stated_timeline": "after this call", "timeline_reference": "call_relative", "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": ["The customer read out login credentials during the call; support asked them not to share them. They are not reproduced anywhere in this analysis."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

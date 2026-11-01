@@ -1,0 +1,24 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You wanted to know where to change the sender name on your order emails.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you changed the sender name to your brand name in Email settings, saved it, and confirmed it now shows your brand name.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "We explained that the sender name is changed under Email settings, then Sender name, by typing your brand name and saving.", "source_item_ids": ["I1"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [
+    {"text": "Email settings, then Sender name", "source_item_ids": ["I1"]}
+  ],
+  "primary_topic": "changing your sender name"
+}

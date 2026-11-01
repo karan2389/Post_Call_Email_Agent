@@ -1,0 +1,12 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – webinar confirmation email",
+  "body_text": "Hi Tara,\n\nThank you for speaking with us. You came to us because your webinar registration page was not sending the confirmation email.\n\nWhat's now working:\n- The confirmation email option in your page settings is now switched on and showing.\n\nWhat we discussed:\n- We explained that the same confirmation email option is available in the page settings of every page, including your second webinar page.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-F6\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+  "word_count_excluding_signature": 83,
+  "length_status": "within_preferred",
+  "mode": "full",
+  "caveats": ["Who switched the option on is not established; stated neutrally."],
+  "referenced_item_ids": ["I1", "I2"],
+  "recording_urls_included": ["https://fathom.video/share/EXAMPLE-F6"],
+  "sections_included": ["resolved", "covered", "recording"]
+}

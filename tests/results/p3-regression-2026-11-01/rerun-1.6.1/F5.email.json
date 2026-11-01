@@ -1,0 +1,12 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – changing sender name",
+  "body_text": "Hi Neha,\n\nThank you for speaking with us. You reached out to find out where to change the sender name on your order emails.\n\nWhat was completed during the call:\n- Following our guidance, you set your brand name as the sender name in Email settings, under Sender name, and saved it. You confirmed it now shows your brand name.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-F5\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 76,
+  "length_status": "within_preferred",
+  "mode": "full",
+  "caveats": [],
+  "referenced_item_ids": ["I1"],
+  "recording_urls_included": ["https://fathom.video/share/EXAMPLE-F5"],
+  "sections_included": ["resolved", "recording"]
+}

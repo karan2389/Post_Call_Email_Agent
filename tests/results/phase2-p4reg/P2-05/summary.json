@@ -1,0 +1,30 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You wanted your coupon code to apply at checkout for the Advanced Course, and you also raised a wrong company name on your invoice and extending the coupon's expiry date.",
+  "objective": "Get the coupon working on the Advanced Course, correct the company name on the invoice, and extend the coupon's expiry date.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1", "S2", "S3"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you added the Advanced Course to the coupon in the Products section and saved it, and you confirmed the discount now shows at checkout.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "We explained that the coupon was assigned only to the Starter Course, which is why the Advanced Course showed an \"Invalid coupon\" message.", "source_item_ids": ["I1"]},
+    {"text": "We explained that you can extend the coupon's expiry date yourself in the coupon settings, where there is a date option.", "source_item_ids": ["I4"]},
+    {"text": "The company name in the GST part of your invoice is not yet corrected.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Extend the coupon's expiry date in the coupon settings.", "timeline": "that evening", "timeline_source": "aaj raat", "source_item_ids": ["I5"]}
+  ],
+  "support_next_steps": [
+    {"text": "We will check the wrong company name in the GST part of your invoice and let you know.", "timeline": "the day after our call", "timeline_source": "kal tak", "source_item_ids": ["I3"]}
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [
+    {"text": "Coupon dashboard, Products section: Advanced Course; coupon settings: expiry date option.", "source_item_ids": ["I2", "I4"]}
+  ],
+  "primary_topic": "coupon code and invoice name"
+}

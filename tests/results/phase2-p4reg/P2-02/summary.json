@@ -1,0 +1,30 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "Your custom domain shop.testfunnel.example had been showing a \"site can't be reached\" error for three days, even though your funnel worked on the FlexiFunnels link.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you opened the domain in an incognito window and checked its status in your dashboard, which showed \"Not connected\"; the same error in incognito ruled out a browser cache issue.", "source_item_ids": ["I1", "I2"]},
+    {"text": "You deleted the old A record for shop and added a CNAME record for shop, and after that the dashboard showed the domain as connected and shop.testfunnel.example loaded.", "source_item_ids": ["I4"]},
+    {"text": "You then deleted the second www record and added a CNAME for www with the same target value, and you confirmed that both shop.testfunnel.example and the www version now load your funnel.", "source_item_ids": ["I6"]}
+  ],
+  "covered": [
+    {"text": "We explained that an old A record for shop, pointing to an old server address, was blocking the connection, and that it needed to be replaced with a CNAME record using the target value shown in your FlexiFunnels domain settings.", "source_item_ids": ["I3"]},
+    {"text": "We also explained that the www version showed an error because a second record for www pointed somewhere else, and that it needed a CNAME with the same target value.", "source_item_ids": ["I5"]},
+    {"text": "We mentioned that the padlock for the secure certificate can take some time to appear after connecting the domain.", "source_item_ids": ["I7"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {"text": "We will check that the secure certificate has been issued, and we will message you if it has not.", "timeline": "the morning after our call", "timeline_source": "tomorrow morning", "source_item_ids": ["I8"]}
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [
+    {"text": "The CNAME records for shop and for www use the target value shown in your FlexiFunnels domain settings.", "source_item_ids": ["I3", "I5"]}
+  ],
+  "primary_topic": "custom domain connection"
+}

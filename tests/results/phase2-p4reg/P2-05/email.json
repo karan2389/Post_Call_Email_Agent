@@ -1,0 +1,28 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – coupon code and invoice name",
+    "body_text":  "Hi Sanjay,\n\nThank you for speaking with us. You came to us about your coupon code not applying to the Advanced Course at checkout, and you also asked about a wrong company name on your invoice and extending the coupon\u0027s expiry date.\n\nWhat was completed during the call:\n- Following our guidance, you added the Advanced Course to the coupon in the Products section and saved it, and you confirmed the discount now shows at checkout.\n\nWhat we discussed:\n- The coupon was assigned only to the Starter Course, which is why the Advanced Course showed an \"Invalid coupon\" message.\n- You can extend the coupon\u0027s expiry date yourself in the coupon settings, where there is a date option.\n- The company name in the GST part of your invoice is not yet corrected.\n\nWhat you need to do next:\n1. Extend the coupon\u0027s expiry date in the coupon settings (you mentioned you planned to do this that evening).\n\nWhat we\u0027ll do next:\n- We will check the wrong company name in the GST part of your invoice and let you know by the day after our call.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-05\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+    "word_count_excluding_signature":  204,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3",
+                                "I4",
+                                "I5"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-05"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "covered",
+                              "customer_next_steps",
+                              "support_next_steps",
+                              "recording"
+                          ]
+}

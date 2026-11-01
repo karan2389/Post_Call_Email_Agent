@@ -1,0 +1,28 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "mixed",
+  "participants": {"customer_speakers": ["Arjun Demo"], "support_speakers": ["Sameer"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Theek hai, main kal subah check karunga. Thank you sir.",
+  "issues": [
+    {"id": "S1", "title": "Custom domain not connecting", "problem_statement": "The customer's domain was not connecting and the funnel opened only on the FlexiFunnels link.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer deleted the old A record in the GoDaddy DNS settings and saved, following support's guidance.", "owner": "customer", "guided_by": "support", "evidence": ["Delete kar diya, save bhi kar diya."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer added a CNAME record with the name www and the value shown in the FlexiFunnels domain settings, and saved it, following support's guidance.", "owner": "customer", "guided_by": "support", "evidence": ["CNAME add ho gaya aur save ho gaya sir."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "completed", "description": "After the DNS changes, the domain settings in FlexiFunnels showed the status as connected and the funnel opened on the domain.", "owner": "uncertain", "guided_by": null, "evidence": ["Haan sir, connected dikh raha hai. Funnel domain par khul gaya."], "stated_timeline": null, "timeline_reference": null, "confidence": "medium"},
+    {"id": "I4", "issue_id": "S1", "category": "explained", "description": "Support explained that the SSL certificate padlock can take some time to appear.", "owner": "support", "guided_by": null, "evidence": ["SSL certificate ka padlock aane mein thoda time lagta hai."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I5", "issue_id": "S1", "category": "pending_customer_action", "description": "Customer will check whether the SSL padlock has appeared and let support know if it has not.", "owner": "customer", "guided_by": null, "evidence": ["Aap kal subah check kijiye, agar padlock na aaye to hamein bata dijiye.", "main kal subah check karunga"], "stated_timeline": "kal subah", "timeline_reference": "call_relative", "confidence": "high"}
+  ],
+  "ownership_review_required": true,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": [],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

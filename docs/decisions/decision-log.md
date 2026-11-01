@@ -141,6 +141,14 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-050 — Regression findings fixed in two skills; Gmail connector facts recorded (2026-11-01)
+
+**Decision:** the Phase 4 regression found two skill defects, fixed in email-generation 1.6.1 (owner-neutral done heading) and customer-summary 1.4.1 (a pending item is never cited in `covered`). Three expectations are stale against D-042/D-044 (F2 completed-owner, P2-07 skip, P2-13 uncertain-owner confidence) and were NOT edited; they need the user's decision (`docs/phase3-acceptance-report.md` section 10). Gmail connector facts (schemas only, one read-only metadata lookup) are in `docs/phase4-gmail-integration.md`.
+
+### D-049 — Sending state machine, send key, draft versioning, pre-send checks (2026-11-01)
+
+**Decision (user instruction):** `src/lib/sendstate.js`: the 12 states and transitions (SENT and SKIPPED terminal; VALIDATION_FAILED and REVIEW_REQUIRED cannot reach READY_TO_SEND except by named human decision); send key = hash of record fingerprint + recording URL set, stable per call and independent of the draft, so a changed draft cannot create a second send; draft hash = recipient + subject + body; an authorised resend must name a reason and person and be bound to that draft hash, and is never automatic; ten pre-send checks; reconciliation marks SENT only on exactly one matching Sent message with a verified body hash, otherwise RECONCILIATION_REQUIRED (human). **Limit:** the Gmail connector has no idempotency key, so this is not exactly-once delivery. Tests: `tests/unit/phase4.test.js`.
+
 ### D-048 — Deterministic spreadsheet write guard (2026-11-01)
 
 **Decision (user instruction, Phase 4 master task):** every spreadsheet write must pass `authorizeWrite()` (`src/lib/guard.js`, CLI `node src/p3.js guard-write`, exit 4 = rejected) before the connector call. Only the destination ID `1_TxhedZ...` is approved; the source, the backup and any unknown ID are rejected whatever the gates say; non-connector paths, non-write tools, a copy target outside the destination, and a config destination that differs from the approved ID are rejected; `writes_enabled`, `destination_sharing_verified` and `headers_verified` must all be true.

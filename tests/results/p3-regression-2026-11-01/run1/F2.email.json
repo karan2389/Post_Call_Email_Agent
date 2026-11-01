@@ -1,0 +1,12 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – domain connection",
+  "body_text": "Hi Arjun,\n\nThank you for speaking with us. You reached out because your domain was not connecting and your funnel opened only on the FlexiFunnels link.\n\nWhat we completed during the call:\n- Following our guidance, you deleted the old A record in your GoDaddy DNS settings and added a CNAME record (name www, with the value shown in your FlexiFunnels domain settings), saving both.\n- Your domain now shows as connected in FlexiFunnels, and your funnel opens on it.\n\nWhat we discussed:\n- We explained that the SSL padlock can take a little time to appear.\n\nWhat you need to do next:\n1. Check whether the SSL padlock has appeared the morning after our call, and let us know if it has not.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-F2\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+  "word_count_excluding_signature": 140,
+  "length_status": "within_preferred",
+  "mode": "full",
+  "caveats": [],
+  "referenced_item_ids": ["I1", "I2", "I3", "I4", "I5"],
+  "recording_urls_included": ["https://fathom.video/share/EXAMPLE-F2"],
+  "sections_included": ["resolved", "covered", "customer_next_steps", "recording"]
+}

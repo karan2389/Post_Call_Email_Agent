@@ -1,0 +1,19 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "email_class": "unsafe",
+  "issues": [
+    {
+      "code": "OWNER_MISATTRIBUTED",
+      "item_id": "I2",
+      "email_excerpt": "What we completed during the call:",
+      "explanation": "I2 is a completed step owned by the customer (guided by support); the heading credits it to 'we' even though the bullet says 'you'."
+    }
+  ],
+  "statement_map": [
+    {"email_excerpt": "You came to us to find out where to change the sender name on your order emails.", "item_ids": ["S1"]},
+    {"email_excerpt": "Following our guidance, you changed the sender name to your brand name in Email settings, saved it, and confirmed it now shows your brand name.", "item_ids": ["I2"]},
+    {"email_excerpt": "We explained that the sender name is changed under Email settings, then Sender name, by typing your brand name and saving.", "item_ids": ["I1"]}
+  ],
+  "pending_items_checked": []
+}

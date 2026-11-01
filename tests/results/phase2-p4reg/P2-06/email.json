@@ -1,0 +1,29 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – plans, redirect and GST",
+    "body_text":  "Hi Priya,\n\nThank you for speaking with us. You came to us about offering monthly and yearly plans on one checkout page, sending buyers to your own thank-you page, and adding GST to your prices.\n\nWhat was completed during the call:\n- You added a yearly price to your product under Pricing and confirmed that both the monthly and yearly options now show on your checkout.\n- You pasted and saved your thank-you page link in the After purchase redirect option in the product\u0027s Pages settings, and a test purchase took you straight to your thank-you page.\n\nWhat we discussed:\n- We mentioned that there is a tax setting for adding GST to your prices.\n\nWhat you need to do next:\n1. Add your privacy policy link to the checkout footer. You mentioned you planned to do this that week.\n\nWhat we\u0027ll do next:\n- We will send you our guide on the tax settings so you can follow the steps.\n\nOur call continued across two recordings, so here are both parts in order:\nPart 1: https://fathom.video/share/EXAMPLE-P2-06-PART-1\nPart 2: https://fathom.video/share/EXAMPLE-P2-06-PART-2\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  189,
+    "length_status":  "within_preferred",
+    "mode":  "full",
+    "caveats":  [
+
+                ],
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3",
+                                "I4",
+                                "I5"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-06-PART-1",
+                                    "https://fathom.video/share/EXAMPLE-P2-06-PART-2"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "covered",
+                              "customer_next_steps",
+                              "support_next_steps",
+                              "recording"
+                          ]
+}

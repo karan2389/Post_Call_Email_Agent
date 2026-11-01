@@ -1,0 +1,27 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Kabir"], "support_speakers": ["Sameer"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "That would be great, thank you.",
+  "issues": [
+    {"id": "S1", "title": "Funnel form leads not reaching CRM", "problem_statement": "New leads from the customer's funnel form had stopped reaching their CRM about three days before the call.", "status": "partially_resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "explained", "description": "Support found that the webhook URL in the customer's webhook settings contained a typo ('exmaple' instead of 'example' in the domain).", "owner": "support", "guided_by": null, "evidence": ["The webhook URL has a typo, it says crm.testfunnel.exmaple instead of crm.testfunnel.example."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer corrected the webhook URL in the field and saved it, following support's guidance.", "owner": "customer", "guided_by": "support", "evidence": ["Please correct it yourself in the field and save.", "Corrected and saved."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "completed", "description": "Customer submitted a test lead through the form, following support's guidance, and confirmed it showed up in their CRM; support confirmed new leads are flowing again.", "owner": "customer", "guided_by": "support", "evidence": ["Now submit a test lead through your form.", "Submitted. Yes, the test lead is showing up in my CRM now!", "so new leads are flowing again."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S1", "category": "pending_support_action", "description": "Support will re-index the webhook queue and have the technical team resend to the customer's CRM the leads from the last three days that did not reach it, and will message the customer once that is done; no time was given.", "owner": "support", "guided_by": null, "evidence": ["I'll have our technical team resend the missed leads to your CRM.", "I can't give an exact time, but I'll update you as soon as it's done."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": ["One support remark was an internal aside about staff and internal tracking, not addressed to the customer; excluded from all items."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "mode": "full",
+  "call_purpose": "You came to us because your webinar registration page was not sending the confirmation email.",
+  "objective": null,
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "The confirmation email option in your page settings is now switched on and showing.", "source_item_ids": ["I1"]}
+  ],
+  "covered": [
+    {"text": "We explained that the same confirmation email option is available in the page settings of every page, including your second webinar page.", "source_item_ids": ["I2"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "technical_details": [],
+  "primary_topic": "webinar confirmation email"
+}

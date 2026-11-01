@@ -1,0 +1,25 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Speaker 2"], "support_speakers": ["Speaker 1"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Great, thank you.",
+  "issues": [
+    {"id": "S1", "title": "Webinar registration page confirmation email", "problem_statement": "The customer's webinar registration page was not sending the confirmation email.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "The confirmation email option in the page settings was switched on and is now showing.", "owner": "uncertain", "guided_by": null, "evidence": ["Done. It is showing now.", "Okay good."], "stated_timeline": null, "timeline_reference": null, "confidence": "medium"},
+    {"id": "I2", "issue_id": "S1", "category": "explained", "description": "Support explained that the same confirmation email option exists on every page, in the page settings, including the customer's second webinar page.", "owner": "support", "guided_by": null, "evidence": ["Yes, the same option exists on every page, in the page settings."], "stated_timeline": null, "timeline_reference": null, "confidence": "high"}
+  ],
+  "ownership_review_required": true,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "clear",
+  "generation_mode": "full",
+  "analysis_notes": ["Who switched the option on is not established; the result is clear."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with a clear outcome."}
+}

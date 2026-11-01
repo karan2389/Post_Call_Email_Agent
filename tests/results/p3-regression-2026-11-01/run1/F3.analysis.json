@@ -1,0 +1,27 @@
+﻿{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Rohan Sample"], "support_speakers": ["Riya"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "okay thanks bye",
+  "issues": [
+    {"id": "S1", "title": "Form autoresponder email not sent to leads", "problem_statement": "Leads were coming in from the customer's form, but the autoresponder email was not going to them.", "status": "resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer turned on the autoresponder option in the form settings and saved it, following support's guidance.", "owner": "customer", "guided_by": "support", "evidence": ["open form settings and turn on the autoresponder option then save it", "yes turned on saved"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer submitted a test lead from their page, following support's guidance, and confirmed the autoresponder email arrived in their inbox.", "owner": "customer", "guided_by": "support", "evidence": ["now submit a test lead from your page", "done the mail came in my inbox"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "explained", "description": "Support explained that the sender domain can be verified under email domain in settings, so that mails do not go to spam.", "owner": "support", "guided_by": null, "evidence": ["you can verify sender domain under email domain in settings, it is good so mails do not go to spam"], "stated_timeline": null, "timeline_reference": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S1", "category": "explained", "description": "Support made a remark about an extension and an invoice with a wrong name, but the wording is garbled and its meaning could not be established.", "owner": "support", "guided_by": null, "evidence": ["the the exten extension for the bt bvc not provided by us uh sorry the and the invoice the g r wrong name wrong"], "stated_timeline": null, "timeline_reference": null, "confidence": "low"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "transcript_quality": "partly_garbled",
+  "generation_mode": "conservative",
+  "analysis_notes": ["One support remark about an extension and an invoice is garbled and unreliable; it may hold a point worth checking in the recording."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with a clear outcome."}
+}

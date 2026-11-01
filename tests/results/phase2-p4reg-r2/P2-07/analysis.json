@@ -1,0 +1,26 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Speaker 1"], "support_speakers": ["Speaker 2"], "other_speakers": []},
+  "customer_sentiment": "neutral",
+  "sentiment_evidence": null,
+  "issues": [
+    {"id": "S1", "title": "Support call", "problem_statement": "The customer said something was still not working, but the transcript never names what it was.", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "discussed", "description": "The customer said an unnamed problem was still not working and that a previous fix returned each time; the problem and the earlier fix are not named.", "owner": "none", "guided_by": null, "evidence": ["so that one is still not working, same as before.", "It comes back every time."], "stated_timeline": null, "timeline_reference": null, "confidence": "low"},
+    {"id": "I2", "issue_id": "S1", "category": "discussed", "description": "An unnamed setting was checked again and the customer reported the result was still the same; the setting and the outcome are not named.", "owner": "none", "guided_by": null, "evidence": ["Done. It's still the same."], "stated_timeline": null, "timeline_reference": null, "confidence": "low"},
+    {"id": "I3", "issue_id": "S1", "category": "pending_support_action", "description": "Support said it would see what can be done about an unnamed pending matter; what that action is cannot be established.", "owner": "support", "guided_by": null, "evidence": ["I'll see what can be done."], "stated_timeline": null, "timeline_reference": null, "confidence": "low"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "transcript_quality": "substantially_garbled",
+  "generation_mode": "neutral_fallback",
+  "analysis_notes": ["The conversation refers throughout to unnamed things ('that one', 'the thing', 'that setting', 'the other one'); no product, setting, action or outcome is identifiable. Speaker roles inferred from content (Speaker 2 instructs and asks, Speaker 1 reports). A reviewer may check the recording."],
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "A support conversation took place but nothing concrete could be established."}
+}
