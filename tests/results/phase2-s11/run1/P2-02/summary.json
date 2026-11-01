@@ -1,0 +1,56 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You came to us because your custom domain had been showing a \"site can't be reached\" error for three days, although your funnel worked on the FlexiFunnels link.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you deleted the old A record and added a CNAME record using the target value from your FlexiFunnels domain settings, and you confirmed your domain now loads.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "Following our guidance, you deleted the second www record and added a CNAME for www with the same target value, and you confirmed that both your domain and its www version now load your funnel.",
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We confirmed it was not a browser cache problem, since the same error showed in an incognito window.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "We explained that an old A record pointing to an old server address was blocking the connection.",
+      "source_item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "text": "We explained that the padlock for the secure certificate can take some time to appear after your domain connects.",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {
+      "text": "We will check that your secure certificate has been issued and message you if it has not.",
+      "timeline": "tomorrow morning",
+      "source_item_ids": [
+        "I6"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "custom domain connection"
+}

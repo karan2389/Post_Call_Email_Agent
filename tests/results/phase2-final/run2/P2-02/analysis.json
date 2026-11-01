@@ -1,0 +1,101 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Arjun Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Great, thanks Sameer.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Custom domain not loading",
+      "problem_statement": "The customer's custom domain had been showing \"site can't be reached\" for three days, while the funnel worked on the FlexiFunnels link but not on the customer's own domain.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Secure certificate (padlock) after connecting the domain",
+      "problem_statement": "Support noted that the padlock for the secure certificate can take some time to appear after the domain connects; the customer did not report a missing padlock.",
+      "status": "informational"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer deleted the old A record at their domain registrar and added a CNAME record, using the target value shown in the FlexiFunnels domain settings, following support's guidance; support later saw the dashboard show the domain as connected and the customer confirmed the domain loads.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "I deleted the A record and added the CNAME. Saved.",
+        "It loads!"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer deleted a second record for the www version and added a CNAME record for www with the same target value, following support's guidance, and confirmed both the main domain and the www version now load the funnel.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Done, both changes saved.",
+        "are loading our funnel now. Thank you!"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "explained",
+      "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "the padlock for the secure certificate can take some time to appear after connecting"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S2",
+      "category": "pending_support_action",
+      "description": "Support will check that the secure certificate has been issued and will message the customer if it has not.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."
+      ],
+      "stated_timeline": "tomorrow morning",
+      "timeline_reference": "call_relative",
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

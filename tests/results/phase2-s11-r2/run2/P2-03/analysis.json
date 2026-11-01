@@ -1,0 +1,78 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Meera Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "frustrated",
+  "sentiment_evidence": "I've lost their trust over this, it's very frustrating.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Course lesson videos not playing for students",
+      "problem_statement": "Some of the customer's students say the lesson videos in the customer's course keep loading and never play, mostly on their phones; the customer said this was the third time they raised it.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Support opened the lesson link shared by the customer on a desktop in Chrome, in Safari and on a phone; the video played fine each time and support could not reproduce the problem.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "I've opened it on my desktop in Chrome and the video plays fine.",
+        "It plays on Safari and on my phone too. So I cannot reproduce the problem from my side."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "pending_support_action",
+      "description": "Support will raise the issue with the technical team and get back to the customer; support did not give a timeline.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll raise this with our technical team and get back to you.",
+        "I can't give you a timeline right now"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S1",
+      "category": "pending_customer_action",
+      "description": "Customer will ask one of the students to record a short screen recording showing the video loading and send it to support; support asked that it come along with the lesson link.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "Okay, I'll ask one of the students to record it and send it to you.",
+        "a short screen recording from one affected student, showing the video loading, along with the lesson link."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call; issue unresolved with clear next steps on both sides."
+  }
+}

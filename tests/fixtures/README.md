@@ -2,6 +2,8 @@
 
 Synthetic test data only. Fixture files are created in Phase 2–3, one per scenario in `tests/evals/README.md`. They are used to populate the **test copy** of the spreadsheet and as inputs for skill scenarios (D-026). Include Hindi / mixed-language and multi-segment transcripts.
 
+**Phase 2 fixtures (created 2026-10-31):** `P2-01 … P2-11` (resolved, multi-step, unresolved, Hindi, Hinglish, two segments, ambiguous, no-show, internal-only information, long, cancelled) with `metadata.json`, `transcript.txt`, `expected.json`; `adversarial/ADV-01 … ADV-09.json` flawed drafts. `expected.json` may carry `expectation_revisions` recording any change made after a run. Not yet covered: prompt injection, sensitive topics, truncated transcripts, three or more segments.
+
 ## Rules
 
 - Names: obviously fictional (e.g. "Arjun Testwala", "Riya Demo"). No real customers; real staff names only with approval.

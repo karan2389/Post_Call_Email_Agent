@@ -76,6 +76,7 @@ Produced by the transcript-analysis skill's `skip_recommendation`. All terminal 
 | Code | Type | Meaning |
 |---|---|---|
 | `VALIDATION_FAILED` | T | One or more blocking issues; details in `validation_issue_codes`; rejected draft stored in `email_body` |
+| `LENGTH_REVIEW_REQUIRED` | T | The email body is above `human_review_above_words` (350, `config/email_policy.yaml`). Everything else may be valid; a human reviews and sends or edits it. The draft is stored in `email_body` (D-031) |
 
 ## 7. Technical
 

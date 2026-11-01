@@ -1,0 +1,38 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "Leads were coming in from your form, but the autoresponder email was not being sent to them.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you turned on the autoresponder option in your form settings and saved it; a test form filled in from your other email address then delivered the email, and you confirmed it is working correctly now.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that emails can sometimes go to spam, so verifying your sender domain is a good idea, and that you can do this in the email domain part of the settings. This is not yet done.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Verify your sender domain in the email domain part of the settings.",
+      "timeline": "कल सुबह (the morning after the call)",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "autoresponder and sender domain"
+}

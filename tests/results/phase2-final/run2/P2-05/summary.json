@@ -1,0 +1,61 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You called because your coupon code was not applying at checkout and showed \"Invalid coupon\", and because you wanted to use it on the Advanced Course; you also raised the company name in the GST part of your invoice and extending the coupon's expiry date.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you edited the coupon, selected the Advanced Course in the Products section and saved, and you confirmed that the discount now shows at checkout.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that the coupon had been assigned only to the Starter Course and not to the Advanced Course, so the product needed to be assigned to it.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "We explained that you can extend the coupon's expiry date yourself in the coupon settings, where the date option is available. This is not yet done.",
+      "source_item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "text": "The company name in the GST part of your invoice showing incorrectly is not yet resolved.",
+      "source_item_ids": []
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "You mentioned that you planned to extend the coupon's expiry date in the coupon settings.",
+      "timeline": "that evening (the evening of our call)",
+      "timeline_source": "aaj raat",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will check about the company name in the GST part of your invoice and let you know.",
+      "timeline": "by the following day (the day after our call)",
+      "timeline_source": "kal tak",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "coupon and invoice details"
+}

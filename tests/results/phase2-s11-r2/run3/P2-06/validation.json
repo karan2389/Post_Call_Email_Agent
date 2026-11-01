@@ -1,0 +1,56 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted to sell your product with monthly and yearly plans on the same checkout page, send customers to your own thank-you page after payment, add GST to your prices, and add your privacy policy link to the checkout footer.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you added a yearly price to your product under Pricing, and you confirmed both the monthly and yearly options now show on your checkout.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you pasted your thank-you page link into the After purchase redirect option in your product's Pages settings and saved it, and you confirmed a test purchase took you straight to your thank-you page.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "There is a tax setting for adding GST to prices. This is not yet resolved.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "Add your privacy policy link to the checkout footer (you mentioned you would do this this week).",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "We will send you our guide on the tax settings so you can follow the steps.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Our call continued across two recordings, so here are both parts in order:",
+      "item_ids": [
+        "recording_count=2: segments explained"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I5"
+  ]
+}

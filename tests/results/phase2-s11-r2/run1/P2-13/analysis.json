@@ -1,0 +1,49 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Uday Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "neutral",
+  "sentiment_evidence": "No, that was the only thing. Thanks Riya.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Buy Now button going to the wrong page",
+      "problem_statement": "The Buy Now button on the customer's sales page was sending people to the wrong page.",
+      "status": "resolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "The Buy Now button on the sales page now goes to the right page, which the customer reported having tested; the transcript does not establish who made the change.",
+      "owner": "uncertain",
+      "guided_by": "none",
+      "evidence": [
+        "Done. It goes to the right page now, I just tested it."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    }
+  ],
+  "ownership_review_required": true,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "ANALYSIS_LOW_CONFIDENCE",
+    "explanation": "The only outcome of the call is completed but the transcript does not establish whether the customer or support performed it."
+  }
+}

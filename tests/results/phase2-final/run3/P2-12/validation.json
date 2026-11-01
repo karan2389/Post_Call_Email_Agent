@@ -1,0 +1,27 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You reached out because your webinar registration page was not sending the confirmation email and your products page was showing the wrong currency.",
+      "item_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "We turned on the confirmation email for your webinar registration page and saved it, and after a test registration you confirmed that the confirmation email arrived.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you selected Indian Rupee in your account's regional settings and saved it, and your products page now shows rupees.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": []
+}

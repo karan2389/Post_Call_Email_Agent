@@ -1,0 +1,28 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted your customers to receive the order confirmation email after they buy.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you switched on the order confirmation email for your product and saved it, and you confirmed that the confirmation email for your test order arrived in your inbox.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Change the default sender name under Email settings, Sender name, to your brand name (you mentioned you would do this after the call).",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2"
+  ]
+}

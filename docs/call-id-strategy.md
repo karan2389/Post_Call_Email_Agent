@@ -1,6 +1,15 @@
 # Call ID Strategy
 
-Status: **Approved (D-024).** The Call ID is stored in source column **AD**, header **`POST_CALL_CALL_ID`**. That is the only approved modification to the source worksheet.
+Status: **Design approved (D-024); writing to the source is NOT yet authorised (D-029).** The proposed Call ID location is source column **AD**, header **`POST_CALL_CALL_ID`**. The original source currently has headers through AC and AD is empty. Earlier documentation proposing this column does not make it approved for writing.
+
+## 0. Gate: all source writes stay disabled until every condition is met
+
+1. Ownership of column AD is confirmed with the sheet owner.
+2. The header `POST_CALL_CALL_ID` is approved.
+3. Protected ranges are verified: Google is seen to reject a forbidden write from the connector account (R-03, OD-36), after which `source.protected_ranges_verified` may be set to `true`.
+4. The backup synchronisation is confirmed **not to erase agent-owned data** in AD (OD-43, `backup-recovery.md`).
+
+Until then `source.source_writes_enabled` is `false`, and no cell in the source, including the AD header, is written. Sections below describe the intended behaviour once the gate is open.
 
 ## 1. Rules
 

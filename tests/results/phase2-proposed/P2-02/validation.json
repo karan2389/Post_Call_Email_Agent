@@ -1,0 +1,40 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "instead of showing a \"site can't be reached\" error",
+      "explanation": "The analysis (S1/I1/I2) records only that the domain was not connecting; the specific \"site can't be reached\" error message has no supporting item or evidence (it appears only in the summary)."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted your custom domain to load your funnel instead of showing a \"site can't be reached\" error.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "Following our guidance, you replaced the old records with CNAME records for your domain and its www version, and you confirmed that both now load your funnel.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the padlock for the secure certificate can take some time to appear after connecting.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "We will check that the secure certificate has been issued, and message you if it has not. We will do this tomorrow morning.",
+      "item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4"
+  ]
+}

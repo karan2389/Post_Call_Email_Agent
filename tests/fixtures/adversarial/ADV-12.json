@@ -1,0 +1,25 @@
+{
+  "id": "ADV-12",
+  "base_case": "P2-03",
+  "description": "unresolved issue left unstated (and all outcome wording dropped) to keep the email short",
+  "expected_codes": [],
+  "expected_semantic_codes": [
+    "KEY_OUTCOME_OMITTED"
+  ],
+  "email": {
+    "schema": "EmailDraft/1",
+    "subject": "Follow-up on your FlexiFunnels support call – course video playback",
+    "body_text": "Hi Meera,\n\nThank you for your time on our call, and I am sorry for the trouble.\n\nYour next steps:\n1. Ask one of your affected students to make a short screen recording showing the video loading, and send it to us along with the lesson link.\n\nWhat we'll do next:\n- We will raise this with our technical team and get back to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-03\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature": 81,
+    "length_status": "within_preferred",
+    "referenced_item_ids": [
+      "I1",
+      "I2",
+      "I3"
+    ],
+    "recording_urls_included": [
+      "https://fathom.video/share/EXAMPLE-P2-03"
+    ],
+    "sections_included": []
+  }
+}

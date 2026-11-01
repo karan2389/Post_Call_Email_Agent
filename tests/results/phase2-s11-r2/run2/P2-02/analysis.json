@@ -1,0 +1,117 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Arjun Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Yes! Both shop.testfunnel.example and the www version are loading our funnel now. Thank you!",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Custom domain not reachable",
+      "problem_statement": "The customer's custom domain had been showing \"site can't be reached\" for three days, while the funnel worked on the FlexiFunnels link but not on their own domain.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "www version of the domain showing an error page",
+      "problem_statement": "After the main custom domain started loading, the www version of the domain still showed an error page.",
+      "status": "resolved"
+    },
+    {
+      "id": "S3",
+      "title": "Secure certificate (padlock) after connecting the domain",
+      "problem_statement": "Support noted that the padlock for the secure certificate can take some time to appear after the domain is connected.",
+      "status": "informational"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Customer opened the domain in an incognito window and still saw the same error, which support took to mean it was not a browser cache issue; the domain status in the dashboard showed Not connected.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Opened in incognito. Still the same error.",
+        "It says \"Not connected\" next to the domain."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer deleted the old A record for the domain at their domain registrar (it pointed to an old server address, which support said was blocking the connection) and added a CNAME record using the target value from their FlexiFunnels domain settings, following support's guidance; the dashboard then showed the domain as connected and the customer confirmed the domain loads.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "I deleted the A record and added the CNAME. Saved.",
+        "The dashboard now shows the domain as connected.",
+        "It loads!"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "completed",
+      "description": "Customer deleted a second record for the www version that pointed somewhere else and added a CNAME record for www with the same target value, following support's guidance, and confirmed that both the domain and the www version now load their funnel.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Done, both changes saved.",
+        "Both shop.testfunnel.example and the www version are loading our funnel now."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S3",
+      "category": "pending_support_action",
+      "description": "Support will check that the secure certificate has been issued and will message the customer if it has not.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."
+      ],
+      "stated_timeline": "tomorrow morning",
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S3",
+      "category": "explained",
+      "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "the padlock for the secure certificate can take some time to appear after connecting."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

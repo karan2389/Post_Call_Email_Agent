@@ -1,0 +1,70 @@
+{
+  "case_id": "P2-01",
+  "scenario": "Normal technical support call with a resolved issue",
+  "eligibility": {
+    "outcome": "ELIGIBLE",
+    "reason_code": null
+  },
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": [
+      "positive",
+      "neutral"
+    ],
+    "issue_count": {
+      "min": 1,
+      "max": 2
+    },
+    "required_items": [
+      {
+        "category": "completed",
+        "pattern": "confirmation email|toggle",
+        "owner": "customer"
+      },
+      {
+        "category": "explained",
+        "pattern": "sender name",
+        "owner": "support"
+      },
+      {
+        "category": "pending_customer_action",
+        "pattern": "sender name",
+        "owner": "customer"
+      }
+    ],
+    "forbidden_categories": {
+      "pending_support_action": "no support commitment was made"
+    },
+    "stated_timelines_allowed": [
+      null,
+      "after the call"
+    ]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": [
+      "https://fathom.video/share/EXAMPLE-P2-01"
+    ],
+    "must_include": [
+      "Neha",
+      "sender name"
+    ],
+    "must_not_include": [
+      "we will check",
+      "our team will"
+    ],
+    "notes": "Sender-name change is the customer's step. Support made no commitments, so there must be no 'What we'll do next' content."
+  },
+  "validation_expected": "PASS",
+  "expectation_revisions": [
+    {
+      "after": "S-11 correction (2026-10-31); user decision 3, approved",
+      "original": "analysis.required_items[category=completed].owner = \"support\" for patterns: confirmation email|toggle",
+      "revised": "owner = \"customer\" (the customer performed the action; support guided it)",
+      "reason": "Ownership of a completed action is the performer (skills transcript-analysis 1.3.x). Transcript evidence: Support: \"Let's switch it on and save.\" Customer: \"Done, I saved it.\". Derived from the synthetic transcript only, not from generated output. Original file preserved in tests/fixtures/_history/2026-10-31-before-ownership-update/."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "STATUS_MISREPRESENTED",
+      "item_id": "I3",
+      "email_excerpt": "Your secure certificate is now fully set up and the padlock is showing, so your visitors will see a secure site.",
+      "explanation": "The certificate/padlock was only explained (I3) and its issuance check is still a pending support action (I4); it is not done."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "We explained that the old record was blocking the connection and had to be replaced with a CNAME record.",
+      "explanation": "The analysis records no explanation by support of why the old record blocked the connection; the customer performed the change following guidance (I1)."
+    },
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I4",
+      "email_excerpt": "",
+      "explanation": "Support will check the certificate has been issued and message the customer if not; this step is missing."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "Your custom domain is now connected, and both the main address and the www version load your funnel.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Your secure certificate is now fully set up and the padlock is showing, so your visitors will see a secure site.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "We explained that the old record was blocking the connection and had to be replaced with a CNAME record.",
+      "item_ids": []
+    }
+  ],
+  "pending_items_checked": [
+    "I4"
+  ]
+}

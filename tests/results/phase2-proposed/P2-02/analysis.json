@@ -1,0 +1,23 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Arjun Testwala"], "support_speakers": ["Sameer Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Yes! Both shop.testfunnel.example and the www version are loading our funnel now. Thank you!",
+  "issues": [
+    {"id": "S1", "title": "Custom domain not connecting to funnel", "status": "resolved"},
+    {"id": "S2", "title": "Secure certificate (padlock) for the domain", "status": "partially_resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer deleted the old A record and added a CNAME record for the main domain following support's guidance; the dashboard showed it connected and the customer confirmed the funnel loads.", "owner": "customer", "evidence": ["I deleted the A record and added the CNAME. Saved.", "It loads!"], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "Customer replaced the second record for the www version with a CNAME record following support's guidance and confirmed the www version loads the funnel.", "owner": "customer", "evidence": ["Done, both changes saved.", "Yes! Both shop.testfunnel.example and the www version are loading our funnel now."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S2", "category": "explained", "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting.", "owner": "support", "evidence": ["the padlock for the secure certificate can take some time to appear after connecting"], "stated_timeline": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S2", "category": "pending_support_action", "description": "Support will check that the secure certificate has been issued and message the customer if it has not.", "owner": "support", "evidence": ["I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."], "stated_timeline": "tomorrow morning", "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

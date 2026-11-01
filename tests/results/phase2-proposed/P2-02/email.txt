@@ -1,0 +1,22 @@
+Subject: Follow-up on your FlexiFunnels support call – custom domain connection
+
+Hi Arjun,
+
+Thank you for your time on our call. You wanted your custom domain to load your funnel instead of showing a "site can't be reached" error. Here is a quick summary so you have everything in one place.
+
+What we resolved:
+- Following our guidance, you replaced the old records with CNAME records for your domain and its www version, and you confirmed that both now load your funnel.
+
+What we covered:
+- We explained that the padlock for the secure certificate can take some time to appear after connecting.
+
+What we'll do next:
+- We will check that the secure certificate has been issued, and message you if it has not. We will do this tomorrow morning.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-02
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Sameer
+FlexiFunnels Support

@@ -1,0 +1,28 @@
+{
+  "case_id": "P2-01",
+  "scenario": "Normal technical support call with a resolved issue",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": ["positive", "neutral"],
+    "issue_count": {"min": 1, "max": 2},
+    "required_items": [
+      {"category": "completed", "pattern": "confirmation email|toggle", "owner": "support"},
+      {"category": "explained", "pattern": "sender name", "owner": "support"},
+      {"category": "pending_customer_action", "pattern": "sender name", "owner": "customer"}
+    ],
+    "forbidden_categories": {"pending_support_action": "no support commitment was made"},
+    "stated_timelines_allowed": [null, "after the call"]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-01"],
+    "must_include": ["Neha", "sender name"],
+    "must_not_include": ["we will check", "our team will"],
+    "notes": "Sender-name change is the customer's step. Support made no commitments, so there must be no 'What we'll do next' content."
+  },
+  "validation_expected": "PASS"
+}

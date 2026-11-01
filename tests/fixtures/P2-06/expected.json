@@ -1,0 +1,86 @@
+{
+  "case_id": "P2-06",
+  "scenario": "Multiple Fathom recording segments belonging to one call",
+  "eligibility": {
+    "outcome": "ELIGIBLE",
+    "reason_code": null
+  },
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "recording_count": 2,
+    "sentiment_allowed": [
+      "positive",
+      "neutral"
+    ],
+    "issue_count": {
+      "min": 2,
+      "max": 5
+    },
+    "required_items": [
+      {
+        "category": "completed",
+        "pattern": "yearly|two plans|pricing|price",
+        "owner": "customer"
+      },
+      {
+        "category": "completed",
+        "pattern": "redirect|thank-you",
+        "owner": "customer"
+      },
+      {
+        "category": "pending_support_action",
+        "pattern": "guide|tax",
+        "owner": "support"
+      },
+      {
+        "category": "pending_customer_action",
+        "pattern": "privacy",
+        "owner": "customer"
+      }
+    ],
+    "forbidden_categories": {},
+    "segment_break_not_incomplete": true,
+    "stated_timelines_allowed": [
+      null,
+      "this week"
+    ]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": [
+      "https://fathom.video/share/EXAMPLE-P2-06-PART-1",
+      "https://fathom.video/share/EXAMPLE-P2-06-PART-2"
+    ],
+    "must_include": [
+      "Priya",
+      "Part 1:",
+      "Part 2:",
+      "tax"
+    ],
+    "must_not_include": [
+      "two calls",
+      "two meetings",
+      "separate calls",
+      "http(?!s://fathom\\.video/share/EXAMPLE-P2-06)"
+    ],
+    "notes": "One email for one call; both links in order; the call continued across two recordings because the customer reconnected. The tax guide is promised but no link was given on the call, so the email must say it will be sent and must not invent a link. Timestamps restart at 00:00:00 in segment 2: must not be treated as an incomplete transcript."
+  },
+  "validation_expected": "PASS",
+  "expectation_revisions": [
+    {
+      "after": "first run (2026-10-31)",
+      "original": "analysis.issue_count 2-3",
+      "revised": "2-5",
+      "reason": "The analysis listed 4 issues (pricing, redirect, tax guide, privacy link). Issue granularity is not defined by the skill; the range was a guess. The semantic OWNER_MISATTRIBUTED failure of this case is NOT revised away (see S-11 in docs/phase2-plan.md)."
+    },
+    {
+      "after": "S-11 correction (2026-10-31); user decision 3, approved",
+      "original": "analysis.required_items[category=completed].owner = \"support\" for patterns: yearly|two plans|pricing|price ; redirect|thank-you",
+      "revised": "owner = \"customer\" (the customer performed the action; support guided it)",
+      "reason": "Ownership of a completed action is the performer (skills transcript-analysis 1.3.x). Transcript evidence: Customer: \"Added. Let me open the checkout\" and \"Pasted and saved.\". Derived from the synthetic transcript only, not from generated output. Original file preserved in tests/fixtures/_history/2026-10-31-before-ownership-update/."
+    }
+  ]
+}

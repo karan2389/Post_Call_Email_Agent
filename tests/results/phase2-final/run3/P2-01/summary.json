@@ -1,0 +1,40 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You reached out because your customers were not receiving the order confirmation email after they bought, even though you had connected your payment gateway.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you switched on the order confirmation email for your product and saved it, and after a test order you confirmed the confirmation email arrived in your inbox.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "The email still shows the default sender name, which is not yet resolved. We explained that you can change it under Email settings, then Sender name.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Change the sender name under Email settings, then Sender name, to use your brand name.",
+      "timeline": "after our call",
+      "timeline_source": "after the call",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "order confirmation email"
+}

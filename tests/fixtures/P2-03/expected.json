@@ -1,0 +1,36 @@
+{
+  "case_id": "P2-03",
+  "scenario": "Issue remains unresolved at the end of the call",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": ["frustrated", "angry"],
+    "issue_count": {"min": 1, "max": 1},
+    "required_items": [
+      {"category": "pending_support_action", "pattern": "technical team|raise|escalat", "owner": "support"},
+      {"category": "pending_customer_action", "pattern": "recording|student", "owner": "customer"}
+    ],
+    "forbidden_categories": {"completed": "nothing was resolved on this call"},
+    "issue_status_required": {"S1": "unresolved"},
+    "stated_timelines_allowed": [null]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-03"],
+    "must_include": ["Meera", "not yet resolved|isn't resolved|not resolved|still"],
+    "must_not_include": ["soon", "shortly", "today", "tomorrow", "we (have )?fixed|has been fixed|was fixed", "resolved the", "guarantee", "refund", "compensat"],
+    "notes": "Support explicitly refused to give a timeline. Email must acknowledge frustration once, keep the issue as unresolved, name the customer's step (screen recording and lesson link from an affected student) and our step (raise with the technical team and get back), with no timeline words."
+  },
+  "validation_expected": "PASS",
+  "expectation_revisions": [
+    {
+      "after": "Phase 2 final changes (2026-11-01); user instruction, approved",
+      "original": "email.must_not_include contained the bare word \"fixed\"",
+      "revised": "email.must_not_include contains \"we (have )?fixed|has been fixed|was fixed\" instead of \"fixed\"",
+      "reason": "The bare word also blocks harmless customer-intent wording such as \"you hope it gets sorted out\" or \"you wanted this fixed\" when the analysis records that hope. Transcript evidence: Meera Testwala: \"Fine. I just hope it gets sorted out.\" The revised pattern still rejects any claim that we resolved the issue. Unsupported claims about customer intent or resolution stay rejected by the semantic validator (email-validation rules 3 and 5a) and by the deterministic UNSUPPORTED_CUSTOMER_INTENT check. Original file preserved in tests/fixtures/_history/2026-10-31-before-ownership-update/P2-03.expected.json. Not re-run (no regression runs, 2026-11-01)."
+    }
+  ]
+}

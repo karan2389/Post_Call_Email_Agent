@@ -1,0 +1,102 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You called with a list of topics, including your thank-you page, mobile landing page buttons, emails going to spam, your coupon, invoices, weekly lesson unlocking and your student list.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S8"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you pasted your thank-you page link into the product's After purchase redirect field and saved it, and a test order now goes to your thank-you page.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you increased the spacing between the two buttons in the mobile view, and you confirmed on your phone they are now separate.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "To verify your email domain, add it in Email settings, add the three DNS records you receive at your domain registrar, then click Verify. Your emails going to spam is not yet resolved.",
+      "item_ids": [
+        "I3",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "Your EARLYBIRD coupon has expired and you will think about extending it; if you do, you can change the expiry date in the coupon settings. This is not yet resolved.",
+      "item_ids": [
+        "I6",
+        "S4"
+      ]
+    },
+    {
+      "email_excerpt": "There is a drip schedule setting for lessons.",
+      "item_ids": [
+        "I8"
+      ]
+    },
+    {
+      "email_excerpt": "We are not aware of a quiz generator being available right now and do not have a date for one, so please do not plan around it.",
+      "item_ids": [
+        "I10"
+      ]
+    },
+    {
+      "email_excerpt": "To export your student list, go to Students, click Export and choose CSV.",
+      "item_ids": [
+        "I11"
+      ]
+    },
+    {
+      "email_excerpt": "Get your developer, who has the registrar login, to add the three DNS records. You mentioned doing this by Friday.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Once the records are added, click Verify in your email settings.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "Try exporting your student list.",
+      "item_ids": [
+        "I12"
+      ]
+    },
+    {
+      "email_excerpt": "The name on your invoices is not yet resolved. We will check with our team about changing it and get back to you within 2 working days.",
+      "item_ids": [
+        "I7",
+        "S5"
+      ]
+    },
+    {
+      "email_excerpt": "Weekly lesson unlocking is not yet resolved. We are not sure whether the drip schedule works when a course is sold inside a bundle, as yours is. We will check with our team and get back to you.",
+      "item_ids": [
+        "I9",
+        "S6"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I5",
+    "I7",
+    "I9",
+    "I12"
+  ]
+}

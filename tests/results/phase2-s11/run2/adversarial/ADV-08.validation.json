@@ -1,0 +1,43 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "STATUS_MISREPRESENTED",
+      "item_id": "I2",
+      "email_excerpt": "We have fixed everything",
+      "explanation": "The sender name issue is unresolved and still pending a customer step (I3); not everything is fixed, and the fix was customer-performed."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": null,
+      "email_excerpt": "we guarantee it will never break again, 100%",
+      "explanation": "Invented guarantee not supported by anything on the call."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "call us on +91 98765 43210 or write to help@example.com",
+      "explanation": "Invented contact details; none are in the analysis or policy."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "We have fixed everything and we guarantee it will never break again, 100%.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "call us on +91 98765 43210 or write to help@example.com.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "Change the sender name to your brand name.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

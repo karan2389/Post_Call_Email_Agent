@@ -1,0 +1,23 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": [], "support_speakers": [], "other_speakers": ["Speaker 1", "Speaker 2"]},
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {"id": "S1", "title": "Recurring problem, subject not named", "problem_statement": "A problem that was also discussed on an earlier call keeps coming back after a repeated attempt; the transcript never names what it is.", "status": "unresolved"},
+    {"id": "S2", "title": "Second pending matter, subject not named", "problem_statement": "Another matter is described as pending; the transcript never names what it is.", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "discussed", "description": "A repeated attempt at an unnamed step did not change the result; the problem is unresolved and the transcript does not say what the step or the problem was.", "owner": "none", "guided_by": null, "evidence": ["Done. It's still the same."], "stated_timeline": null, "confidence": "low"},
+    {"id": "I2", "issue_id": "S1", "category": "discussed", "description": "An unnamed 'other thing' was mentioned as a next step, but it is not clear who will do it or what it is.", "owner": "none", "guided_by": null, "evidence": ["So we'll do that other thing and you let me know."], "stated_timeline": null, "confidence": "low"},
+    {"id": "I3", "issue_id": "S2", "category": "discussed", "description": "A second unnamed matter was acknowledged as pending; the transcript does not say what it is or who will act.", "owner": "none", "guided_by": null, "evidence": ["And the other one, that is also pending.", "I'll see what can be done."], "stated_timeline": null, "confidence": "low"}
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {"skip": true, "reason_code": "ANALYSIS_LOW_CONFIDENCE", "explanation": "Speakers are unlabelled and the topics, actions and owners are never named, so the outcomes cannot be classified with at least medium confidence."}
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "P2-11",
+  "synthetic": true,
+  "Date": "October 30, 2026",
+  "Time of the call": "9:30 AM",
+  "Customer Name": "Isha Testwala",
+  "Email": "isha.testwala@example.com",
+  "Call lead by(who took the call)": "Sameer Demo",
+  "Meeting URL": "https://meet.example.com/p2-11",
+  "Recording URL": "",
+  "Recording Sent": "",
+  "Meeting Notes": "call cancel",
+  "delivery_mode": "dry_run"
+}

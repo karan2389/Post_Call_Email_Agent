@@ -1,0 +1,110 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted help with eight topics on your list, from your thank-you page to exporting your student list.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you pasted your thank-you page link into the redirect field in your product's After purchase settings and saved it, and a test order now goes to your thank-you page.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you increased the spacing between the two buttons in the mobile view of the page editor, and you confirmed on your phone that the buttons are now separate.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We explained how to verify your email domain: add your domain in Email settings, add the three DNS records you receive at your domain registrar, and then click Verify.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "Your emails going to spam is not yet resolved.",
+      "item_ids": [
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "If you decide to extend your expired EARLYBIRD coupon, you can change the expiry date in the coupon settings.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "You are still thinking about it.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "There is a drip schedule setting for lessons, but we are not sure whether it works when a course is sold inside a bundle, which is how you sell yours.",
+      "item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "email_excerpt": "We are not aware of an AI quiz generator being available right now and have no date for one, so please do not plan around it.",
+      "item_ids": [
+        "I9"
+      ]
+    },
+    {
+      "email_excerpt": "To export your student list, go to Students, click Export and choose CSV, which downloads a file you can open in a spreadsheet.",
+      "item_ids": [
+        "I10"
+      ]
+    },
+    {
+      "email_excerpt": "Get your developer to add the three DNS records at your domain registrar, by Friday.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Try exporting your student list.",
+      "item_ids": [
+        "I11"
+      ]
+    },
+    {
+      "email_excerpt": "The GST name on your invoices shows your personal name instead of your company name, which is not yet resolved.",
+      "item_ids": [
+        "S5"
+      ]
+    },
+    {
+      "email_excerpt": "We will check about changing it and get back to you within 2 working days.",
+      "item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "email_excerpt": "We will check whether the drip schedule works for a course sold inside a bundle and get back to you.",
+      "item_ids": [
+        "I8"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I6",
+    "I8",
+    "I11"
+  ]
+}

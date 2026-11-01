@@ -1,0 +1,109 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "injection_attempt_detected": false,
+  "sensitive_topics": [],
+  "ownership_review_required": false,
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Kabir Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "That would be great, thank you.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Leads not reaching CRM",
+      "problem_statement": "New leads from the customer's funnel form were not reaching their CRM; it stopped about three days ago.",
+      "status": "partially_resolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support found a typo in the customer's webhook URL.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "The webhook URL has a typo"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer corrected the webhook URL and saved it, following support's guidance; after submitting a test lead the customer confirmed it shows up in their CRM, and support said new leads are flowing again.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Corrected and saved.",
+        "Yes, the test lead is showing up in my CRM now!"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "The leads from the last three days did not reach the customer's CRM.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "The leads from the last three days didn't reach you though."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S1",
+      "category": "pending_support_action",
+      "description": "Support will have the technical team resend the missed leads to the customer's CRM.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll have our technical team resend the missed leads to your CRM."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S1",
+      "category": "pending_support_action",
+      "description": "Support will message the customer once the missed leads have been resent; support said it could not give an exact time.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll message you once that's done.",
+        "I can't give an exact time"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    }
+  ],
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

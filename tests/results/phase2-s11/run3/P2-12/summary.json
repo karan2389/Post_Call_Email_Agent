@@ -1,0 +1,36 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "Your webinar registration page was not sending the confirmation email, and your products page showed the wrong currency.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "We turned on the confirmation email for your webinar registration page from our side and saved it.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "You registered once with your other email address as a test and confirmed the confirmation email arrived.",
+      "source_item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "text": "Following our guidance, you selected Indian Rupee in your account's Settings, Regional page and saved it, and you confirmed your products page now shows the right currency.",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "covered": [],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "webinar email and currency"
+}

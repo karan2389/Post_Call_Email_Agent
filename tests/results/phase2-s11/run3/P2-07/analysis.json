@@ -1,0 +1,49 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "INCOMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [],
+    "support_speakers": [],
+    "other_speakers": [
+      "Speaker 1",
+      "Speaker 2"
+    ]
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Unidentified ongoing problem",
+      "problem_statement": "A problem was described as still not working after an earlier attempt, but the transcript never says what it is; a second pending matter is also mentioned without detail.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "The speakers discussed a problem that is still not working and a possible setting to check, without saying what the problem or setting is; it remains unresolved.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "so that one is still not working, same as before.",
+        "Done. It's still the same."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "TRANSCRIPT_INCOMPLETE",
+    "explanation": "The transcript starts mid-conversation with unlabelled speakers and never states the problem, so the customer and the outcomes cannot be identified."
+  }
+}

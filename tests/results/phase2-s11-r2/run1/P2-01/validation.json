@@ -1,0 +1,41 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted your customers to receive the order confirmation email after they buy, since you had already connected your payment gateway.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you switched on the order confirmation email for your product and saved it, and the confirmation email from your test order arrived in your inbox.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the email still shows the default sender name and that you can change it under Email settings, Sender name.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "This is not yet resolved.",
+      "item_ids": [
+        "I2",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "Change the sender name to your brand name under Email settings, Sender name (after the call, as you mentioned).",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

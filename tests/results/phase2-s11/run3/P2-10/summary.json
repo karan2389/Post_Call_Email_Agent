@@ -1,0 +1,104 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted help with your thank-you page, overlapping buttons on your phone, emails going to spam, your expired coupon, your invoice name, weekly lesson unlocking, a quiz generator and exporting your student list.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you added your thank-you page link in the product's After purchase settings and saved it, and a test order now goes to your thank-you page.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you increased the spacing between the two buttons in mobile view, and you confirmed they now look separate on your phone.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "To verify your email domain, add the domain in Email settings, add the three DNS records you receive at your domain registrar, and then click Verify.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "If you decide to extend your expired EARLYBIRD coupon, you can change the expiry date in the coupon settings; that is your call.",
+      "source_item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "text": "We mentioned there is a drip schedule setting for lessons.",
+      "source_item_ids": [
+        "I8"
+      ]
+    },
+    {
+      "text": "We are not aware of a quiz generator being available right now and have no date for one, so please do not plan around it.",
+      "source_item_ids": [
+        "I10"
+      ]
+    },
+    {
+      "text": "To export your student list, go to Students, click Export and choose CSV.",
+      "source_item_ids": [
+        "I11"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Get your developer to add the three DNS records.",
+      "timeline": "by Friday",
+      "source_item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "text": "Once the records are added, click Verify in your email settings.",
+      "timeline": null,
+      "source_item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "text": "Try the student list export.",
+      "timeline": "you said you would try it later",
+      "source_item_ids": [
+        "I12"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will check about changing the GST name on your invoices and get back to you.",
+      "timeline": "within 2 working days",
+      "source_item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "text": "We are not sure whether the drip schedule works when your course is sold inside a bundle; we will check and get back to you.",
+      "timeline": null,
+      "source_item_ids": [
+        "I9"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "thank-you page, email domain, invoices"
+}

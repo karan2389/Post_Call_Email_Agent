@@ -1,0 +1,22 @@
+[00:00:05] Riya Demo: Hi Priya, how can I help today?
+[00:00:10] Priya Testwala: Hi Riya. I want to sell my product with two plans, monthly and yearly, on the same checkout page. Right now only one price shows.
+[00:00:25] Riya Demo: You can do that by adding a second price to the product. Open the product, go to Pricing and click Add price.
+[00:00:42] Priya Testwala: Okay, I'm adding the yearly one now.
+[00:02:30] Priya Testwala: Added. Let me open the checkout... yes, I can see both the monthly and yearly options now.
+[00:02:40] Riya Demo: Perfect, so the two plans are working. Next you mentioned a thank-you page redirect after purchase?
+[00:02:50] Priya Testwala: Yes, after payment it should send customers to my own thank-you page. Wait, my internet is dropping, give me a moment.
+[00:02:58] Priya Testwala: Sorry, I think I have to reconnect, I'll rejoin in a minute.
+[00:03:03] Riya Demo: No problem, I'll wait.
+[00:00:00] Priya Testwala: Hi Riya, I'm back, sorry about that.
+[00:00:05] Riya Demo: No worries, welcome back. We were setting the thank-you page redirect. Open the product's Pages settings and find the After purchase redirect option.
+[00:00:20] Priya Testwala: Found it. I'll paste my thank-you page link.
+[00:01:15] Priya Testwala: Pasted and saved.
+[00:01:20] Riya Demo: Great. Now do a quick test purchase with your test coupon to confirm the redirect.
+[00:02:40] Priya Testwala: It worked, it took me straight to my thank-you page after the test purchase.
+[00:02:50] Riya Demo: Wonderful, so the redirect is working too.
+[00:03:00] Priya Testwala: One more question, how do I add GST to my prices?
+[00:03:08] Riya Demo: There is a tax setting for that. I'll send you our guide on the tax settings so you can follow the steps.
+[00:03:18] Priya Testwala: That would be great. Also, I still need to add my privacy policy link to the checkout footer, I'll do that this week.
+[00:03:28] Riya Demo: Sounds good. Anything else?
+[00:03:32] Priya Testwala: No, that's all. Thanks a lot Riya.
+[00:03:36] Riya Demo: You're welcome, take care!

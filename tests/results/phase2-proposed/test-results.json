@@ -1,0 +1,104 @@
+{
+  "generated_for": "phase2 synthetic dry run",
+  "total": 4,
+  "passed": 2,
+  "results": [
+    {
+      "case": "P2-01",
+      "scenario": "Normal technical support call with a resolved issue",
+      "checks": [],
+      "failures": [
+        "analysis vs expected: missing item explained/support /sender name/"
+      ],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 2
+      },
+      "email": {
+        "words": 113,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "FAIL"
+    },
+    {
+      "case": "P2-02",
+      "scenario": "Complex troubleshooting involving multiple steps",
+      "checks": [],
+      "failures": [
+        "semantic UNSUPPORTED_CLAIM: instead of showing a \"site can't be reached\" error",
+        "validation FAIL, expected PASS"
+      ],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 4
+      },
+      "email": {
+        "words": 136,
+        "deterministic_issues": 0,
+        "semantic_issues": 1,
+        "validation": "FAIL"
+      },
+      "status": "FAIL"
+    },
+    {
+      "case": "P2-06",
+      "scenario": "Multiple Fathom recording segments belonging to one call",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 4
+      },
+      "email": {
+        "words": 173,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-09",
+      "scenario": "Transcript contains internal-only information that must never appear in the customer email",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 2
+      },
+      "email": {
+        "words": 123,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    }
+  ]
+}

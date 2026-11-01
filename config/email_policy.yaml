@@ -1,0 +1,54 @@
+# Email policy shared by the email-generation and email-validation stages and by the deterministic checks
+# (docs/validation-rules.md section 5). Non-secret.
+# Phase 2 (synthetic dry-run only): nothing here is used to send mail.
+
+language: en                      # MVP language (OD-08); Hindi / Hinglish calls still get an English email
+subject_template: "Follow-up on your FlexiFunnels support call – {primary_topic}"
+subject_min_chars: 20
+subject_max_chars: 90
+min_words: 80                     # excluding signature (OD-09, proposal)
+
+# Length policy (user decision 1, 2026-10-31; D-031). Used identically by the generator, the deterministic checks and the validator.
+# Count = whitespace-separated tokens of the body, excluding the signature block; the greeting, section labels, list markers and URLs count.
+preferred_max_words: 250          # up to this: normal
+permitted_max_words: 350          # 251-350: permitted only when needed to keep important customer information (resolved, unresolved and pending items)
+human_review_above_words: 350     # above 350: the email is NOT sent automatically; record SKIPPED LENGTH_REVIEW_REQUIRED for a human
+length_rules:
+  - "Never omit an unresolved issue, an important completed action or a pending action only to meet the word limit."
+  - "Before adding words or dropping content, remove repetition, filler and unnecessary explanations."
+max_words: 250                    # kept for older readers: equals preferred_max_words
+
+# Relative timeline policy (user decision 4, 2026-10-31; D-031). call_date (YYYY-MM-DD, Asia/Kolkata, from the source row, never the
+# system clock) is passed into the pipeline. Relative words are read against the CALL date, never the generation or sending date.
+relative_timeline_policy:
+  call_date_required: true
+  rules:
+    - "Interpret relative timeline words against call_date, not the date the email is generated or sent."
+    - "Never invent a calendar date. Never change the customer's intended timing. Preserve uncertainty (vague words such as 'later' or 'soon' carry no timeline)."
+    - "A customer's own timing stays the customer's: 'You mentioned that you planned to ...'. Never turn it into a support commitment."
+    - "Do not write bare 'today', 'tonight', 'tomorrow' or 'yesterday' in the email; anchor to the call."
+  examples:
+    - "I'll try it tonight -> You mentioned during our call that you planned to try it that evening."
+    - "I'll complete it tomorrow -> You mentioned that you planned to complete it the following day."
+    - "I'll check it next week -> You mentioned that you planned to check it next week."
+
+# Signature as specified by skills/email-generation Examples. {support_agent_first_name} comes from the source row.
+# No phone numbers, email addresses or links are configured: none may be invented (Phase 2 brief).
+signature_block: |
+  Warm regards,
+  {support_agent_first_name}
+  FlexiFunnels Support
+
+banned_phrases:
+  - "as an ai"
+  - "i hope this email finds you well"
+  - "guarantee"
+  - "100%"
+  - "definitely"
+  - "transcript"
+  - "automated"
+
+allowed_links: []                 # only the call's Fathom recording URLs are allowed; no help-centre link is configured
+allowed_contacts: []              # no support phone number or email address is configured; none may appear
+
+sensitive_topics_require_human: unset   # OD-11 not decided; analysis flags topics, policy is unresolved

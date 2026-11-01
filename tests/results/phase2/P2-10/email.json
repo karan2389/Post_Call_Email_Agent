@@ -1,0 +1,9 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – thank-you page, email domain and invoices",
+  "body_text": "Hi Anita,\n\nThank you for your time on our call. You came with a list covering your thank-you page, mobile landing page, email domain, invoices and course. Here is a quick summary.\n\nWhat we resolved:\n- Your thank-you page redirect is set up, and your test order now goes to your page.\n- The overlapping mobile buttons are fixed, and you confirmed they look fine.\n\nWhat we covered:\n- Email domain: add your domain in Email settings, add the three DNS records at your registrar, then click Verify.\n- EARLYBIRD coupon: if you extend it, change the expiry date in the coupon settings.\n- Lesson drip: a drip schedule setting exists for lessons.\n- AI quiz generator: we are not aware of one being available right now and have no date for one, so please do not plan around it.\n\nYour next steps:\n1. Have your developer add the three DNS records by Friday.\n2. Once they are added, click Verify in your email settings.\n3. Export your student list: Students, Export, then CSV (you said you would try this later).\n\nWhat we'll do next:\n- We will check with our billing team about changing the name on your invoices and get back to you within 2 working days.\n- We will check with our product team whether the drip schedule works for a course sold inside a bundle and get back to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 250,
+  "referenced_item_ids": ["I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10", "I11"],
+  "recording_urls_included": ["https://fathom.video/share/EXAMPLE-P2-10"],
+  "sections_included": ["resolved", "covered", "customer_next_steps", "support_next_steps", "recording"]
+}

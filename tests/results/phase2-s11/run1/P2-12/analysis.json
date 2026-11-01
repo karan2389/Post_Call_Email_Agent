@@ -1,0 +1,70 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Tara Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Perfect, it looks right to me too. Thank you!",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Webinar confirmation email not sent",
+      "problem_statement": "The customer's webinar registration page was not sending the confirmation email.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Wrong currency on products page",
+      "problem_statement": "The customer's products page was showing the wrong currency.",
+      "status": "resolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Support turned on the confirmation email for the webinar page from their side and saved it; after the customer registered with another email as a test, the confirmation email arrived.",
+      "owner": "support",
+      "guided_by": "none",
+      "evidence": [
+        "I've turned it on from my side and saved it.",
+        "Registered. Yes, the confirmation email just came in!"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S2",
+      "category": "completed",
+      "description": "Customer selected Indian Rupee in Settings, Regional (account regional settings, which support said only the account owner can change) and saved it, following support's guidance; the products page now shows rupees, which support saw on refresh and the customer confirmed.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "I selected Indian Rupee and clicked save.",
+        "Perfect, it looks right to me too."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted new leads from your funnel form to reach your CRM again.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you corrected the typo in your webhook URL and saved it, and you confirmed that a test lead now shows up in your CRM.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "We will arrange for the leads from the last three days that did not reach your CRM to be resent, and we will message you once that is done. We cannot give an exact time yet.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2"
+  ]
+}

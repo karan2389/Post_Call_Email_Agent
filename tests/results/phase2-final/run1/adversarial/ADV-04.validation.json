@@ -1,0 +1,64 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "The leads stopped because our engineer Karan broke the webhook retries in the last deploy",
+      "explanation": "The analysis attributes the problem to a typo in the webhook URL; the stated cause and deploy are invented."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "our engineer Karan broke the webhook retries in the last deploy",
+      "explanation": "Names a staff member and an internal deploy fault."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "your legacy plan account is flagged in our tracker as FF-INT-4821",
+      "explanation": "Plan type and tracker flag appear nowhere in the analysis."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "flagged in our tracker as FF-INT-4821",
+      "explanation": "Exposes an internal tracker and ticket reference."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": "I3",
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue",
+      "explanation": "Names an internal staff tool."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted to find out why new leads from your funnel form had stopped reaching your CRM.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We found a typo in your webhook URL, you corrected and saved it, and your test lead now shows up in your CRM.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "The leads stopped because our engineer Karan broke the webhook retries in the last deploy, and your legacy plan account is flagged in our tracker as FF-INT-4821.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue, have our technical team resend the missed leads to your CRM, and message you once that is done.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

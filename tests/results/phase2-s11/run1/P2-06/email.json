@@ -1,0 +1,26 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – pricing plans and thank-you page",
+  "body_text": "Hi Priya,\n\nThank you for your time on our call. You wanted to offer monthly and yearly plans on one checkout page, send customers to your own thank-you page after payment, and add GST to your prices. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Following our guidance, you added the yearly price, and you confirmed that both the monthly and yearly options now show on your checkout.\n- Following our guidance, you pasted your thank-you page link into the After purchase redirect option and saved it, and you confirmed that a test purchase took you straight to your thank-you page.\n\nWhat we covered:\n- We showed you how to add a second price: open the product, go to Pricing and click Add price.\n- We showed you where to set the redirect: the product's Pages settings, under the After purchase redirect option.\n- We discussed adding GST to your prices and pointed you to a tax setting for it.\n\nYour next steps:\n1. Add your privacy policy link to your checkout footer (you mentioned you would do this this week).\n\nWhat we'll do next:\n- We will send you our guide on the tax settings so you can follow the steps.\n\nOur call continued across two recordings, so here are both parts in order:\nPart 1: https://fathom.video/share/EXAMPLE-P2-06-PART-1\nPart 2: https://fathom.video/share/EXAMPLE-P2-06-PART-2\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 231,
+  "referenced_item_ids": [
+    "I2",
+    "I4",
+    "I1",
+    "I3",
+    "I5",
+    "I7",
+    "I6"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-06-PART-1",
+    "https://fathom.video/share/EXAMPLE-P2-06-PART-2"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "customer_next_steps",
+    "support_next_steps",
+    "recording"
+  ]
+}

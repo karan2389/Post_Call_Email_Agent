@@ -1,0 +1,20 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – funnel leads and your CRM",
+  "body_text": "Hi Kabir,\n\nThank you for your time on our call. You called because new leads from your funnel form were not reaching your CRM, which stopped about three days before our call.\n\nWhat we resolved:\n- Following our guidance, you corrected the typo in your webhook URL and saved it, and a test lead you submitted now shows up in your CRM, so new leads are flowing again.\n\nWhat we covered:\n- The leads from the three days before our call did not reach your CRM, so this issue is only partly resolved.\n\nWhat we'll do next:\n- We will resend the missed leads to your CRM and message you once that is done. We cannot give an exact time.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-09\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+  "word_count_excluding_signature": 136,
+  "length_status": "within_preferred",
+  "referenced_item_ids": [
+    "I1",
+    "I2"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-09"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "support_next_steps",
+    "recording"
+  ]
+}

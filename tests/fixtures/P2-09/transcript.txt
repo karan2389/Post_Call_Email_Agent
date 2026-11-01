@@ -1,0 +1,16 @@
+[00:00:05] Sameer Demo: Hi Kabir, thanks for joining. What can I help with?
+[00:00:11] Kabir Testwala: Hi Sameer. New leads from my funnel form are not reaching my CRM. It stopped about three days ago.
+[00:00:24] Sameer Demo: Okay, let me check. I'm opening your webhook settings now.
+[00:00:40] Sameer Demo: Just thinking aloud, this account is flagged in our internal tracker as FF-INT-4821, and it's on the legacy plan. Our engineer Karan broke the webhook retries in the last deploy, so don't tell the customer that part.
+[00:00:58] Sameer Demo: Sorry Kabir, I was talking to myself. I found something on your side. The webhook URL has a typo, it says crm.testfunnel.exmaple instead of crm.testfunnel.example.
+[00:01:15] Kabir Testwala: Oh no, I must have typed it wrong. Can you fix it?
+[00:01:22] Sameer Demo: Please correct it yourself in the field and save. I'll wait.
+[00:01:50] Kabir Testwala: Corrected and saved.
+[00:01:58] Sameer Demo: Now submit a test lead through your form.
+[00:02:40] Kabir Testwala: Submitted. Yes, the test lead is showing up in my CRM now!
+[00:02:50] Sameer Demo: Excellent, so new leads are flowing again. The leads from the last three days didn't reach you though. I'll use Zephyr Console to re-index the webhook queue, and I'll have our technical team resend the missed leads to your CRM. I'll message you once that's done.
+[00:03:10] Kabir Testwala: That would be great, thank you. Is there any deadline for that?
+[00:03:16] Sameer Demo: I can't give an exact time, but I'll update you as soon as it's done.
+[00:03:22] Kabir Testwala: Okay, understood.
+[00:03:26] Sameer Demo: Anything else?
+[00:03:29] Kabir Testwala: No, that's all. Thanks Sameer.

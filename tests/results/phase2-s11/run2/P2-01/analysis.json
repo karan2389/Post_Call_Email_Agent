@@ -1,0 +1,83 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Neha Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Thanks Riya, really helpful.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Order confirmation email not received",
+      "problem_statement": "The customer had connected their payment gateway, but their customers were not getting the order confirmation email after they buy.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Default sender name on the email",
+      "problem_statement": "The order confirmation email still shows the default sender name, and the customer wants to use their brand name.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer switched on the order confirmation email for the product and saved it, following support's guidance, and after placing a test order confirmed the confirmation email arrived in their inbox.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Done, I saved it.",
+        "the confirmation email just arrived in my inbox!"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S2",
+      "category": "explained",
+      "description": "Support explained that the email still shows the default sender name and that it can be changed under Email settings, Sender name.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "the email still shows the default sender name",
+        "You can change it under Email settings, Sender name."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "pending_customer_action",
+      "description": "Customer will change the sender name under Email settings to their brand name.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "I'll change that myself after the call, I want to use my brand name."
+      ],
+      "stated_timeline": "after the call",
+      "confidence": "high"
+    }
+  ],
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

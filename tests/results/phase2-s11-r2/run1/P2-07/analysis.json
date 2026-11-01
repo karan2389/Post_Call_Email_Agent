@@ -1,0 +1,62 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "INCOMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [],
+    "support_speakers": [],
+    "other_speakers": [
+      "Speaker 1",
+      "Speaker 2"
+    ]
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Unnamed recurring problem",
+      "problem_statement": "A problem was still not working after earlier attempts; the transcript never says what it is.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "The speakers discussed a problem that was still not working after two earlier attempts and another attempt during the call, with the same result; the problem is never named.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Yes, twice. It comes back every time.",
+        "Done. It's still the same."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "A second, unnamed matter was mentioned as also pending; what it is and who will act on it is not stated.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "And the other one, that is also pending."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "TRANSCRIPT_INCOMPLETE",
+    "explanation": "The transcript starts mid-conversation with generic speaker labels, never names the problem and gives no attributable outcomes or commitments."
+  }
+}

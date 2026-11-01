@@ -1,0 +1,34 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "Following our guidance, you deleted the old A record at your domain registrar and added a CNAME record using the target value from your FlexiFunnels domain settings, and your domain now loads.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you deleted a second record for the www version and added a CNAME record for www with the same target value, and you confirmed both the main domain and the www version now load your funnel.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the padlock for the secure certificate can take some time to appear after connecting.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "We will check that your secure certificate has been issued and message you if it has not, the morning after our call.",
+      "item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4"
+  ]
+}

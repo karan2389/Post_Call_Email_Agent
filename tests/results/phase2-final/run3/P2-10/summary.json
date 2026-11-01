@@ -1,0 +1,116 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You came with a list of topics: your thank-you page, mobile buttons, emails going to spam, a coupon, invoice GST name, lesson unlocking, a quiz generator and student export.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you added your thank-you page link to the After purchase redirect field and saved it, and a test order now reaches your thank-you page.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you increased the spacing between the two buttons in the mobile view, and you confirmed on your phone that they no longer overlap.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "Emails going to spam: add your domain in Email settings, add the three DNS records you receive at your domain registrar, then click Verify. This is not yet resolved.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "Your invoice GST name shows your personal name instead of your company name. This is not yet resolved.",
+      "source_item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "text": "Lesson drip: there is a drip schedule setting, but we were not sure whether it works when a course is sold inside a bundle, as yours is. This is not yet resolved.",
+      "source_item_ids": [
+        "I9"
+      ]
+    },
+    {
+      "text": "Expired coupon: if you decide to extend it, you can change the expiry date in the coupon settings. You mentioned you had not decided yet.",
+      "source_item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "text": "Quiz generator: we are not aware of one being available and have no date for one, so please do not plan around it.",
+      "source_item_ids": [
+        "I11"
+      ]
+    },
+    {
+      "text": "Student export: go to Students, click Export and choose CSV.",
+      "source_item_ids": [
+        "I12"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Get your developer to add the three DNS records at your domain registrar.",
+      "timeline": "by Friday",
+      "timeline_source": "by Friday",
+      "source_item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "text": "Once the records are added, click Verify in the email settings.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "text": "Try exporting your student list.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I13"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will check with our billing team about changing the GST name on your invoices and get back to you.",
+      "timeline": "within 2 working days",
+      "timeline_source": "within 2 working days",
+      "source_item_ids": [
+        "I8"
+      ]
+    },
+    {
+      "text": "We will check with our product team whether the drip schedule works for a course sold inside a bundle, and get back to you.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I10"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "thank-you page, domain and invoice"
+}

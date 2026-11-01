@@ -1,0 +1,38 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "resolved": [
+    {
+      "text": "Following our guidance, you turned on the autoresponder option in your form settings and saved it, and the email from your test form submission arrived.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that the email can sometimes land in spam, so verifying your sender domain is a good idea, and that you can do this in the email domain section of your settings.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Verify your sender domain in the email domain section of your settings.",
+      "timeline": "tomorrow morning",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "call_purpose": "You wanted the autoresponder email to reach the leads coming in from your form, who were arriving but not receiving it.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "primary_topic": "autoresponder emails"
+}

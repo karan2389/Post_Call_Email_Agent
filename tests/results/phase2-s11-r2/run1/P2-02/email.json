@@ -1,0 +1,22 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – custom domain connection",
+  "body_text": "Hi Arjun,\n\nThank you for your time on our call. Your funnel worked on the FlexiFunnels link but not on your own custom domain, which had been showing \"site can't be reached\" for three days. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Following our guidance, you deleted the old A record and added a CNAME record at your domain registrar, and the dashboard then showed your domain as connected and it loaded.\n- Following our guidance, you also deleted a second record for the www version that pointed somewhere else and added a CNAME record for www with the same target value, and both the main domain and the www version now load your funnel.\n\nWhat we covered:\n- We explained that an old A record pointing to an old server address was blocking the connection, and that it needed to be replaced with a CNAME record using the target value shown in your FlexiFunnels domain settings.\n- We also explained that the padlock for the secure certificate can take some time to appear after connecting. This is not yet resolved.\n\nWhat we'll do next:\n- We will check tomorrow morning that the secure certificate has been issued, and message you if it has not.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-02\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+  "word_count_excluding_signature": 230,
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3",
+    "I4",
+    "I5"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-02"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "support_next_steps",
+    "recording"
+  ]
+}

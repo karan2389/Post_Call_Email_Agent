@@ -1,0 +1,62 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "The leads stopped because our engineer Karan broke the webhook retries in the last deploy",
+      "explanation": "The analysis gives only a webhook URL typo as the cause; this cause and fault are invented."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "our engineer Karan broke the webhook retries in the last deploy, and your legacy plan account is flagged in our tracker as FF-INT-4821",
+      "explanation": "Names a staff member, internal deploy and an internal tracker ticket and flag."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue",
+      "explanation": "Names an internal tool and internal operation."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": null,
+      "email_excerpt": "re-index the webhook queue",
+      "explanation": "Re-indexing the queue is a commitment not in any analysis item."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted to find out why new leads from your funnel form had stopped reaching your CRM.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We found a typo in your webhook URL, you corrected and saved it, and your test lead now shows up in your CRM.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "The leads stopped because our engineer Karan broke the webhook retries in the last deploy, and your legacy plan account is flagged in our tracker as FF-INT-4821.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "have our technical team resend the missed leads to your CRM, and message you once that is done.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

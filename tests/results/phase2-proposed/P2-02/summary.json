@@ -1,0 +1,18 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted your custom domain to load your funnel instead of showing a \"site can't be reached\" error.",
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you replaced the old records with CNAME records for your domain and its www version, and you confirmed that both now load your funnel.", "source_item_ids": ["I1", "I2"]}
+  ],
+  "covered": [
+    {"text": "We explained that the padlock for the secure certificate can take some time to appear after connecting.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {"text": "We will check that the secure certificate has been issued, and message you if it has not.", "timeline": "tomorrow morning", "source_item_ids": ["I4"]}
+  ],
+  "omitted_item_ids": [],
+  "primary_topic": "custom domain connection"
+}

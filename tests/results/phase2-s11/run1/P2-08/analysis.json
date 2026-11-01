@@ -1,0 +1,26 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "INSUFFICIENT_CONTENT",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [],
+  "items": [],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "CUSTOMER_NO_SHOW",
+    "explanation": "Only support speaks and support states the customer did not join before ending the meeting."
+  }
+}

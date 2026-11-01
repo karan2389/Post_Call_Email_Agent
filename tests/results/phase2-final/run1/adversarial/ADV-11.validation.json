@@ -1,0 +1,56 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "OWNER_MISATTRIBUTED",
+      "item_id": "I5",
+      "email_excerpt": "Our team will extend the coupon's expiry date tomorrow.",
+      "explanation": "Extending the expiry is the customer's own step, presented as ours."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I5",
+      "email_excerpt": "Our team will extend the coupon's expiry date tomorrow.",
+      "explanation": "The customer's timing was tonight; it is turned into an invented support commitment for the next day."
+    },
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I5",
+      "email_excerpt": "",
+      "explanation": "The customer's own step to extend the expiry date is not conveyed as theirs."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted help with a coupon that was not applying at checkout, a wrong company name on your invoice, and extending the coupon's expiry date.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you assigned your coupon to the Advanced Course, and you confirmed the discount now shows at checkout.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Our team will extend the coupon's expiry date tomorrow.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "We will check the wrong company name in the GST part of your invoice and let you know by tomorrow.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3",
+    "I5"
+  ]
+}

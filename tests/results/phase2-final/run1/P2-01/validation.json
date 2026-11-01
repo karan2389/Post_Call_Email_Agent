@@ -1,0 +1,43 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You called about your customers not receiving the order confirmation email after buying, and about the default sender name shown on that email.",
+      "item_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you switched on the order confirmation email for your product and saved it, then placed a test order and confirmed that the confirmation email arrived in your inbox.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the sender name can be changed under Email settings, Sender name.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "The email still shows the default sender name, so this is not yet resolved.",
+      "item_ids": [
+        "S2",
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "Change the sender name to your brand name under Email settings, Sender name. You mentioned you would do this after our call.",
+      "item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4"
+  ]
+}

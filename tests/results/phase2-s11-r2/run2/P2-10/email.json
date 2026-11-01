@@ -1,0 +1,29 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – thank-you page and email domain",
+  "body_text": "Hi Anita,\n\nThank you for your time on our call. You wanted help with eight topics on your list, from your thank-you page to exporting your student list.\n\nWhat we resolved:\n- Following our guidance, you pasted your thank-you page link into the redirect field in your product's After purchase settings and saved it, and a test order now goes to your thank-you page.\n- Following our guidance, you increased the spacing between the two buttons in the mobile view of the page editor, and you confirmed on your phone that the buttons are now separate.\n\nWhat we covered:\n- We explained how to verify your email domain: add your domain in Email settings, add the three DNS records you receive at your domain registrar, and then click Verify. Your emails going to spam is not yet resolved.\n- If you decide to extend your expired EARLYBIRD coupon, you can change the expiry date in the coupon settings. You are still thinking about it.\n- There is a drip schedule setting for lessons, but we are not sure whether it works when a course is sold inside a bundle, which is how you sell yours. This is not yet resolved.\n- We are not aware of an AI quiz generator being available right now and have no date for one, so please do not plan around it.\n- To export your student list, go to Students, click Export and choose CSV, which downloads a file you can open in a spreadsheet.\n\nYour next steps:\n1. Get your developer to add the three DNS records at your domain registrar, by Friday.\n2. Try exporting your student list.\n\nWhat we'll do next:\n- The GST name on your invoices shows your personal name instead of your company name, which is not yet resolved. We will check about changing it and get back to you within 2 working days.\n- We will check whether the drip schedule works for a course sold inside a bundle and get back to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 342,
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3",
+    "I4",
+    "I5",
+    "I6",
+    "I7",
+    "I8",
+    "I9",
+    "I10",
+    "I11"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-10"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "customer_next_steps",
+    "support_next_steps",
+    "recording"
+  ]
+}

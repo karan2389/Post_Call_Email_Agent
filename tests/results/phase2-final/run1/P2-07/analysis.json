@@ -1,0 +1,86 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [],
+    "support_speakers": [],
+    "other_speakers": [
+      "Speaker 1",
+      "Speaker 2"
+    ]
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": "Fine. And the other one, that is also pending.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Unspecified matter still not working",
+      "problem_statement": "A matter that is not named in the conversation was said to be still not working after earlier attempts; the transcript does not say what it is.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S2",
+      "title": "Second unspecified pending matter",
+      "problem_statement": "A second matter that is not named was described as also pending; the transcript does not say what it is.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "One speaker said an unnamed matter is still not working after being tried twice and after a step was repeated; the matter and the step are not identified.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Yes, twice. It comes back every time.",
+        "Done. It's still the same."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "The speakers referred to doing an unspecified 'other thing' and one speaker letting the other know; what it is and who will do it cannot be determined.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "So we'll do that other thing and you let me know."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "discussed",
+      "description": "A second unnamed matter was called pending; one speaker said they would see what can be done, but the speaker's role and the matter are not identified.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Fine. And the other one, that is also pending.",
+        "Yes, that too. I'll see what can be done."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "ANALYSIS_LOW_CONFIDENCE",
+    "explanation": "The conversation uses unnamed references with generic speaker labels, so neither the issues nor who owns the outcomes can be established."
+  }
+}

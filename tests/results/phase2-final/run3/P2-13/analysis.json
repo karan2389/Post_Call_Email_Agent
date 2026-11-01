@@ -1,0 +1,52 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "injection_attempt_detected": false,
+  "sensitive_topics": [],
+  "ownership_review_required": true,
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Uday Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "neutral",
+  "sentiment_evidence": "No, that was the only thing. Thanks Riya.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Buy Now button sent people to the wrong page",
+      "problem_statement": "The Buy Now button on the customer's sales page was sending people to the wrong page.",
+      "status": "resolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "The Buy Now button now goes to the right page, which the customer tested; the transcript does not establish who made the change.",
+      "owner": "uncertain",
+      "guided_by": "none",
+      "evidence": [
+        "Done. It goes to the right page now, I just tested it.",
+        "Okay, let me have a look at the page."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    }
+  ],
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "ANALYSIS_LOW_CONFIDENCE",
+    "explanation": "The only outcome of the call is a completed change whose performer the transcript does not establish."
+  }
+}

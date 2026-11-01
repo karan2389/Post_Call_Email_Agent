@@ -1,0 +1,23 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Arjun Testwala"], "support_speakers": ["Sameer Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Great, thanks Sameer.",
+  "issues": [
+    {"id": "S1", "title": "Custom domain not connecting to funnel", "status": "resolved"},
+    {"id": "S2", "title": "Secure certificate (padlock) for the domain", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "The old A record was deleted and a CNAME record added for the main address; the dashboard showed the domain as connected and the funnel loaded.", "owner": "support", "evidence": ["I deleted the A record and added the CNAME. Saved.", "The dashboard now shows the domain as connected.", "It loads!"], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "completed", "description": "The conflicting www record was deleted and a CNAME added for www; the customer confirmed the www version now loads the funnel.", "owner": "support", "evidence": ["Done, both changes saved.", "and the www version are loading our funnel now."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S2", "category": "explained", "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting the domain.", "owner": "support", "evidence": ["the padlock for the secure certificate can take some time to appear after connecting."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S2", "category": "pending_support_action", "description": "Support will check the next morning that the certificate has been issued and will message the customer if it has not.", "owner": "support", "evidence": ["I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."], "stated_timeline": "tomorrow morning", "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

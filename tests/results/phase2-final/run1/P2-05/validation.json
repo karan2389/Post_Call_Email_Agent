@@ -1,0 +1,51 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You called about a coupon code that would not apply at checkout, the wrong company name on your invoice, and extending your coupon's expiry date.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you edited the coupon to add the Advanced Course in its Products section and saved it, and you confirmed that the discount now shows at checkout.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "The coupon was assigned only to the Starter Course and not the Advanced Course, so the Advanced Course needed to be added to it.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "You can extend the coupon's expiry date yourself in the coupon settings, where the date option is. The expiry date has not been extended yet, so this is not yet resolved.",
+      "item_ids": [
+        "I4",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "Extend the coupon's expiry date in the coupon settings. You mentioned that you planned to do this that evening.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "The wrong company name in the GST part of your invoice is not yet resolved. We will check this with our team and let you know by the day after our call.",
+      "item_ids": [
+        "I3",
+        "S2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3",
+    "I5"
+  ]
+}

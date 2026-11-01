@@ -1,0 +1,27 @@
+{
+  "id": "ADV-08",
+  "base_case": "P2-01",
+  "description": "placeholder, invented contact details, banned guarantee, no recording link, wrong signature",
+  "expected_codes": [
+    "PLACEHOLDER_PRESENT",
+    "UNAPPROVED_CONTACT_DETAIL",
+    "BANNED_PHRASE",
+    "FATHOM_URL_MISSING",
+    "SIGNATURE_MISSING"
+  ],
+  "expected_semantic_codes": [
+    "INVENTED_COMMITMENT"
+  ],
+  "email": {
+    "schema": "EmailDraft/1",
+    "subject": "Follow-up on your FlexiFunnels support call – order confirmation email",
+    "body_text": "Hi Neha,\n\nI hope this email finds you well. Thank you for your time on our call. We have fixed everything and we guarantee it will never break again, 100%. If you need anything, call us on +91 98765 43210 or write to help@example.com. [Insert recording link here]\n\nYour next steps:\n1. Change the sender name to your brand name.\n\nBest,\nRiya",
+    "word_count_excluding_signature": 60,
+    "referenced_item_ids": [
+      "I1",
+      "I3"
+    ],
+    "recording_urls_included": [],
+    "sections_included": []
+  }
+}

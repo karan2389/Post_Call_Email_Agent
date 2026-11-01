@@ -1,0 +1,34 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "KEY_OUTCOME_OMITTED",
+      "item_id": "S1",
+      "email_excerpt": "Thank you for your time on our call, and I am sorry for the trouble.",
+      "explanation": "The unresolved video-loading issue and what was found on the call are never stated, and the email does not say it is not yet resolved."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "Thank you for your time on our call, and I am sorry for the trouble.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "Ask one of your affected students to make a short screen recording showing the video loading, and send it to us along with the lesson link.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "We will raise this with our technical team and get back to you.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2",
+    "I3"
+  ]
+}

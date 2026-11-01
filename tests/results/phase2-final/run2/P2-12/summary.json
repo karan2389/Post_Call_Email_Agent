@@ -1,0 +1,31 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You called because your webinar registration page was not sending the confirmation email and your products page showed the wrong currency.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "We turned on the confirmation email for your webinar page and saved it, and after you registered once with another email address, you confirmed the confirmation email arrived.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you selected Indian Rupee in Settings, Regional, and saved it, and your products page now shows rupees, which you confirmed looks right.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [],
+  "customer_next_steps": [],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "webinar email and currency"
+}

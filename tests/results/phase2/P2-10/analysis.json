@@ -1,0 +1,36 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Anita Testwala"], "support_speakers": ["Riya Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Perfect, that's exactly my list. Thank you so much Riya.",
+  "issues": [
+    {"id": "S1", "title": "Thank-you page redirect after checkout", "status": "resolved"},
+    {"id": "S2", "title": "Overlapping buttons on mobile landing page", "status": "resolved"},
+    {"id": "S3", "title": "Emails going to spam; email domain verification", "status": "partially_resolved"},
+    {"id": "S4", "title": "Expired EARLYBIRD coupon", "status": "informational"},
+    {"id": "S5", "title": "Company name on GST invoices", "status": "unresolved"},
+    {"id": "S6", "title": "Weekly lesson drip for a course sold in a bundle", "status": "unresolved"},
+    {"id": "S7", "title": "Question about an AI quiz generator", "status": "informational"},
+    {"id": "S8", "title": "Exporting the student list", "status": "partially_resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "The redirect field was filled with the customer's thank-you page link and a test order confirmed it now goes to that page.", "owner": "support", "evidence": ["Pasted and saved. Let me do a test order... yes, it now goes to my thank-you page."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S2", "category": "completed", "description": "Spacing between the two buttons was increased in the mobile view and the customer confirmed on their phone that they no longer overlap.", "owner": "support", "evidence": ["Let me check on my phone... yes, now they are separate, it looks fine."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S3", "category": "explained", "description": "Support explained that adding the domain in Email settings gives three DNS records to add at the domain registrar, after which Verify is clicked.", "owner": "support", "evidence": ["In Email settings, add your domain and you will get three DNS records."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S3", "category": "pending_customer_action", "description": "Customer will have their developer add the three DNS records at the domain registrar.", "owner": "customer", "evidence": ["I'll get him to add the records by Friday."], "stated_timeline": "by Friday", "confidence": "high"},
+    {"id": "I5", "issue_id": "S3", "category": "pending_customer_action", "description": "Once the records are added, the customer is to click Verify in the email settings.", "owner": "customer", "evidence": ["Once the records are added, click Verify in the email settings."], "stated_timeline": null, "confidence": "medium"},
+    {"id": "I6", "issue_id": "S4", "category": "explained", "description": "Support explained that the coupon's expiry date can be changed in the coupon settings if the customer decides to extend it; the customer is undecided.", "owner": "support", "evidence": ["you can change the expiry date in the coupon settings. It's your call."], "stated_timeline": null, "confidence": "medium"},
+    {"id": "I7", "issue_id": "S5", "category": "pending_support_action", "description": "Support will check with the billing team about changing the name on the invoices and get back to the customer.", "owner": "support", "evidence": ["I'll check with our billing team about changing it, and get back to you within 2 working days."], "stated_timeline": "within 2 working days", "confidence": "high"},
+    {"id": "I8", "issue_id": "S6", "category": "explained", "description": "Support said a drip schedule setting exists for lessons, but was unsure whether it works for a course sold inside a bundle.", "owner": "support", "evidence": ["There is a drip schedule setting for lessons.", "I'm not sure whether it works when the course is sold inside a bundle"], "stated_timeline": null, "confidence": "medium"},
+    {"id": "I9", "issue_id": "S6", "category": "pending_support_action", "description": "Support will check with the product team whether the drip schedule works for a course sold inside a bundle and get back to the customer.", "owner": "support", "evidence": ["Let me check that with our product team and get back to you."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I10", "issue_id": "S7", "category": "explained", "description": "Support said they are not aware of an AI quiz generator being available now, have no date for one, and advised the customer not to plan around it.", "owner": "support", "evidence": ["I'm not aware of a quiz generator being available right now, and I don't have a date for one."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I11", "issue_id": "S8", "category": "pending_customer_action", "description": "Customer will try exporting the student list (Students, Export, choose CSV) later, after support explained the steps.", "owner": "customer", "evidence": ["Go to Students, click Export, and choose CSV.", "Got it, thanks. I'll try it later."], "stated_timeline": null, "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with several clear outcomes and pending items on both sides."}
+}

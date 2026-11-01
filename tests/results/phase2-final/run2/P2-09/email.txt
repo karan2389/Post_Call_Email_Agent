@@ -1,0 +1,22 @@
+Subject: Follow-up on your FlexiFunnels support call – funnel leads and your CRM
+
+Hi Kabir,
+
+Thank you for your time on our call. You called because new leads from your funnel form were not reaching your CRM, which stopped about three days before our call.
+
+What we resolved:
+- Following our guidance, you corrected the typo in your webhook URL and saved it, and a test lead you submitted now shows up in your CRM, so new leads are flowing again.
+
+What we covered:
+- The leads from the three days before our call did not reach your CRM, so this issue is only partly resolved.
+
+What we'll do next:
+- We will resend the missed leads to your CRM and message you once that is done. We cannot give an exact time.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-09
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Sameer
+FlexiFunnels Support

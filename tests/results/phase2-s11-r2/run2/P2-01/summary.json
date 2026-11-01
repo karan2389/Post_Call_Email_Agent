@@ -1,0 +1,38 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You had connected your payment gateway, but your customers were not getting the order confirmation email after they buy.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you switched on the order confirmation email for your product and saved it, and a test order you placed produced the confirmation email in your inbox.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that the default sender name on the email can be changed under Email settings, Sender name. This is not yet done.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Change the sender name to your brand name under Email settings, Sender name.",
+      "timeline": "after the call",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "order confirmation email"
+}

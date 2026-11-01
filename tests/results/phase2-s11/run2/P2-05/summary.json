@@ -1,0 +1,54 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "Your coupon code was not applying at checkout for the Advanced Course and showed \"Invalid coupon\", and you also wanted help with the company name on your invoice and the coupon's expiry date.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you edited the coupon, selected the Advanced Course in its Products section and saved it, and you confirmed the discount now shows at checkout.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that the coupon was assigned only to the Starter Course and not the Advanced Course, so the product needed to be assigned.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "We explained that you can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.",
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Extend the coupon's expiry date in the coupon settings.",
+      "timeline": "tonight (the night of the call)",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will check the company name issue on your invoice with our billing team and let you know.",
+      "timeline": "by tomorrow (the day after the call)",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "coupon and invoice name"
+}

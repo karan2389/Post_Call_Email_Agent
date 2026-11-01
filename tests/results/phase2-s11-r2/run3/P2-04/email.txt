@@ -1,0 +1,23 @@
+Subject: Follow-up on your FlexiFunnels support call – autoresponder email
+
+Hi Rohan,
+
+Thank you for your time on our call. Leads were coming in from your form, but the autoresponder email was not being sent to them. Here is a quick summary so you have everything in one place.
+
+What we resolved:
+- Following our guidance, you turned on the autoresponder option, which had been off, in your form settings and saved it.
+- Following our guidance, you filled in a test form with your other email, and you confirmed the autoresponder email arrived and is now working.
+
+What we covered:
+- Emails can sometimes go to spam, so it is good to verify your sender domain, which you can do in Settings in the email domain section.
+
+Your next steps:
+1. Verify your sender domain in Settings, in the email domain section (you mentioned you would do this tomorrow morning).
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-04
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

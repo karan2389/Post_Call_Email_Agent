@@ -1,0 +1,19 @@
+Subject: Follow-up on your FlexiFunnels support call – order confirmation email and sender name
+
+Hi Neha,
+
+Thank you for your time on our call. You wanted your customers to receive the order confirmation email after they buy. Here is a quick summary so you have everything in one place.
+
+What we resolved:
+- Following our guidance, you switched on the order confirmation email for your product and saved it, and you confirmed that the confirmation email for your test order arrived in your inbox.
+
+Your next steps:
+1. Change the default sender name under Email settings, Sender name, to your brand name (you mentioned you would do this after the call).
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-01
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

@@ -10,8 +10,9 @@ An automated agent for the FlexiFunnels Customer Success / Support team. Every d
 |---|---|
 | Development | Claude Code, this repository (instructions, skills, runbook, docs, tests) |
 | Execution | **Claude Code scheduled task**, once daily at 09:00 Asia/Kolkata, using the Claude model from the user's subscription (consumes plan usage; limited) |
+| Data input | Worksheet `Calls DONE` of the original `CSC  Booking - All Agents` (the only operational source). `CSC Booking - Backup` is a recovery copy only, never read by the agent (D-029) |
 | Data access | **Native Google Sheets connector** and **native Gmail connector** (Google OAuth) |
-| State | `POST_CALL_EMAIL_LOGS` / `POST_CALL_EMAIL_EVENTS` worksheets, and `POST_CALL_CALL_ID` in source column AD (the only approved source-sheet write) |
+| State | `POST_CALL_EMAIL_LOGS` / `POST_CALL_EMAIL_EVENTS` worksheets, and, once the write gate is met, `POST_CALL_CALL_ID` in source column AD (proposed; source writes are disabled until then) |
 | Avoided | A separately billed Anthropic API, a deployed backend, and Google Cloud infrastructure for the initial workflow (kept as `docs/future-alternatives.md`) |
 
 ## What a daily run does

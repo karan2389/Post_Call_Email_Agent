@@ -1,0 +1,8 @@
+[00:00:04] Riya Demo: Hi Uday, what can I help you with today?
+[00:00:09] Uday Testwala: Hi Riya. The Buy Now button on my sales page was sending people to the wrong page.
+[00:00:20] Riya Demo: Okay, let me have a look at the page.
+[00:01:45] Riya Demo: Alright.
+[00:01:50] Uday Testwala: Done. It goes to the right page now, I just tested it.
+[00:01:58] Riya Demo: Good. Anything else?
+[00:02:02] Uday Testwala: No, that was the only thing. Thanks Riya.
+[00:02:06] Riya Demo: Take care, Uday.

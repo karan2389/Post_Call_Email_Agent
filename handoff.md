@@ -2,6 +2,18 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Phase 2 final changes (2026-11-01, uncommitted, D-033): NOT tested by design
+Per your instruction, no regression runs. Done: UTF-8 instruction in email-generation 1.4.0 (+ encoding check documented in `docs/validation-rules.md`; the check already existed in `tests/unit/checks.js`); P2-03 `must_not_include` narrowed to `we (have )?fixed|has been fixed|was fixed` (original preserved in `tests/fixtures/_history/`); language refinements in customer-summary 1.3.0, email-generation 1.4.0, email-validation 1.4.0. Business logic unchanged. Report §11 of `docs/phase2-final-report.md`. Nothing committed or pushed; Phase 3 not started. Re-test before relying on the new wording.
+
+## Final policy implementation and regression (2026-11-01, uncommitted): S-11 CLOSED by your decision (D-032)
+Implemented your four decisions (length 250/350/review, P2-03 investigation, ownership expectations, call-date timelines): skills transcript-analysis 1.4.0, customer-summary 1.2.0, email-generation 1.3.0, email-validation 1.3.0; policy in `config/email_policy.yaml`; D-031. Results (`tests/results/phase2-final/`): individual P2-03 and P2-10 pass; full runs 24/25, 25/25, 25/25 (13 fixtures + 12 adversarial drafts, all adversarial rejected every time). One failure: P2-10 in run 1 has a broken UTF-8 subject ("â€“"), caught by a new deterministic check. S-11's own criteria (ownership, grounding, no fabricated intent/promise/timeline, no leak) hold in every run, but "all fixtures pass consistently" does not, but you decided to close S-11 and accept that run as a one-off generation-session fault (D-032). Still pending: your approval to narrow the P2-03 expectation (`must_not_include: fixed`, preserved as is). Nothing committed. Report: `docs/phase2-final-report.md`. Nothing committed.
+
+## S-11 correction and regression (2026-10-31, uncommitted): fix verified in tests (earlier rounds)
+Skills corrected (transcript-analysis 1.3.1, customer-summary 1.1.1, email-generation 1.2.0, email-validation 1.2.0; D-030, `docs/validation-rules.md` §1a). Round 2 (3 independent runs, 13 fixtures + 9 adversarial): 21/22, 21/22, 20/22; ownership and grounding correct everywhere; all adversarial drafts rejected. Open: P2-10 exceeds 250 words in all six runs (S-6, needs your length policy); one borderline P2-03 email ("wanted this fixed"); owner expectations in P2-01/02/04/05/06/09/10 encode the old defect and need your approval to update (not edited); S-1 relative timelines still undecided. Original results preserved in `tests/results/phase2`; new results in `phase2-s11/` and `phase2-s11-r2/`. Report: `docs/phase2-s11-report.md`. Nothing committed.
+
+## Phase 2 — synthetic dry run (2026-10-31): NOT complete, awaiting your review
+Authorised by you; scope synthetic data only. 11 fixtures (`tests/fixtures/P2-*`), 9 adversarial drafts, `config/email_policy.yaml`, Node harness `tests/unit/run-phase2.js`, plan `docs/phase2-plan.md`, report `docs/phase2-report.md`. Result: 19/20 harness checks pass; 7 of 8 generated emails pass independent semantic validation; **P2-06 fails** (`OWNER_MISATTRIBUTED`, skill defect S-11: `completed` items are always owned by `support` even when the customer did the step). A proposed fix was tested on skill copies only: partly effective (P2-06, P2-09 pass; P2-02 and P2-01 diverged). Skills unchanged. No Gmail, no spreadsheet access, no routine, no commit. Next: your decisions on S-11, S-1 (relative timelines), word limits and OD-08/09/11/38 (`docs/phase2-report.md` §10). Do not start Phase 3 without approval.
+
 ## Completed work
 
 ### Tasks 1–5 (committed): `642f7ea`, `39b1fc2`, `1f0dddb`, `6d9c76d`
@@ -43,6 +55,9 @@ Phase 1 partial. **No application code, no recurring schedule, no spreadsheet wr
 
 ## Remaining blockers (see `docs/phase1-results.md` §8)
 B1 **resolved**: private `karan2389/Post_Call_Email_Agent` attached to the test routine; Test 2 cloned it and read all files and skills (R-02 partly verified) · B2 connector Google accounts unidentified (R-13) · B3 protected ranges absent/unverified, needs a test copy (R-03) · B4 Gmail in cloud untested, needs test-mailbox plan and approval (R-01, R-04) · B5 helpers undecided (OD-38) · B6 data-handling approval for cloud session history (R-12, OD-12).
+
+## Spreadsheet architecture (D-029, uncommitted, awaiting review)
+Agent input = `Calls DONE` in the original `CSC  Booking - All Agents` (`1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, GID `1314582701`). `CSC Booking - Backup` (`10YjhBUPpJBEnbXz5zTqGoXEIVEIuuMZT4cCyiYJ7p3Q`) is a **recovery copy only**, never read or written by the agent, documented in `docs/backup-recovery.md`; not verified as reliable. D-029 supersedes the same-day D-028 (backup as input), which was never committed. **Source writes are disabled** (`source.source_writes_enabled: false`, `protected_ranges_verified: false`) until AD ownership, header approval, protected-range verification and backup-sync safety for agent data are all confirmed (`docs/call-id-strategy.md` §0, OD-43). No backup synchronisation script exists in this repository and none was run. The test routine's saved prompts name the original (historical); it stays disabled.
 
 ## Exact next steps
 1. Review `docs/phase1-results.md`; decide whether to commit Tasks 6–8, and whether to delete the test routine / default environment at claude.ai.

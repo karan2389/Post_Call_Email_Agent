@@ -1,0 +1,107 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted to go through a list of topics: your thank-you page, mobile landing page, email domain, coupon, invoices, course lessons, a quiz generator and student list export.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you added your thank-you page link in the product's After purchase settings, and a test order now goes to your thank-you page.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you increased the spacing between the two buttons in the mobile view of your landing page, and on your phone they are now separate.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "Email domain verification (not yet resolved): you add your domain in Email settings, receive three DNS records, add them at your domain registrar and then click Verify.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "Your EARLYBIRD coupon has expired and you are still deciding whether to extend it. If you do, you can change the expiry date in the coupon settings.",
+      "source_item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "text": "Weekly lesson unlocking (not yet resolved): there is a drip schedule setting for lessons.",
+      "source_item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "text": "We are not aware of an AI quiz generator being available right now and do not have a date for one, so please do not plan around it.",
+      "source_item_ids": [
+        "I9"
+      ]
+    },
+    {
+      "text": "To export your student list, go to Students, click Export and choose CSV. This downloads a file you can open in a spreadsheet.",
+      "source_item_ids": [
+        "I10"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "You mentioned you will get your developer to add the three DNS records at your domain registrar.",
+      "timeline": "by Friday",
+      "timeline_source": "by Friday",
+      "source_item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "text": "You mentioned you will try the student list export.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I11"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will check with our billing team about changing the GST name on your invoices from your personal name to your company name, and get back to you. This is not yet resolved.",
+      "timeline": "within 2 working days",
+      "timeline_source": "within 2 working days",
+      "source_item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "text": "We will check with our product team whether the drip schedule works when your course is sold inside a bundle, and get back to you.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I8"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [
+    {
+      "issue_or_item_id": "S3",
+      "missing": "Whether verifying the email domain is expected to stop the emails going to spam is not stated in the analysis; the email does not claim it."
+    }
+  ],
+  "primary_topic": "several topics and next steps"
+}

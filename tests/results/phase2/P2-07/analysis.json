@@ -1,0 +1,21 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": [], "support_speakers": [], "other_speakers": ["Speaker 1", "Speaker 2"]},
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {"id": "S1", "title": "Unspecified problem that is still not working", "status": "unresolved"},
+    {"id": "S2", "title": "Second unspecified matter described as pending", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "discussed", "description": "An unnamed problem was said to persist after repeated attempts; the setting involved and the next action are not identifiable from the conversation.", "owner": "none", "evidence": ["Done. It's still the same.", "So we'll do that other thing and you let me know."], "stated_timeline": null, "confidence": "low"},
+    {"id": "I2", "issue_id": "S2", "category": "discussed", "description": "A second unnamed matter was said to be pending; support's response is too vague to identify what, if anything, was committed.", "owner": "none", "evidence": ["And the other one, that is also pending.", "Yes, that too. I'll see what can be done."], "stated_timeline": null, "confidence": "low"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {"skip": true, "reason_code": "ANALYSIS_LOW_CONFIDENCE", "explanation": "Speakers are unlabelled and the topics and next steps are only referred to vaguely, so the outcomes cannot be classified with at least medium confidence."}
+}

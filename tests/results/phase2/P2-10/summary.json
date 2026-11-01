@@ -1,0 +1,27 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You came with a list of things to sort out, including your thank-you page, mobile landing page, email domain, invoices and course setup.",
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Your thank-you page redirect is set up, and your test order now goes to your own thank-you page.", "source_item_ids": ["I1"]},
+    {"text": "The overlapping buttons on your mobile landing page are fixed, and you confirmed they look fine on your phone.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "Email domain: add your domain in Email settings, add the three DNS records you receive at your domain registrar, then click Verify.", "source_item_ids": ["I3"]},
+    {"text": "EARLYBIRD coupon: if you decide to extend it, you can change the expiry date in the coupon settings.", "source_item_ids": ["I6"]},
+    {"text": "Lesson drip: there is a drip schedule setting for lessons, and we are checking how it works for a course sold inside a bundle.", "source_item_ids": ["I8"]},
+    {"text": "AI quiz generator: we are not aware of one being available right now and have no date for one, so please do not plan around it.", "source_item_ids": ["I10"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Have your developer add the three DNS records at your domain registrar.", "timeline": "by Friday", "source_item_ids": ["I4"]},
+    {"text": "Once the records are added, click Verify in your email settings.", "timeline": null, "source_item_ids": ["I5"]},
+    {"text": "Export your student list by going to Students, clicking Export and choosing CSV, which you mentioned you would try later.", "timeline": null, "source_item_ids": ["I11"]}
+  ],
+  "support_next_steps": [
+    {"text": "We will check with our billing team about changing the name on your invoices and get back to you.", "timeline": "within 2 working days", "source_item_ids": ["I7"]},
+    {"text": "We will check with our product team whether the drip schedule works for a course sold inside a bundle and get back to you.", "timeline": null, "source_item_ids": ["I9"]}
+  ],
+  "omitted_item_ids": [],
+  "primary_topic": "thank-you page, email domain and invoices"
+}

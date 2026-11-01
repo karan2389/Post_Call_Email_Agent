@@ -1,0 +1,25 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Priya Testwala"], "support_speakers": ["Riya Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Thanks a lot Riya.",
+  "issues": [
+    {"id": "S1", "title": "Monthly and yearly plans on one checkout page", "status": "resolved"},
+    {"id": "S2", "title": "Redirect to own thank-you page after purchase", "status": "resolved"},
+    {"id": "S3", "title": "Adding GST to prices", "status": "partially_resolved"},
+    {"id": "S4", "title": "Privacy policy link in checkout footer", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer added a yearly price to the product following support's guidance and confirmed both the monthly and yearly options show at checkout.", "owner": "customer", "evidence": ["Added. Let me open the checkout... yes, I can see both the monthly and yearly options now."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S2", "category": "completed", "description": "Customer set the after-purchase redirect to their own thank-you page following support's guidance and confirmed it works with a test purchase.", "owner": "customer", "evidence": ["Pasted and saved.", "It worked, it took me straight to my thank-you page after the test purchase."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S3", "category": "pending_support_action", "description": "Support will send the customer a guide on the tax settings so the customer can follow the steps to add GST.", "owner": "support", "evidence": ["I'll send you our guide on the tax settings so you can follow the steps."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I4", "issue_id": "S4", "category": "pending_customer_action", "description": "Customer will add the privacy policy link to the checkout footer.", "owner": "customer", "evidence": ["I still need to add my privacy policy link to the checkout footer, I'll do that this week."], "stated_timeline": "this week", "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call across two recording segments with clear outcomes."}
+}

@@ -1,0 +1,24 @@
+{
+  "case_id": "P2-12",
+  "scenario": "S-11 regression: one action performed by support, one by the customer",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": ["positive", "neutral"],
+    "issue_count": {"min": 2, "max": 3},
+    "required_items": [],
+    "forbidden_categories": {"pending_support_action": "no support commitment was made", "pending_customer_action": "nothing was left for the customer"},
+    "stated_timelines_allowed": [null]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-12"],
+    "must_include": ["Tara", "confirmation email", "rupee|Rupee"],
+    "must_not_include": ["guarantee", "soon", "shortly", "tomorrow", "today"],
+    "notes": "Ownership truth is in tests/fixtures/ownership-truth.json: support turned the confirmation email on; the customer changed the currency. Required item owners are checked there, not here."
+  },
+  "validation_expected": "PASS"
+}

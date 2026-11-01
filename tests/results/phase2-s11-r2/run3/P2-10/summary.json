@@ -1,0 +1,30 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You came with a list: fixing the page buyers land on after checkout, the overlapping buttons on your mobile landing page, emails going to spam, your expired coupon, the GST name on your invoices, weekly lesson unlocking, a quiz generator, and exporting your student list.",
+  "call_purpose_issue_ids": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you pasted your thank-you page link into the empty redirect field in the product's After purchase settings and saved it, and you confirmed a test order now goes to your thank-you page.", "source_item_ids": ["I1"]},
+    {"text": "Following our guidance, you increased the spacing between the two buttons in the mobile view of the page editor, and you confirmed on your phone that they are now separate.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "For emails going to spam, we explained that in Email settings you add your domain, get three DNS records, add those three records at your domain registrar, and then click Verify in the email settings. This is not yet resolved.", "source_item_ids": ["I3"]},
+    {"text": "We explained that if you decide to extend your expired coupon, you can change its expiry date in the coupon settings; you have not decided yet.", "source_item_ids": ["I5"]},
+    {"text": "You told us the GST name on your invoices shows your personal name instead of your company name. This is not yet resolved.", "source_item_ids": ["I6"]},
+    {"text": "We explained that there is a drip schedule setting for lessons, but we are not sure whether it works when a course is sold inside a bundle, which is how you sell yours. This is not yet resolved.", "source_item_ids": ["I8"]},
+    {"text": "We are not aware of a quiz generator being available right now and we do not have a date for one, so please do not plan around it.", "source_item_ids": ["I10"]},
+    {"text": "We explained that you can export your student list by going to Students, clicking Export and choosing CSV, which downloads a file you can open in a spreadsheet.", "source_item_ids": ["I11"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Get your developer, who has the registrar login, to add the DNS records at your domain registrar.", "timeline": "by Friday", "source_item_ids": ["I4"]},
+    {"text": "Try exporting your student list.", "timeline": null, "source_item_ids": ["I12"]}
+  ],
+  "support_next_steps": [
+    {"text": "We will check with our team about changing the GST name on your invoices and get back to you.", "timeline": "within 2 working days", "source_item_ids": ["I7"]},
+    {"text": "We will check with our team whether the drip schedule works for a course sold inside a bundle and get back to you.", "timeline": null, "source_item_ids": ["I9"]}
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "checkout, buttons, DNS, invoices"
+}

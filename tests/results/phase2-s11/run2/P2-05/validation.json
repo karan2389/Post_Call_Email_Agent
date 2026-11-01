@@ -1,0 +1,49 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "Your coupon code was not applying at checkout for the Advanced Course and showed \"Invalid coupon\", and you also wanted help with the company name on your invoice and the coupon's expiry date.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you edited the coupon, selected the Advanced Course in its Products section and saved it, and you confirmed the discount now shows at checkout.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "The coupon was assigned only to the Starter Course and not the Advanced Course, so the product needed to be assigned.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "You can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Extend the coupon's expiry date in the coupon settings (you mentioned you'd do this on the night of our call).",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "We will check the company name issue on your invoice with our billing team and let you know by the day after our call.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3",
+    "I5"
+  ]
+}

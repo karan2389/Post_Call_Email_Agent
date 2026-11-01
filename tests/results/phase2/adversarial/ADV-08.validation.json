@@ -1,0 +1,16 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {"code": "STATUS_MISREPRESENTED", "item_id": "I2", "email_excerpt": "We have fixed everything", "explanation": "Blanket completion claim; only I1 is completed, the sender name (I2/I3) is still a pending customer step."},
+    {"code": "INVENTED_COMMITMENT", "item_id": null, "email_excerpt": "we guarantee it will never break again, 100%", "explanation": "A guarantee that was never given on the call."},
+    {"code": "UNSUPPORTED_CLAIM", "item_id": null, "email_excerpt": "call us on +91 98765 43210 or write to help@example.com.", "explanation": "Contact details are not supported by any analysis item and were invented."}
+  ],
+  "statement_map": [
+    {"email_excerpt": "We have fixed everything", "item_ids": []},
+    {"email_excerpt": "we guarantee it will never break again, 100%", "item_ids": []},
+    {"email_excerpt": "call us on +91 98765 43210 or write to help@example.com.", "item_ids": []},
+    {"email_excerpt": "Change the sender name to your brand name.", "item_ids": ["I3"]}
+  ],
+  "pending_items_checked": ["I3"]
+}

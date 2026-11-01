@@ -1,0 +1,21 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Neha Testwala"], "support_speakers": ["Riya Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Thanks Riya, really helpful.",
+  "issues": [
+    {"id": "S1", "title": "Customers not receiving order confirmation email", "status": "resolved"},
+    {"id": "S2", "title": "Default sender name on order confirmation email", "status": "partially_resolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer switched on the order confirmation email toggle for the product and saved it, then confirmed a test order's confirmation email arrived.", "owner": "customer", "evidence": ["Done, I saved it.", "I placed the test order. And yes, the confirmation email just arrived in my inbox!"], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S2", "category": "pending_customer_action", "description": "Customer will change the default sender name under Email settings, Sender name, to their brand name after the call.", "owner": "customer", "evidence": ["You can change it under Email settings, Sender name.", "I'll change that myself after the call, I want to use my brand name."], "stated_timeline": "after the call", "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

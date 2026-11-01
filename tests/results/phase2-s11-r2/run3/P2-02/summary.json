@@ -1,0 +1,25 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "Your custom domain had been showing \"site can't be reached\" for three days, while your funnel worked on the FlexiFunnels link but not on your own domain.",
+  "call_purpose_issue_ids": ["S1"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you deleted the old A record and added the CNAME record at your domain registrar and saved it, and you confirmed your domain now loads.", "source_item_ids": ["I3"]},
+    {"text": "Following our guidance, you deleted the second www record and added a CNAME for www with the same target value, and you confirmed both your domain and its www version now load your funnel.", "source_item_ids": ["I5"]}
+  ],
+  "covered": [
+    {"text": "We explained that an old A record pointing to an old server address was blocking the connection and needed to be replaced with a CNAME record using the target value shown in your FlexiFunnels domain settings.", "source_item_ids": ["I2"]},
+    {"text": "We explained that the www version still showed an error because a second record for www pointed somewhere else, and needed a CNAME for www with the same target value.", "source_item_ids": ["I4"]},
+    {"text": "We explained that the padlock for the secure certificate can take some time to appear after connecting.", "source_item_ids": ["I6"]}
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {"text": "We will check that the secure certificate has been issued and will message you if it has not.", "timeline": "tomorrow morning", "source_item_ids": ["I7"]}
+  ],
+  "omitted_item_ids": [
+    {"item_id": "I1", "reason": "first diagnostic check with no outcome useful to the customer"}
+  ],
+  "analysis_gaps": [],
+  "primary_topic": "custom domain connection"
+}

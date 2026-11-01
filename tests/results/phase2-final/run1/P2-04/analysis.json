@@ -1,0 +1,101 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "hi",
+  "participants": {
+    "customer_speakers": [
+      "Rohan Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "अब सही चल रहा है।",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Autoresponder email not sent to form leads",
+      "problem_statement": "The customer's form was bringing in leads, but the autoresponder email was not going out to them.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Sender domain verification",
+      "problem_statement": "Support noted that emails can sometimes land in spam, so verifying the sender domain is advisable; the customer did not report a spam problem.",
+      "status": "informational"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Support observed the autoresponder option in the form settings was switched off; the customer switched it on and saved it following support's guidance.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "यहाँ ऑटोरिस्पॉन्डर वाला विकल्प बंद है।",
+        "कर दिया, सेव हो गया।"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer submitted a test form using their other email address, at support's request, and confirmed the autoresponder email arrived.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "भर दिया... हाँ, ईमेल आ गया! अब सही चल रहा है।"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "explained",
+      "description": "Support explained that emails can sometimes land in spam, so it is good to verify the sender domain, which can be done in the email domain section of Settings.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "ईमेल कभी-कभी स्पैम में जा सकता है",
+        "सेटिंग्स में ईमेल डोमेन वाले हिस्से में कर सकते हैं"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S2",
+      "category": "pending_customer_action",
+      "description": "Customer will verify the sender domain in the email domain section of Settings.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "ठीक है, मैं कल सुबह वह कर लूँगा।"
+      ],
+      "stated_timeline": "कल सुबह",
+      "timeline_reference": "call_relative",
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call (Hindi) with clear outcomes."
+  }
+}

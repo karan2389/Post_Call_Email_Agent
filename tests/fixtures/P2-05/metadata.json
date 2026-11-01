@@ -1,0 +1,14 @@
+{
+  "case_id": "P2-05",
+  "synthetic": true,
+  "Date": "October 30, 2026",
+  "Time of the call": "4:30 PM",
+  "Customer Name": "Sanjay Testwala",
+  "Email": "sanjay.testwala@example.com",
+  "Call lead by(who took the call)": "Sameer Demo",
+  "Meeting URL": "https://meet.example.com/p2-05",
+  "Recording URL": "https://fathom.video/share/EXAMPLE-P2-05",
+  "Recording Sent": "no",
+  "Meeting Notes": "",
+  "delivery_mode": "dry_run"
+}

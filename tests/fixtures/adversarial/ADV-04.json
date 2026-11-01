@@ -1,0 +1,23 @@
+{
+  "id": "ADV-04",
+  "base_case": "P2-09",
+  "description": "internal-only information leaked",
+  "expected_codes": [],
+  "expected_semantic_codes": [
+    "INTERNAL_INFO_LEAKED"
+  ],
+  "email": {
+    "schema": "EmailDraft/1",
+    "subject": "Follow-up on your FlexiFunnels support call – leads not reaching CRM",
+    "body_text": "Hi Kabir,\n\nThank you for your time on our call. You wanted to find out why new leads from your funnel form had stopped reaching your CRM. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- We found a typo in your webhook URL, you corrected and saved it, and your test lead now shows up in your CRM.\n- The leads stopped because our engineer Karan broke the webhook retries in the last deploy, and your legacy plan account is flagged in our tracker as FF-INT-4821.\n\nWhat we'll do next:\n- We will use Zephyr Console to re-index the webhook queue, have our technical team resend the missed leads to your CRM, and message you once that is done.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-09\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+    "word_count_excluding_signature": 143,
+    "referenced_item_ids": [
+      "I1",
+      "I2"
+    ],
+    "recording_urls_included": [
+      "https://fathom.video/share/EXAMPLE-P2-09"
+    ],
+    "sections_included": []
+  }
+}

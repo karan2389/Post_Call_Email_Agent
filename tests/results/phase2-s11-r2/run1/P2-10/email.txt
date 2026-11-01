@@ -1,0 +1,33 @@
+Subject: Follow-up on your FlexiFunnels support call – setup questions and next steps
+
+Hi Anita,
+
+Thank you for your time on our call. You came with a list of topics, including your thank-you page, the mobile layout of your landing page, emails going to spam, your invoices, unlocking lessons weekly and exporting your student list. Here is a quick summary so you have everything in one place.
+
+What we resolved:
+- Following our guidance, you pasted your thank-you page link into the redirect field in your product's After purchase settings, and your test order now goes to your thank-you page.
+- Following our guidance, you increased the spacing between the two buttons in the mobile view of your page editor, and you confirmed on your phone that they are now separate and look fine.
+
+What we covered:
+- We explained how to verify your email domain: add your domain in Email settings, add the three DNS records you receive at your domain registrar, then click Verify. This is not yet resolved.
+- We explained that if you decide to extend your expired coupon, you can change its expiry date in the coupon settings.
+- You told us the GST name on your invoices shows your personal name, not your company name. This is not yet resolved.
+- We explained that there is a drip schedule setting for lessons, but we are not sure whether it works when a course is sold inside a bundle, as yours is. This is not yet resolved.
+- We are not aware of an AI quiz generator being available right now and do not have a date for one, so please do not plan around it.
+
+Your next steps:
+1. Get your developer to add the three DNS records at your domain registrar (by Friday, as you mentioned).
+2. Once the records are added, click Verify in your email settings.
+3. Try exporting your student list: go to Students, click Export and choose CSV.
+
+What we'll do next:
+- We will check with our billing team about changing the GST name on your invoices and get back to you within 2 working days.
+- We will check with our product team whether the drip schedule works for a course sold in a bundle and get back to you.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

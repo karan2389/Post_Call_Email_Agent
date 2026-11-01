@@ -1,0 +1,110 @@
+{
+  "case_id": "P2-10",
+  "scenario": "Long transcript with multiple issues and action items",
+  "eligibility": {
+    "outcome": "ELIGIBLE",
+    "reason_code": null
+  },
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": [
+      "positive",
+      "neutral"
+    ],
+    "issue_count": {
+      "min": 6,
+      "max": 9
+    },
+    "required_items": [
+      {
+        "category": "completed",
+        "pattern": "thank-you|redirect",
+        "owner": "customer"
+      },
+      {
+        "category": "completed",
+        "pattern": "mobile|button|spacing",
+        "owner": "customer"
+      },
+      {
+        "category": "explained",
+        "pattern": "domain|DNS",
+        "owner": "support"
+      },
+      {
+        "category": "pending_customer_action",
+        "pattern": "DNS|domain|records",
+        "owner": "customer"
+      },
+      {
+        "category": "pending_support_action",
+        "pattern": "billing|GST|invoice",
+        "owner": "support"
+      },
+      {
+        "category": "pending_support_action",
+        "pattern": "drip|product team",
+        "owner": "support"
+      },
+      {
+        "category": "explained",
+        "pattern": "coupon|expiry",
+        "owner": "support"
+      },
+      {
+        "category": "pending_customer_action",
+        "pattern": "export",
+        "owner": "customer"
+      }
+    ],
+    "forbidden_categories": {},
+    "issue_status_required": {
+      "drip": "unresolved|partially_resolved"
+    },
+    "stated_timelines_allowed": [
+      null,
+      "by Friday",
+      "within 2 working days",
+      "later"
+    ]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": [
+      "https://fathom.video/share/EXAMPLE-P2-10"
+    ],
+    "must_include": [
+      "Anita",
+      "Friday",
+      "2 working days",
+      "drip"
+    ],
+    "must_not_include": [
+      "quiz generator.*(will|coming|soon|planned)",
+      "we will extend",
+      "coupon (has been|was) extended",
+      "guarantee",
+      "soon",
+      "shortly"
+    ],
+    "notes": "Traps: (a) 'I'll think about it' (coupon) is NOT a customer commitment, so it must not appear under next steps; (b) the quiz generator is unavailable with no date, so it must not be promised (omitting it is preferred, or state only what was said); (c) the DNS records are a customer step done by the customer's developer, 'by Friday'; (d) the drip schedule is unconfirmed, and support only promised to check; (e) the export 'I'll try it later' is an acknowledgement of guidance, not a firm next step. Length: this tests whether all pending items fit within max_words (S-6)."
+  },
+  "validation_expected": "PASS",
+  "expectation_revisions": [
+    {
+      "after": "first run (2026-10-31)",
+      "original": "required items: discussed/none for the EARLYBIRD coupon; explained/support for the student export",
+      "revised": "coupon: explained/support (how to change the expiry date); export: pending_customer_action/customer",
+      "reason": "Coupon: support did explain where to change the expiry date, so explained is more accurate than discussed. Export: transcript-analysis rule 7 (\"I'll try that later\" -> pending_customer_action) applies literally; the original expectation contradicted the skill text. The tension with Example B remains open (S-8)."
+    },
+    {
+      "after": "S-11 correction (2026-10-31); user decision 3, approved",
+      "original": "analysis.required_items[category=completed].owner = \"support\" for patterns: thank-you|redirect ; mobile|button|spacing",
+      "revised": "owner = \"customer\" (the customer performed the action; support guided it)",
+      "reason": "Ownership of a completed action is the performer (skills transcript-analysis 1.3.x). Transcript evidence: Customer: \"Pasted and saved. Let me do a test order\" and \"Okay I increased the spacing.\". Derived from the synthetic transcript only, not from generated output. Original file preserved in tests/fixtures/_history/2026-10-31-before-ownership-update/."
+    }
+  ]
+}

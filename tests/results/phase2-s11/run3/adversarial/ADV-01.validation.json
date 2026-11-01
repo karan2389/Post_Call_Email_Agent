@@ -1,0 +1,52 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "STATUS_MISREPRESENTED",
+      "item_id": "I6",
+      "email_excerpt": "Your secure certificate is now fully set up and the padlock is showing",
+      "explanation": "Certificate issuance is only a pending support check (I6) and the padlock was only explained as possibly taking time (I5); neither is completed."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "so your visitors will see a secure site",
+      "explanation": "No analysis item says visitors now see a secure site."
+    },
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I6",
+      "email_excerpt": "",
+      "explanation": "Support's pending check that the certificate has been issued (and message if not) is missing."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted your custom domain to load your funnel instead of showing a \"site can't be reached\" error.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Your custom domain is now connected, and both the main address and the www version load your funnel.",
+      "item_ids": [
+        "I2",
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Your secure certificate is now fully set up and the padlock is showing, so your visitors will see a secure site.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "We explained that the old record was blocking the connection and had to be replaced with a CNAME record.",
+      "item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I6"
+  ]
+}

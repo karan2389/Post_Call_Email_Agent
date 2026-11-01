@@ -1,0 +1,64 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Speaker 1"
+    ],
+    "support_speakers": [
+      "Speaker 2"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Unspecified problem still not working",
+      "problem_statement": "The customer said a problem discussed earlier is still not working after trying a previous fix twice; the transcript never names the problem or the product area.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "An unnamed problem was still occurring after the customer repeated an earlier fix twice and after a further attempt from a setting support pointed to; the problem and the setting are not named.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Yes, twice. It comes back every time.",
+        "Done. It's still the same."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "The speakers agreed that \"the other thing\" would be done and that the customer would be told or would report back, and that a second unnamed matter is also pending; who does what and what the matters are cannot be determined.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "So we'll do that other thing and you let me know.",
+        "Yes, that too. I'll see what can be done."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "ANALYSIS_LOW_CONFIDENCE",
+    "explanation": "Generic speaker labels and vague references mean neither the problem, the next steps nor who owns them can be established with at least medium confidence."
+  }
+}

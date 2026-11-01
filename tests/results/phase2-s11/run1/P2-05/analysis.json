@@ -1,0 +1,113 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "mixed",
+  "participants": {
+    "customer_speakers": [
+      "Sanjay Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "neutral",
+  "sentiment_evidence": "Dhanyavaad Sameer ji.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Coupon not applying at checkout",
+      "problem_statement": "The customer's coupon code was not applying at checkout and showed \"Invalid coupon\" when used on the Advanced Course.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Wrong company name on invoice (GST part)",
+      "problem_statement": "The company name shown in the GST part of the customer's invoice is wrong.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S3",
+      "title": "Extend coupon expiry date",
+      "problem_statement": "The customer wanted to extend the expiry date of their coupon.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support explained that in the coupon dashboard the coupon was assigned only to the Starter Course and not the Advanced Course, so the product needed to be assigned.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "Coupon dashboard mein ye coupon sirf Starter Course ke liye assign hai, Advanced Course ke liye nahi."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer edited the coupon, selected the Advanced Course in the Products section and saved it, following support's guidance, and confirmed the discount now shows at checkout.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Ho gaya. Ab test karta hoon... haan, ab checkout pe discount dikh raha hai."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "pending_support_action",
+      "description": "Support will check the invoice's company name issue with the billing team and tell the customer.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "Uske liye main billing team se check karke aapko kal tak bata dunga."
+      ],
+      "stated_timeline": "kal tak (by the day after the call)",
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S3",
+      "category": "explained",
+      "description": "Support explained that the customer can extend the coupon expiry date themselves in the coupon settings, where the date option is.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "Expiry aap khud coupon settings mein badha sakte ho, wahin date ka option milega."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S3",
+      "category": "pending_customer_action",
+      "description": "Customer will extend the coupon expiry date in the coupon settings.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "Haan, main aaj raat badha dunga."
+      ],
+      "stated_timeline": "aaj raat (the night of the call)",
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

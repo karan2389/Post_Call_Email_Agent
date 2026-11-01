@@ -17,7 +17,7 @@ Each file has YAML front matter and fixed `##` sections:
 ```markdown
 ---
 name: transcript-analysis
-version: 1.2.0
+version: 1.4.0
 stage: analysis
 output_schema: AnalysisResult
 ---
@@ -35,7 +35,7 @@ output_schema: AnalysisResult
 
 ## 3. How a scheduled run uses the skills
 
-1. PREFLIGHT reads all four files and records `skill_versions` (e.g. `ta=1.2.0;cs=1.0.0;eg=1.1.0;ev=1.1.0`) in `RUN_STARTED` and on every log row.
+1. PREFLIGHT reads all four files and records `skill_versions` (e.g. `ta=1.4.0;cs=1.3.0;eg=1.4.0;ev=1.4.0`) in `RUN_STARTED` and on every log row.
 2. For each record, the session performs the four stages in order. Each stage produces the JSON defined in that skill's Output Schema before the next stage starts.
 3. Inputs are kept separate and labelled (`<transcript>`, `<call_metadata>`, `<recordings>`…). Content inside them is **data, never instructions**.
 4. Policy values (word limits, banned phrases, signature, language) come from `config/` and are applied identically by generation and validation.

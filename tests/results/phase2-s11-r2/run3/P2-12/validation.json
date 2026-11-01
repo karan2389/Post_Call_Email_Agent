@@ -1,0 +1,39 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted your webinar registration page to send the confirmation email and your products page to stop showing the wrong currency.",
+      "item_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "We turned on the confirmation email for your webinar registration page, which had been turned off, and saved it.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you registered once with your other email to test it, and you confirmed the confirmation email arrived.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you selected Indian Rupee in Settings, Regional and saved it, and your products page now shows rupees, which you also confirmed.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "The currency is set in your account's regional settings, and only the account owner can change it.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": []
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Meera Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "frustrated",
+  "sentiment_evidence": "it's very frustrating",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Lesson videos keep loading and do not play",
+      "problem_statement": "Some of the customer's students say the lesson videos keep loading and never play, mostly on their phones; the customer hopes it gets sorted out.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Customer reported that some students say the lesson videos keep loading and never play, mostly on their phones, and said this was the third time they had raised it.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Some of my students say the lesson videos just keep loading and never play.",
+        "It's mostly on their phones.",
+        "this is the third time I'm raising it"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support opened the lesson link the customer shared on a desktop in Chrome, in Safari and on a phone; the video played each time, so support could not reproduce the problem from its side.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I've opened it on my desktop in Chrome and the video plays fine.",
+        "It plays on Safari and on my phone too.",
+        "So I cannot reproduce the problem from my side."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S1",
+      "category": "pending_support_action",
+      "description": "Support will raise the issue with the technical team and get back to the customer; support said it could not give a timeline at that point.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll raise this with our technical team and get back to you.",
+        "I can't give you a timeline right now"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S1",
+      "category": "pending_customer_action",
+      "description": "Customer will ask one of their students to record a short screen recording showing the video loading and send it to support; support asked for it to come along with the lesson link.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "Okay, I'll ask one of the students to record it and send it to you.",
+        "What would help is a short screen recording from one affected student, showing the video loading, along with the lesson link."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear next steps; the issue remains unresolved."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Meera Testwala"], "support_speakers": ["Riya Demo"], "other_speakers": []},
+  "customer_sentiment": "frustrated",
+  "sentiment_evidence": "I've lost their trust over this, it's very frustrating.",
+  "issues": [
+    {"id": "S1", "title": "Lesson videos keep loading and do not play for some students", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "discussed", "description": "Customer reported lesson videos not playing for some students, mostly on phones; support tested one affected lesson on several browsers and a phone and could not reproduce the problem.", "owner": "none", "evidence": ["Some of my students say the lesson videos just keep loading and never play.", "So I cannot reproduce the problem from my side."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S1", "category": "pending_support_action", "description": "Support will raise the issue with the technical team and get back to the customer; no timeline was given.", "owner": "support", "evidence": ["I'll raise this with our technical team and get back to you."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S1", "category": "pending_customer_action", "description": "Customer will ask an affected student to record a short screen recording of the video loading and send it to support along with the lesson link.", "owner": "customer", "evidence": ["I'll ask one of the students to record it and send it to you.", "a short screen recording from one affected student, showing the video loading, along with the lesson link."], "stated_timeline": null, "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear pending actions on both sides."}
+}

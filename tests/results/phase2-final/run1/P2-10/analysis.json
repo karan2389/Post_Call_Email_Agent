@@ -1,0 +1,251 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Anita Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Perfect, that's exactly my list. Thank you so much Riya.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Wrong page after checkout",
+      "problem_statement": "After checkout, the customer's customers land on the default page instead of the customer's own thank-you page.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Overlapping buttons on mobile landing page",
+      "problem_statement": "The two buttons on the customer's landing page overlap each other on their phone.",
+      "status": "resolved"
+    },
+    {
+      "id": "S3",
+      "title": "Emails going to spam",
+      "problem_statement": "The customer's emails are going to spam; the customer read that they need to verify their email domain.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S4",
+      "title": "Expired EARLYBIRD coupon",
+      "problem_statement": "The customer's EARLYBIRD coupon has expired and they are not sure whether they want to extend it.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S5",
+      "title": "Personal name in GST name on invoices",
+      "problem_statement": "The GST name on the customer's invoices shows their personal name, not their company name.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S6",
+      "title": "Weekly lesson unlocking for course",
+      "problem_statement": "The customer wants the course lessons to unlock one per week for their students; the course is sold inside a bundle.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S7",
+      "title": "AI quiz generator question",
+      "problem_statement": "The customer asked whether FlexiFunnels has an AI quiz generator, which a friend said it has.",
+      "status": "informational"
+    },
+    {
+      "id": "S8",
+      "title": "Exporting the student list",
+      "problem_statement": "The customer asked how to export their student list.",
+      "status": "informational"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "The redirect field in the product's After purchase settings was empty; the customer pasted their thank-you page link there and saved it, following support's guidance, and a test order now goes to their thank-you page.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "I see the redirect field is empty.",
+        "Pasted and saved. Let me do a test order... yes, it now goes to my thank-you page."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S2",
+      "category": "completed",
+      "description": "Customer switched to the mobile view in the page editor and increased the spacing between the two buttons, following support's guidance, and confirmed on their phone that the buttons are now separate.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Okay I increased the spacing. Let me check on my phone... yes, now they are separate, it looks fine."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S3",
+      "category": "explained",
+      "description": "Support explained how to verify the email domain: add the domain in Email settings, add the three DNS records received at the domain registrar, then click Verify.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "In Email settings, add your domain and you will get three DNS records.",
+        "After that you click Verify."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S3",
+      "category": "pending_customer_action",
+      "description": "Customer will get their developer, who has the registrar login, to add the three DNS records at the domain registrar.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "I'll get him to add the records by Friday."
+      ],
+      "stated_timeline": "by Friday",
+      "timeline_reference": "fixed",
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S3",
+      "category": "pending_customer_action",
+      "description": "Once the DNS records are added, the customer is to click Verify in the email settings.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "Once the records are added, click Verify in the email settings."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I6",
+      "issue_id": "S4",
+      "category": "explained",
+      "description": "Support explained that, if the customer decides to extend the coupon, they can change the expiry date in the coupon settings; the customer said they will think about whether to extend it.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll think about it.",
+        "you can change the expiry date in the coupon settings."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I7",
+      "issue_id": "S5",
+      "category": "pending_support_action",
+      "description": "Support will check with the billing team about changing the name on the customer's invoices and get back to the customer within 2 working days.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll check with our billing team about changing it, and get back to you within 2 working days."
+      ],
+      "stated_timeline": "within 2 working days",
+      "timeline_reference": "fixed",
+      "confidence": "high"
+    },
+    {
+      "id": "I8",
+      "issue_id": "S6",
+      "category": "explained",
+      "description": "Support said there is a drip schedule setting for lessons.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "There is a drip schedule setting for lessons."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I9",
+      "issue_id": "S6",
+      "category": "pending_support_action",
+      "description": "Support is not sure whether the drip schedule works when the course is sold inside a bundle, which is how the customer sells it, and will check this with the product team and get back to the customer.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "But I'm not sure whether it works when the course is sold inside a bundle",
+        "Let me check that with our product team and get back to you."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I10",
+      "issue_id": "S7",
+      "category": "explained",
+      "description": "Support said it is not aware of a quiz generator being available right now and has no date for one, and asked the customer not to plan around it.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'm not aware of a quiz generator being available right now, and I don't have a date for one."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I11",
+      "issue_id": "S8",
+      "category": "explained",
+      "description": "Support explained how to export the student list: go to Students, click Export and choose CSV, which downloads a file that opens in a spreadsheet.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "Go to Students, click Export, and choose CSV."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I12",
+      "issue_id": "S8",
+      "category": "pending_customer_action",
+      "description": "Customer will try exporting their student list.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "I'll try it later."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete multi-topic support call with clear outcomes."
+  }
+}

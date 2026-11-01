@@ -1,0 +1,26 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Priya Testwala"], "support_speakers": ["Riya Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "No, that's all. Thanks a lot Riya.",
+  "issues": [
+    {"id": "S1", "title": "Monthly and yearly plans on one checkout page", "status": "resolved"},
+    {"id": "S2", "title": "Thank-you page redirect after purchase", "status": "resolved"},
+    {"id": "S3", "title": "Adding GST to prices", "status": "unresolved"},
+    {"id": "S4", "title": "Privacy policy link in checkout footer", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "A yearly price was added to the product and the customer confirmed both monthly and yearly options now show at checkout.", "owner": "support", "evidence": ["Added. Let me open the checkout... yes, I can see both the monthly and yearly options now."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S2", "category": "completed", "description": "The after-purchase redirect was set to the customer's own thank-you page and a test purchase confirmed it works.", "owner": "support", "evidence": ["It worked, it took me straight to my thank-you page after the test purchase."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I3", "issue_id": "S3", "category": "discussed", "description": "The customer asked how to add GST to prices and support said a tax setting exists for it; no steps were walked through.", "owner": "none", "evidence": ["how do I add GST to my prices?", "There is a tax setting for that."], "stated_timeline": null, "confidence": "medium"},
+    {"id": "I4", "issue_id": "S3", "category": "pending_support_action", "description": "Support will send the customer the guide on tax settings.", "owner": "support", "evidence": ["I'll send you our guide on the tax settings so you can follow the steps."], "stated_timeline": null, "confidence": "high"},
+    {"id": "I5", "issue_id": "S4", "category": "pending_customer_action", "description": "Customer will add a privacy policy link to the checkout footer.", "owner": "customer", "evidence": ["I still need to add my privacy policy link to the checkout footer, I'll do that this week."], "stated_timeline": "this week", "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call across two recording segments with clear outcomes."}
+}

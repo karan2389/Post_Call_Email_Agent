@@ -47,6 +47,7 @@ Only `live` may send customer emails. Rollback = set `delivery_mode: shadow` in 
 | R-11 | Deterministic steps (date maths, URL parsing, SHA-256 signatures and hashes, UUID generation) cannot be done reliably by the model "in its head" | Check whether the scheduled environment can run small helper scripts; otherwise test model-only fallbacks | Deterministic outputs reproducible on fixtures (OD-38) | 1 |
 | R-12 | Customer data in scheduled-session transcripts/history (transcripts, emails pass through the session) | Review where session history is stored, for how long, and who can see it | Company approval of data handling (OD-12) | 1 |
 | R-13 | Identity of the connector account: emails are sent from the authorising Google account; the sheet is edited as that user | Confirm which account authorises each connector | Sender identity accepted (OD-39); account has only the needed access | 1 / 4 |
+| R-14 | The backup spreadsheet is a recovery copy only (D-029). Its synchronisation, completeness and effect on agent-owned data in column AD are unverified; it could erase AD values (OD-43) | Read-only comparison with the original; confirm synchronisation behaviour with its owner | Synchronisation confirmed not to erase agent-owned data before any source write | 3 / 5
 
 Any behaviour not yet validated is described in the docs as *proposed* or *(validate)*.
 
@@ -65,6 +66,7 @@ Any behaviour not yet validated is described in the docs as *proposed* or *(vali
 | R-11 | PARTIAL: `Bash` works in the cloud sandbox; interpreters untested; the date calculation could not be tested against a non-IST clock |
 | R-12 | PARTIAL: cloud session logs are stored on claude.ai and retrievable; retention and visibility unknown; transcript reads pull content through the session (F3) |
 | R-13 | UNVERIFIED: the connector's Google account is not discoverable from within calls |
+| R-14 | UNVERIFIED: the backup has not been inspected; its synchronisation is outside this repository (`docs/backup-recovery.md`)
 
 ## 5. Cost and dependency policy (D-026)
 

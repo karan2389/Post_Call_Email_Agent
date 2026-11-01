@@ -1,0 +1,43 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted the autoresponder email to reach the leads coming in from your form.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you switched on the autoresponder option in your form settings and saved it, and after a test form submission you confirmed the autoresponder email arrived.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that emails can sometimes land in spam, so verifying your sender domain is a good idea; you can do it in the email domain section of your settings.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Verify your sender domain in the email domain section of your settings.",
+      "timeline": "the morning after our call",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [
+    {
+      "issue_or_item_id": "I3",
+      "missing": "stated_timeline is the original-language phrase with a parenthetical; a clean English rendering of the relative day was needed"
+    }
+  ],
+  "primary_topic": "form autoresponder email"
+}

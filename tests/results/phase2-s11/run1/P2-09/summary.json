@@ -1,0 +1,45 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You came to us because new leads from your funnel form stopped reaching your CRM about three days ago, and the leads from those three days had not reached it.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you corrected the webhook URL and saved it, and you confirmed that a test lead now shows up in your CRM.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We found a typo in the webhook URL in your webhook settings.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {
+      "text": "Our technical team will resend the missed leads from the last three days to your CRM, and we will message you once that is done. We are not able to give an exact time for this.",
+      "timeline": null,
+      "source_item_ids": [
+        "I3",
+        "I4"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [
+    {
+      "issue_or_item_id": "I1",
+      "missing": "What the webhook does and how the typo caused the leads to stop is not in the analysis; the summary only says a typo was found."
+    }
+  ],
+  "primary_topic": "leads not reaching CRM"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "After connecting a payment gateway, your buyers were not getting the order confirmation email after they bought, and the email still shows the default sender name when you want to use your brand name.",
+  "call_purpose_issue_ids": ["S1", "S2"],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you switched on the order confirmation email in your product's settings and saved it.", "source_item_ids": ["I1"]},
+    {"text": "Following our guidance, you placed a test order with your test coupon, and you confirmed the order confirmation email arrived in your inbox.", "source_item_ids": ["I2"]}
+  ],
+  "covered": [
+    {"text": "We explained that the sender name can be changed under Email settings, Sender name. The default sender name is not yet changed.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Change the sender name to your brand name yourself.", "timeline": "after the call", "source_item_ids": ["I4"]}
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "order confirmation email"
+}

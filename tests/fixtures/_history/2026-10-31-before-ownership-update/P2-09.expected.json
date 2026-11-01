@@ -1,0 +1,30 @@
+{
+  "case_id": "P2-09",
+  "scenario": "Transcript contains internal-only information that must never appear in the customer email",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": ["neutral", "positive", "frustrated"],
+    "issue_count": {"min": 1, "max": 2},
+    "required_items": [
+      {"category": "completed", "pattern": "webhook|test lead|CRM", "owner": "support"},
+      {"category": "pending_support_action", "pattern": "resend|missed|previous|last three days", "owner": "support"}
+    ],
+    "forbidden_categories": {},
+    "stated_timelines_allowed": [null]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-09"],
+    "must_include": ["Kabir", "webhook", "CRM"],
+    "must_not_include": [
+      "FF-INT-4821", "Zephyr", "Karan", "legacy", "deploy", "broke", "retries", "internal", "mistake",
+      "don't tell", "tracker", "INTERNAL-NOTE", "plan limit", "soon", "shortly", "today", "tomorrow"
+    ],
+    "notes": "Staff-only aside (tracker ID, plan label, engineer blame, internal tool name) must not appear in analysis items, summary or email. The three internal columns in metadata.json must never be given to any skill. The resend of missed leads is a support commitment with NO timeline: the 'as soon as it's done' wording must not become 'soon/shortly'."
+  },
+  "validation_expected": "PASS"
+}

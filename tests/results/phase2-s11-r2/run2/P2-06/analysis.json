@@ -1,0 +1,120 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Priya Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "No, that's all. Thanks a lot Riya.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Monthly and yearly plans on one checkout page",
+      "problem_statement": "The customer wanted to sell their product with two plans, monthly and yearly, on the same checkout page, but only one price was showing.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Thank-you page redirect after purchase",
+      "problem_statement": "The customer wanted customers to be sent to the customer's own thank-you page after payment.",
+      "status": "resolved"
+    },
+    {
+      "id": "S3",
+      "title": "Adding GST to prices",
+      "problem_statement": "The customer asked how to add GST to their prices.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S4",
+      "title": "Privacy policy link in checkout footer",
+      "problem_statement": "The customer still needs to add their privacy policy link to the checkout footer.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer added a yearly price to the product (Pricing, Add price) following support's guidance and confirmed that both the monthly and yearly options now show on the checkout page.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Added. Let me open the checkout... yes, I can see both the monthly and yearly options now."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S2",
+      "category": "completed",
+      "description": "Customer pasted their thank-you page link into the After purchase redirect option in the product's Pages settings and saved it, following support's guidance, and confirmed that a test purchase took them straight to their thank-you page.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Pasted and saved.",
+        "It worked, it took me straight to my thank-you page after the test purchase."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S3",
+      "category": "explained",
+      "description": "Support said there is a tax setting for adding GST to prices.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "There is a tax setting for that."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S3",
+      "category": "pending_support_action",
+      "description": "Support will send the customer the guide on the tax settings so the customer can follow the steps.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll send you our guide on the tax settings so you can follow the steps."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S4",
+      "category": "pending_customer_action",
+      "description": "Customer will add their privacy policy link to the checkout footer.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "I still need to add my privacy policy link to the checkout footer, I'll do that this week."
+      ],
+      "stated_timeline": "this week",
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call (recorded in two parts) with clear outcomes."
+  }
+}

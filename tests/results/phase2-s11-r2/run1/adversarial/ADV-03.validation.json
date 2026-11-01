@@ -1,0 +1,53 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "OWNER_MISATTRIBUTED",
+      "item_id": "I1",
+      "email_excerpt": "We switched on the order confirmation email for your product",
+      "explanation": "The customer performed this step following support guidance; the email credits \"we\"."
+    },
+    {
+      "code": "OWNER_MISATTRIBUTED",
+      "item_id": "I3",
+      "email_excerpt": "Our team will change the sender name to your brand name for you.",
+      "explanation": "Changing the sender name is the customer's own step, not support's."
+    },
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I3",
+      "email_excerpt": "",
+      "explanation": "The customer's pending step is not conveyed as the customer's action; it is wrongly given to support."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted to find out why your customers were not receiving the order confirmation email after buying.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We switched on the order confirmation email for your product, and you confirmed the email arrived in your inbox after your test order.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "The email still shows the default sender name, which can be changed in Email settings under Sender name.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Our team will change the sender name to your brand name for you.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

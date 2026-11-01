@@ -1,0 +1,20 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted help with a coupon that was not applying at checkout, a wrong company name on your invoice, and extending the coupon's expiry date.",
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "We guided you to assign your coupon to the Advanced Course, and you confirmed the discount now shows at checkout.", "source_item_ids": ["I1"]}
+  ],
+  "covered": [
+    {"text": "We explained that you can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.", "source_item_ids": ["I3"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Extend the coupon's expiry date in the coupon settings.", "timeline": "that night, the night of the call", "source_item_ids": ["I4"]}
+  ],
+  "support_next_steps": [
+    {"text": "We will check the wrong company name in the GST part of your invoice and let you know.", "timeline": "by the day after the call", "source_item_ids": ["I2"]}
+  ],
+  "omitted_item_ids": [],
+  "primary_topic": "coupon, invoice and expiry date"
+}

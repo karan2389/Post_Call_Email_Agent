@@ -1,0 +1,69 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You called about offering monthly and yearly plans on one checkout page, sending customers to your own thank-you page after purchase, and adding GST to your prices.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you added a yearly price to your product, and you confirmed that both the monthly and yearly options now show on your checkout page.",
+      "source_item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "text": "Following our guidance, you pasted your thank-you page link into the After purchase redirect option and saved it, and you confirmed with a test purchase that it took you straight to your thank-you page.",
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that a second price is added from the product's Pricing section using Add price.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "We explained that the redirect is set in the product's Pages settings, under the After purchase redirect option.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "We explained that there is a tax setting for adding GST to your prices. This is not yet resolved.",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Add your privacy policy link to your checkout footer.",
+      "timeline": "that week (the week of our call)",
+      "timeline_source": "this week",
+      "source_item_ids": [
+        "I7"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will send you our guide on the tax settings so you can follow the steps.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I6"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "pricing plans and thank-you page"
+}

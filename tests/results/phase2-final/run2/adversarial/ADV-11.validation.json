@@ -1,0 +1,40 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "OWNER_MISATTRIBUTED",
+      "item_id": "I5",
+      "email_excerpt": "Our team will extend the coupon's expiry date tomorrow.",
+      "explanation": "Extending the expiry is the customer's own planned step (I5, that evening), presented as a support commitment with a changed time."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I3",
+      "email_excerpt": "let you know by tomorrow.",
+      "explanation": "Support's \"by tomorrow\" was relative to the call date (2026-10-30); \"tomorrow\" in an email read later is not anchored and shifts the deadline."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "Following our guidance, you assigned your coupon to the Advanced Course, and you confirmed the discount now shows at checkout.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Our team will extend the coupon's expiry date tomorrow.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "We will check the wrong company name in the GST part of your invoice and let you know by tomorrow.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3",
+    "I5"
+  ]
+}

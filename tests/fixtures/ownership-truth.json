@@ -1,0 +1,134 @@
+{
+  "revisions": [
+    "Round 1 of the S-11 regression: the P2-12 support entry matched the customer's own test-registration item, which the customer really performed. The first fix (exclude regist|test) was itself too broad because the correct support item also mentions a test registration; the pattern was changed to match the toggle wording and exclude descriptions that begin with Customer. In all three round-1 runs the analysis owner was correct; only the test pattern was wrong. Disclosed in docs/phase2-s11-report.md.",
+    "Final round, run 1: the P2-12 support pattern did not match the wording \"turned it on\". The analysis owner (support) was correct; only the test pattern was too narrow. Pattern widened to turn(ed) (it) on | switched (it) on | enabled | activated. Disclosed in docs/phase2-final-report.md."
+  ],
+  "description": "Who actually performed each completed action, decided from the transcripts by the test author (S-11 regression). New file: it does not replace any existing expected.json. For every listed action, an analysis item with category completed and a description matching `pattern` must have owner = `performer`. performer 'uncertain' means the transcript does not establish it.",
+  "cases": {
+    "P2-01": [
+      {
+        "pattern": "confirmation email|toggle|switched on",
+        "performer": "customer",
+        "note": "support: 'Let's switch it on and save'; customer: 'Done, I saved it.'",
+        "evidence": [
+          "Done, I saved it."
+        ]
+      }
+    ],
+    "P2-02": [
+      {
+        "pattern": "A record|CNAME|main address|shop|connect",
+        "performer": "customer",
+        "note": "customer deleted the A record and added the CNAME",
+        "evidence": [
+          "I deleted the A record and added the CNAME. Saved."
+        ]
+      },
+      {
+        "pattern": "www",
+        "performer": "customer",
+        "note": "customer deleted the second record and added the www CNAME",
+        "evidence": [
+          "Done, both changes saved."
+        ]
+      }
+    ],
+    "P2-04": [
+      {
+        "pattern": "autoresponder|auto",
+        "performer": "customer",
+        "note": "'कर दिया, सेव हो गया।'",
+        "evidence": [
+          "कर दिया, सेव हो गया।"
+        ]
+      }
+    ],
+    "P2-05": [
+      {
+        "pattern": "coupon",
+        "performer": "customer",
+        "note": "'Ho gaya.' after support explained the steps",
+        "evidence": [
+          "Ho gaya. Ab test karta hoon"
+        ]
+      }
+    ],
+    "P2-06": [
+      {
+        "pattern": "yearly|price|plan",
+        "performer": "customer",
+        "note": "customer added the yearly price",
+        "evidence": [
+          "Added. Let me open the checkout"
+        ]
+      },
+      {
+        "pattern": "redirect|thank-you",
+        "performer": "customer",
+        "note": "customer pasted and saved the redirect link",
+        "evidence": [
+          "Pasted and saved."
+        ]
+      }
+    ],
+    "P2-09": [
+      {
+        "pattern": "webhook|URL|typo|corrected",
+        "performer": "customer",
+        "note": "'Corrected and saved.' after support said 'correct it yourself'",
+        "evidence": [
+          "Corrected and saved."
+        ]
+      }
+    ],
+    "P2-10": [
+      {
+        "pattern": "thank-you|redirect",
+        "performer": "customer",
+        "note": "customer pasted and saved the link",
+        "evidence": [
+          "Pasted and saved. Let me do a test order"
+        ]
+      },
+      {
+        "pattern": "mobile|button|spacing",
+        "performer": "customer",
+        "note": "customer increased the spacing",
+        "evidence": [
+          "Okay I increased the spacing."
+        ]
+      }
+    ],
+    "P2-12": [
+      {
+        "pattern": "turn(ed)? (it )?on|switched (it )?on|enabled|activated",
+        "exclude": "^Customer",
+        "performer": "support",
+        "note": "'I've turned it on from my side and saved it.' (a separate item for the customer's own test registration is customer-performed and starts with Customer, so it is excluded)",
+        "evidence": [
+          "I've turned it on from my side and saved it."
+        ]
+      },
+      {
+        "pattern": "currency|rupee|regional",
+        "performer": "customer",
+        "note": "'I selected Indian Rupee and clicked save.'",
+        "evidence": [
+          "I selected Indian Rupee and clicked save."
+        ]
+      }
+    ],
+    "P2-13": [
+      {
+        "pattern": "button|link|page",
+        "performer": "uncertain",
+        "note": "nothing shows who changed it",
+        "evidence": [
+          "Okay, let me have a look at the page.",
+          "Done. It goes to the right page now, I just tested it."
+        ]
+      }
+    ]
+  },
+  "audit": "Every `evidence` line must appear verbatim in tests/fixtures/<case>/transcript.txt; the harness verifies this on every run. Ownership is derived only from these transcripts, never from generated analysis or email output."
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "injection_attempt_detected": false,
+  "sensitive_topics": [],
+  "ownership_review_required": false,
+  "transcript_status": "INCOMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Speaker 1 (probable)"
+    ],
+    "support_speakers": [
+      "Speaker 2 (probable)"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Unidentified problem still not working",
+      "problem_statement": "A problem that the transcript never names is still not working, as before.",
+      "status": "unresolved"
+    },
+    {
+      "id": "S2",
+      "title": "Unidentified second pending matter",
+      "problem_statement": "A second matter that the transcript never names is described as pending.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "The unnamed problem is still not working after the customer repeated an earlier step twice and then retried from a setting; the problem and the setting are not identified.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "that one is still not working, same as before.",
+        "Done. It's still the same."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "An agreed next step (\"that other thing\") is mentioned without saying what it is or who will do it.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "So we'll do that other thing and you let me know."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "discussed",
+      "description": "A second matter is called pending and support says they will see what can be done; the matter is not identified.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "the other one, that is also pending.",
+        "I'll see what can be done."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "low"
+    }
+  ],
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "TRANSCRIPT_INCOMPLETE",
+    "explanation": "The transcript starts mid-conversation, the customer and the problem are never identified and no outcome can be attributed."
+  }
+}

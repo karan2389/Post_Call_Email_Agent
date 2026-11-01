@@ -1,0 +1,99 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You came with a list: the page buyers land on after checkout, the overlapping buttons on your mobile landing page, emails going to spam, your expired coupon, the GST name on your invoices, weekly lesson unlocking, a quiz generator, and exporting your student list.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you pasted your thank-you page link into the empty redirect field in the product's After purchase settings and saved it, and you confirmed a test order now goes to your thank-you page.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you increased the spacing between the two buttons in the mobile view of the page editor, and you confirmed on your phone that they are now separate.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Emails going to spam: in Email settings you add your domain, get three DNS records, add those three records at your domain registrar, and then click Verify in the email settings. This is not yet resolved.",
+      "item_ids": [
+        "I3",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "If you decide to extend your expired coupon, you can change its expiry date in the coupon settings; you have not decided yet.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "You told us the GST name on your invoices shows your personal name instead of your company name. This is not yet resolved.",
+      "item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "email_excerpt": "There is a drip schedule setting for lessons, but we are not sure whether it works when a course is sold inside a bundle, which is how you sell yours. This is not yet resolved.",
+      "item_ids": [
+        "I8"
+      ]
+    },
+    {
+      "email_excerpt": "We are not aware of a quiz generator being available right now and we do not have a date for one, so please do not plan around it.",
+      "item_ids": [
+        "I10"
+      ]
+    },
+    {
+      "email_excerpt": "You can export your student list by going to Students, clicking Export and choosing CSV, which downloads a file you can open in a spreadsheet.",
+      "item_ids": [
+        "I11"
+      ]
+    },
+    {
+      "email_excerpt": "Get your developer, who has the registrar login, to add the DNS records at your domain registrar (you mentioned by Friday).",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Try exporting your student list.",
+      "item_ids": [
+        "I12"
+      ]
+    },
+    {
+      "email_excerpt": "We will check with our team about changing the GST name on your invoices and get back to you, within 2 working days.",
+      "item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "email_excerpt": "We will check with our team whether the drip schedule works for a course sold inside a bundle and get back to you.",
+      "item_ids": [
+        "I9"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I7",
+    "I9",
+    "I12"
+  ]
+}

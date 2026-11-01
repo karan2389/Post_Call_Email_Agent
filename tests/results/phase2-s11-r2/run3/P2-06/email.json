@@ -1,0 +1,24 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – plans, redirect and GST",
+  "body_text": "Hi Priya,\n\nThank you for your time on our call. You wanted to sell your product with monthly and yearly plans on the same checkout page, send customers to your own thank-you page after payment, add GST to your prices, and add your privacy policy link to the checkout footer. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Following our guidance, you added a yearly price to your product under Pricing, and you confirmed both the monthly and yearly options now show on your checkout.\n- Following our guidance, you pasted your thank-you page link into the After purchase redirect option in your product's Pages settings and saved it, and you confirmed a test purchase took you straight to your thank-you page.\n\nWhat we covered:\n- There is a tax setting for adding GST to prices. This is not yet resolved.\n\nYour next steps:\n1. Add your privacy policy link to the checkout footer (you mentioned you would do this this week).\n\nWhat we'll do next:\n- We will send you our guide on the tax settings so you can follow the steps.\n\nOur call continued across two recordings, so here are both parts in order:\nPart 1: https://fathom.video/share/EXAMPLE-P2-06-PART-1\nPart 2: https://fathom.video/share/EXAMPLE-P2-06-PART-2\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 219,
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3",
+    "I5",
+    "I4"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-06-PART-1",
+    "https://fathom.video/share/EXAMPLE-P2-06-PART-2"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "customer_next_steps",
+    "support_next_steps",
+    "recording"
+  ]
+}

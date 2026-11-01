@@ -1,0 +1,35 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "Following our guidance, you corrected the typo in your webhook URL and saved it, and a test lead you submitted now shows up in your CRM, so new leads are flowing again.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "The leads from the three days before our call did not reach your CRM, so this issue is only partly resolved.",
+      "item_ids": [
+        "S1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We will resend the missed leads to your CRM and message you once that is done.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We cannot give an exact time.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2"
+  ]
+}

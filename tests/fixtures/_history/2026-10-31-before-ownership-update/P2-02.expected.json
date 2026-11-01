@@ -1,0 +1,66 @@
+{
+  "case_id": "P2-02",
+  "scenario": "Complex troubleshooting involving multiple steps",
+  "eligibility": {
+    "outcome": "ELIGIBLE",
+    "reason_code": null
+  },
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": [
+      "positive",
+      "neutral",
+      "frustrated"
+    ],
+    "issue_count": {
+      "min": 1,
+      "max": 3
+    },
+    "required_items": [
+      {
+        "category": "completed",
+        "pattern": "connected|loading|loads",
+        "owner": "support"
+      },
+      {
+        "category": "pending_support_action",
+        "pattern": "certificate",
+        "owner": "support"
+      }
+    ],
+    "forbidden_categories": {},
+    "stated_timelines_allowed": [
+      null,
+      "tomorrow morning"
+    ]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": [
+      "https://fathom.video/share/EXAMPLE-P2-02"
+    ],
+    "must_include": [
+      "Arjun",
+      "morning",
+      "certificate"
+    ],
+    "must_not_include": [
+      "incognito.*(fixed|solved|resolved)",
+      "guarantee",
+      "within 24 hours"
+    ],
+    "notes": "The incognito/cache check did NOT help and must not be presented as the solution. The fix was replacing the old A record with a CNAME (shop) and fixing the www record. The certificate is pending support. The email is sent the day after the call, so 'tomorrow morning' needs care (see docs/phase2-plan.md S-1)."
+  },
+  "validation_expected": "PASS",
+  "expectation_revisions": [
+    {
+      "after": "first run (2026-10-31)",
+      "original": "email.must_include contained the literal \"tomorrow morning\"",
+      "revised": "must_include \"morning\"",
+      "reason": "The email is read the day after the call, so the generator kept the meaning but anchored it to the call (\"On the morning after our call\"). The independent validator accepted it as the same meaning (S-1). The literal-word expectation was too strict. Whether re-anchoring is the desired policy is still open (S-1)."
+    }
+  ]
+}

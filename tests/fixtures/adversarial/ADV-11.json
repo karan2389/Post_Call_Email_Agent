@@ -1,0 +1,28 @@
+{
+  "id": "ADV-11",
+  "base_case": "P2-05",
+  "description": "unanchored \"tomorrow\" and the customer's own step turned into our commitment",
+  "expected_codes": [
+    "RELATIVE_TIME_UNANCHORED"
+  ],
+  "expected_semantic_codes": [
+    "OWNER_MISATTRIBUTED"
+  ],
+  "email": {
+    "schema": "EmailDraft/1",
+    "subject": "Follow-up on your FlexiFunnels support call – coupon, invoice and expiry date",
+    "body_text": "Hi Sanjay,\n\nThank you for your time on our call. You wanted help with a coupon that was not applying at checkout, a wrong company name on your invoice, and extending the coupon's expiry date. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Following our guidance, you assigned your coupon to the Advanced Course, and you confirmed the discount now shows at checkout.\n\nWhat we'll do next:\n- Our team will extend the coupon's expiry date tomorrow.\n- We will check the wrong company name in the GST part of your invoice and let you know by tomorrow.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-05\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+    "word_count_excluding_signature": 122,
+    "length_status": "within_preferred",
+    "referenced_item_ids": [
+      "I1",
+      "I2",
+      "I3",
+      "I4"
+    ],
+    "recording_urls_included": [
+      "https://fathom.video/share/EXAMPLE-P2-05"
+    ],
+    "sections_included": []
+  }
+}

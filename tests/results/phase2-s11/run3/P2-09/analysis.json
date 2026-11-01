@@ -1,0 +1,85 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Kabir Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "That would be great, thank you.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Funnel form leads not reaching CRM",
+      "problem_statement": "New leads from the customer's funnel form stopped reaching their CRM about three days ago.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Leads from the last three days missing in CRM",
+      "problem_statement": "The leads submitted over the last three days did not reach the customer's CRM.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support found a typo in the webhook URL in the customer's webhook settings.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "The webhook URL has a typo"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer corrected the webhook URL in the field and saved it, following support's guidance, then submitted a test lead and confirmed it now shows up in their CRM; support confirmed new leads are flowing again.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Corrected and saved.",
+        "Yes, the test lead is showing up in my CRM now!",
+        "so new leads are flowing again."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "pending_support_action",
+      "description": "Support will arrange for the missed leads from the last three days to be resent to the customer's CRM (including re-indexing the webhook queue and having the technical team resend them) and will message the customer once that is done; no exact time was given.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll have our technical team resend the missed leads to your CRM.",
+        "I'll message you once that's done.",
+        "I can't give an exact time"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

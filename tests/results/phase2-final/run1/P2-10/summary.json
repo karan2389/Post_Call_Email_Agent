@@ -1,0 +1,109 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You called with a list of topics, including your thank-you page, mobile landing page buttons, emails going to spam, your coupon, invoices, weekly lesson unlocking and your student list.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S8"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you pasted your thank-you page link into the redirect field in the product's After purchase settings and saved it, and a test order now goes to your thank-you page.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you increased the spacing between the two buttons in the mobile view, and you confirmed on your phone that they are now separate.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "To verify your email domain, add the domain in Email settings, add the three DNS records you receive at your domain registrar, then click Verify. Your emails going to spam is not yet resolved.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "Your EARLYBIRD coupon has expired and you said you will think about whether to extend it; if you decide to, you can change the expiry date in the coupon settings. This is not yet resolved.",
+      "source_item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "text": "We said there is a drip schedule setting for lessons.",
+      "source_item_ids": [
+        "I8"
+      ]
+    },
+    {
+      "text": "We are not aware of a quiz generator being available right now and do not have a date for one, so please do not plan around it.",
+      "source_item_ids": [
+        "I10"
+      ]
+    },
+    {
+      "text": "To export your student list, go to Students, click Export and choose CSV, which downloads a file you can open in a spreadsheet.",
+      "source_item_ids": [
+        "I11"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Get your developer, who has the registrar login, to add the three DNS records at your domain registrar.",
+      "timeline": "by Friday",
+      "timeline_source": "by Friday",
+      "source_item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "text": "Once the records are added, click Verify in your email settings.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "text": "Try exporting your student list.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I12"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "The name on your invoices is not yet resolved. We will check with our team about changing it and get back to you.",
+      "timeline": "within 2 working days",
+      "timeline_source": "within 2 working days",
+      "source_item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "text": "Weekly unlocking of your lessons is not yet resolved. We are not sure whether the drip schedule works when a course is sold inside a bundle, which is how you sell yours. We will check this with our team and get back to you.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I9"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "thank-you page, email domain and more"
+}

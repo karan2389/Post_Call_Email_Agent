@@ -1,0 +1,22 @@
+Subject: Follow-up on your FlexiFunnels support call – order confirmation email
+
+Hi Neha,
+
+Thank you for your time on our call. You reached out because your customers were not receiving the order confirmation email after they bought, even though you had connected your payment gateway.
+
+What we resolved:
+- Following our guidance, you switched on the order confirmation email for your product and saved it, and after a test order you confirmed the confirmation email arrived in your inbox.
+
+What we covered:
+- The email still shows the default sender name, which is not yet resolved. We explained that you can change it under Email settings, then Sender name.
+
+Your next steps:
+1. Change the sender name under Email settings, then Sender name, to use your brand name (you mentioned you planned to do this after our call).
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-01
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

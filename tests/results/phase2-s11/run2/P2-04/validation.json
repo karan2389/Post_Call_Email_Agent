@@ -1,0 +1,34 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "Leads were coming in from your form, but the autoresponder email was not being sent to them.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you switched on the autoresponder option in your form settings and saved it, and after a test form from another email you confirmed the email arrived and the autoresponder is now working.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Emails can sometimes go to spam, so it is a good idea to verify your sender domain, which you can do in Settings, in the email domain section.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Verify your sender domain in the email domain section of Settings (you mentioned you'd do this the morning after our call).",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

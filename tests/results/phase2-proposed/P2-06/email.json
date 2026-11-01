@@ -1,0 +1,22 @@
+{
+    "schema":  "EmailDraft/1",
+    "subject":  "Follow-up on your FlexiFunnels support call – pricing plans and thank-you redirect",
+    "body_text":  "Hi Priya,\n\nThank you for your time on our call. You wanted to offer monthly and yearly plans on the same checkout page and send customers to your own thank-you page after purchase. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Following our guidance, you added a yearly price to your product, and you confirmed both the monthly and yearly options now show at checkout.\n- Following our guidance, you set the after-purchase redirect to your own thank-you page, and you confirmed with a test purchase that it works.\n\nYour next steps:\n1. Add your privacy policy link to the checkout footer (you mentioned you would do this this week).\n\nWhat we\u0027ll do next:\n- We will send you our guide on the tax settings so you can follow the steps to add GST to your prices.\n\nOur call continued across two recordings, so here are both parts in order:\nPart 1: https://fathom.video/share/EXAMPLE-P2-06-PART-1\nPart 2: https://fathom.video/share/EXAMPLE-P2-06-PART-2\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+    "word_count_excluding_signature":  173,
+    "referenced_item_ids":  [
+                                "I1",
+                                "I2",
+                                "I3",
+                                "I4"
+                            ],
+    "recording_urls_included":  [
+                                    "https://fathom.video/share/EXAMPLE-P2-06-PART-1",
+                                    "https://fathom.video/share/EXAMPLE-P2-06-PART-2"
+                                ],
+    "sections_included":  [
+                              "resolved",
+                              "customer_next_steps",
+                              "support_next_steps",
+                              "recording"
+                          ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted to resolve an issue where some of your students' lesson videos keep loading and do not play, mostly on their phones.",
+  "tone_guidance": "acknowledge_and_reassure",
+  "resolved": [],
+  "covered": [
+    {"text": "We checked an affected lesson on several browsers and a phone and could not reproduce the problem from our side, so this issue is not yet resolved.", "source_item_ids": ["I1"]}
+  ],
+  "customer_next_steps": [
+    {"text": "Ask one affected student to record a short screen recording showing the video loading, and send it to us along with the lesson link.", "timeline": null, "source_item_ids": ["I3"]}
+  ],
+  "support_next_steps": [
+    {"text": "We will raise this with our technical team and get back to you.", "timeline": null, "source_item_ids": ["I2"]}
+  ],
+  "omitted_item_ids": [],
+  "primary_topic": "course video loading issue"
+}

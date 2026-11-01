@@ -1,0 +1,129 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Arjun Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Yes! Both shop.testfunnel.example and the www version are loading our funnel now. Thank you!",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Custom domain not reachable",
+      "problem_statement": "The customer's custom domain had been showing \"site can't be reached\" for three days, although the funnel worked on the FlexiFunnels link.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "www address showing an error page",
+      "problem_statement": "After the main domain address loaded, the www version of the domain still showed an error page.",
+      "status": "resolved"
+    },
+    {
+      "id": "S3",
+      "title": "Secure certificate padlock",
+      "problem_statement": "The padlock for the secure certificate can take some time to appear after the domain is connected, and its issue still needs to be checked.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Customer opened the domain in an incognito window and the same error showed; the dashboard showed the domain as \"Not connected\".",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Opened in incognito. Still the same error.",
+        "It says \"Not connected\" next to the domain."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support explained that an old A record for the shop address, set up earlier by the customer's previous developer, was blocking the connection and had to be replaced with a CNAME record.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "That old record is blocking the connection."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer deleted the old A record and added a CNAME record for the shop address using the target value from the FlexiFunnels domain settings, following support's guidance; the dashboard then showed the domain as connected and the address loaded.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "I deleted the A record and added the CNAME. Saved.",
+        "It loads!"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S2",
+      "category": "completed",
+      "description": "Customer deleted the second record for www and added a CNAME for www with the same target value, following support's guidance, and confirmed that both the main address and the www version now load the funnel.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Done, both changes saved.",
+        "Yes! Both shop.testfunnel.example and the www version are loading our funnel now."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S3",
+      "category": "explained",
+      "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "the padlock for the secure certificate can take some time to appear after connecting"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I6",
+      "issue_id": "S3",
+      "category": "pending_support_action",
+      "description": "Support will check that the secure certificate has been issued and will message the customer if it has not.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."
+      ],
+      "stated_timeline": "tomorrow morning",
+      "confidence": "high"
+    }
+  ],
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

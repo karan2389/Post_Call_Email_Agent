@@ -1,0 +1,18 @@
+Subject: Follow-up on your FlexiFunnels support call – webinar email and currency
+
+Hi Tara,
+
+Thank you for your time on the call. Your webinar registration page was not sending the confirmation email, and your products page showed the wrong currency. Here is a summary.
+
+What we resolved:
+- We turned on the confirmation email for your webinar registration page from our side and saved it.
+- You registered once with your other email address as a test and confirmed the confirmation email arrived.
+- Following our guidance, you selected Indian Rupee in your account's Settings, Regional page and saved it, and you confirmed your products page now shows the right currency.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-12
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Sameer
+FlexiFunnels Support

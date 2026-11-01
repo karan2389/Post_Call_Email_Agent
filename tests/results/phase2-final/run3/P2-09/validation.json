@@ -1,0 +1,43 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You reached out because new leads from your funnel form had stopped reaching your CRM about three days before our call.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you corrected the webhook URL and saved it, and you confirmed a test lead now shows up in your CRM, so new leads are flowing again.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We found a typo in your webhook URL.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "The leads from the three days before our call did not reach your CRM, so this issue is only partly resolved.",
+      "item_ids": [
+        "I3",
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We will have our technical team resend the missed leads to your CRM, and we will message you once that is done.",
+      "item_ids": [
+        "I4",
+        "I5"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I5"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "Following our guidance, you turned on the autoresponder option in your form settings and saved it, and a test form you filled in from another email address delivered the email.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that emails can sometimes go to spam, so verifying your sender domain is a good idea, and that you can do this in the email domain section of Settings.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "You mentioned that you planned to verify your sender domain in the email domain section of Settings the morning after our call.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

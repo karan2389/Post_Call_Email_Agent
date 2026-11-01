@@ -1,0 +1,39 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "Some of your students told you that the lesson videos in your course keep loading and never play, mostly on their phones.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "acknowledge_and_reassure",
+  "resolved": [],
+  "covered": [
+    {
+      "text": "We opened the lesson link you shared on a desktop in Chrome, in Safari and on a phone; the video played fine each time, so we could not reproduce the problem. This is not yet resolved.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Ask one of your students to make a short screen recording showing the video loading, and send it to us along with the lesson link.",
+      "timeline": null,
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will raise this with our team and get back to you; we are not able to give a timeline yet.",
+      "timeline": null,
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "lesson videos not playing"
+}

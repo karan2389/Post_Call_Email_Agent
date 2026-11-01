@@ -1,0 +1,19 @@
+[00:00:06] Sameer Demo: Hi Arjun, this is Sameer from FlexiFunnels support. What's going on?
+[00:00:12] Arjun Testwala: Hi Sameer. My custom domain shop.testfunnel.example has been showing "site can't be reached" for three days now. My funnel works on the FlexiFunnels link but not on my own domain.
+[00:00:30] Sameer Demo: Okay. Let's first rule out the simple things. Please open the domain in an incognito window.
+[00:00:42] Arjun Testwala: Opened in incognito. Still the same error.
+[00:00:48] Sameer Demo: Alright, so it is not a browser cache issue. Let's look at the domain status in your dashboard.
+[00:01:05] Arjun Testwala: It says "Not connected" next to the domain.
+[00:01:12] Sameer Demo: Thanks. Now open your domain registrar's DNS page. I can see you have an A record for shop pointing to an old server address.
+[00:01:30] Arjun Testwala: Yes, my previous developer set that up a long time ago.
+[00:01:38] Sameer Demo: That old record is blocking the connection. Please delete that A record and add a CNAME record for shop, using the target value shown in your FlexiFunnels domain settings.
+[00:03:20] Arjun Testwala: I deleted the A record and added the CNAME. Saved.
+[00:03:30] Sameer Demo: Good. DNS changes can take a few minutes. Let me check with a lookup tool... it is not updated yet. Let's give it a few minutes.
+[00:09:45] Sameer Demo: Okay, I'm back. The dashboard now shows the domain as connected. Please try loading shop.testfunnel.example again.
+[00:10:02] Arjun Testwala: It loads! But when I type www.shop.testfunnel.example I still get an error page.
+[00:10:12] Sameer Demo: That is because you have a second record for www pointing somewhere else. Please delete it and add a CNAME for www with the same target value.
+[00:12:40] Arjun Testwala: Done, both changes saved.
+[00:14:05] Arjun Testwala: Yes! Both shop.testfunnel.example and the www version are loading our funnel now. Thank you!
+[00:14:15] Sameer Demo: Wonderful. One last thing, the padlock for the secure certificate can take some time to appear after connecting. I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't.
+[00:14:35] Arjun Testwala: Great, thanks Sameer.
+[00:14:38] Sameer Demo: You're welcome. Take care.

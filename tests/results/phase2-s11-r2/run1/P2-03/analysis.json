@@ -1,0 +1,77 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Meera Testwala"
+    ],
+    "support_speakers": [
+      "Riya Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "frustrated",
+  "sentiment_evidence": "I've lost their trust over this, it's very frustrating.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Lesson videos not playing for students",
+      "problem_statement": "Some of the customer's students said the lesson videos in their course keep loading and never play, mostly on their phones, and this was the third time the customer had raised it.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Support opened the affected lesson link on a desktop in Chrome, in Safari and on a phone, and the video played in each, so support could not reproduce the problem.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "I've opened it on my desktop in Chrome and the video plays fine.",
+        "So I cannot reproduce the problem from my side."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "pending_support_action",
+      "description": "Support will raise the issue with the technical team and get back to the customer; support said it could not give a timeline at this time.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll raise this with our technical team and get back to you.",
+        "I can't give you a timeline right now"
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S1",
+      "category": "pending_customer_action",
+      "description": "Customer will ask one affected student to record a short screen recording showing the video loading and send it to support along with the lesson link.",
+      "owner": "customer",
+      "guided_by": null,
+      "evidence": [
+        "I'll ask one of the students to record it and send it to you."
+      ],
+      "stated_timeline": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

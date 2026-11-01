@@ -1,0 +1,33 @@
+Subject: Follow-up on your FlexiFunnels support call – thank-you page, email domain, invoices
+
+Hi Anita,
+
+Thank you for your time on the call. You wanted help with your thank-you page, overlapping buttons on your phone, emails going to spam, your expired coupon, your invoice name, weekly lesson unlocking, a quiz generator and exporting your student list. Here is a summary.
+
+What we resolved:
+- Following our guidance, you added your thank-you page link in the product's After purchase settings and saved it, and a test order now goes to your thank-you page.
+- Following our guidance, you increased the spacing between the two buttons in mobile view, and you confirmed they now look separate on your phone.
+
+What we covered:
+- To verify your email domain, add the domain in Email settings, add the three DNS records you receive at your domain registrar, and then click Verify.
+- If you decide to extend your expired EARLYBIRD coupon, you can change the expiry date in the coupon settings; that is your call.
+- There is a drip schedule setting for lessons.
+- We are not aware of a quiz generator being available right now and have no date for one, so please do not plan around it.
+- To export your student list, go to Students, click Export and choose CSV.
+
+Your next steps:
+1. Get your developer to add the three DNS records by Friday.
+2. Once the records are added, click Verify in your email settings.
+3. Try the student list export (you mentioned you would do this later).
+
+What we'll do next:
+- We will check about changing the GST name on your invoices and get back to you within 2 working days.
+- We are not sure whether the drip schedule works when your course is sold inside a bundle. We will check and get back to you.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

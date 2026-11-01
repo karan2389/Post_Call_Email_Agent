@@ -1,0 +1,30 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – thank-you page, email domain, invoices",
+  "body_text": "Hi Anita,\n\nThank you for your time on the call. You wanted help with your thank-you page, overlapping buttons on your phone, emails going to spam, your expired coupon, your invoice name, weekly lesson unlocking, a quiz generator and exporting your student list. Here is a summary.\n\nWhat we resolved:\n- Following our guidance, you added your thank-you page link in the product's After purchase settings and saved it, and a test order now goes to your thank-you page.\n- Following our guidance, you increased the spacing between the two buttons in mobile view, and you confirmed they now look separate on your phone.\n\nWhat we covered:\n- To verify your email domain, add the domain in Email settings, add the three DNS records you receive at your domain registrar, and then click Verify.\n- If you decide to extend your expired EARLYBIRD coupon, you can change the expiry date in the coupon settings; that is your call.\n- There is a drip schedule setting for lessons.\n- We are not aware of a quiz generator being available right now and have no date for one, so please do not plan around it.\n- To export your student list, go to Students, click Export and choose CSV.\n\nYour next steps:\n1. Get your developer to add the three DNS records by Friday.\n2. Once the records are added, click Verify in your email settings.\n3. Try the student list export (you mentioned you would do this later).\n\nWhat we'll do next:\n- We will check about changing the GST name on your invoices and get back to you within 2 working days.\n- We are not sure whether the drip schedule works when your course is sold inside a bundle. We will check and get back to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 314,
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3",
+    "I4",
+    "I5",
+    "I6",
+    "I7",
+    "I8",
+    "I9",
+    "I10",
+    "I11",
+    "I12"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-10"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "customer_next_steps",
+    "support_next_steps",
+    "recording"
+  ]
+}

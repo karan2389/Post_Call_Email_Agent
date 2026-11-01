@@ -1,0 +1,19 @@
+{
+  "case_id": "P2-09",
+  "synthetic": true,
+  "Date": "October 30, 2026",
+  "Time of the call": "1:00 PM",
+  "Customer Name": "Kabir Testwala",
+  "Email": "kabir.testwala@example.com",
+  "Call lead by(who took the call)": "Sameer Demo",
+  "Meeting URL": "https://meet.example.com/p2-09",
+  "Recording URL": "https://fathom.video/share/EXAMPLE-P2-09",
+  "Recording Sent": "no",
+  "Meeting Notes": "",
+  "delivery_mode": "dry_run",
+  "internal_columns_never_sent_to_any_skill": {
+    "Mistakes that you made & what steps you will take": "Forgot to check the plan limit first. INTERNAL-NOTE-MISTAKE-77",
+    "Bugs found": "Webhook retry bug after last release. INTERNAL-NOTE-BUG-88",
+    "Suggetions": "Add a warning in the dashboard. INTERNAL-NOTE-SUGGEST-99"
+  }
+}

@@ -1,0 +1,14 @@
+[00:00:05] Riya Demo: Hi Meera, thanks for joining. I understand this is about your course videos?
+[00:00:12] Meera Testwala: Yes, and honestly this is the third time I'm raising it. Some of my students say the lesson videos just keep loading and never play. It's mostly on their phones.
+[00:00:28] Riya Demo: I'm sorry about the trouble. Let me check. Can you share the link to one of the affected lessons?
+[00:00:40] Meera Testwala: Sure, I've pasted it in the chat.
+[00:01:10] Riya Demo: I've opened it on my desktop in Chrome and the video plays fine. Let me try Safari and my phone as well.
+[00:02:30] Riya Demo: It plays on Safari and on my phone too. So I cannot reproduce the problem from my side.
+[00:02:40] Meera Testwala: But my students are really facing it. I've lost their trust over this, it's very frustrating.
+[00:02:52] Riya Demo: I understand. Since I can't see the cause, I'll raise this with our technical team and get back to you.
+[00:03:05] Meera Testwala: When will that be? I need something concrete.
+[00:03:12] Riya Demo: I can't give you a timeline right now, I don't want to promise something I can't confirm. What would help is a short screen recording from one affected student, showing the video loading, along with the lesson link.
+[00:03:35] Meera Testwala: Okay, I'll ask one of the students to record it and send it to you.
+[00:03:42] Riya Demo: Thank you, that will really help the technical team.
+[00:03:48] Meera Testwala: Fine. I just hope it gets sorted out.
+[00:03:52] Riya Demo: I'll do my best to help. Thanks for your patience, Meera.

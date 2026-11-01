@@ -1,0 +1,15 @@
+{
+  "case_id": "P2-12",
+  "synthetic": true,
+  "added_for": "S-11 regression: support performs the action itself",
+  "Date": "October 30, 2026",
+  "Time of the call": "8:00 PM",
+  "Customer Name": "Tara Testwala",
+  "Email": "tara.testwala@example.com",
+  "Call lead by(who took the call)": "Sameer Demo",
+  "Meeting URL": "https://meet.example.com/p2-12",
+  "Recording URL": "https://fathom.video/share/EXAMPLE-P2-12",
+  "Recording Sent": "no",
+  "Meeting Notes": "",
+  "delivery_mode": "dry_run"
+}

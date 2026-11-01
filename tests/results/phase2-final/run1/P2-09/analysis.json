@@ -1,0 +1,89 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Kabir Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "That would be great, thank you.",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "New form leads not reaching CRM",
+      "problem_statement": "New leads from the customer's funnel form were not reaching their CRM; it stopped about three days before the call.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Missed leads from the preceding three days",
+      "problem_statement": "The leads from about the three days before the call did not reach the customer's CRM.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support found that the webhook URL had a typo.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "The webhook URL has a typo"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer corrected the webhook URL in the field and saved it, at support's instruction, then submitted a test lead and confirmed it shows up in their CRM.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Please correct it yourself in the field and save.",
+        "Corrected and saved.",
+        "Submitted. Yes, the test lead is showing up in my CRM now!"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S2",
+      "category": "pending_support_action",
+      "description": "Support will re-index the webhook queue, have the technical team resend the missed leads to the customer's CRM, and message the customer once that is done; support said it could not give an exact time.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll have our technical team resend the missed leads to your CRM.",
+        "I'll message you once that's done.",
+        "I can't give an exact time"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    }
+  ],
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes and a pending support action."
+  }
+}

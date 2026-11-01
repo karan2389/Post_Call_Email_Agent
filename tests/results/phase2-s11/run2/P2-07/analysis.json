@@ -1,0 +1,63 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "ownership_review_required": false,
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "language": "en",
+  "participants": {
+    "customer_speakers": [],
+    "support_speakers": [],
+    "other_speakers": [
+      "Speaker 1",
+      "Speaker 2"
+    ]
+  },
+  "customer_sentiment": "unclear",
+  "sentiment_evidence": null,
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Unidentified problem still not resolved",
+      "problem_statement": "The speakers refer to a problem that is still not working and to a second pending matter, but the transcript never says what either one is.",
+      "status": "unresolved"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Speakers said a problem that was tried twice before is still not working after trying again; what the problem and the setting are is not stated.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Yes, twice. It comes back every time.",
+        "Done. It's still the same."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "discussed",
+      "description": "Speaker 2 said \"we'll do that other thing\" and Speaker 1 said another matter is also pending; neither the actions nor who is the customer or support is established.",
+      "owner": "none",
+      "guided_by": null,
+      "evidence": [
+        "Okay. So we'll do that other thing and you let me know.",
+        "Yes, that too. I'll see what can be done."
+      ],
+      "stated_timeline": null,
+      "confidence": "low"
+    }
+  ],
+  "overall_confidence": "low",
+  "skip_recommendation": {
+    "skip": true,
+    "reason_code": "ANALYSIS_LOW_CONFIDENCE",
+    "explanation": "Speakers are unlabelled and the topics and commitments are never identified, so outcomes cannot be classified with medium confidence."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I4",
+      "email_excerpt": "",
+      "explanation": "Support's step to check with the billing team about the invoice company name is missing."
+    },
+    {
+      "code": "KEY_OUTCOME_OMITTED",
+      "item_id": "I3",
+      "email_excerpt": "a wrong company name on your invoice",
+      "explanation": "The unresolved invoice company-name issue (S2) is only named in the opening and never stated as not yet resolved."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted help with a coupon that was not applying at checkout, a wrong company name on your invoice, and extending the coupon's expiry date.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "We guided you to assign your coupon to the Advanced Course, and you confirmed the discount now shows at checkout.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that you can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "Extend the coupon's expiry date in the coupon settings (you mentioned you would do this that night, the night of our call).",
+      "item_ids": [
+        "I6"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I6"
+  ]
+}

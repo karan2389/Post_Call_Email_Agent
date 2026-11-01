@@ -1,0 +1,28 @@
+Subject: Follow-up on your FlexiFunnels support call – pricing plans and thank-you page
+
+Hi Priya,
+
+Thank you for your time on our call. You wanted to offer monthly and yearly plans on the same checkout page, send customers to your own thank-you page after payment, and add GST to your prices. Here is a quick summary so you have everything in one place.
+
+What we resolved:
+- Following our guidance, you added a yearly price to your product, and you confirmed that both the monthly and yearly options now show on your checkout page.
+- Following our guidance, you pasted your thank-you page link into the product's After purchase redirect option and saved it, and your test purchase took you straight to your thank-you page.
+
+What we covered:
+- We explained that there is a tax setting for adding GST to your prices. This is not yet fully resolved.
+
+Your next steps:
+1. Add your privacy policy link to your checkout footer (this week, as you mentioned).
+
+What we'll do next:
+- We will send you our guide on the tax settings so you can follow the steps.
+
+Our call continued across two recordings, so here are both parts in order:
+Part 1: https://fathom.video/share/EXAMPLE-P2-06-PART-1
+Part 2: https://fathom.video/share/EXAMPLE-P2-06-PART-2
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

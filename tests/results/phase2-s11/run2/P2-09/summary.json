@@ -1,0 +1,38 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "New leads from your funnel form had stopped reaching your CRM about three days ago.",
+  "call_purpose_issue_ids": [
+    "S1"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you corrected the webhook URL and saved it, and after submitting a test lead you confirmed it showed up in your CRM, so new leads are flowing again.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We found a typo in your webhook URL, which read crm.testfunnel.exmaple instead of crm.testfunnel.example.",
+      "source_item_ids": [
+        "I1"
+      ]
+    }
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {
+      "text": "We will arrange for the leads from the last three days that did not reach your CRM to be resent, and we will message you once that is done. We could not give an exact time during the call.",
+      "timeline": null,
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "leads not reaching CRM"
+}

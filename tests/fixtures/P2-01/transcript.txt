@@ -1,0 +1,13 @@
+[00:00:04] Riya Demo: Hi Neha, thanks for joining. What would you like help with today?
+[00:00:10] Neha Testwala: Hi Riya. I've connected my payment gateway, but my customers aren't getting the order confirmation email after they buy.
+[00:00:24] Riya Demo: Okay, let me look at your account. Can you share your screen and open the product's settings?
+[00:00:35] Neha Testwala: Sure, it's open.
+[00:00:41] Riya Demo: I can see the order confirmation email toggle is switched off for this product. Let's switch it on and save.
+[00:00:55] Neha Testwala: Done, I saved it.
+[00:01:02] Riya Demo: Great. Now please place a test order using your test coupon so we can check it.
+[00:02:10] Neha Testwala: Okay, I placed the test order. And yes, the confirmation email just arrived in my inbox!
+[00:02:20] Riya Demo: Perfect, so that is working now. One more thing, the email still shows the default sender name. You can change it under Email settings, Sender name.
+[00:02:38] Neha Testwala: Oh good, I'll change that myself after the call, I want to use my brand name.
+[00:02:46] Riya Demo: Sounds good. Anything else?
+[00:02:50] Neha Testwala: No, that's all. Thanks Riya, really helpful.
+[00:02:54] Riya Demo: Happy to help, have a great day!

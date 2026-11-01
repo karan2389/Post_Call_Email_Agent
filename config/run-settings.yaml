@@ -19,11 +19,23 @@ lease_minutes: 30
 run_lock_minutes: 120             # R-08
 
 source:
+  # AGENT INPUT = the original spreadsheet "CSC  Booking - All Agents" (D-029). It is the only operational source.
   spreadsheet_id: 1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI
   worksheet: Calls DONE
-  call_id_column: AD
-  call_id_header: POST_CALL_CALL_ID
+  worksheet_gid: 1314582701
+  call_id_column: AD                # PROPOSED Call ID column; NOT approved for writing (see source_writes_enabled)
+  call_id_header: POST_CALL_CALL_ID # PROPOSED header; not approved
+  # All source writes stay disabled until every condition in docs/call-id-strategy.md section 0 is met:
+  # AD ownership confirmed, header approved, protected ranges verified, backup synchronisation confirmed not to erase agent data.
+  source_writes_enabled: false
   protected_ranges_verified: false  # must be true before ANY write to Calls DONE (R-03, OD-36); set only after Google is seen to reject a forbidden write from the connector account
+
+# Recovery copy only. NOT an agent input and never read or written by the agent (D-029). Synchronisation is documented
+# separately (docs/backup-recovery.md) and is not part of agent execution. Its reliability is unverified.
+backup:
+  role: recovery_copy_only
+  spreadsheet_id: 10YjhBUPpJBEnbXz5zTqGoXEIVEIuuMZT4cCyiYJ7p3Q   # CSC Booking - Backup
+  worksheet: Calls DONE
 
 logs:
   spreadsheet_id: null            # OD-18 (same spreadsheet or separate); worksheets not yet created

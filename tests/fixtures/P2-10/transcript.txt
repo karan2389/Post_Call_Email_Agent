@@ -1,0 +1,31 @@
+[00:00:05] Riya Demo: Hi Anita, thanks for joining. I see you have a few things to cover today.
+[00:00:12] Anita Testwala: Yes Riya, I have a list. First, my thank-you page. After checkout, customers land on the wrong page, the default one instead of mine.
+[00:00:28] Riya Demo: Let's look. Please open the product and go to the After purchase settings.
+[00:00:40] Anita Testwala: Opened. I see the redirect field is empty.
+[00:00:46] Riya Demo: That's why. Paste your thank-you page link there and save.
+[00:01:20] Anita Testwala: Pasted and saved. Let me do a test order... yes, it now goes to my thank-you page.
+[00:01:35] Riya Demo: Good, that one is done. What's next?
+[00:01:40] Anita Testwala: Second, my landing page on mobile. The two buttons overlap each other on my phone.
+[00:01:52] Riya Demo: Open the page editor and switch to the mobile view. Select the button section and increase the spacing between the two buttons.
+[00:03:05] Anita Testwala: Okay I increased the spacing. Let me check on my phone... yes, now they are separate, it looks fine.
+[00:03:15] Riya Demo: Great, so the mobile layout is fixed. Next?
+[00:03:20] Anita Testwala: Third, my emails are going to spam. I read that I need to verify my email domain.
+[00:03:30] Riya Demo: Correct. In Email settings, add your domain and you will get three DNS records. You add those three records at your domain registrar. After that you click Verify.
+[00:03:50] Anita Testwala: I don't have the registrar login with me right now. My developer has it. I'll get him to add the records by Friday.
+[00:04:00] Riya Demo: That's fine. Once the records are added, click Verify in the email settings.
+[00:04:10] Anita Testwala: Okay. Fourth, my EARLYBIRD coupon has expired but I'm not sure if I want to extend it. I'll think about it.
+[00:04:22] Riya Demo: Sure. If you decide to extend it, you can change the expiry date in the coupon settings. It's your call.
+[00:04:32] Anita Testwala: Fifth, my invoices. The GST name shows my personal name, not my company name.
+[00:04:42] Riya Demo: I see. I'll check with our billing team about changing it, and get back to you within 2 working days.
+[00:04:52] Anita Testwala: Okay, thanks. Sixth, the course. I want the lessons to unlock one per week for my students.
+[00:05:02] Riya Demo: There is a drip schedule setting for lessons. But I'm not sure whether it works when the course is sold inside a bundle, which is how you sell it. Let me check that with our product team and get back to you.
+[00:05:18] Anita Testwala: Okay. Do you also have an AI quiz generator? A friend said FlexiFunnels has one.
+[00:05:28] Riya Demo: I'm not aware of a quiz generator being available right now, and I don't have a date for one. So please don't plan around it.
+[00:05:38] Anita Testwala: Alright. That's disappointing but fine.
+[00:05:44] Riya Demo: Anything else on your list?
+[00:05:48] Anita Testwala: One more. Can you tell me how to export my student list?
+[00:05:55] Riya Demo: Yes. Go to Students, click Export, and choose CSV. It downloads a file you can open in a spreadsheet.
+[00:06:10] Anita Testwala: Got it, thanks. I'll try it later.
+[00:06:15] Riya Demo: Good. So to recap, thank-you page and mobile buttons are done. Your developer will add the DNS records by Friday. I'll check the invoice name with billing within 2 working days, and I'll check the drip schedule with the product team.
+[00:06:35] Anita Testwala: Perfect, that's exactly my list. Thank you so much Riya.
+[00:06:40] Riya Demo: My pleasure. Take care Anita!

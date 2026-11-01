@@ -1,0 +1,34 @@
+Subject: Follow-up on your FlexiFunnels support call – thank-you page, domain and invoice
+
+Hi Anita,
+
+Thank you for your time on our call. You came with a list of topics: your thank-you page, mobile buttons, emails going to spam, a coupon, invoice GST name, lesson unlocking, a quiz generator and student export.
+
+What we resolved:
+- Following our guidance, you added your thank-you page link to the After purchase redirect field and saved it, and a test order now reaches your thank-you page.
+- Following our guidance, you increased the spacing between the two buttons in the mobile view, and you confirmed on your phone that they no longer overlap.
+
+What we covered:
+- Emails going to spam: add your domain in Email settings, add the three DNS records you receive at your domain registrar, then click Verify. This is not yet resolved.
+- Your invoice GST name shows your personal name instead of your company name. This is not yet resolved.
+- Lesson drip: there is a drip schedule setting, but we were not sure whether it works when a course is sold inside a bundle, as yours is. This is not yet resolved.
+- Expired coupon: if you decide to extend it, you can change the expiry date in the coupon settings. You mentioned you had not decided yet.
+- Quiz generator: we are not aware of one being available and have no date for one, so please do not plan around it.
+- Student export: go to Students, click Export and choose CSV.
+
+Your next steps:
+1. Get your developer to add the three DNS records at your domain registrar by Friday.
+2. Once the records are added, click Verify in the email settings.
+3. Try exporting your student list.
+
+What we'll do next:
+- We will check with our billing team about changing the GST name on your invoices and get back to you within 2 working days.
+- We will check with our product team whether the drip schedule works for a course sold inside a bundle, and get back to you.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

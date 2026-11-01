@@ -1,0 +1,61 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted to sell your product with monthly and yearly plans on the same checkout page, have customers sent to your own thank-you page after payment, and add GST to your prices.",
+  "call_date": "2026-10-30",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you added a yearly price to your product, and you confirmed that both the monthly and yearly options now show on your checkout.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you pasted your thank-you page link into the After purchase redirect option, and a test purchase took you to your thank-you page.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that there is a tax setting for adding GST to your prices. This is not fully resolved yet.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "Adding your privacy policy link to the checkout footer is not yet done.",
+      "source_item_ids": []
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "You mentioned that you planned to add your privacy policy link to the checkout footer.",
+      "timeline": "that week",
+      "timeline_source": "this week",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will send you our guide on the tax settings so you can follow the steps.",
+      "timeline": null,
+      "timeline_source": null,
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "primary_topic": "pricing plans and thank-you page"
+}

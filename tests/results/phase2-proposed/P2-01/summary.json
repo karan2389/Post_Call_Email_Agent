@@ -1,0 +1,16 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted your customers to receive the order confirmation email after they buy.",
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you switched on the order confirmation email for your product and saved it, and you confirmed that the confirmation email for your test order arrived in your inbox.", "source_item_ids": ["I1"]}
+  ],
+  "covered": [],
+  "customer_next_steps": [
+    {"text": "Change the default sender name under Email settings, Sender name, to your brand name.", "timeline": "after the call", "source_item_ids": ["I2"]}
+  ],
+  "support_next_steps": [],
+  "omitted_item_ids": [],
+  "primary_topic": "order confirmation email and sender name"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – autoresponder email",
+  "body_text": "Hi Rohan,\n\nThank you for your time on our call. Leads were coming in from your form, but the autoresponder email was not being sent to them. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Following our guidance, you turned on the autoresponder option, which had been off, in your form settings and saved it.\n- Following our guidance, you filled in a test form with your other email, and you confirmed the autoresponder email arrived and is now working.\n\nWhat we covered:\n- Emails can sometimes go to spam, so it is good to verify your sender domain, which you can do in Settings in the email domain section.\n\nYour next steps:\n1. Verify your sender domain in Settings, in the email domain section (you mentioned you would do this tomorrow morning).\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-04\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 157,
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3",
+    "I4"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-04"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "customer_next_steps",
+    "recording"
+  ]
+}

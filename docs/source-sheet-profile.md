@@ -6,6 +6,8 @@ Status: **Verified by read-only inspection on 2026-10-31** through the Google Sh
 
 This document contains **no customer data**. Observations are described structurally; no names, emails, phone numbers, transcript text or Fathom share tokens are reproduced (share tokens grant access to recordings).
 
+> **Scope (D-029):** this profile describes the original spreadsheet `CSC  Booking - All Agents`, which is the agent's only operational source. The separate `CSC Booking - Backup` is a recovery copy only; it was never inspected and nothing here applies to it (`backup-recovery.md`).
+
 ## 1. Location
 
 | Item | Value | Status |
@@ -15,7 +17,7 @@ This document contains **no customer data**. Observations are described structur
 | Source worksheet | `Calls DONE` | Verified |
 | Worksheet GID (sheetId) | `1314582701` | Verified |
 | Grid size | 15,662 rows × 35 columns (headers in A–AC; AD–AI empty at inspection) | Verified |
-| Agent-owned column | AD, header `POST_CALL_CALL_ID` — the **only** approved write (D-024). Not yet created | Approved |
+| Agent-owned column | AD, header `POST_CALL_CALL_ID` — *proposed* Call ID column (D-024); **not approved for writing** until the gate in `call-id-strategy.md` §0 is met. Not created | Proposed, gated |
 | Last data row at inspection | ≈ 15,455 (rows for 31 Oct 2026 already present) | Verified |
 | Header row | Row 1 (single header row, no frozen rows) | Verified |
 | Spreadsheet timezone | `Asia/Calcutta` (IANA alias of `Asia/Kolkata`) | Verified |

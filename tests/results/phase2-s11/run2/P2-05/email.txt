@@ -1,0 +1,26 @@
+Subject: Follow-up on your FlexiFunnels support call – coupon and invoice name
+
+Hi Sanjay,
+
+Thank you for your time on the call. Your coupon code was not applying at checkout for the Advanced Course and showed "Invalid coupon", and you also wanted help with the company name on your invoice and the coupon's expiry date. Here is a quick summary so you have everything in one place.
+
+What we resolved:
+- Following our guidance, you edited the coupon, selected the Advanced Course in its Products section and saved it, and you confirmed the discount now shows at checkout.
+
+What we covered:
+- The coupon was assigned only to the Starter Course and not the Advanced Course, so the product needed to be assigned.
+- You can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.
+
+Your next steps:
+1. Extend the coupon's expiry date in the coupon settings (you mentioned you'd do this on the night of our call).
+
+What we'll do next:
+- We will check the company name issue on your invoice with our billing team and let you know by the day after our call.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-05
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Sameer
+FlexiFunnels Support

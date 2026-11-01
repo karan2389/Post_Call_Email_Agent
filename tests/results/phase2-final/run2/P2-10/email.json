@@ -1,0 +1,32 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – thank-you page, emails and invoices",
+  "body_text": "Hi Anita,\n\nThank you for your time on our call. You came with a list of items to cover, and here is where each one stands.\n\nWhat we resolved:\n- Following our guidance, you pasted your thank-you page link into the redirect field in the After purchase settings, and a test order now goes to your thank-you page.\n- Following our guidance, you increased the spacing between the two buttons in the mobile view, and you confirmed they are now separate on your phone.\n\nWhat we covered:\n- Emails going to spam is not yet resolved. Add your domain in Email settings, add the three DNS records you receive at your domain registrar, then click Verify.\n- Your EARLYBIRD coupon has expired and you are thinking about whether to extend it. If you decide to, you can change the expiry date in the coupon settings.\n- The GST name on your invoices showing your personal name instead of your company name is not yet resolved.\n- For weekly lesson unlock, there is a drip schedule setting for lessons. This is not yet resolved.\n- We are not aware of an AI quiz generator being available right now and have no date for one, so please do not plan around it.\n- To export your student list, go to Students, click Export and choose CSV.\n\nYour next steps:\n1. Get your developer, who has the registrar login, to add the DNS records, by Friday.\n2. Once the records are added, click Verify in your email settings.\n3. You mentioned that you would try exporting your student list.\n\nWhat we'll do next:\n- We will check about changing the GST name on your invoices and get back to you, within 2 working days.\n- We will check whether the drip schedule works when a course is sold inside a bundle, which is how you sell yours, and get back to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 335,
+  "length_status": "above_preferred",
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3",
+    "I6",
+    "I7",
+    "I9",
+    "I11",
+    "I12",
+    "I4",
+    "I5",
+    "I13",
+    "I8",
+    "I10"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-10"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "customer_next_steps",
+    "support_next_steps",
+    "recording"
+  ]
+}

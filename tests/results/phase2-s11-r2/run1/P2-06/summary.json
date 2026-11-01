@@ -1,0 +1,54 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "resolved": [
+    {
+      "text": "Following our guidance, you added a yearly price to your product, and you confirmed that both the monthly and yearly options now show on your checkout page.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "Following our guidance, you pasted your thank-you page link into the product's After purchase redirect option and saved it, and your test purchase took you straight to your thank-you page.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We explained that there is a tax setting for adding GST to your prices. This is not yet fully resolved.",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Add your privacy policy link to your checkout footer.",
+      "timeline": "this week",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will send you our guide on the tax settings so you can follow the steps.",
+      "timeline": null,
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "call_purpose": "You wanted to offer monthly and yearly plans on the same checkout page, send customers to your own thank-you page after payment, and add GST to your prices.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "primary_topic": "pricing plans and thank-you page"
+}

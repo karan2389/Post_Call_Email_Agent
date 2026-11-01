@@ -1,0 +1,11 @@
+{
+  "case_id": "P2-11",
+  "scenario": "Cancelled meeting (added to cover E1 next to the no-show case)",
+  "eligibility": {"outcome": "SKIP", "reason_code": "CALL_CANCELLED", "rule": "E1"},
+  "analysis": {"run": false},
+  "email": {
+    "generated": false,
+    "notes": "Meeting Notes says 'call cancel', so E1 ends the record as SKIPPED CALL_CANCELLED. It is terminal and beats the deferrable missing transcript and missing recording URL. No skill runs."
+  },
+  "validation_expected": "N/A"
+}

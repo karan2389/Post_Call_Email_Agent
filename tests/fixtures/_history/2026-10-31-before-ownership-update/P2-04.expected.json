@@ -1,0 +1,30 @@
+{
+  "case_id": "P2-04",
+  "scenario": "Hindi-language conversation (Devanagari)",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "hi",
+    "sentiment_allowed": ["positive", "neutral"],
+    "issue_count": {"min": 1, "max": 2},
+    "required_items": [
+      {"category": "completed", "pattern": "autoresponder", "owner": "support"},
+      {"category": "explained", "pattern": "domain|spam", "owner": "support"},
+      {"category": "pending_customer_action", "pattern": "domain|verif", "owner": "customer"}
+    ],
+    "forbidden_categories": {"pending_support_action": "no support commitment was made"},
+    "evidence_language": "original (Devanagari) quotes required",
+    "stated_timelines_allowed": [null, "कल सुबह"]
+  },
+  "email": {
+    "generated": true,
+    "language": "en",
+    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-04"],
+    "must_include": ["Rohan", "autoresponder", "domain"],
+    "must_not_include": ["our team will", "guarantee"],
+    "notes": "MVP policy language is English (OD-08), so the email is English although the call was in Hindi. Analysis descriptions English, evidence quotes in Hindi. The spam remark was a suggestion, not a confirmed fact about this account."
+  },
+  "validation_expected": "PASS"
+}

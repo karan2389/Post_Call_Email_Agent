@@ -6,8 +6,8 @@ All timestamps: ISO 8601 with offset, Asia/Kolkata, e.g. `2026-10-31T14:05:00+05
 
 ## 1. Source worksheet
 
-- Spreadsheet ID `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, worksheet `Calls DONE` (GID `1314582701`). It is the CSC team's shared workbook and is owned by the team.
-- The agent reads it. Its **only** write is the Call ID in column AD `POST_CALL_CALL_ID`, one empty cell at a time (D-024, `call-id-strategy.md`). No other source column is ever written — `Transcript`, `AI Summary` and `Recording Sent` included.
+- **Agent input (D-029):** spreadsheet `CSC  Booking - All Agents`, ID `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI`, worksheet `Calls DONE` (GID `1314582701`). It is the CSC team's shared workbook, owned by the team, and the only operational source. The mapping below was verified on it. A separate backup (`CSC Booking - Backup`) is a recovery copy only and is not read by the agent (`backup-recovery.md`).
+- The agent reads it. Source writes are **disabled** until the gate in `call-id-strategy.md` §0 is met; the proposed **only** write is then the Call ID in column AD `POST_CALL_CALL_ID`, one empty cell at a time (D-024). No other source column is ever written — `Transcript`, `AI Summary` and `Recording Sent` included.
 - Headers in row 1. Read columns are mapped by **exact header text** through `config/` (never by letter). The write column is fixed to AD with header `POST_CALL_CALL_ID` and checked on every run. Letters below are as of inspection.
 
 ### 1.1 Verified fields
@@ -128,7 +128,7 @@ The current state and final record of each call: customer information, status, r
 | `customer_sentiment` | enum | `positive` `neutral` `frustrated` `angry` `unclear` |
 | `pending_support_actions_count` | int | Follow-up load reporting |
 | `pending_customer_actions_count` | int | |
-| `skill_versions` | string | e.g. `ta=1.2.0;cs=1.0.0;eg=1.1.0;ev=1.1.0` |
+| `skill_versions` | string | e.g. `ta=1.4.0;cs=1.3.0;eg=1.4.0;ev=1.4.0` |
 | `model_used` | string | Claude model reported by the scheduled session, if available (single model for all stages) |
 | `run_variant` | string | Scheduled-task variant that processed the record (OD-37), for audit |
 

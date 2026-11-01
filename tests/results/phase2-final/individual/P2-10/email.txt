@@ -1,0 +1,32 @@
+Subject: Follow-up on your FlexiFunnels support call – several topics and next steps
+
+Hi Anita,
+
+Thank you for your time on our call. You wanted to go through a list of topics: your thank-you page, mobile landing page, email domain, coupon, invoices, course lessons, a quiz generator and student list export.
+
+What we resolved:
+- Following our guidance, you added your thank-you page link in the product's After purchase settings, and a test order now goes to your thank-you page.
+- Following our guidance, you increased the spacing between the two buttons in the mobile view of your landing page, and on your phone they are now separate.
+
+What we covered:
+- Email domain verification (not yet resolved): you add your domain in Email settings, receive three DNS records, add them at your domain registrar and then click Verify.
+- Your EARLYBIRD coupon has expired and you are still deciding whether to extend it. If you do, you can change the expiry date in the coupon settings.
+- Weekly lesson unlocking (not yet resolved): there is a drip schedule setting for lessons.
+- We are not aware of an AI quiz generator being available right now and do not have a date for one, so please do not plan around it.
+- To export your student list, go to Students, click Export and choose CSV. This downloads a file you can open in a spreadsheet.
+
+Your next steps:
+1. You mentioned you will get your developer to add the three DNS records at your domain registrar by Friday.
+2. You mentioned you will try the student list export.
+
+What we'll do next:
+- We will check with our billing team about changing the GST name on your invoices from your personal name to your company name, and get back to you within 2 working days. This is not yet resolved.
+- We will check with our product team whether the drip schedule works when your course is sold inside a bundle, and get back to you.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

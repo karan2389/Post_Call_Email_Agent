@@ -1,0 +1,60 @@
+{
+  "generated_for": "phase2 synthetic dry run",
+  "total": 2,
+  "passed": 2,
+  "truth_audit_failures": [],
+  "results": [
+    {
+      "case": "P2-03",
+      "scenario": "Issue remains unresolved at the end of the call",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 4
+      },
+      "ungrounded_terms_warning": [],
+      "email": {
+        "words": 172,
+        "length_status": "within_preferred",
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-10",
+      "scenario": "Long transcript with multiple issues and action items",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 11
+      },
+      "ungrounded_terms_warning": [],
+      "email": {
+        "words": 339,
+        "length_status": "above_preferred",
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    }
+  ]
+}

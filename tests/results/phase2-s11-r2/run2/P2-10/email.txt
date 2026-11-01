@@ -1,0 +1,32 @@
+Subject: Follow-up on your FlexiFunnels support call – thank-you page and email domain
+
+Hi Anita,
+
+Thank you for your time on our call. You wanted help with eight topics on your list, from your thank-you page to exporting your student list.
+
+What we resolved:
+- Following our guidance, you pasted your thank-you page link into the redirect field in your product's After purchase settings and saved it, and a test order now goes to your thank-you page.
+- Following our guidance, you increased the spacing between the two buttons in the mobile view of the page editor, and you confirmed on your phone that the buttons are now separate.
+
+What we covered:
+- We explained how to verify your email domain: add your domain in Email settings, add the three DNS records you receive at your domain registrar, and then click Verify. Your emails going to spam is not yet resolved.
+- If you decide to extend your expired EARLYBIRD coupon, you can change the expiry date in the coupon settings. You are still thinking about it.
+- There is a drip schedule setting for lessons, but we are not sure whether it works when a course is sold inside a bundle, which is how you sell yours. This is not yet resolved.
+- We are not aware of an AI quiz generator being available right now and have no date for one, so please do not plan around it.
+- To export your student list, go to Students, click Export and choose CSV, which downloads a file you can open in a spreadsheet.
+
+Your next steps:
+1. Get your developer to add the three DNS records at your domain registrar, by Friday.
+2. Try exporting your student list.
+
+What we'll do next:
+- The GST name on your invoices shows your personal name instead of your company name, which is not yet resolved. We will check about changing it and get back to you within 2 working days.
+- We will check whether the drip schedule works for a course sold inside a bundle and get back to you.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-10
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Riya
+FlexiFunnels Support

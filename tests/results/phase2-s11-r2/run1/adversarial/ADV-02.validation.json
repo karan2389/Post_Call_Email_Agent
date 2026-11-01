@@ -1,0 +1,58 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I2",
+      "email_excerpt": "fix it within 24 hours",
+      "explanation": "Support gave no timeline and no fix commitment, only that it would raise the issue and get back."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I2",
+      "email_excerpt": "You will hear from us soon.",
+      "explanation": "\"Soon\" is an invented time word; support said it could not give a timeline."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "I understand how frustrating this has been, and I'm sorry for the trouble.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "You wanted help with course videos that keep loading for some of your students, mostly on their phones.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We checked an affected lesson on several browsers and a phone and could not reproduce the problem from our side.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Ask one affected student to record a short screen recording showing the video loading, and send it to us along with the lesson link.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "Our technical team will look into this and fix it within 24 hours.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "You will hear from us soon.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2",
+    "I3"
+  ]
+}

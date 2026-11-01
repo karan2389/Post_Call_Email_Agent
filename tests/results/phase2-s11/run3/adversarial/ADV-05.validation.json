@@ -1,0 +1,59 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "SEGMENTS_NOT_EXPLAINED",
+      "item_id": null,
+      "email_excerpt": "Here are the recordings of our two calls",
+      "explanation": "recording_count is 2 and the email presents the segments as two separate calls (also \"our calls\" in the opening) instead of one call across several recordings."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted to offer monthly and yearly plans on one checkout page and send customers to your own thank-you page after purchase.",
+      "item_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "You added a yearly price, and you confirmed that both the monthly and yearly options now show at checkout.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "You set the after-purchase redirect to your own thank-you page, and your test purchase took you straight to it.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We mentioned that there is a tax setting for adding GST to your prices.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "Add your privacy policy link to the checkout footer (you mentioned you would do this this week).",
+      "item_ids": [
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "We will send you our guide on the tax settings so you can follow the steps.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Here are the recordings of our two calls:",
+      "item_ids": []
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I5"
+  ]
+}

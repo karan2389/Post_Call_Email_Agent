@@ -1,0 +1,16 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted new leads from your funnel form to reach your CRM again.",
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {"text": "Following our guidance, you corrected the typo in your webhook URL and saved it, and you confirmed that a test lead now shows up in your CRM.", "source_item_ids": ["I1"]}
+  ],
+  "covered": [],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {"text": "We will arrange for the leads from the last three days that did not reach your CRM to be resent, and we will message you once that is done. We cannot give an exact time yet.", "timeline": null, "source_item_ids": ["I2"]}
+  ],
+  "omitted_item_ids": [],
+  "primary_topic": "webhook and CRM leads"
+}

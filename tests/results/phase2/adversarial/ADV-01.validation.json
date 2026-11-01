@@ -1,0 +1,46 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "STATUS_MISREPRESENTED",
+      "item_id": "I3",
+      "email_excerpt": "Your secure certificate is now fully set up and the padlock is showing, so your visitors will see a secure site.",
+      "explanation": "Certificate/padlock was only explained as taking time to appear; it is not completed."
+    },
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I4",
+      "email_excerpt": "",
+      "explanation": "Support's next-morning certificate check (and message if not issued) is missing."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "We explained that the old record was blocking the connection and had to be replaced with a CNAME record.",
+      "explanation": "No item records this explanation; the only explained item is about the padlock."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "Your custom domain is now connected, and both the main address and the www version load your funnel.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "Your secure certificate is now fully set up and the padlock is showing, so your visitors will see a secure site.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the old record was blocking the connection and had to be replaced with a CNAME record.",
+      "item_ids": []
+    }
+  ],
+  "pending_items_checked": [
+    "I4"
+  ]
+}

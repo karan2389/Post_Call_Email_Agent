@@ -48,6 +48,16 @@ Business rules, safety controls and data rules (D-001 … D-025) are unchanged b
    Existing transcript automation (OD-33)
 ```
 
+### 3a. Operational source and recovery copy (D-029)
+
+| Role | Spreadsheet | ID | GID | Agent access |
+|---|---|---|---|---|
+| **Operational and authoritative source (agent input)** | `CSC  Booking - All Agents` (two spaces), worksheet `Calls DONE` | `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI` | `1314582701` | Read each run. Writes disabled (see below) |
+| **Recovery copy only** | `CSC Booking - Backup`, worksheet `Calls DONE` | `10YjhBUPpJBEnbXz5zTqGoXEIVEIuuMZT4cCyiYJ7p3Q` | not verified | **None.** Not an input, never read or written by the agent |
+
+The backup synchronisation (script, schedule, logic) is **outside this repository**, is not part of agent execution and is documented separately in `backup-recovery.md`. The original is the only operational source; all column mappings (`source-sheet-profile.md`, `data-model.md`) refer to it.
+
+**Source writes are disabled.** Column AD `POST_CALL_CALL_ID` is a *proposal* until all of these hold (`call-id-strategy.md` §0): column ownership confirmed, header approved, protected ranges verified (R-03, OD-36), and the backup synchronisation confirmed not to erase agent-owned data (OD-43). `source.source_writes_enabled` and `source.protected_ranges_verified` stay `false` until then.
 | Component | Role | Status |
 |---|---|---|
 | Claude Code scheduled task | Starts the daily run and executes the workflow | Proposed; cloud variant to be tested first, desktop as fallback (OD-37) *(validate)* |
@@ -56,7 +66,7 @@ Business rules, safety controls and data rules (D-001 … D-025) are unchanged b
 | Google Sheets connector | Read `Calls DONE`; write empty AD cells; read/write logs | Tools observed in an interactive session; scheduled access *(validate, R-01)* |
 | Gmail connector | Reconciliation search; test drafts; sends in `live` mode | Tools observed in an interactive session; scheduled access and unattended sending *(validate, R-01, R-04)* |
 | `POST_CALL_EMAIL_LOGS` / `POST_CALL_EMAIL_EVENTS` | Persistent state across independent sessions | Designed; not created |
-| Column AD `POST_CALL_CALL_ID` | Stable Call ID per call | Approved (D-024); not created |
+| Column AD `POST_CALL_CALL_ID` | Stable Call ID per call | Proposed (D-024); writes gated, not approved to write; not created |
 
 **Observed connector tools (interactive session, 2026-10-31).** Sheets: `get_spreadsheet`, `get_values`, `update_values`, `append_values`, `batch_clear_values`, `insert_dimension`, `update_spreadsheet`, `update_formulas`, `copy_sheet_to_another_spreadsheet`. Gmail: `search_threads`, `get_thread`, `get_message`, `create_draft`, `send_message`, `reply`, label tools, and others. This shows what exists in an interactive session only. It says nothing about scheduled runs, and some tools are **forbidden** for this agent (see §5).
 

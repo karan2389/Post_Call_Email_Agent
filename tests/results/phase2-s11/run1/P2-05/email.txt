@@ -1,0 +1,26 @@
+Subject: Follow-up on your FlexiFunnels support call – coupon, invoice and expiry
+
+Hi Sanjay,
+
+Thank you for your time on our call. You wanted your coupon code to work at checkout for the Advanced Course, the company name on your invoice's GST part corrected, and your coupon's expiry date extended.
+
+What we resolved:
+- Following our guidance, you assigned the Advanced Course to your coupon in the Products section of the coupon settings and saved it, and you confirmed the discount now shows at checkout.
+
+What we covered:
+- Your coupon was assigned only to the Starter Course and not the Advanced Course, so the Advanced Course needed to be assigned.
+- You can extend the coupon's expiry date yourself in the coupon settings, where the date option is.
+
+Your next steps:
+1. Extend the coupon's expiry date in the coupon settings (you mentioned doing this the night of our call).
+
+What we'll do next:
+- We will check the company name on your invoice's GST part with our billing team and let you know by the day after our call.
+
+You can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-05
+
+If anything is unclear, just reply to this email.
+
+Warm regards,
+Sameer
+FlexiFunnels Support

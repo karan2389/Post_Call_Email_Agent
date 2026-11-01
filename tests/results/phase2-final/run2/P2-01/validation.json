@@ -1,0 +1,35 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "Following our guidance, you switched on the order confirmation email for your product and saved it, and a test order you placed delivered the confirmation email to your inbox.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "We explained that the default sender name on the email can be changed under Email settings, Sender name.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "This is not yet done.",
+      "item_ids": [
+        "S2",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "You mentioned that you planned to change the sender name to your brand name yourself after our call.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

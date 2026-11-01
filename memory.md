@@ -13,6 +13,16 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - 2026-10-31 — **Phase 1 Test 2:** with private repo `karan2389/Post_Call_Email_Agent` as the routine source, a manual cloud run cloned it, read `CLAUDE.md`, runbook, settings, Phase 1 results and all four skills, and read the `Calls DONE` header (read-only). R-02 partly verified. Older repo `flexifunnels-post-call-email-agent` is a stale copy.
 
+- 2026-10-31 — **D-029 (supersedes the same-day D-028):** the agent operates on the original `CSC  Booking - All Agents`; `CSC Booking - Backup` is a recovery copy only. Source writes (AD) stay disabled until a four-condition gate is met. Backup synchronisation is outside this repository; not verified.
+
+- 2026-10-31 — **Phase 2 run on synthetic data (not complete):** 19/20 harness checks; P2-06 fails on a skill defect (S-11: owner of `completed` items). Proposed patch only partly effective, skills unchanged. Findings S-1 … S-15 in `docs/phase2-plan.md`; report `docs/phase2-report.md`. Deterministic checks exist only as a test harness (`tests/unit/`); OD-38 still undecided.
+
+- 2026-10-31 — **D-030 S-11 correction:** `completed` owner = performer (customer/support/uncertain, never guessed); summary grounding rule and `analysis_gaps`; skills 1.3.1 / 1.1.1 / 1.2.0 / 1.2.0. Verified in two rounds of three runs (best 21/22), **not closed at that time, later closed by D-032**: P2-10 length (S-6), one borderline P2-03 email, expectation approvals pending. Report `docs/phase2-s11-report.md`.
+
+- 2026-11-01 — **D-031 final Phase 2 policies:** length 250 preferred / 251-350 permitted / above 350 human review (`LENGTH_REVIEW_REQUIRED`); relative timelines read against `call_date`; customer-intent statements must be grounded in the analysis; ownership expectations updated from transcript evidence (originals in `tests/fixtures/_history/`). Skills 1.4.0 / 1.2.0 / 1.3.0 / 1.3.0. Final regression: runs 24/25, 25/25, 25/25 plus individual P2-03, P2-10 pass; one P2-10 run had a broken UTF-8 subject. S-11 closed by user decision on 2026-11-01 (D-032), the broken-subject run accepted as a one-off; P2-03 expectation unchanged, approval to narrow it still pending. Report `docs/phase2-final-report.md`.
+
+- 2026-11-01 — **D-033 Phase 2 final changes (untested by decision):** UTF-8 instruction (email-generation 1.4.0), P2-03 expectation narrowed (original kept in `_history/`), friendlier customer-facing wording (customer-summary 1.3.0, email-generation 1.4.0, email-validation 1.4.0). No regression runs were performed; business logic unchanged. Report `docs/phase2-final-report.md` §11.
+
 ## Phase 1 discoveries (verified 2026-10-31)
 
 - Cloud routines run in an Anthropic sandbox (`/home/user`, empty unless a git source is configured); cron/`run_once_at` are **UTC**, minimum interval 1 h (09:00 IST = `30 3 * * *`). `Bash` is available there.
@@ -36,7 +46,7 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 - Seven states: `PENDING`, `PROCESSING`, `VALIDATING`, `SENDING`, `SENT`, `FAILED`, `SKIPPED` (D-017). A send happens only from `SENDING`, after a write-ahead; never auto-resend an uncertain send.
 - **D-022 transition:** delivery modes `dry_run`/`test`/`shadow`/`live`; only `live` emails customers, for calls on/after `go_live_date`. `Recording Sent = yes` always blocks; an empty cell is not proof of "not sent"; the agent never writes `Recording Sent`. Rollback = `shadow`.
 - **D-023:** transcript automation is independent; the agent reads `Transcript`, never writes it or `AI Summary`; late transcripts deferred; transcript hash re-checked pre-send; if it changes, the draft is invalidated and reprocessed.
-- **D-024:** Call ID `gen:{uuid4}` in AD `POST_CALL_CALL_ID`, the only approved source write; single empty cell only; never overwrite a valid ID; ambiguous row match → write nothing; no backfill.
+- **D-024:** Call ID `gen:{uuid4}` in AD `POST_CALL_CALL_ID`, proposed as the only source write, **gated and not approved for writing** (D-029); if ever enabled, single empty cell only; never overwrite a valid ID; ambiguous row match → write nothing; no backfill.
 - **D-025:** several Fathom URLs in one cell = segments of one call; all valid links in order in **one** email; dedupe within the cell; any invalid URL flags the record (no partial email); same URL across rows → duplicate/privacy checks (`DUPLICATE_SOURCE_ROW` / `RECORDING_URL_CONFLICT`). `source_fingerprint` = email + date + time.
 - Five outcome categories: `discussed`, `explained`, `completed`, `pending_customer_action`, `pending_support_action`. When unsure, choose the less complete one.
 - Cancelled / no-show only on explicit `Meeting Notes` evidence (OD-26); ambiguous → review, not guessed.
@@ -45,7 +55,9 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 ## Source sheet (verified 2026-10-31)
 
-- Spreadsheet `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI` ("CSC  Booking - All Agents"), worksheet `Calls DONE` (GID 1314582701), timezone `Asia/Calcutta`. A shared CSC team workbook.
+- **Recovery copy only (D-029):** `CSC Booking - Backup`, ID `10YjhBUPpJBEnbXz5zTqGoXEIVEIuuMZT4cCyiYJ7p3Q`, worksheet `Calls DONE`. Never an agent input; not inspected; its synchronisation is outside this repository (`docs/backup-recovery.md`, OD-43, R-14).
+- **Operational source and agent input (inspected read-only):** spreadsheet `1jRNPM4GJ4ctV5lgUVzyJhhq15tFdnT3jZ5TjHsAPbsI` ("CSC  Booking - All Agents"), worksheet `Calls DONE` (GID 1314582701), timezone `Asia/Calcutta`. A shared CSC team workbook. Headers run through AC; AD is empty.
+- The column mapping below refers to this original spreadsheet.
 - Mapping: `Date` (A), `Time of the call` (B), `Customer Name` (C), `Email` (D), `Call lead by(who took the call)` (F), `Meeting URL` (L, row matching only), `Recording URL` (M, one or more Fathom `/share/` URLs), `Recording Sent` (N), `Meeting Notes` (Q), `Transcript` (AB, direct text `[HH:MM:SS] Speaker: text`), `AI Summary` (AC, never written), AD `POST_CALL_CALL_ID` (to be created).
 - Missing: Fathom recording ID, structured call status (W/X unused), opt-out, call type.
 - Transcripts can be empty the day after a call; some contain Hindi. Data issues: trailing spaces, whitespace-only URLs, two URLs in a cell, the same URL in two rows, inconsistent name casing, rows created before the call, date-only placeholder rows.

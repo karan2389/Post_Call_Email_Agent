@@ -1,0 +1,71 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "call_purpose": "You wanted to offer monthly and yearly plans on one checkout page, send customers to your own thank-you page after payment, and add GST to your prices.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "resolved": [
+    {
+      "text": "Following our guidance, you added the yearly price, and you confirmed that both the monthly and yearly options now show on your checkout.",
+      "source_item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "text": "Following our guidance, you pasted your thank-you page link into the After purchase redirect option and saved it, and you confirmed that a test purchase took you straight to your thank-you page.",
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We showed you how to add a second price: open the product, go to Pricing and click Add price.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "We showed you where to set the redirect: the product's Pages settings, under the After purchase redirect option.",
+      "source_item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "text": "We discussed adding GST to your prices and pointed you to a tax setting for it.",
+      "source_item_ids": [
+        "I5"
+      ]
+    }
+  ],
+  "customer_next_steps": [
+    {
+      "text": "Add your privacy policy link to your checkout footer.",
+      "timeline": "this week",
+      "source_item_ids": [
+        "I7"
+      ]
+    }
+  ],
+  "support_next_steps": [
+    {
+      "text": "We will send you our guide on the tax settings so you can follow the steps.",
+      "timeline": null,
+      "source_item_ids": [
+        "I6"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [
+    {
+      "issue_or_item_id": "I5",
+      "missing": "Where the tax setting is located is not in the analysis, so the summary only says one exists."
+    }
+  ],
+  "primary_topic": "pricing plans and thank-you page"
+}

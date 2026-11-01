@@ -1,0 +1,21 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – course lesson videos",
+  "body_text": "Hi Meera,\n\nThank you for your time on our call. I'm sorry for the trouble and the frustration this has caused. You contacted us because some of your students report that your course lesson videos keep loading and never play, mostly on their phones, and you hope it gets sorted out.\n\nWhat we covered:\n- We opened the lesson link you shared on desktop in Chrome, in Safari and on a phone, and the video played on each, so we could not reproduce the problem from our side. This issue is not yet resolved.\n\nYour next steps:\n1. Ask one of the affected students to record a short screen recording showing the video loading, and send it to us along with the lesson link.\n\nWhat we'll do next:\n- We will raise this with our technical team and get back to you.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-03\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nRiya\nFlexiFunnels Support",
+  "word_count_excluding_signature": 158,
+  "length_status": "within_preferred",
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-03"
+  ],
+  "sections_included": [
+    "covered",
+    "customer_next_steps",
+    "support_next_steps",
+    "recording"
+  ]
+}

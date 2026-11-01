@@ -1,0 +1,45 @@
+{
+  "schema": "CustomerSummary/1",
+  "skipped": false,
+  "resolved": [
+    {
+      "text": "Following our guidance, you corrected the typo in your webhook URL and saved it, and a test lead you submitted through your form now shows up in your CRM, so new leads are flowing again.",
+      "source_item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "covered": [
+    {
+      "text": "We found a typo in your webhook URL and told you about it.",
+      "source_item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "text": "We told you that the leads from the last three days did not reach your CRM. This is not yet resolved.",
+      "source_item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "customer_next_steps": [],
+  "support_next_steps": [
+    {
+      "text": "We will re-index the webhook queue, have our technical team resend the missed leads to your CRM, and message you once that is done. We cannot give an exact time.",
+      "timeline": null,
+      "source_item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "omitted_item_ids": [],
+  "analysis_gaps": [],
+  "call_purpose": "You wanted new leads from your funnel form to reach your CRM again after they stopped about three days ago, and the leads from the last three days to reach it too.",
+  "call_purpose_issue_ids": [
+    "S1",
+    "S2"
+  ],
+  "tone_guidance": "warm_and_concise",
+  "primary_topic": "CRM lead delivery"
+}

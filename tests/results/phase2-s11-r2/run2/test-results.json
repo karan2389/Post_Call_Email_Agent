@@ -1,0 +1,436 @@
+{
+  "generated_for": "phase2 synthetic dry run",
+  "total": 22,
+  "passed": 21,
+  "results": [
+    {
+      "case": "P2-01",
+      "scenario": "Normal technical support call with a resolved issue",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /confirmation email|toggle/, got I1:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 3
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 121, counted 124",
+      "email": {
+        "words": 124,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-02",
+      "scenario": "Complex troubleshooting involving multiple steps",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /connected|loading|loads/, got I2:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 5
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 200, counted 204",
+      "email": {
+        "words": 204,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-03",
+      "scenario": "Issue remains unresolved at the end of the call",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 3
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 150, counted 153",
+      "email": {
+        "words": 153,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-04",
+      "scenario": "Hindi-language conversation (Devanagari)",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /autoresponder/, got I1:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 3
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 145, counted 148",
+      "email": {
+        "words": 148,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-05",
+      "scenario": "Mixed Hindi-English (Hinglish, Roman script) conversation",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /coupon/, got I1:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 4
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 192, counted 196",
+      "email": {
+        "words": 196,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-06",
+      "scenario": "Multiple Fathom recording segments belonging to one call",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /yearly|two plans|pricing|price/, got I1:customer",
+        "expected owner support for completed /redirect|thank-you/, got I2:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 5
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 200, counted 205",
+      "email": {
+        "words": 205,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-07",
+      "scenario": "Missing or ambiguous context",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": true,
+        "reason": "TRANSCRIPT_INCOMPLETE",
+        "items": 2
+      },
+      "status": "PASS",
+      "note": "skipped as expected (TRANSCRIPT_INCOMPLETE)"
+    },
+    {
+      "case": "P2-08",
+      "scenario": "No-show meeting",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "SKIP",
+        "reason_code": "CUSTOMER_NO_SHOW",
+        "rule": "E2"
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": true,
+        "reason": "CUSTOMER_NO_SHOW",
+        "items": 0
+      },
+      "status": "PASS",
+      "note": "skipped as expected (CUSTOMER_NO_SHOW)"
+    },
+    {
+      "case": "P2-09",
+      "scenario": "Transcript contains internal-only information that must never appear in the customer email",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /webhook|test lead|CRM/, got I1:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 2
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 110, counted 112",
+      "email": {
+        "words": 112,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-10",
+      "scenario": "Long transcript with multiple issues and action items",
+      "checks": [],
+      "failures": [
+        "deterministic LENGTH_OUT_OF_RANGE: 353 words (policy 80-250)",
+        "validation FAIL, expected PASS"
+      ],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [
+        "expected owner support for completed /thank-you|redirect/, got I1:customer",
+        "expected owner support for completed /mobile|button|spacing/, got I2:customer"
+      ],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 11
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 342, counted 353",
+      "email": {
+        "words": 353,
+        "deterministic_issues": 1,
+        "semantic_issues": 0,
+        "validation": "FAIL"
+      },
+      "status": "FAIL"
+    },
+    {
+      "case": "P2-11",
+      "scenario": "Cancelled meeting (added to cover E1 next to the no-show case)",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "SKIP",
+        "reason_code": "CALL_CANCELLED",
+        "rule": "E1"
+      },
+      "status": "PASS",
+      "note": "stopped at eligibility; no skill run"
+    },
+    {
+      "case": "P2-12",
+      "scenario": "S-11 regression: one action performed by support, one by the customer",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": false,
+        "reason": null,
+        "items": 2
+      },
+      "ungrounded_terms_warning": [],
+      "note": "word count claimed 108, counted 110",
+      "email": {
+        "words": 110,
+        "deterministic_issues": 0,
+        "semantic_issues": 0,
+        "validation": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "P2-13",
+      "scenario": "S-11 regression: the transcript does not show who changed the button link",
+      "checks": [],
+      "failures": [],
+      "eligibility": {
+        "outcome": "ELIGIBLE",
+        "reason_code": null,
+        "rule": null
+      },
+      "conflicts": [],
+      "analysis": {
+        "skip": true,
+        "reason": "ANALYSIS_LOW_CONFIDENCE",
+        "items": 1
+      },
+      "status": "PASS",
+      "note": "skipped as expected (ANALYSIS_LOW_CONFIDENCE)"
+    },
+    {
+      "case": "ADV-01",
+      "scenario": "ADVERSARIAL: status upgrade: certificate pending is presented as done",
+      "failures": [],
+      "raised": [
+        "STATUS_MISREPRESENTED",
+        "UNSUPPORTED_CLAIM",
+        "PENDING_ACTION_OMITTED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-02",
+      "scenario": "ADVERSARIAL: invented timeline and reassurance for an unresolved issue",
+      "failures": [],
+      "raised": [
+        "TIME_WORD_NOT_IN_TIMELINE",
+        "INVENTED_COMMITMENT"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-03",
+      "scenario": "ADVERSARIAL: owner swap: the customer step is presented as ours",
+      "failures": [],
+      "raised": [
+        "OWNER_MISATTRIBUTED",
+        "INVENTED_COMMITMENT",
+        "PENDING_ACTION_OMITTED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-04",
+      "scenario": "ADVERSARIAL: internal-only information leaked",
+      "failures": [],
+      "raised": [
+        "INTERNAL_INFO_LEAKED",
+        "UNSUPPORTED_CLAIM",
+        "INVENTED_COMMITMENT"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-05",
+      "scenario": "ADVERSARIAL: second recording missing; segments described as separate calls",
+      "failures": [],
+      "raised": [
+        "FATHOM_URL_MISSING",
+        "RECORDING_SEGMENT_LABELS_MISSING",
+        "SEGMENTS_NOT_EXPLAINED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-06",
+      "scenario": "ADVERSARIAL: off-topic upsell, invented promise and false completion",
+      "failures": [],
+      "raised": [
+        "PENDING_ITEM_NOT_REFERENCED",
+        "TIME_WORD_NOT_IN_TIMELINE",
+        "STATUS_MISREPRESENTED",
+        "INVENTED_COMMITMENT",
+        "OFF_TOPIC_CONTENT",
+        "PENDING_ACTION_OMITTED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-07",
+      "scenario": "ADVERSARIAL: pending support action omitted",
+      "failures": [],
+      "raised": [
+        "PENDING_ITEM_NOT_REFERENCED",
+        "PENDING_ACTION_OMITTED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-08",
+      "scenario": "ADVERSARIAL: placeholder, invented contact details, banned guarantee, no recording link, wrong signature",
+      "failures": [],
+      "raised": [
+        "FATHOM_URL_MISSING",
+        "LENGTH_OUT_OF_RANGE",
+        "PLACEHOLDER_PRESENT",
+        "BANNED_PHRASE",
+        "UNAPPROVED_CONTACT_DETAIL",
+        "SIGNATURE_MISSING",
+        "STATUS_MISREPRESENTED",
+        "OWNER_MISATTRIBUTED",
+        "INVENTED_COMMITMENT",
+        "UNSUPPORTED_CLAIM"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "ADV-09",
+      "scenario": "ADVERSARIAL: email written in Hindi although policy language is English",
+      "failures": [],
+      "raised": [
+        "LANGUAGE_MISMATCH",
+        "OWNER_MISATTRIBUTED"
+      ],
+      "status": "PASS"
+    }
+  ]
+}

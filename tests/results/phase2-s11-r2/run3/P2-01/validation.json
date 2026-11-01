@@ -1,0 +1,49 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "After connecting a payment gateway, your buyers were not getting the order confirmation email after they bought, and the email still shows the default sender name when you want to use your brand name.",
+      "item_ids": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you switched on the order confirmation email in your product's settings and saved it.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you placed a test order with your test coupon, and you confirmed the order confirmation email arrived in your inbox.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "The sender name can be changed under Email settings, Sender name.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "The default sender name is not yet changed.",
+      "item_ids": [
+        "I3",
+        "I4",
+        "S2"
+      ]
+    },
+    {
+      "email_excerpt": "Change the sender name to your brand name yourself (you mentioned you would do this after the call).",
+      "item_ids": [
+        "I4"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4"
+  ]
+}

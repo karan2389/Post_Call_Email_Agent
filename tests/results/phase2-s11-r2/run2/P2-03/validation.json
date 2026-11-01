@@ -1,0 +1,59 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "we are sorry for the trouble this has caused",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Some of your students told you that the lesson videos in your course keep loading and never play, mostly on their phones.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We opened the lesson link you shared on a desktop in Chrome, in Safari and on a phone.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "The video played fine each time, so we could not reproduce the problem.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "This is not yet resolved.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "Ask one of your students to make a short screen recording showing the video loading, and send it to us along with the lesson link.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "We will raise this with our team and get back to you.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We are not able to give a timeline yet.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2",
+    "I3"
+  ]
+}

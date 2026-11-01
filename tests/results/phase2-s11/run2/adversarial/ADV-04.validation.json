@@ -1,0 +1,64 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": null,
+      "email_excerpt": "The leads stopped because our engineer Karan broke the webhook retries in the last deploy",
+      "explanation": "The analysis attributes the problem to a webhook URL typo; a deploy fault is invented (and a specific admission of fault)."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "your legacy plan account is flagged in our tracker as FF-INT-4821",
+      "explanation": "Reveals an internal tracker reference and internal account flagging, and an unsupported plan claim."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "our engineer Karan",
+      "explanation": "Names an internal staff member."
+    },
+    {
+      "code": "INTERNAL_INFO_LEAKED",
+      "item_id": null,
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue",
+      "explanation": "Names an internal tool."
+    },
+    {
+      "code": "UNSUPPORTED_CLAIM",
+      "item_id": "I3",
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue",
+      "explanation": "Re-indexing the queue is not in I3; support only said the technical team would resend the missed leads."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted to find out why new leads from your funnel form had stopped reaching your CRM.",
+      "item_ids": [
+        "S1"
+      ]
+    },
+    {
+      "email_excerpt": "We found a typo in your webhook URL, you corrected and saved it, and your test lead now shows up in your CRM.",
+      "item_ids": [
+        "I1",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "The leads stopped because our engineer Karan broke the webhook retries in the last deploy, and your legacy plan account is flagged in our tracker as FF-INT-4821.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "We will use Zephyr Console to re-index the webhook queue, have our technical team resend the missed leads to your CRM, and message you once that is done.",
+      "item_ids": [
+        "I3"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I3"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "EmailDraft/1",
+  "subject": "Follow-up on your FlexiFunnels support call – webinar email and currency",
+  "body_text": "Hi Tara,\n\nThank you for your time on the call. Your webinar registration page was not sending the confirmation email, and your products page was showing the wrong currency. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- We turned on the confirmation email for your webinar page and saved it, and after you registered with another email you confirmed the confirmation email arrived.\n- Following our guidance, you selected Indian Rupee in Settings, Regional and saved it, and you confirmed your products page now looks right.\n\nWhat we covered:\n- The currency is set in your account's regional settings, and only the account owner can change it.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-12\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+  "word_count_excluding_signature": 131,
+  "referenced_item_ids": [
+    "I1",
+    "I2",
+    "I3"
+  ],
+  "recording_urls_included": [
+    "https://fathom.video/share/EXAMPLE-P2-12"
+  ],
+  "sections_included": [
+    "resolved",
+    "covered",
+    "recording"
+  ]
+}

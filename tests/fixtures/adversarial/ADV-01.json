@@ -1,0 +1,25 @@
+{
+  "id": "ADV-01",
+  "base_case": "P2-02",
+  "description": "status upgrade: certificate pending is presented as done",
+  "expected_codes": [],
+  "expected_semantic_codes": [
+    "STATUS_MISREPRESENTED"
+  ],
+  "email": {
+    "schema": "EmailDraft/1",
+    "subject": "Follow-up on your FlexiFunnels support call – custom domain connection",
+    "body_text": "Hi Arjun,\n\nThank you for your time on our call. You wanted your custom domain to load your funnel instead of showing a \"site can't be reached\" error. Here is a quick summary so you have everything in one place.\n\nWhat we resolved:\n- Your custom domain is now connected, and both the main address and the www version load your funnel.\n- Your secure certificate is now fully set up and the padlock is showing, so your visitors will see a secure site.\n\nWhat we covered:\n- We explained that the old record was blocking the connection and had to be replaced with a CNAME record.\n\nYou can rewatch our call here: https://fathom.video/share/EXAMPLE-P2-02\n\nIf anything is unclear, just reply to this email.\n\nWarm regards,\nSameer\nFlexiFunnels Support",
+    "word_count_excluding_signature": 123,
+    "referenced_item_ids": [
+      "I1",
+      "I2",
+      "I3",
+      "I4"
+    ],
+    "recording_urls_included": [
+      "https://fathom.video/share/EXAMPLE-P2-02"
+    ],
+    "sections_included": []
+  }
+}

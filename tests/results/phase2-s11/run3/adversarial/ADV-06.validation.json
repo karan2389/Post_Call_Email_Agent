@@ -1,0 +1,96 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "FAIL",
+  "issues": [
+    {
+      "code": "STATUS_MISREPRESENTED",
+      "item_id": "I6",
+      "email_excerpt": "We have extended your EARLYBIRD coupon so it is live again.",
+      "explanation": "Support only explained how the customer could extend the coupon if they decide to; nothing was extended."
+    },
+    {
+      "code": "INVENTED_COMMITMENT",
+      "item_id": "I10",
+      "email_excerpt": "Our AI quiz generator is coming very soon and we will make sure you get early access.",
+      "explanation": "Support said they were not aware of a quiz generator and had no date; the release timing and early access are invented."
+    },
+    {
+      "code": "OFF_TOPIC_CONTENT",
+      "item_id": null,
+      "email_excerpt": "Upgrade to our premium plan to unlock more templates and faster support.",
+      "explanation": "Upsell unrelated to the call."
+    },
+    {
+      "code": "PENDING_ACTION_OMITTED",
+      "item_id": "I12",
+      "email_excerpt": "",
+      "explanation": "The customer's step to try the student list export is missing."
+    }
+  ],
+  "statement_map": [
+    {
+      "email_excerpt": "You came with a list covering your thank-you page, mobile landing page, email domain, invoices and course.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3",
+        "S5",
+        "S6"
+      ]
+    },
+    {
+      "email_excerpt": "Your thank-you page redirect is set up, and your test order now goes to your page.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "The overlapping mobile buttons are fixed, and you confirmed they look fine.",
+      "item_ids": [
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We have extended your EARLYBIRD coupon so it is live again.",
+      "item_ids": [
+        "I6"
+      ]
+    },
+    {
+      "email_excerpt": "Our AI quiz generator is coming very soon and we will make sure you get early access.",
+      "item_ids": [
+        "I10"
+      ]
+    },
+    {
+      "email_excerpt": "Upgrade to our premium plan to unlock more templates and faster support.",
+      "item_ids": []
+    },
+    {
+      "email_excerpt": "Have your developer add the three DNS records by Friday, then click Verify in your email settings.",
+      "item_ids": [
+        "I4",
+        "I5"
+      ]
+    },
+    {
+      "email_excerpt": "We will check with our billing team about changing the name on your invoices and get back to you within 2 working days.",
+      "item_ids": [
+        "I7"
+      ]
+    },
+    {
+      "email_excerpt": "We will check with our product team whether the drip schedule works for a course sold inside a bundle and get back to you.",
+      "item_ids": [
+        "I9"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I4",
+    "I5",
+    "I7",
+    "I9",
+    "I12"
+  ]
+}

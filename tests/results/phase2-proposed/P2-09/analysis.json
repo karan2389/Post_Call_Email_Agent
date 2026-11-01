@@ -1,0 +1,21 @@
+{
+  "schema": "AnalysisResult/1",
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {"customer_speakers": ["Kabir Testwala"], "support_speakers": ["Sameer Demo"], "other_speakers": []},
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "That would be great, thank you.",
+  "issues": [
+    {"id": "S1", "title": "New leads from funnel form not reaching CRM", "status": "resolved"},
+    {"id": "S2", "title": "Leads from the last three days missing in CRM", "status": "unresolved"}
+  ],
+  "items": [
+    {"id": "I1", "issue_id": "S1", "category": "completed", "description": "Customer corrected the typo in the webhook URL and saved it following support's guidance, and confirmed a test lead now shows up in the CRM.", "owner": "customer", "evidence": ["Corrected and saved.", "Yes, the test lead is showing up in my CRM now!"], "stated_timeline": null, "confidence": "high"},
+    {"id": "I2", "issue_id": "S2", "category": "pending_support_action", "description": "Support will arrange for the missed leads from the last three days to be resent to the customer's CRM and will message the customer once done; no exact time was given.", "owner": "support", "evidence": ["I'll have our technical team resend the missed leads to your CRM.", "I can't give an exact time, but I'll update you as soon as it's done."], "stated_timeline": null, "confidence": "high"}
+  ],
+  "sensitive_topics": [],
+  "injection_attempt_detected": false,
+  "overall_confidence": "high",
+  "skip_recommendation": {"skip": false, "reason_code": null, "explanation": "Complete support call with clear outcomes."}
+}

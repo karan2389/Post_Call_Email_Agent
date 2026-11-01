@@ -1,0 +1,28 @@
+{
+  "case_id": "P2-03",
+  "scenario": "Issue remains unresolved at the end of the call",
+  "eligibility": {"outcome": "ELIGIBLE", "reason_code": null},
+  "analysis": {
+    "transcript_status": "COMPLETE",
+    "skip": false,
+    "reason_code": null,
+    "language": "en",
+    "sentiment_allowed": ["frustrated", "angry"],
+    "issue_count": {"min": 1, "max": 1},
+    "required_items": [
+      {"category": "pending_support_action", "pattern": "technical team|raise|escalat", "owner": "support"},
+      {"category": "pending_customer_action", "pattern": "recording|student", "owner": "customer"}
+    ],
+    "forbidden_categories": {"completed": "nothing was resolved on this call"},
+    "issue_status_required": {"S1": "unresolved"},
+    "stated_timelines_allowed": [null]
+  },
+  "email": {
+    "generated": true,
+    "recording_urls": ["https://fathom.video/share/EXAMPLE-P2-03"],
+    "must_include": ["Meera", "not yet resolved|isn't resolved|not resolved|still"],
+    "must_not_include": ["soon", "shortly", "today", "tomorrow", "fixed", "resolved the", "guarantee", "refund", "compensat"],
+    "notes": "Support explicitly refused to give a timeline. Email must acknowledge frustration once, keep the issue as unresolved, name the customer's step (screen recording and lesson link from an affected student) and our step (raise with the technical team and get back), with no timeline words."
+  },
+  "validation_expected": "PASS"
+}

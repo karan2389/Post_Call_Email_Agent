@@ -1,0 +1,18 @@
+{
+  "case_id": "P2-08",
+  "scenario": "No-show meeting",
+  "eligibility": {"outcome": "SKIP", "reason_code": "CUSTOMER_NO_SHOW", "rule": "E2"},
+  "analysis": {
+    "run": "safeguard only (EV-57): eligibility already stops the record before analysis",
+    "transcript_status": "INSUFFICIENT_CONTENT",
+    "skip": true,
+    "reason_code_allowed": ["CUSTOMER_NO_SHOW"],
+    "required_items": [],
+    "forbidden_categories": {"completed": "no support was delivered"}
+  },
+  "email": {
+    "generated": false,
+    "notes": "Meeting Notes says 'customer not came', so eligibility rule E2 ends the record as SKIPPED CUSTOMER_NO_SHOW before any skill runs. If the analysis stage is run anyway as a safeguard, it must also recommend CUSTOMER_NO_SHOW."
+  },
+  "validation_expected": "N/A"
+}

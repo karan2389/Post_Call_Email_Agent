@@ -1,0 +1,62 @@
+{
+  "schema": "ValidationResult/1",
+  "outcome": "PASS",
+  "issues": [],
+  "statement_map": [
+    {
+      "email_excerpt": "You wanted your coupon code to apply at checkout for the Advanced Course instead of showing an \"Invalid coupon\" message, and you also raised the wrong company name in the GST part of your invoice and extending your coupon expiry date.",
+      "item_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "email_excerpt": "The coupon had been assigned only to the Starter Course.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "Following our guidance, you edited it, selected the Advanced Course in its Products section and saved it, and you confirmed the discount now shows at checkout.",
+      "item_ids": [
+        "I1"
+      ]
+    },
+    {
+      "email_excerpt": "You can extend the coupon's expiry date yourself in the coupon settings, where the date option is available.",
+      "item_ids": [
+        "I3"
+      ]
+    },
+    {
+      "email_excerpt": "This is not yet done.",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "Extend your coupon's expiry date in the coupon settings (you said you would do this on the night of our call).",
+      "item_ids": [
+        "I4"
+      ]
+    },
+    {
+      "email_excerpt": "The company name in the GST part of your invoice is wrong, which is not yet resolved.",
+      "item_ids": [
+        "S2",
+        "I2"
+      ]
+    },
+    {
+      "email_excerpt": "We will check about it and let you know by the day after our call.",
+      "item_ids": [
+        "I2"
+      ]
+    }
+  ],
+  "pending_items_checked": [
+    "I2",
+    "I4"
+  ]
+}

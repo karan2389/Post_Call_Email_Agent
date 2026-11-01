@@ -1,0 +1,16 @@
+[00:00:07] Sameer Demo: Hello Sanjay ji, bataiye, kya help chahiye?
+[00:00:12] Sanjay Testwala: Sameer ji, mera coupon code checkout pe apply nahi ho raha. "Invalid coupon" aa raha hai.
+[00:00:22] Sameer Demo: Theek hai, dekhte hain. Aap ye coupon kis product pe lagana chahte ho?
+[00:00:29] Sanjay Testwala: Advanced Course pe.
+[00:00:35] Sameer Demo: Coupon dashboard mein ye coupon sirf Starter Course ke liye assign hai, Advanced Course ke liye nahi. Aapko product assign karna padega.
+[00:00:50] Sanjay Testwala: Kaise karte hain?
+[00:00:55] Sameer Demo: Coupon ko edit karo, Products section mein Advanced Course select karo aur save kar do.
+[00:01:40] Sanjay Testwala: Ho gaya. Ab test karta hoon... haan, ab checkout pe discount dikh raha hai.
+[00:01:50] Sameer Demo: Badhiya. Aur kuch?
+[00:01:54] Sanjay Testwala: Haan, invoice mein meri company ka naam galat aa raha hai, GST wale part mein.
+[00:02:05] Sameer Demo: Uske liye main billing team se check karke aapko kal tak bata dunga.
+[00:02:12] Sanjay Testwala: Theek hai. Aur coupon ki expiry date bhi badhani hai.
+[00:02:18] Sameer Demo: Expiry aap khud coupon settings mein badha sakte ho, wahin date ka option milega.
+[00:02:28] Sanjay Testwala: Haan, main aaj raat badha dunga.
+[00:02:33] Sameer Demo: Perfect. Dhanyavaad Sanjay ji.
+[00:02:36] Sanjay Testwala: Dhanyavaad Sameer ji.

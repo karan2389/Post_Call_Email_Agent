@@ -1,0 +1,115 @@
+{
+  "schema": "AnalysisResult/1",
+  "call_date": "2026-10-30",
+  "injection_attempt_detected": false,
+  "sensitive_topics": [],
+  "ownership_review_required": false,
+  "transcript_status": "COMPLETE",
+  "call_classification": "support",
+  "language": "en",
+  "participants": {
+    "customer_speakers": [
+      "Arjun Testwala"
+    ],
+    "support_speakers": [
+      "Sameer Demo"
+    ],
+    "other_speakers": []
+  },
+  "customer_sentiment": "positive",
+  "sentiment_evidence": "Yes! Both shop.testfunnel.example and the www version are loading our funnel now. Thank you!",
+  "issues": [
+    {
+      "id": "S1",
+      "title": "Custom domain not reachable",
+      "problem_statement": "The customer's custom domain had been showing a \"site can't be reached\" error for three days, while the funnel worked on the FlexiFunnels link but not on their own domain.",
+      "status": "resolved"
+    },
+    {
+      "id": "S2",
+      "title": "Secure certificate (padlock) after connecting",
+      "problem_statement": "Support said the padlock for the secure certificate can take some time to appear after connecting the domain; whether it has been issued is not yet confirmed.",
+      "status": "informational"
+    }
+  ],
+  "items": [
+    {
+      "id": "I1",
+      "issue_id": "S1",
+      "category": "explained",
+      "description": "Support explained that an old A record pointing to an old server address was blocking the connection.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "That old record is blocking the connection."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I2",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer deleted the old A record and added a CNAME record using the target value shown in the FlexiFunnels domain settings, following support's guidance; support then saw the dashboard show the domain as connected and the customer confirmed it loads.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "I deleted the A record and added the CNAME. Saved.",
+        "It loads!"
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I3",
+      "issue_id": "S1",
+      "category": "completed",
+      "description": "Customer deleted a second record for the www version and added a CNAME record for www with the same target value, following support's guidance, and confirmed both the domain and its www version now load the funnel.",
+      "owner": "customer",
+      "guided_by": "support",
+      "evidence": [
+        "Done, both changes saved.",
+        "Both shop.testfunnel.example and the www version are loading our funnel now."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    },
+    {
+      "id": "I4",
+      "issue_id": "S2",
+      "category": "pending_support_action",
+      "description": "Support will check that the secure certificate has been issued and will message the customer if it has not.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "I'll check tomorrow morning that the certificate has been issued, and I'll message you if it hasn't."
+      ],
+      "stated_timeline": "tomorrow morning",
+      "timeline_reference": "call_relative",
+      "confidence": "high"
+    },
+    {
+      "id": "I5",
+      "issue_id": "S2",
+      "category": "explained",
+      "description": "Support explained that the padlock for the secure certificate can take some time to appear after connecting.",
+      "owner": "support",
+      "guided_by": null,
+      "evidence": [
+        "the padlock for the secure certificate can take some time to appear after connecting."
+      ],
+      "stated_timeline": null,
+      "timeline_reference": null,
+      "confidence": "high"
+    }
+  ],
+  "overall_confidence": "high",
+  "skip_recommendation": {
+    "skip": false,
+    "reason_code": null,
+    "explanation": "Complete support call with clear outcomes."
+  }
+}

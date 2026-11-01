@@ -1,0 +1,11 @@
+[00:00:05] Sameer Demo: Hi Tara, thanks for joining. How can I help?
+[00:00:11] Tara Testwala: Hi Sameer. My webinar registration page isn't sending the confirmation email, and my products page has the wrong currency shown.
+[00:00:25] Sameer Demo: Let's start with the confirmation email. I have access to your account's settings from my side, so let me look.
+[00:00:40] Sameer Demo: I can see the confirmation email is turned off for the webinar page. I've turned it on from my side and saved it.
+[00:01:05] Sameer Demo: Please register once with your other email so we can test it.
+[00:02:10] Tara Testwala: Registered. Yes, the confirmation email just came in!
+[00:02:18] Sameer Demo: Great. Now the currency. That one is in your account regional settings, and only the account owner can change it. Please open Settings, then Regional, and choose Indian Rupee.
+[00:02:40] Tara Testwala: I selected Indian Rupee and clicked save.
+[00:02:50] Sameer Demo: I'm refreshing your products page now. I can see it shows rupees now.
+[00:03:00] Tara Testwala: Perfect, it looks right to me too. Thank you!
+[00:03:06] Sameer Demo: You're welcome, have a good evening.
