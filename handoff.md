@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## B7 resolved locally: `.env` ACL restricted, Brevo key removed (2026-11-02, D-069)
+Gmail is the sole active provider and has no Brevo dependency (only the retired brevo.js, env.js, brevo-check.js and their tests reference the variables). `.env` ACL is now KARAN\karan (M), Administrators (F), SYSTEM (F), inheritance disabled, `.env` only; the `BREVO_API_KEY` line was removed (two non-secret sender values remain); `.env.example` has commented placeholders only; `api_key_provisioned` false. Secret scan: key in 0 working-tree files, 0 commits, 0 scratch files, 0 transcripts. **Needs you: revoke the key in Brevo manually.** Remaining C0 blockers: B1-B6, B8-B12 (`docs/c0-readiness-report.md`).
+
 ## C0 pilot readiness prepared: NOT READY for C1 (2026-11-02, D-068)
 Preparation only. Read-only reply-monitoring investigation, consent checklist, approval workflow and review card, deterministic C1 candidate-pool rules and allowlist validation (not created), suppression check, scheduling comparison (Task Scheduler cannot reach the connectors: `claude mcp list` shows none; nothing created), requirements, acceptance criteria, go-live checklist, report template, C0 readiness report (`docs/c0-readiness-report.md`, blockers B1-B12 with owners). New code: `src/lib/pilot.js`, suppression in `preSendChecks`; `tests/unit/phase4-pilot.test.js` 11/11 (mutation-checked). No email, internal test, draft, sheet write, schedule or gate change. **Finding to act on:** `.env` is readable by all local accounts (inherited ACL); revoke the Brevo key and remove it, or restrict the ACL. **Needs you:** business confirmations (consent, reply owner, opt-out process, approver), confidence-source decision, then authorise C1 explicitly.
 

@@ -95,7 +95,7 @@ email_provider:
     sender_verified_in_brevo: true       # user confirmed 2026-11-01 and two real Brevo sends were accepted from this sender (D-062, D-064)
     domain_authenticated_in_brevo: false # DKIM / Brevo code / DMARC for flexifunnels.com, confirmed in Brevo
     link_tracking_disabled_confirmed: true   # user accepted 2026-11-02 (D-065) on the evidence of a raw delivered message (D-064): original URLs preserved in the production format (no anchors; the adapter refuses anchors). Brevo's open pixel and tracked List-Unsubscribe header REMAIN and are accepted for the pixel only; the unsubscribe header is an open risk. Revert to false if either changes link behaviour
-    api_key_provisioned: true          # the key is held only in the BREVO_API_KEY environment variable
+    api_key_provisioned: false         # the local Brevo key was removed from .env on 2026-11-02 (D-069); the user revokes it in Brevo manually. Not used by the Gmail-only path
     delivery_status_method: poll         # poll GET /smtp/emails/{uuid} events; a webhook needs a public receiver the project does not have
 
 # Supervised pilot stages (D-066). Each stage needs the user's explicit authorisation in chat; all stay false. C1 = up to 5 individually approved emails, C2 = up to 15 more after the C1 review, C3 = capped automation (separate design and authorisation).

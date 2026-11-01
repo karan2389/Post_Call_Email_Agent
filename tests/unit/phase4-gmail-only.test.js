@@ -219,6 +219,15 @@ t('source guarantees: no auto-approval path, provider.js reads no environment, n
   assert.ok(!/require\(['"]\.\/brevo['"]\)/.test(rd('sender.js')));
 });
 
+t('secrets hygiene (D-069): .env.example holds placeholders only, no tracked file has a real-shaped Brevo key, and the Gmail send path never reads the environment or .env', () => {
+  const root = path.join(__dirname, '../..'); const ex = fs.readFileSync(path.join(root, '.env.example'), 'utf8').split(/\r?\n/).filter((l) => l.trim() && !/^\s*#/.test(l));
+  assert.ok(ex.every((l) => /^[A-Za-z_][A-Za-z0-9_]*=\s*$/.test(l)), 'every uncommented assignment must be empty'); assert.ok(!/xkeysib-[A-Za-z0-9]{20,}/.test(fs.readFileSync(path.join(root, '.env.example'), 'utf8')));
+  const tracked = require('child_process').spawnSync('git', ['ls-files'], { cwd: root, encoding: 'utf8' }).stdout.split(/\r?\n/).filter(Boolean);
+  const bad = tracked.filter((f) => { try { return /xkeysib-[A-Za-z0-9]{32,}/.test(fs.readFileSync(path.join(root, f), 'latin1')); } catch (e) { return false; } }); assert.deepStrictEqual(bad, []);
+  assert.ok(!tracked.some((f) => /(^|\/)\.env$/.test(f)));
+  for (const f of ['sender.js', 'provider.js', 'gmail.js', 'urlcheck.js', 'approval.js', 'pilot.js', 'sendstate.js', 'sendlog.js']) { const s = fs.readFileSync(path.join(root, 'src/lib', f), 'utf8').replace(/\/\/.*$/gm, ''); assert.ok(!/process\.env|\.env['"]|BREVO|require\(['"]\.\/(brevo|env)['"]\)/.test(s), f); }
+});
+
 (async () => {
   for (const [name, fn] of tests) { try { await fn(); n += 1; } catch (e) { console.error('FAIL: ' + name + '\n' + (e && e.stack ? e.stack.split('\n').slice(0, 5).join('\n') : e)); process.exitCode = 1; } }
   console.log(`phase4 gmail-only: ${n}/${tests.length} test groups passed`);
