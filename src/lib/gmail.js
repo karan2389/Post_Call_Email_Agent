@@ -31,6 +31,10 @@ function buildSearchQuery(attempt) {
 
 // A candidate from search_threads/get_message becomes a reconcile() input once its plain-text body has been read: bodyHash is computed
 // by the caller from the message body with the same function used when sending (sendlog.bodyHash).
-const toCandidate = (m, bodyHashFn) => ({ id: m.id, subject: m.subject, to: Array.isArray(m.to || m.toRecipients) ? (m.to || m.toRecipients)[0] : m.to, date: m.date, body_hash: m.body == null ? undefined : bodyHashFn(m.body) });
+// Observed 2026-11-01 (first internal test, D-057): a link in the sent plain-text body comes back as
+// https://www.google.com/url?q=<original>&source=gmail&ust=<timestamp>&sa=E. Reconciliation compares the body with the link wrapping removed;
+// this only affects the comparison, it does not make the delivered text match the validated draft (see docs/phase4-gmail-integration.md).
+const unwrapGoogleLinks = (text) => String(text).replace(/https:\/\/www\.google\.com\/url\?q=([^&\s]+)(?:&(?:amp;)?[a-z]+=[^&\s]*)*/g, (m, q) => { try { return decodeURIComponent(q); } catch (e) { return q; } });
+const toCandidate = (m, bodyHashFn) => ({ id: m.id, subject: m.subject, to: Array.isArray(m.to || m.toRecipients) ? (m.to || m.toRecipients)[0] : m.to, date: m.date, body_hash: m.body == null ? undefined : bodyHashFn(unwrapGoogleLinks(m.body)) });
 
-module.exports = { buildSendRequest, buildSearchQuery, toCandidate, draftHash: S.draftHash };
+module.exports = { buildSendRequest, buildSearchQuery, toCandidate, unwrapGoogleLinks, draftHash: S.draftHash };

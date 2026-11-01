@@ -187,6 +187,17 @@ t('test override: a timeout is reconciled against the MARKED message, never retr
   assert.deepStrictEqual([r.outcome, r.via], ['SENT', 'RECONCILIATION']); assert.strictEqual(env.sendCalls, 1);
 });
 
+t('reconciliation tolerates the Google link wrapping seen on a real send (D-057), but a changed text is still a mismatch', async () => {
+  const wrapped = G.unwrapGoogleLinks('See https://www.google.com/url?q=https://fathom.video/share/EXAMPLE-1&source=gmail&ust=1793623527304000&sa=E now');
+  assert.strictEqual(wrapped, 'See https://fathom.video/share/EXAMPLE-1 now');
+  assert.strictEqual(G.unwrapGoogleLinks('plain https://fathom.video/share/EXAMPLE-2'), 'plain https://fathom.video/share/EXAMPLE-2');
+  const att = { recipient: 'a@example.com', subject: 'S', started_at: '2026-11-02T03:30:00Z', body_hash: L.bodyHash('Link https://fathom.video/share/EXAMPLE-3 end') };
+  const msg = (body) => ({ id: 'g1', subject: 'S', to: ['a@example.com'], date: '2026-11-02T03:30:20Z', body });
+  const ok = S.reconcile(att, [G.toCandidate(msg('Link https://www.google.com/url?q=https://fathom.video/share/EXAMPLE-3&source=gmail&ust=1&sa=E end'), L.bodyHash)]);
+  assert.strictEqual(ok.outcome, 'SENT');
+  const bad = S.reconcile(att, [G.toCandidate(msg('Link https://www.google.com/url?q=https://fathom.video/share/EXAMPLE-3&source=gmail&ust=1&sa=E end EDITED'), L.bodyHash)]);
+  assert.strictEqual(bad.code, 'BODY_MISMATCH');
+});
 (async () => {
   for (const [name, fn] of tests) { try { await fn(); n += 1; } catch (e) { console.error('FAIL: ' + name + '\n' + (e && e.stack ? e.stack.split('\n').slice(0, 4).join('\n') : e)); process.exitCode = 1; } }
   console.log(`phase4 sender (mocked Gmail): ${n}/${tests.length} test groups passed`);

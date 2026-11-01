@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## First internal test email SENT; link-rewriting finding (2026-11-01, D-056/D-057)
+One marked test email to karan.s@flexifunnels.com (message ID 1a19724b2d3e0e9a), From supportcore@flexifunnels.com observed, Send Log final state SENT, no reconciliation, gate closed. **Blocker for customer sending:** the delivered body has the Fathom link wrapped in a time-limited google.com/url redirect (not identical to the validated draft). Next (needs your authorisation for further test sends to karan.s): find out whether the connector or Gmail does it, whether htmlBody or the draft route avoids it, and whether the wrapped link keeps working. Do not start a customer pilot before that.
+
 ## Send Log created; internal test send HELD (2026-11-01, D-055)
 Send Log worksheet created and verified (19/19 headers, sheet ID 1001), gate closed again. Gmail identity: supportcore@flexifunnels.com supported by read-only evidence (no profile endpoint). **No email sent.** Missing prerequisite: a stored, validated draft addressed to karan.s@flexifunnels.com (needs a test draft row in Sheet1 and a real validation, plus a deterministic internal-test marker in the sent text). **Needs your decision** (see the last report).
 
