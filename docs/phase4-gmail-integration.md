@@ -51,3 +51,30 @@ Authorised by the user: use the stored draft in `Sheet1` row 2 (source row 15450
 **Finding, blocks customer sending until resolved (D-057).** The Fathom link in the stored draft arrived in the `text/plain` part (and the HTML part) as `https://www.google.com/url?q=<original link>&source=gmail&ust=<timestamp>&sa=E`, a Google redirect with an expiry parameter, not the original URL. So **the delivered text is not identical to the validated draft**, and the validation rule that every Fathom URL appears exactly as parsed (`FATHOM_URL_MISMATCH`, `UNAPPROVED_LINK`) is not met by what the customer would receive. Not yet known: whether the connector or Gmail's send path does this, whether the link still works after the `ust` time, and whether any way of sending (for example an `htmlBody` anchor or the draft route) avoids it. Finding out needs further test sends, which were not authorised. Reconciliation now compares bodies with this wrapping removed (`unwrapGoogleLinks`, tested), so a wrapped delivery is still recognised as ours, while any other text change is still a mismatch. A customer send must not happen before this is understood and the delivered link is verified to equal the validated one.
 
 Other facts confirmed by this send: the connector is authorised as `supportcore@flexifunnels.com` (the From address is now observed, not inferred); `send_message` returns `id` and `threadId`; `get_message` (PLAIN_TEXT and RAW) can read a sent message back, so reconciliation by search plus body check is feasible.
+
+## 7. Link-rewriting investigation (2026-11-01, D-058): 2 of the 3 authorised synthetic test sends used
+
+Authorised by the user: at most 3 marked internal test emails to `karan.s@flexifunnels.com`, synthetic drafts and harmless `example.*` URLs only, separate `test_` send keys, no customer data. Each send followed the sender sequence: sender verified (all recent Sent messages from `supportcore@flexifunnels.com`), recipient exactly `karan.s@flexifunnels.com`, guard allowed, `SEND_IN_PROGRESS` row read back before the call, `SENT` row after, gate closed after each. The three keys are distinct and none is a customer send key. **One authorised send was not used.**
+
+| | Test 1 (`p4-linktest-1`, msg `1a1972cdff75c989`) | Test 2 (`p4-linktest-2`, msg `1a1972ec1e455b23`) |
+|---|---|---|
+| Input | plain `body` only: raw URL with query, `<angle>` URL, scheme-less `example.com/...`, labelled URL | `htmlBody` with an anchor (non-URL text), an anchor whose text is the URL, a bare URL in the HTML, plus a plain alternative |
+| Delivered `text/plain` | all 4 wrapped | all 3 wrapped |
+| Delivered `text/html` (an HTML part appeared although none was supplied) | all 4 wrapped | all 3 `href`s wrapped; anchor text unchanged; the bare URL was auto-linked and wrapped |
+| Other | the scheme-less URL got `http://` added | |
+
+**Form of the rewrite:** `https://www.google.com/url?q=<original>&source=gmail&ust=<time>&sa=E`. `ust` is the send time plus 24 hours.
+
+**Where it happens:** in the connector's send path, before Gmail stores the message. The stored message already carries the wrapped links and shows `Received: by gmailapi.google.com with HTTPREST`, and the plain `body` field behaved the same as `htmlBody`. Gmail's own API does not normally do this, so this is an inference; the connector's internals are not visible. **No input form tested avoids it.**
+
+**Redirect behaviour (verified, built-in browser, test 1 angle URL):** the wrapped link opens a Google "Redirect Notice" page ("the page you were on is trying to send you to ..."), not a direct redirect. One click on its signed `google.com/goto` link reached the original destination (`https://example.org/p4-linktest-1/angle`, page loaded). So the original destination stays reachable **now**, behind an extra confirmation page. **Not verified:** what the link does after the `ust` time (test 1 links: after 2026-11-02 12:54 UTC; test 2: after 13:56 UTC). A link to a call recording must keep working for days, so this must be checked before any decision to accept wrapped links.
+
+**Other observation:** the metadata view of Sent shows the recipient as `karans@...` while the raw `To:` header is `karan.s@...`; this is display normalisation, and recipients should be checked in the raw header.
+
+**Not tested (no authorisation or sends left to spare):** the draft route (`create_draft`, read the draft back, then send it by `draftId`), other connector tools, URLs inside preformatted HTML, any sending mechanism outside this connector.
+
+### Recommended fix path (nothing implemented; customer sending stays blocked)
+1. **Keep customer sending blocked** (`customer_sending_authorised: false`). Wrapped, expiring, interstitial links break the "delivered equals validated" rule and risk dead recording links.
+2. **Safest next test (needs the user's approval):** create one synthetic draft, read it back without sending (a draft is not an email), and only if its links are original, send it by `draftId` as the remaining test send, verify the raw message, delete the synthetic draft. If the draft already shows wrapping, nothing is sent and the draft route is ruled out.
+3. **If the draft route also wraps:** the options are a different sending mechanism outside this connector (this needs credentials, which the project forbids creating without a separate decision), or accepting wrapped links with documented mitigations (not recommended). Either needs the user's decision.
+4. Whichever route is chosen, add a deterministic post-send check that the delivered body, with a known wrapper removed, equals the validated body (`unwrapGoogleLinks` already supports reconciliation) and that every Fathom URL in the delivered message is the original or a verified redirect to it.

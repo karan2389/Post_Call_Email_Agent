@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Link-rewriting investigation (2026-11-01, D-058)
+Two synthetic tests to karan.s (plain-text and HTML): every URL is wrapped by the connector's send path (plain and HTML parts, 24h ust, Redirect Notice interstitial); no form avoids it; destination reachable now; post-expiry behaviour unverified; one authorised send unused. Customer sending stays blocked. **Needs your decision:** approve the draft-route test (create one synthetic draft, read it back without sending, send only if links are original, delete it), or choose another route. Check the test-1 links after 2026-11-02 12:54 UTC to see what expiry does.
+
 ## First internal test email SENT; link-rewriting finding (2026-11-01, D-056/D-057)
 One marked test email to karan.s@flexifunnels.com (message ID 1a19724b2d3e0e9a), From supportcore@flexifunnels.com observed, Send Log final state SENT, no reconciliation, gate closed. **Blocker for customer sending:** the delivered body has the Fathom link wrapped in a time-limited google.com/url redirect (not identical to the validated draft). Next (needs your authorisation for further test sends to karan.s): find out whether the connector or Gmail does it, whether htmlBody or the draft route avoids it, and whether the wrapped link keeps working. Do not start a customer pilot before that.
 
