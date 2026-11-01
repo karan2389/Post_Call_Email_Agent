@@ -70,3 +70,13 @@ draft_destination:
   writes_enabled: false              # was enabled 2026-11-01 only to replace the three older-skill draft bodies (rows 3, 11, 13) on the user's explicit authorisation (D-047); set back to false. Re-enable only for an approved run
   gmail_enabled: false               # Phase 3 never uses Gmail
   scheduled_execution: false         # Phase 3 is manually initiated
+
+# Phase 4 Gmail settings (D-053). Approvals recorded; NOTHING here enables sending: delivery_mode stays dry_run, gmail_enabled stays false.
+gmail:
+  sender_address: supportcore@flexifunnels.com   # APPROVED by the user 2026-11-01 as the customer-facing sender for all automated post-call follow-up emails
+  sender_approved: true
+  sender_connector_authorisation_verified: false # the Gmail connector appears authorised as this mailbox (sender of its latest sent message) but this is an inference; confirm with the first approved internal test send
+  internal_test_recipients:                       # the ONLY addresses test mode may send to (src/lib/sendstate.js, TEST_RECIPIENT_NOT_APPROVED)
+    - karan.s@flexifunnels.com                    # APPROVED by the user 2026-11-01 for the Gmail internal tests (Stage B)
+  internal_tests_authorised: false               # approving the recipient is not authorisation to send: the first internal test send needs the user's go-ahead in chat
+  customer_sending_authorised: false             # live customer sending needs the user's explicit final authorisation after the pilot (Stage D)

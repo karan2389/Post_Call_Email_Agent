@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-053 — Customer-facing sender and internal Gmail test recipient approved (2026-11-01)
+
+**Decision (user, explicit):** `supportcore@flexifunnels.com` is the customer-facing sender address for all automated post-call follow-up emails; `karan.s@flexifunnels.com` is the internal test recipient for the Gmail tests. **Scope:** identity and recipient only. No internal test send is authorised yet, customer sending stays disabled, `delivery_mode` stays `dry_run`. The connector's authorisation as the sender mailbox remains an inference until the first approved test send shows the From address.
+
 ### D-052 — Controlled storage test passed; Phase 3 closed with limitations (2026-11-01)
 
 **Decision:** on the user's authorisation ("Authorise test") one synthetic row was written to the destination through the guard, read back with 0 mismatches, the 15 existing rows were shown unchanged, the planner re-ran as idempotent on the stored rows, and the test row was cleared; `writes_enabled` was set back to false. Phase 3 is marked complete with the limitations in `docs/phase3-acceptance-report.md` section 12. No real record was written, replaced or deleted; nothing was sent.
