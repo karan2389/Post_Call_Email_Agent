@@ -32,6 +32,9 @@ No email, internal test, draft, sheet write, customer-record change, scheduled t
 | B11 | Phase 3 leftovers (D-071, `docs/b11-phase3-leftovers.md`). **OD-10 resolved** (confirmed by the user) and **OD-32 resolved** (helper built and tested). **15453 and 15454:** transcripts still empty on 2026-11-02 (31 Oct calls, window until 7 Nov); they stay deferred and out of the pool; processing them needs your authorisation when the transcripts arrive. **Sensitive-topic path on real data:** you chose to wait for a natural case, so it stays unproven on real data (open, accepted). Still user-confirmed only: source read-only and destination sharing | User + agent | Go-live | Partly resolved; transcripts and real sensitive case open |
 | B12 | The real customer send path has only been exercised by an internal test; first live use is C1 itself | Agent | C1 | Accepted, mitigated by individual approval |
 
+## 2a. B1-B3 and B9: brief prepared (2026-11-02, D-072)
+These are confirmations only people can give. A forwardable brief with specific questions, suggested positions and what the agent does is in `docs/business-confirmation-brief.md`; the dated record to fill is `docs/business-confirmations-record.md` (all 18 lines NOT CONFIRMED). The brief states three facts the business must know: Gmail wraps links with an expiring Redirect Notice, there is no unsubscribe link, and the Fathom links open without login. Nothing is answered, assumed or sent; the blockers stay open until the lines are filled.
+
 ## 3. Other risks (no blocker)
 - Gmail wrapper links expire (about 24 hours) and customers see a Redirect Notice page; accepted by the user, unverified.
 - No idempotency key: sending is not exactly-once; reconciliation and human review cover it.

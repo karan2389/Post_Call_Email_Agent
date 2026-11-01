@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## B1-B3 and B9 prepared: brief and record, awaiting answers (2026-11-02, D-072)
+Documentation only. `docs/business-confirmation-brief.md` (forward to the business owner, legal or data-protection lead, support lead: 5 questions each for consent, reply ownership, opt-out, plus links and retention, with suggested positions and three key facts) and `docs/business-confirmations-record.md` (18 dated lines, all NOT CONFIRMED). The agent fills nothing. **Needs you:** send the brief to the owners and record their answers; then B5 (approvers), B6 (wrapped-link check), B8 (dry-run scheduling).
+
 ## B11 worked: OD-10 and OD-32 resolved, deferred transcripts still empty (2026-11-02, D-071)
 Two bounded read-only cell reads of the source (AB15453, AB15454 plus their date/time): both transcripts still empty (31 Oct calls, 7-day window to 7 Nov); no content read, nothing written. You confirmed OD-10 (all calls treated as support calls, 40-char floor, 7 days, opt-out via suppression list) and adopted OD-32, now `greetingName()` in `src/lib/normalize.js` (`tests/unit/phase3-greeting.test.js` 7/7; `tests/unit/checks.js` uses it; Phase 2 25/25 and focused 9/9 unchanged; p3 command `greeting-name`). You chose to wait for a natural sensitive-topic case, so that path stays unproven on real data. `docs/b11-phase3-leftovers.md`. Not wired yet: the runbook prompt (`workflows/phase3-record-worker.md`) still gets `greeting_name` from the session. Next by your order: B1-B3 and B9 (business confirmations), B5, B6, B8.
 
