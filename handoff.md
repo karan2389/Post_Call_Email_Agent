@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## B4 designed and implemented: verified local confidence record (2026-11-02, D-070)
+`src/lib/confidence.js` (+ `tests/unit/phase4-confidence.test.js` 8/8 and pilot 12/12, mutation-checked): confidence = min(model declaration, computed from evidence counts); record bound to call, send key, draft hash, transcript hash and skill versions, sealed, hashes and counts only (no transcript text), 14-day expiry, fail closed on any defect; pool and review card read it only through `resolveConfidence`; p3 commands `confidence-record` and `confidence-check`; design in `docs/confidence-artifact.md`. No record exists yet; the 7 stored drafts need re-analysis of their transcripts (customer data, needs your explicit authorisation) before they can enter a C1 pool. No gate, sheet, email or schedule changed. Next blockers by your order: B11 (Phase 3 leftovers), B1-B3 and B9 (business), B5, B6, B8.
+
 ## B7 resolved locally: `.env` ACL restricted, Brevo key removed (2026-11-02, D-069)
 Gmail is the sole active provider and has no Brevo dependency (only the retired brevo.js, env.js, brevo-check.js and their tests reference the variables). `.env` ACL is now KARAN\karan (M), Administrators (F), SYSTEM (F), inheritance disabled, `.env` only; the `BREVO_API_KEY` line was removed (two non-secret sender values remain); `.env.example` has commented placeholders only; `api_key_provisioned` false. Secret scan: key in 0 working-tree files, 0 commits, 0 scratch files, 0 transcripts. **The user confirmed the key was revoked in Brevo (2026-11-02), so B7 is closed.** Remaining C0 blockers: B1-B6, B8-B12 (`docs/c0-readiness-report.md`).
 

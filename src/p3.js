@@ -28,6 +28,7 @@ const SL = require('./lib/sendlog');
 const GM = require('./lib/gmail');
 const PV = require('./lib/provider');
 const UC = require('./lib/urlcheck');
+const CFD = require('./lib/confidence');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -103,6 +104,8 @@ async function main() {
     try { const sel = PV.selectProvider(cfg); return out({ provider: sel, readiness_blockers: PV.gmailReadiness(cfg) }); }
     catch (e) { out({ provider: null, error: e.code || 'PROVIDER_NOT_ALLOWED' }); process.exit(5); }
   }
+  if (cmd === 'confidence-record') return out(CFD.buildRecord(json.analysis, json.ctx));   // {analysis, ctx{callRef,sendKey,draftHash,transcriptHash,skillVersions,createdAt}} -> record for local/confidence.json (hashes and counts only)
+  if (cmd === 'confidence-check') return out(CFD.resolveConfidence(json.records, json.expected));   // {records[], expected{...,now}} -> {ok, derived|code}; fails closed
   if (cmd === 'verify-urls') return out(UC.verifyDeliveredUrls(json.delivered, json.canonical));   // {delivered, canonical[]} -> per-URL verdict (canonical equality vs delivered representation)
   if (cmd === 'presend') return out(S.preSendChecks(json.record, json.ctx));                      // {record, ctx} -> {ok, failed[]}
   if (cmd === 'send-request') return out(GM.buildSendRequest(json));                                // stored draft -> exact send_message arguments

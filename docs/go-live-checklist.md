@@ -10,7 +10,8 @@ Legend: [x] done with evidence, [ ] open. Owner in brackets.
 - [x] Strict Gmail-wrapper URL verification; read-back verification before `SENT` (D-066, D-067 real test)
 - [x] Approvals bound to recipient and draft hash; stage caps; suppression check (D-066, D-068)
 - [x] Candidate-pool and allowlist validation helpers (D-068)
-- [ ] Confidence source for stored drafts decided and implemented (blocker B4)
+- [x] Confidence source decided and implemented: verified local confidence record, fail closed (D-070, blocker B4)
+- [ ] Confidence records exist for the drafts that will be considered for C1 (needs re-analysis of the stored drafts' transcripts, user authorisation)
 - [ ] Run lock and failure summary (design only, `docs/pilot-scheduling-comparison.md`)
 
 ## B. Business confirmations (user, support lead, legal)
