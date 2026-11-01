@@ -2,6 +2,9 @@
 
 One dated line per confirmation. Record the person's name and role and where their written answer is (an email, a message, a document), never customer data. **Status of every line: NOT CONFIRMED.** The agent never fills a line on anyone's behalf; the user records it after receiving the answer. Questions: `docs/business-confirmation-brief.md`. Wider checklist: `docs/pilot-consent-checklist.md`.
 
+## Reported approval (2026-11-02)
+The user reported in chat on 2026-11-02 that **the business owner has approved all the blockers**. No written answer, name, date or detail came with it, so this is recorded **as reported, not as per-line confirmations**: the lines below stay NOT CONFIRMED until the specifics (named owners, response target, opt-out process, opt-out wording decision, existing do-not-contact lists, retention period, countries and exclusions, frequency limit, Fathom sharing acceptance) are recorded with a name, a date and an evidence location. "Approved" does not by itself name a reply owner, set a retention period or decide the email wording, and the agent will not fill those in. It also does not cover B5 (approvers), B6 (the wrapped-link check, an observation), or B8 (scheduling, which needs the user's own approval).
+
 Required before C1: all B1, B2, B3 and B9 lines marked CONFIRMED, or an item accepted as a risk in writing by the business owner.
 
 ## B1. Legal basis and consent

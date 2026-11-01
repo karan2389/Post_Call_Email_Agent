@@ -35,6 +35,9 @@ No email, internal test, draft, sheet write, customer-record change, scheduled t
 ## 2a. B1-B3 and B9: brief prepared (2026-11-02, D-072)
 These are confirmations only people can give. A forwardable brief with specific questions, suggested positions and what the agent does is in `docs/business-confirmation-brief.md`; the dated record to fill is `docs/business-confirmations-record.md` (all 18 lines NOT CONFIRMED). The brief states three facts the business must know: Gmail wraps links with an expiring Redirect Notice, there is no unsubscribe link, and the Fathom links open without login. Nothing is answered, assumed or sent; the blockers stay open until the lines are filled.
 
+### 2b. Business owner approval reported (2026-11-02, D-073)
+The user reported that the business owner approved all the blockers. Recorded as **reported only**: no names, answers or evidence were supplied, so B1, B2, B3 and B9 stay open at line level (`docs/business-confirmations-record.md`) until the specifics are recorded. It does not cover B5, B6 (observation) or B8 (needs the user's own approval).
+
 ## 3. Other risks (no blocker)
 - Gmail wrapper links expire (about 24 hours) and customers see a Redirect Notice page; accepted by the user, unverified.
 - No idempotency key: sending is not exactly-once; reconciliation and human review cover it.

@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## Business owner approval reported, specifics pending (2026-11-02, D-073)
+The user said the business owner approved all the blockers. Recorded as reported in `docs/business-confirmations-record.md` and the C0 report; no line is marked CONFIRMED because no names, answers or evidence were supplied. **Needs you:** paste or point me to the owner's actual answers (reply owner and backup, check times and response target, opt-out process and who runs it, opt-out sentence yes/no and wording, existing do-not-contact lists and owner, Fathom sharing accepted, retention period, countries, exclusions, frequency limit) and the approvers for B5. Then I record each line and re-assess C1 readiness.
+
 ## B1-B3 and B9 prepared: brief and record, awaiting answers (2026-11-02, D-072)
 Documentation only. `docs/business-confirmation-brief.md` (forward to the business owner, legal or data-protection lead, support lead: 5 questions each for consent, reply ownership, opt-out, plus links and retention, with suggested positions and three key facts) and `docs/business-confirmations-record.md` (18 dated lines, all NOT CONFIRMED). The agent fills nothing. **Needs you:** send the brief to the owners and record their answers; then B5 (approvers), B6 (wrapped-link check), B8 (dry-run scheduling).
 
