@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## Tracking flag set; adapter refuses anchors (2026-11-02, D-065)
+link_tracking_disabled_confirmed, sender_verified_in_brevo, api_key_provisioned now true (evidence in D-062/D-064). Provider readiness empty; customer sending still blocked (dry_run, customer_sending_authorised false, no schedule). Open: tracked List-Unsubscribe header (ask Brevo support), DNS for flexifunnels.com (DMARC fail), pilot design, scheduling.
+
 ## Second Brevo test: links preserved, pixel and unsubscribe header remain (2026-11-02, D-064)
 Production-style email keeps Fathom URLs exactly in text and HTML (no anchors). Open pixel and tracked List-Unsubscribe still added; DMARC fails until DNS. Tracking flag still false pending your decision. Suggested: refuse anchors in the adapter; ask Brevo support about pixel/unsubscribe.
 

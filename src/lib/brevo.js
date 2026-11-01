@@ -48,6 +48,8 @@ function buildPayload(req, env, meta) {
   const to = N.normalizeEmail(r.to[0]);
   if (!to.valid) throw fail('INVALID_RECIPIENT', true);
   if (!r.subject || !String(r.subject).trim() || !r.body || !String(r.body).trim()) throw fail('EMPTY_SUBJECT_OR_BODY', true);
+  // Brevo wraps every <a href> in a click-tracking redirect (D-062), so an HTML body with a link is refused; bare URL text is preserved (D-064).
+  if (r.htmlBody && /<a[\s>]|href\s*=/i.test(String(r.htmlBody))) throw fail('HTML_ANCHORS_NOT_ALLOWED', true);
   const sender = { email: N.normalizeEmail(env.BREVO_SENDER_EMAIL).value };
   if (env.BREVO_SENDER_NAME) sender.name = String(env.BREVO_SENDER_NAME);
   // contactPixelTrackingConsent:false = Brevo must not track opens or clicks for this recipient (per-contact consent mechanism, Brevo help article read 2026-11-02, D-063).

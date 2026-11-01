@@ -77,3 +77,7 @@ Every request now carries `contactPixelTrackingConsent: false` on the single rec
 ## 12. Second real test result (2026-11-02, D-064)
 Production-style HTML twin with the opt-out field: Fathom-style URLs preserved exactly in text and HTML (only & entity-escaped in HTML); no anchors, so no click wrapping; open pixels and a tracked one-click `List-Unsubscribe` header still added; DMARC still fails (Brevo-domain DKIM/SPF only). Open items: decision on the tracking flag, pixel and unsubscribe header (ask Brevo support), DNS for flexifunnels.com.
 
+
+## 13. Tracking flag decision (D-065)
+Flags set from evidence: `sender_verified_in_brevo`, `link_tracking_disabled_confirmed` (meaning: original URLs preserved, open pixel accepted), `api_key_provisioned`. The adapter now refuses HTML anchors. Open risks: tracked one-click `List-Unsubscribe` header; DMARC fail until the domain is authenticated. Customer sending remains blocked by `delivery_mode: dry_run` and `customer_sending_authorised: false`.
+

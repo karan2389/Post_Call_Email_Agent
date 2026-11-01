@@ -93,9 +93,10 @@ t('CLI --live with a wrong key reports the code only; a missing .env reports blo
   const g = mockFetch(async () => res(200, {})); const m = await run({ argv: ['--live'], fs: memfs({ 'config/run-settings.yaml': YAML.replace('AUTH', 'true') }), fetch: g });
   assert.strictEqual(m.connectivity.code, 'MISSING_API_KEY'); assert.strictEqual(g.calls.length, 0); assert.deepStrictEqual(m.env_file_issues, [{ code: 'ENV_FILE_MISSING' }]);
 });
-t('the real repo config keeps every gate closed and records the approved name', () => {
-  const fs = require('fs'); const cfg = C.brevoConfig(fs.readFileSync(require('path').join(__dirname, '../../config/run-settings.yaml'), 'utf8'));
-  assert.deepStrictEqual([cfg.approved_sender_name, cfg.connectivity_check_authorised, cfg.adapter_enabled, cfg.sender_verified_in_brevo, cfg.link_tracking_disabled_confirmed], ['Support Team | FlexiFunnels', false, false, false, false]);
+t('the real repo config keeps the sending gates closed (adapter, customer sending, live mode) and records the approved name', () => {
+  const fs = require('fs'); const txt = fs.readFileSync(require('path').join(__dirname, '../../config/run-settings.yaml'), 'utf8'); const cfg = C.brevoConfig(txt);
+  assert.deepStrictEqual([cfg.approved_sender_name, cfg.connectivity_check_authorised, cfg.adapter_enabled], ['Support Team | FlexiFunnels', false, false]);
+  assert.ok(/^delivery_mode:\s*dry_run/m.test(txt)); assert.ok(/customer_sending_authorised:\s*false/.test(txt)); assert.ok(/^\s+writes_enabled:\s*false/m.test(txt)); assert.ok(/scheduled_execution:\s*false/.test(txt));
 });
 t('source guarantees: env.js and brevo-check.js contain no write to process.env, no network call of their own, and the adapter still never reads process.env', () => {
   const fs = require('fs'); const p = (f) => fs.readFileSync(require('path').join(__dirname, '../../src', f), 'utf8');

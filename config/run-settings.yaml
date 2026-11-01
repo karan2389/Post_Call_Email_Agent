@@ -91,8 +91,8 @@ email_provider:
     approved_sender_email: supportcore@flexifunnels.com   # the sender approved by the user (D-053); must equal BREVO_SENDER_EMAIL
     approved_sender_name: Support Team | FlexiFunnels   # display name confirmed by the user 2026-11-01 (D-061); must equal BREVO_SENDER_NAME
     connectivity_check_authorised: false # gate for `node src/brevo-check.js --live` (one read-only GET /account); stays false until the user authorises the first real request
-    sender_verified_in_brevo: false      # set true ONLY after the sender is verified in Brevo (user-confirmed or API-evidenced)
+    sender_verified_in_brevo: true       # user confirmed 2026-11-01 and two real Brevo sends were accepted from this sender (D-062, D-064)
     domain_authenticated_in_brevo: false # DKIM / Brevo code / DMARC for flexifunnels.com, confirmed in Brevo
-    link_tracking_disabled_confirmed: false  # set true ONLY after Brevo click tracking is off AND a raw delivered message shows original URLs
-    api_key_provisioned: false           # the key is held only in the BREVO_API_KEY environment variable
+    link_tracking_disabled_confirmed: true   # user accepted 2026-11-02 (D-065) on the evidence of a raw delivered message (D-064): original URLs preserved in the production format (no anchors; the adapter refuses anchors). Brevo's open pixel and tracked List-Unsubscribe header REMAIN and are accepted for the pixel only; the unsubscribe header is an open risk. Revert to false if either changes link behaviour
+    api_key_provisioned: true          # the key is held only in the BREVO_API_KEY environment variable
     delivery_status_method: poll         # poll GET /smtp/emails/{uuid} events; a webhook needs a public receiver the project does not have

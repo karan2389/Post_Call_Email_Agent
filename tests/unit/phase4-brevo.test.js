@@ -62,6 +62,12 @@ t('explicit HTML is supported and sent unchanged next to the plain text', async 
   const f = ok(); await client(f).send(req({ htmlBody: '<p>Hello <b>there</b></p>' }), {}); const p = JSON.parse(f.calls[0].init.body);
   assert.strictEqual(p.htmlContent, '<p>Hello <b>there</b></p>'); assert.strictEqual(p.textContent, BODY);
 });
+t('HTML containing a link is refused before any request (Brevo would click-wrap it, D-062); bare URL text is accepted', async () => {
+  const f = ok(); const c = client(f);
+  for (const h of ['<a href="https://x.example/">v</a>', '<A HREF=\'https://x.example/\'>v</A>', '<p><a\nhref="https://x.example/">v</a></p>', '<div href="x">']) await rejects(c.send(req({ htmlBody: h }), {}), 'HTML_ANCHORS_NOT_ALLOWED', true);
+  assert.strictEqual(f.calls.length, 0);
+  await c.send(req({ htmlBody: '<p>see https://fathom.video/share/EXAMPLE-1?t=1&amp;s=2 <b>now</b> and a abbr</p>' }), {}); assert.strictEqual(f.calls.length, 1);
+});
 t('recipient rules: exactly one valid address; cc, bcc, none, two, malformed are rejected before any request', async () => {
   const f = ok(); const c = client(f);
   await rejects(c.send(req({ to: ['a@example.com', 'b@example.com'] }), {}), 'EXACTLY_ONE_RECIPIENT_REQUIRED', true);
