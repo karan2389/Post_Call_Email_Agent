@@ -48,3 +48,6 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Pilot approvals contain customer addresses (D-066)
+/local/

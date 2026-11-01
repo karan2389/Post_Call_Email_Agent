@@ -26,6 +26,8 @@ const G = require('./lib/guard');
 const S = require('./lib/sendstate');
 const SL = require('./lib/sendlog');
 const GM = require('./lib/gmail');
+const PV = require('./lib/provider');
+const UC = require('./lib/urlcheck');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -95,6 +97,13 @@ async function main() {
   if (cmd === 'build-row') return out({ values: D.buildRow(json) });
   if (cmd === 'review') return out(P.reviewDecision(json));
   // Phase 4 helpers (D-054): pure; the session performs the Gmail and spreadsheet calls
+  if (cmd === 'provider') {   // Gmail-only provider selection from config (D-066); exit 5 when the configured provider is not allowed
+    let t = ''; try { t = fs.readFileSync(path.join(ROOT, 'config', 'run-settings.yaml'), 'utf8'); } catch (e) { /* unreadable config selects nothing */ }
+    const cfg = PV.parseProviderConfig(t);
+    try { const sel = PV.selectProvider(cfg); return out({ provider: sel, readiness_blockers: PV.gmailReadiness(cfg) }); }
+    catch (e) { out({ provider: null, error: e.code || 'PROVIDER_NOT_ALLOWED' }); process.exit(5); }
+  }
+  if (cmd === 'verify-urls') return out(UC.verifyDeliveredUrls(json.delivered, json.canonical));   // {delivered, canonical[]} -> per-URL verdict (canonical equality vs delivered representation)
   if (cmd === 'presend') return out(S.preSendChecks(json.record, json.ctx));                      // {record, ctx} -> {ok, failed[]}
   if (cmd === 'send-request') return out(GM.buildSendRequest(json));                                // stored draft -> exact send_message arguments
   if (cmd === 'search-query') return out({ query: GM.buildSearchQuery(json) });                      // attempt -> search_threads query

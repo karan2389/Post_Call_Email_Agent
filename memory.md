@@ -98,3 +98,5 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - Repository: `C:\dev\post-call-email-agent`, branch `main`, remote `origin` = private GitHub repo `karan2389/Post_Call_Email_Agent` (created and pushed 2026-10-31 via `gh`; OD-21 resolved; instructions only, never customer data). Python is not installed and is not needed unless helpers (OD-38) are approved.
 - A Google Sheets MCP connector and a Gmail connector are available in interactive Claude Code sessions. They are development tools here; scheduled-run access is what Phase 1 must validate.
+
+- **Email provider (D-066, 2026-11-02):** the Gmail connector is the sole provider; Gmail's URL wrapper is accepted only when its destination equals the validated Fathom URL (strict parser, exact equality), SENT only after a read-back (recipient, actual From, subject, body, URLs), live sends need a per-email approval bound to recipient + draft hash. Brevo (D-060 to D-065) is retired: kept only as history until migration is verified. Details: `docs/phase4-gmail-only.md`.

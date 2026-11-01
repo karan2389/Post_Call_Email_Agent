@@ -12,6 +12,7 @@
 const S = require('./sendstate');
 const L = require('./sendlog');
 const G = require('./gmail');
+const U = require('./urlcheck');
 
 const MAX_RETRIES = 2;
 
@@ -31,13 +32,15 @@ async function reconcileAttempt(rec, ctx, deps) {
   let state = rec.state;
   const note = async (to, extra) => { const ev = await emit(deps, ctx, rec, state, to, extra); state = to; return ev; };
   if (state === 'SEND_IN_PROGRESS') await note('SEND_OUTCOME_UNKNOWN', { reason: 'RECOVERY_AFTER_INTERRUPTION' });
-  const attempt = { recipient: rec.attempt_recipient || rec.stored_recipient, subject: rec.attempt_subject || rec.stored_subject, started_at: rec.started_at, body_hash: rec.attempt_body_hash || rec.body_hash };
+  const attempt = { recipient: rec.attempt_recipient || rec.stored_recipient, subject: rec.attempt_subject || rec.stored_subject, started_at: rec.started_at, body_hash: rec.attempt_body_hash || rec.body_hash,
+    expected_from: ctx.sender_address || undefined };   // actual From must equal the approved sender whenever the context names it (D-066)
+  const canonicalUrls = rec.canonical_urls || (ctx.sender_address ? U.extractUrls(rec.attempt_body_text || rec.stored_body) : undefined);   // delivered URLs are verified against the validated draft
   let found;
   try {
-    const mail = deps.mail || deps.gmail;   // provider-neutral (D-060); Gmail stays supported but disabled
+    const mail = deps.mail || deps.gmail;   // provider-neutral (D-060); Gmail is the only provider in the Gmail-only architecture (D-066)
     const threads = await mail.search(typeof mail.buildQuery === 'function' ? mail.buildQuery(attempt) : G.buildSearchQuery(attempt));
     const cands = [];
-    for (const t of threads || []) { const m = await mail.read(t.id); cands.push(G.toCandidate(m, L.bodyHash)); }
+    for (const t of threads || []) { const m = await mail.read(t.id); cands.push(G.toCandidate(m, L.bodyHash, canonicalUrls)); }
     found = S.reconcile(attempt, cands);
   } catch (e) {
     found = { outcome: 'RECONCILIATION_REQUIRED', code: 'SEARCH_FAILED' };
@@ -70,6 +73,7 @@ async function sendOne(draft, folded, ctx, deps) {
   const checks = S.preSendChecks(pre, ctx);
   if (!checks.ok) return { outcome: 'BLOCKED', failed: checks.failed, send_key: sendKey };
   const prov = deps.mail || deps.gmail;
+  if (ctx.provider_policy === 'gmail_only' && !(prov && prov.name === 'gmail')) return { outcome: 'BLOCKED', failed: ['PROVIDER_NOT_ALLOWED:' + String((prov && prov.name) || 'unknown')], send_key: sendKey };   // Gmail only, no fallback (D-066)
   if (prov && typeof prov.readiness === 'function') { const bad = prov.readiness(); if (bad.length) return { outcome: 'BLOCKED', failed: bad.map((c) => 'PROVIDER_NOT_READY:' + c), send_key: sendKey }; }   // nothing logged, nothing sent
 
   try {
@@ -84,6 +88,7 @@ async function sendOne(draft, folded, ctx, deps) {
   }
   const started = deps.now();
   const env = testing ? S.testEnvelope(rec, ctx.test_recipient) : null;
+  rec.attempt_body_text = env ? env.body : rec.stored_body; if (ctx.sender_address) rec.canonical_urls = U.extractUrls(rec.attempt_body_text);
   rec.started_at = started; rec.attempt_body_hash = rec.body_hash; rec.attempt_subject = env ? env.subject : rec.stored_subject; rec.attempt_recipient = env ? env.to : rec.stored_recipient; rec.state = 'SEND_IN_PROGRESS';
 
   let res;
@@ -103,6 +108,18 @@ async function sendOne(draft, folded, ctx, deps) {
     try { await emit(deps, ctx, rec, 'SEND_IN_PROGRESS', 'SEND_OUTCOME_UNKNOWN', { reason: 'NO_MESSAGE_ID_RETURNED' }); rec.state = 'SEND_OUTCOME_UNKNOWN'; } catch (e) { /* same */ }
     return reconcileAttempt(rec, ctx, deps);
   }
+  if (ctx.verify_after_send === true) {   // a message ID is not proof (D-066): read the sent message back and check recipient, From, subject, body and URLs
+    let verdict;
+    try {
+      const m = await mail.read(res.id);
+      verdict = S.reconcile({ recipient: rec.attempt_recipient, subject: rec.attempt_subject, started_at: started, body_hash: rec.attempt_body_hash, expected_from: ctx.sender_address },
+        [G.toCandidate(Object.assign({}, m, { id: res.id }), L.bodyHash, rec.canonical_urls)]);
+    } catch (e) { verdict = { outcome: 'RECONCILIATION_REQUIRED', code: 'POST_SEND_READ_FAILED' }; }
+    if (verdict.outcome !== 'SENT') {
+      try { await emit(deps, ctx, rec, 'SEND_IN_PROGRESS', 'SEND_OUTCOME_UNKNOWN', { reason: 'POST_SEND_VERIFICATION_FAILED:' + verdict.code, gmailMessageId: res.id }); rec.state = 'SEND_OUTCOME_UNKNOWN'; } catch (e) { /* same recovery */ }
+      return reconcileAttempt(rec, ctx, deps);   // never a resend: search, verify, or hand to a human
+    }
+  }
   try { await emit(deps, ctx, rec, 'SEND_IN_PROGRESS', 'SENT', { gmailMessageId: res.id, gmailThreadId: res.threadId, reason: mail.name ? 'PROVIDER_CONFIRMED:' + mail.name : 'CONNECTOR_CONFIRMED' }); }
   catch (e) { return { outcome: 'SENT_TRACKING_FAILED', send_key: sendKey, gmail_message_id: res.id }; }   // the log still says SEND_IN_PROGRESS; recovery finds the message
   return { outcome: 'SENT', send_key: sendKey, gmail_message_id: res.id };
@@ -113,7 +130,10 @@ async function runBatch(items, foldedMap, ctx, deps) {
   const results = []; const sum = { examined: items.length, sent: 0, blocked: 0, failed: 0, reconciliation_required: 0, duplicates_prevented: 0, tracking_failures: 0, errors: 0 };
   for (const it of items) {
     let r;
-    try { r = await sendOne(it, foldedMap.get(S.sendKey(it.fingerprint, it.url_set_key)), ctx, deps); } catch (e) { r = { outcome: 'ERROR', error: String(e && e.message ? e.message : e).slice(0, 120) }; }
+    // the log is re-read before every item, so the same call appearing twice in one batch cannot be sent twice (D-066); a snapshot passed in is the fallback
+    let k = S.sendKey(it.fingerprint, it.url_set_key); if (k && ctx.delivery_mode === 'test' && ctx.test_recipient) k = S.testSendKey(k, ctx.test_recipient);
+    const fresh = L.fold(deps.log.events()); const folded = (k && fresh.get(k)) || foldedMap.get(k) || foldedMap.get(S.sendKey(it.fingerprint, it.url_set_key));
+    try { r = await sendOne(it, folded, ctx, deps); } catch (e) { r = { outcome: 'ERROR', error: String(e && e.message ? e.message : e).slice(0, 120) }; }
     results.push(Object.assign({ fingerprint: it.fingerprint }, r));
     if (r.outcome === 'SENT') sum.sent += 1; else if (r.outcome === 'BLOCKED') { sum.blocked += 1; if (r.duplicate_prevented) sum.duplicates_prevented += 1; }
     else if (r.outcome === 'SEND_FAILED') sum.failed += 1; else if (r.outcome === 'RECONCILIATION_REQUIRED') sum.reconciliation_required += 1;

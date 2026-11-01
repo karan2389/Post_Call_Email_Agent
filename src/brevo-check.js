@@ -15,7 +15,8 @@ function brevoConfig(yaml) {
   const prov = (String(yaml).match(/^email_provider:[\s\S]*?(?=^\S|(?![\s\S]))/m) || [''])[0];
   const blk = prov.indexOf('  brevo:') >= 0 ? prov.slice(prov.indexOf('  brevo:')) : '';
   const val = (k) => { const m = blk.match(new RegExp('^\\s*' + k + ':\\s*([^#\\n]*)', 'm')); if (!m) return undefined; const v = m[1].trim(); return v === 'true' ? true : v === 'false' ? false : v === 'null' ? null : v; };
-  return { approved_sender_email: val('approved_sender_email'), approved_sender_name: val('approved_sender_name'), sender_verified_in_brevo: val('sender_verified_in_brevo'),
+  const active = (prov.match(/^\s*active:\s*([^#\n]*)/m) || [])[1];
+  return { provider_active: active === undefined ? undefined : active.trim(), approved_sender_email: val('approved_sender_email'), approved_sender_name: val('approved_sender_name'), sender_verified_in_brevo: val('sender_verified_in_brevo'),
     link_tracking_disabled_confirmed: val('link_tracking_disabled_confirmed'), connectivity_check_authorised: val('connectivity_check_authorised'), adapter_enabled: val('adapter_enabled') };
 }
 
@@ -37,6 +38,7 @@ async function run(o) {
     request_made: false,
   };
   if (!live) return report;
+  if (cfg.provider_active !== 'brevo') { report.connectivity = { ok: false, code: 'PROVIDER_RETIRED', request_made: false }; return report; }   // Gmail-only architecture (D-066): Brevo cannot be used
   if (cfg.connectivity_check_authorised !== true) { report.connectivity = { ok: false, code: 'CONNECTIVITY_CHECK_NOT_AUTHORISED', request_made: false }; return report; }
   if (!ignored || tracked) { report.connectivity = { ok: false, code: 'ENV_FILE_NOT_PROTECTED', request_made: false }; return report; }
   if (typeof o.fetch !== 'function') { report.connectivity = { ok: false, code: 'NO_FETCH_AVAILABLE', request_made: false }; return report; }

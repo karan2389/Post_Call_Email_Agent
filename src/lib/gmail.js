@@ -6,6 +6,7 @@
 
 const N = require('./normalize');
 const S = require('./sendstate');
+const U = require('./urlcheck');
 
 // rec: the stored draft ({stored_recipient, stored_subject, stored_body}); returns the send_message arguments.
 function buildSendRequest(rec, ctx) {
@@ -34,7 +35,17 @@ function buildSearchQuery(attempt) {
 // Observed 2026-11-01 (first internal test, D-057): a link in the sent plain-text body comes back as
 // https://www.google.com/url?q=<original>&source=gmail&ust=<timestamp>&sa=E. Reconciliation compares the body with the link wrapping removed;
 // this only affects the comparison, it does not make the delivered text match the validated draft (see docs/phase4-gmail-integration.md).
-const unwrapGoogleLinks = (text) => String(text).replace(/https:\/\/www\.google\.com\/url\?q=([^&\s]+)(?:&(?:amp;)?[a-z]+=[^&\s]*)*/g, (m, q) => { try { return decodeURIComponent(q); } catch (e) { return q; } });
-const toCandidate = (m, bodyHashFn) => ({ id: m.id, subject: m.subject, to: Array.isArray(m.to || m.toRecipients) ? (m.to || m.toRecipients)[0] : m.to, date: m.date, body_hash: m.body == null ? undefined : bodyHashFn(unwrapGoogleLinks(m.body)) });
+// D-066: the wrapper is now recognised strictly (src/lib/urlcheck.js). When the canonical URLs of the validated draft are supplied, every delivered URL
+// must be plain or a valid wrapper whose destination equals the canonical URL, in order; otherwise body_hash becomes a failure marker so that
+// reconciliation ends in RECONCILIATION_REQUIRED (BODY_MISMATCH). The stored draft is never changed.
+const unwrapGoogleLinks = U.unwrapGoogleLinks;
+const toCandidate = (m, bodyHashFn, canonicalUrls) => {
+  let bodyHash;
+  if (m.body != null) {
+    if (Array.isArray(canonicalUrls) && !U.verifyDeliveredUrls(m.body, canonicalUrls).ok) bodyHash = 'URL_VERIFICATION_FAILED';
+    else bodyHash = bodyHashFn(unwrapGoogleLinks(m.body));
+  }
+  return { id: m.id, subject: m.subject, to: Array.isArray(m.to || m.toRecipients) ? (m.to || m.toRecipients)[0] : m.to, from: m.from, date: m.date, body_hash: bodyHash };
+};
 
 module.exports = { buildSendRequest, buildSearchQuery, toCandidate, unwrapGoogleLinks, draftHash: S.draftHash };

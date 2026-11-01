@@ -81,12 +81,13 @@ gmail:
   internal_tests_authorised: false               # approving the recipient is not authorisation to send: the first internal test send needs the user's go-ahead in chat
   customer_sending_authorised: false             # live customer sending needs the user's explicit final authorisation after the pilot (Stage D)
 
-# Email provider (D-060). The Gmail connector rewrites every URL (D-057..D-059), so Brevo is the planned provider. NOTHING here enables sending:
+# Email provider (D-066): the Gmail connector is the ONLY provider (supersedes D-060). It rewrites URLs; the wrapper is accepted only when its destination equals the validated Fathom URL (src/lib/urlcheck.js). NOTHING here enables sending:
 # delivery_mode stays dry_run and customer_sending_authorised stays false. Secrets live ONLY in environment variables (see .env.example), never here.
 email_provider:
-  active: brevo                          # brevo | gmail (informational until sending is authorised)
-  gmail_adapter_enabled: false           # Gmail adapter code is kept (src/lib/gmail.js) but disabled
-  brevo:
+  active: gmail                          # the only allowed value (D-066); anything else is refused by src/lib/provider.js, there is no fallback
+  gmail_adapter_enabled: false           # the Gmail path sends nothing until this is true AND delivery_mode/customer_sending_authorised permit it; NOT enabled by D-066
+  allow_fallback: false                # there is no automatic fallback to any other provider
+  brevo:                                 # RETIRED (D-066): not selectable, kept as historical mocked-tested code until migration verification is complete
     adapter_enabled: false               # no real request is made until the user enables it
     approved_sender_email: supportcore@flexifunnels.com   # the sender approved by the user (D-053); must equal BREVO_SENDER_EMAIL
     approved_sender_name: Support Team | FlexiFunnels   # display name confirmed by the user 2026-11-01 (D-061); must equal BREVO_SENDER_NAME
@@ -96,3 +97,9 @@ email_provider:
     link_tracking_disabled_confirmed: true   # user accepted 2026-11-02 (D-065) on the evidence of a raw delivered message (D-064): original URLs preserved in the production format (no anchors; the adapter refuses anchors). Brevo's open pixel and tracked List-Unsubscribe header REMAIN and are accepted for the pixel only; the unsubscribe header is an open risk. Revert to false if either changes link behaviour
     api_key_provisioned: true          # the key is held only in the BREVO_API_KEY environment variable
     delivery_status_method: poll         # poll GET /smtp/emails/{uuid} events; a webhook needs a public receiver the project does not have
+
+# Supervised pilot stages (D-066). Each stage needs the user's explicit authorisation in chat; all stay false. C1 = up to 5 individually approved emails, C2 = up to 15 more after the C1 review, C3 = capped automation (separate design and authorisation).
+pilot:
+  c1_authorised: false
+  c2_authorised: false
+  c3_authorised: false

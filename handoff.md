@@ -2,7 +2,10 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
-## Tracking flag set; adapter refuses anchors (2026-11-02, D-065)
+## Gmail is now the sole provider; Brevo retired (2026-11-02, D-066)
+Implemented and tested with mocks only: `src/lib/provider.js` (Gmail only, no fallback), `src/lib/urlcheck.js` (strict Google-wrapper verification against the validated Fathom URLs), read-back verification before SENT (recipient, actual From, subject, body, URLs), `src/lib/approval.js` (approvals bound to send key + recipient + draft hash; C1 5, C2 15), runBatch duplicate fix. Config: `active: gmail`, `allow_fallback: false`, `gmail_adapter_enabled: false`, `pilot.*: false`. Brevo code and `BREVO_*` secrets kept (not exposed) until migration is verified. Nothing sent, drafted, written to a sheet or scheduled. Doc: `docs/phase4-gmail-only.md`. **Needs you:** authorise a controlled Gmail internal test (to verify the read-back path and the wrapper on a real message), then C0 items for the pilot (DNS no longer needed for Gmail; consent decision; reply monitoring). Nothing starts without explicit authorisation.
+
+## Tracking flag set; adapter refuses anchors (2026-11-02, D-065) [Brevo, retired by D-066]
 link_tracking_disabled_confirmed, sender_verified_in_brevo, api_key_provisioned now true (evidence in D-062/D-064). Provider readiness empty; customer sending still blocked (dry_run, customer_sending_authorised false, no schedule). Open: tracked List-Unsubscribe header (ask Brevo support), DNS for flexifunnels.com (DMARC fail), pilot design, scheduling.
 
 ## Second Brevo test: links preserved, pixel and unsubscribe header remain (2026-11-02, D-064)

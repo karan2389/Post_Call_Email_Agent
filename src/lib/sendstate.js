@@ -5,7 +5,10 @@
 // This is NOT exactly-once delivery: a crash between the connector's send and our record is covered by reconciliation, not prevented.
 
 const N = require('./normalize');
+const A = require('./approval');
 const em = (x) => { const r = N.normalizeEmail(x == null ? '' : String(x)); return r.valid ? r.value : ''; };
+// bare address of "Name <addr>" or "addr" (From/To as a connector may return them)
+const addr = (x) => { const s = String(x == null ? '' : x); const m = s.match(/<([^<>]+)>/); return em(m ? m[1] : s); };
 
 const STATES = ['DRAFT_GENERATED', 'VALIDATION_FAILED', 'VALIDATED', 'STORED', 'READY_TO_SEND', 'SEND_IN_PROGRESS', 'SENT', 'SEND_FAILED',
   'SEND_OUTCOME_UNKNOWN', 'RECONCILIATION_REQUIRED', 'REVIEW_REQUIRED', 'SKIPPED'];
@@ -91,6 +94,10 @@ function preSendChecks(rec, ctx) {
     const eff = c.test_recipient !== undefined ? em(c.test_recipient) : to;   // explicit override: the effective recipient must be an approved internal address
     if (!list.length || !eff || list.indexOf(eff) < 0) fail.push('TEST_RECIPIENT_NOT_APPROVED');   // test mode may only reach approved internal addresses
   } else fail.push('MODE_DOES_NOT_PERMIT_SEND');                                             // dry_run, shadow, anything else
+  if (c.require_approval === true) {   // supervised pilot (D-066): an approval bound to this send key, this recipient and this exact draft text
+    const ap = A.checkApproval(c.approvals, { send_key: r.send_key, recipient: r.stored_recipient, draft_hash: draftHash(r.stored_recipient, r.stored_subject, r.stored_body) }, c);
+    if (!ap.ok) fail.push(ap.code);
+  }
   const blocking = fail.filter((x) => x !== 'RESEND_AUTHORISED_EXPLICITLY');
   return { ok: blocking.length === 0 && fail.indexOf('RESEND_AUTHORISED_EXPLICITLY') < 0, failed: fail };
 }
@@ -102,9 +109,13 @@ function reconcile(attempt, sent, opts) {
   const a = attempt || {}; const list = Array.isArray(sent) ? sent : [];
   const to = em(a.recipient);
   const t0 = Date.parse(a.started_at); const win = ((opts && opts.window_minutes) || 120) * 60000;
-  const cand = list.filter((m) => m && m.id && em(m.to) === to && m.subject === a.subject && Date.parse(m.date) >= t0 - 60000 && Date.parse(m.date) <= t0 + win);
+  const cand = list.filter((m) => m && m.id && addr(m.to) === to && m.subject === a.subject && Date.parse(m.date) >= t0 - 60000 && Date.parse(m.date) <= t0 + win);
   if (cand.length === 1) {
     const m = cand[0];
+    if (a.expected_from) {   // actual From identity (D-066): required whenever the attempt names the approved sender
+      if (!m.from) return { outcome: 'RECONCILIATION_REQUIRED', code: 'FROM_NOT_VERIFIED', gmail_message_id: m.id };
+      if (addr(m.from) !== em(a.expected_from)) return { outcome: 'RECONCILIATION_REQUIRED', code: 'FROM_MISMATCH', gmail_message_id: m.id };
+    }
     if (m.body_hash && m.body_hash !== a.body_hash) return { outcome: 'RECONCILIATION_REQUIRED', code: 'BODY_MISMATCH', gmail_message_id: m.id };
     if (!m.body_hash) return { outcome: 'RECONCILIATION_REQUIRED', code: 'BODY_NOT_VERIFIED', gmail_message_id: m.id };
     return { outcome: 'SENT', code: 'MATCHED_SENT_MESSAGE', gmail_message_id: m.id };

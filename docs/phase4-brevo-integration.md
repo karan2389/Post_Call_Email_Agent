@@ -1,3 +1,5 @@
+﻿> **RETIRED (D-066):** Brevo is no longer selectable; this page is the historical record of the Brevo integration and its real tests (D-062 to D-065). Active architecture: docs/phase4-gmail-only.md.
+
 # Phase 4: Brevo transactional email provider (design and mocked implementation)
 
 Status: **implemented and tested with mocked HTTP only (`src/lib/brevo.js`, `tests/unit/phase4-brevo.test.js`, D-060). No Brevo account was created, no credential exists, no real request was made, no email was sent.** Customer sending stays disabled (`delivery_mode: dry_run`, `customer_sending_authorised: false`, `email_provider.brevo.adapter_enabled: false`).

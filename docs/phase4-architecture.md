@@ -15,4 +15,4 @@ Rollout (user's staged plan): A dry run (done for drafts) -> B internal Gmail te
 Honest limits: not exactly-once (docs/phase4-idempotency.md); the connector's behaviour on timeout and error is undocumented and untested live; the connector's sender identity is inferred until the first test send.
 
 ## Provider update (D-060)
-The Gmail connector route is unusable (it rewrites every URL, D-057 to D-059). The sender is now provider-neutral (`deps.mail`); the Gmail adapter is kept but disabled; `src/lib/brevo.js` is the mocked-only Brevo adapter. Setup steps, safeguards, the delivery-verification design and open risks: `docs/phase4-brevo-integration.md`. Nothing real has been sent through Brevo.
+**Current (D-066): Gmail is the sole provider.** The connector rewrites URLs (D-057 to D-059); the wrapper is accepted only when its destination equals the validated Fathom URL and the delivered message is verified on read-back (recipient, actual From, subject, body, URLs). No fallback; Brevo is retired (`src/lib/brevo.js` is kept as historical mocked-tested code). Details, approvals and migration: `docs/phase4-gmail-only.md`.
