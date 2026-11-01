@@ -23,6 +23,12 @@ Durable project knowledge only: architectural decisions, technical discoveries, 
 
 - 2026-11-01 — **D-033 Phase 2 final changes (untested by decision):** UTF-8 instruction (email-generation 1.4.0), P2-03 expectation narrowed (original kept in `_history/`), friendlier customer-facing wording (customer-summary 1.3.0, email-generation 1.4.0, email-validation 1.4.0). No regression runs were performed; business logic unchanged. Report `docs/phase2-final-report.md` §11.
 
+- 2026-11-01 — **D-036 no Call ID column in Phase 3:** calls are identified for dedup only by fingerprint (normalised date + time + email), not unique; same-day calls at different times are separate; exact collisions flagged (FINGERPRINT_COLLISION), never merged or discarded; draft schema 21 columns; supersedes the D-035 interim key; Phase 4+ persistent-ID question left open.
+
+- 2026-11-01 — **D-035 Phase 3 draft destination:** generated drafts go to spreadsheet `1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40` (GID 0); source `Calls DONE` read only; backup untouched; Gmail off; manual runs. Destination uninspected; schema and access (OD-45) are proposals (the interim Call ID key was superseded by D-036); read-only on the source is procedural unless the connector account is view-only (R-15). Design: `docs/phase3-draft-destination.md`.
+
+- 2026-11-01 — **D-034 roadmap consolidated to seven phases (0-7):** 3 Real Data Integration (read-only drafts), 4 Tracking & Gmail, 5 Shadow & Production Readiness, 6 Live Automation & Scheduling, 7 Dashboard. Phase 2 = Completed - Synthetic Implementation Baseline (committed 817fe0e, pushed); latest refinements untested. No technical or business decision changed.
+
 ## Phase 1 discoveries (verified 2026-10-31)
 
 - Cloud routines run in an Anthropic sandbox (`/home/user`, empty unless a git source is configured); cron/`run_once_at` are **UTC**, minimum interval 1 h (09:00 IST = `30 3 * * *`). `Bash` is available there.

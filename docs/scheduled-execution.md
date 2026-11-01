@@ -23,8 +23,8 @@ Status: **Proposed (D-026). Nothing has been configured.** No scheduled task exi
 
 | Stage | Spreadsheet | `delivery_mode` | Gmail |
 |---|---|---|---|
-| Phase 1–2 | Read-only on the real sheet (validation only) or a test copy | `dry_run` | None |
-| Phase 3–4 | **Test copy** of the spreadsheet | `test` | Drafts / sends to allowlisted internal addresses only |
+| Phase 1–3 | Read-only on the real sheet (Phase 1 validation; Phase 3 real records, drafts only) or synthetic fixtures (Phase 2) | `dry_run` | None |
+| Phase 4 | **Test copy** of the spreadsheet | `test` | Drafts / sends to allowlisted internal addresses only |
 | Phase 5 | Real sheet (approved) | `shadow` | None to customers; drafts stored in the logs |
 | Phase 6 go-live | Real sheet | `live` with `go_live_date` | Sends to customers for eligible calls on/after the go-live date |
 
@@ -48,6 +48,7 @@ Only `live` may send customer emails. Rollback = set `delivery_mode: shadow` in 
 | R-12 | Customer data in scheduled-session transcripts/history (transcripts, emails pass through the session) | Review where session history is stored, for how long, and who can see it | Company approval of data handling (OD-12) | 1 |
 | R-13 | Identity of the connector account: emails are sent from the authorising Google account; the sheet is edited as that user | Confirm which account authorises each connector | Sender identity accepted (OD-39); account has only the needed access | 1 / 4 |
 | R-14 | The backup spreadsheet is a recovery copy only (D-029). Its synchronisation, completeness and effect on agent-owned data in column AD are unverified; it could erase AD values (OD-43) | Read-only comparison with the original; confirm synchronisation behaviour with its owner | Synchronisation confirmed not to erase agent-owned data before any source write | 3 / 5
+| R-15 | The Phase 3 draft spreadsheet (`1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40`, D-035) is uninspected (worksheet name, headers, access, rows unknown) and will hold real customer data; the connector account that writes it can also edit the source unless it is view-only there, so "read-only source" is procedural | Read-only inspection of both spreadsheets and the connector account's access (R-13); agree headers (OD-45) | Headers match the approved schema, access limited to named leads, connector account view-only on the source or the residual risk accepted in writing | 3
 
 Any behaviour not yet validated is described in the docs as *proposed* or *(validate)*.
 
@@ -67,6 +68,7 @@ Any behaviour not yet validated is described in the docs as *proposed* or *(vali
 | R-12 | PARTIAL: cloud session logs are stored on claude.ai and retrievable; retention and visibility unknown; transcript reads pull content through the session (F3) |
 | R-13 | UNVERIFIED: the connector's Google account is not discoverable from within calls |
 | R-14 | UNVERIFIED: the backup has not been inspected; its synchronisation is outside this repository (`docs/backup-recovery.md`)
+| R-15 | UNVERIFIED: the draft spreadsheet has not been inspected; nothing was read or written when D-035 was recorded (`docs/phase3-draft-destination.md`)
 
 ## 5. Cost and dependency policy (D-026)
 

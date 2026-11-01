@@ -8,7 +8,7 @@ Status: **Revised for the scheduled-task architecture (D-026).** All test data i
 |---|---|---|---|
 | Connector & environment validation | R-01 … R-13 (`scheduled-execution.md` §4) | Scheduled task + interactive Claude Code, read-only first | Phase 1 |
 | Skill scenario tests | Analysis, summary, generation and validation on synthetic transcripts (incl. Hindi, multi-segment, adversarial drafts) | Interactive or scheduled session, `dry_run`; results recorded in `outputs/` (git-ignored, synthetic only) | Phase 2, and before any skill change |
-| Workflow scenario tests | Eligibility, duplicates, Call ID writes, state transitions, deferral, recovery, multi-run behaviour | Scheduled or manual runs against a **test copy** of the spreadsheet populated from `tests/fixtures/` | Phase 3 |
+| Workflow scenario tests | Eligibility, duplicates, Call ID writes, state transitions, deferral, recovery, multi-run behaviour | Scheduled or manual runs against a **test copy** of the spreadsheet populated from `tests/fixtures/` | Phase 4 |
 | Gmail tests | Drafts / internal sends, uncertain-send confirmation and human review, unattended send behaviour | Test mailbox, `test` mode, allowlisted internal recipients only | Phase 4 |
 | Shadow review | Real records, drafts only, human review | Real sheet, `shadow` mode | Phase 5 |
 | Helper unit tests (only if OD-38 adopts helpers) | Date maths, URL parsing, signatures/hashes, UUID format | Local, no network | Phase 1 |
@@ -36,7 +36,7 @@ Each case has a synthetic fixture (row values + transcript) and expected results
 - Model outputs vary; safety cases run 3 times and must pass every time.
 - Usage cost of each scenario run is noted (R-09).
 
-## 4. Recovery scenarios (must be covered, Phase 3–4)
+## 4. Recovery scenarios (must be covered, Phase 4)
 
 1. Session stops in `PROCESSING` → lease expiry → `PENDING` → processed once.
 2. Session stops in `VALIDATING` → same.

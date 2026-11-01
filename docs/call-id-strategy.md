@@ -2,6 +2,8 @@
 
 Status: **Design approved (D-024); writing to the source is NOT yet authorised (D-029).** The proposed Call ID location is source column **AD**, header **`POST_CALL_CALL_ID`**. The original source currently has headers through AC and AD is empty. Earlier documentation proposing this column does not make it approved for writing.
 
+> **Phase 3 note (D-036, supersedes the D-035 interim-key proposal):** Phase 3 introduces **no Call ID column** in the source or the draft spreadsheet and uses no UUID Call IDs. Calls are identified for duplicate detection and draft association only by a deterministic record fingerprint (normalised Call Date + Call Time + Customer Email); it is not a guaranteed unique identifier, and exact collisions are flagged for human review, never merged or discarded (`docs/phase3-draft-destination.md` section 6). The `gen:{uuid4}` design below is left as written, is not used in Phase 3, and is neither approved nor removed for later phases; whether a persistent ID is needed from Phase 4 on is to be confirmed at Phase 4.
+
 ## 0. Gate: all source writes stay disabled until every condition is met
 
 1. Ownership of column AD is confirmed with the sheet owner.

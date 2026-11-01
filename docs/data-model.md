@@ -1,6 +1,6 @@
 # Data Model
 
-Status: Source mapping **verified against the real sheet on 2026-10-31** (see `source-sheet-profile.md`). Log/event schemas are proposed; the worksheets are **not created** (creation needs approval, Phase 3). Whether the logs live in the same spreadsheet as the source is OD-18.
+Status: Source mapping **verified against the real sheet on 2026-10-31** (see `source-sheet-profile.md`). Log/event schemas are proposed; the worksheets are **not created** (creation needs approval, Phase 4). Whether the logs live in the same spreadsheet as the source is OD-18.
 
 All timestamps: ISO 8601 with offset, Asia/Kolkata, e.g. `2026-10-31T14:05:00+05:30`. All dates (`call_date`, `target_date`): `YYYY-MM-DD` in Asia/Kolkata.
 
@@ -134,6 +134,9 @@ The current state and final record of each call: customer information, status, r
 
 Email bodies are personal data. Access to this worksheet should be limited to the support team (OD-19). The email body is never written to ordinary logs.
 
+## 2a. Phase 3 draft spreadsheet (proposed, D-035/D-036; not inspected, not created)
+
+A separate spreadsheet (`1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40`, GID 0) stores validated drafts and skip, deferral, failure and review records, one row per call, with **no Call ID column**. Proposed 21-column schema (Call Date, Call Time, Customer Name, Customer Email, Support Agent, Recording URL(s), Recording Count, Email Subject, Email Body, Word Count, Validation Status, Validation Issue Codes, Processing Status, Reason Code, Draft Created At, Last Updated At, Transcript Hash, Skill Versions, Run ID, Error / Review Notes, Source Row (reference only)), storage rules and the record-fingerprint de-duplication (normalised Call Date + Call Time + Customer Email, recomputed from the stored columns, not a unique identifier) are in `docs/phase3-draft-destination.md` sections 4 and 6. Phase 4 adds the full `POST_CALL_EMAIL_LOGS` / `POST_CALL_EMAIL_EVENTS` model below; the `call_id` rows there remain the Phase 4 proposal (see the Phase 3 note in `call-id-strategy.md`); whether the draft sheet becomes the logs sheet is OD-18.
 ## 3. `POST_CALL_EMAIL_EVENTS` worksheet (agent-owned, append-only)
 
 One row per state transition or notable event. Never updated or deleted by the agent. Recommended rather than strictly required: it provides the audit trail, run history and recheck history for the dashboard.

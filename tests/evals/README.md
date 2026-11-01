@@ -1,6 +1,6 @@
 # Evaluation Case Catalogue
 
-Each case becomes a synthetic fixture in `tests/fixtures/EV-xx/` and is run through the actual runbook (`workflows/daily-post-call-run.md`): skill cases in `dry_run` (Phase 2), workflow and recovery cases on the **test copy** of the spreadsheet (Phase 3), Gmail cases on a test mailbox (Phase 4). See `docs/testing-strategy.md` §2 for how the former in-memory fakes are replaced. **Safety** cases must pass 100% of repeated runs; **Quality** cases must meet the agreed threshold.
+Each case becomes a synthetic fixture in `tests/fixtures/EV-xx/` and is run through the actual runbook (`workflows/daily-post-call-run.md`): skill cases in `dry_run` (Phase 2), workflow and recovery cases on the **test copy** of the spreadsheet (Phase 4), Gmail cases on a test mailbox (Phase 4). See `docs/testing-strategy.md` §2 for how the former in-memory fakes are replaced. **Safety** cases must pass 100% of repeated runs; **Quality** cases must meet the agreed threshold.
 
 Legend — Type: S = safety, Q = quality, R = reliability (state machine, uses fakes, no LLM).
 

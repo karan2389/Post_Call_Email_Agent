@@ -2,7 +2,7 @@
 
 An automated agent for the FlexiFunnels Customer Success / Support team. Every day it picks up the previous day's support calls (Asia/Kolkata) from Google Sheets, understands each conversation, writes a concise, personalised follow-up email that includes the Fathom recording link(s), validates it, and (only in `live` mode) sends it through Gmail. Every outcome is recorded in the `POST_CALL_EMAIL_LOGS` worksheet.
 
-> **Status:** Phase 1 partly done (read-only, `docs/phase1-results.md`). The architecture below is **proposed** (D-026): the Sheets connector works in a cloud run, but a cloud run can now read the project files and skills from the private GitHub remote (Test 2), but a full runbook run has not been done, Gmail in the cloud is untested, and AD-only writes are not yet enforceable. No recurring schedule, spreadsheet change, application code or email exists. See `ROADMAP.md` and `handoff.md`.
+> **Status:** Phases 0-2 completed (Phase 2 = synthetic implementation baseline; its latest refinements are untested, `docs/phase2-final-report.md`); Phases 3-7 not started, see `ROADMAP.md`. Phase 1 (feasibility, read-only, `docs/phase1-results.md`) left open items that are carried into later phases. The architecture below is **proposed** (D-026): the Sheets connector works in a cloud run, but a cloud run can now read the project files and skills from the private GitHub remote (Test 2), but a full runbook run has not been done, Gmail in the cloud is untested, and AD-only writes are not yet enforceable. No recurring schedule, spreadsheet change, application code or email exists. See `ROADMAP.md` and `handoff.md`.
 
 ## Architecture in brief
 
@@ -38,7 +38,7 @@ CLAUDE.md          Rules for every Claude Code session (interactive and schedule
 README.md          This file
 memory.md          Durable decisions, discoveries, milestones
 handoff.md         Current status and exact next steps
-ROADMAP.md         Phases and exit criteria
+ROADMAP.md         Seven phases (0-7) and exit criteria
 workflows/         daily-post-call-run.md — the runbook the scheduled task follows
 docs/              Architecture, scheduled execution and risks, rules, data model, security, decisions
 skills/            Four SKILL.md files: analysis, summary, generation, validation
@@ -54,6 +54,7 @@ outputs/, logs/    Local synthetic outputs (git-ignored)
 |---|---|
 | `docs/architecture.md` | Proposed architecture, components, boundaries, run flow |
 | `docs/scheduled-execution.md` | Execution model, schedule, delivery modes by phase, **validation register R-01 … R-13**, cost policy, go-live checklist |
+| `docs/phase3-draft-destination.md` | Phase 3 design (proposed): read-only source, separate draft spreadsheet, proposed schema, de-duplication, gates |
 | `docs/phase1-results.md` | Phase 1 read-only feasibility results, connector limitations and remaining blockers |
 | `workflows/daily-post-call-run.md` | The daily runbook |
 | `docs/pipeline.md` | Rules: previous-day selection, eligibility E1–E18, deferral, duplicates, failure isolation, delivery modes |
@@ -72,7 +73,7 @@ outputs/, logs/    Local synthetic outputs (git-ignored)
 
 ## Setup
 
-Nothing to install for the primary architecture. Phase 1 will create and validate one **read-only** scheduled task (needs user approval). Python is not needed unless helper scripts are approved (OD-38).
+Nothing to install for the primary architecture. A read-only scheduled routine was created for Phase 1 and stays disabled; further scheduling needs user approval (Phase 6). Python is not needed unless helper scripts are approved (OD-38).
 
 ## Data protection
 

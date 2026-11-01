@@ -41,3 +41,15 @@ logs:
   spreadsheet_id: null            # OD-18 (same spreadsheet or separate); worksheets not yet created
   logs_worksheet: POST_CALL_EMAIL_LOGS
   events_worksheet: POST_CALL_EMAIL_EVENTS
+
+# Phase 3 draft destination (D-035, proposed; Phase 3 NOT approved or started). The only place generated drafts may be written.
+# Never the source and never the backup. Not inspected yet: worksheet name, headers, access and rows are unknown.
+draft_destination:
+  spreadsheet_id: 1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40
+  worksheet_gid: 0
+  worksheet: null                    # unknown until the read-only inspection (docs/phase3-draft-destination.md section 3)
+  schema_version: p3-draft-v1-proposed
+  headers_verified: false            # set true only after inspection matches the approved schema
+  writes_enabled: false              # set true only after Phase 3 approval, OD-12 approval, and inspection (no Call ID column is required, D-036)
+  gmail_enabled: false               # Phase 3 never uses Gmail
+  scheduled_execution: false         # Phase 3 is manually initiated

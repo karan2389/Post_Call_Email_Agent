@@ -46,7 +46,8 @@ No API keys, service-account keys or `.env` secrets exist in the primary archite
 |---|---|---|
 | `Calls DONE` | Read; write only empty AD cells (`POST_CALL_CALL_ID`) | **Verified protected ranges only.** The runbook and pre/post-write checks are defence in depth, not enforcement. Connector permissions are per spreadsheet and act as the user; there is no code write guard in this architecture |
 | Protected ranges (OD-36) | **Required and verified** before any real-sheet write: A–AC and AE+ protected from the connector's account | Effective **only** if the connector's Google account is not the owner and not an allowed editor of those ranges. If it is the owner, protection can only warn. A dedicated non-owner Google account for the connector is the likely route (R-03, R-13) |
-| Logs worksheets | Read/write by the agent | Created only with approval (Phase 3) |
+| Draft destination spreadsheet (Phase 3, D-035) | Write for approved draft output only; holds real customer data | Inspect first, never assume headers or access; writes disabled until Phase 3 approval, OD-12 approval and inspection; limit access to named support leads (`phase3-draft-destination.md` section 8) |
+| Logs worksheets | Read/write by the agent | Created only with approval (Phase 4) |
 | Gmail | Search/read for reconciliation; drafts in `test`; send only in `live` | Runbook gates; whether unattended sending needs approval is R-04 |
 | Forbidden tool uses | Row inserts, clears, formula or spreadsheet-property edits on the source; Gmail delete/trash/forward | Runbook (`architecture.md` §5) |
 
@@ -72,6 +73,12 @@ If enforcement cannot be verified, the real source sheet receives no writes at a
 - Every Call ID write is a single-cell write to an empty AD cell, preceded and followed by a row-signature check (`call-id-strategy.md` §6). If the row match is ambiguous, nothing is written.
 - No backfill of historical rows.
 - Development and validation sessions must not write to the real source sheet. Write testing uses a test copy.
+
+## 8a. Phase 3 read-only source and draft destination (D-035, proposed)
+
+- In Phase 3 the source `Calls DONE` is read only and drafts go only to the dedicated draft spreadsheet; never to the source, never to the backup. Gmail is not connected or invoked and no scheduled task exists.
+- Read-only on the source is a procedure unless the connector account has view-only access (R-03, R-15); this must be confirmed and recorded before Phase 3 writes anything.
+- The draft spreadsheet will hold real customer names, emails, recording links and email bodies: restrict access, no link sharing, OD-12 approval first. Failed or unvalidated drafts are never stored as validated.
 
 ## 9. Version control
 

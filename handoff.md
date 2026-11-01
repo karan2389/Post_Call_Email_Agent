@@ -2,7 +2,16 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
-## Phase 2 final changes (2026-11-01, uncommitted, D-033): NOT tested by design
+## No Call ID column; fingerprint identification (2026-11-01, uncommitted, D-036): documentation only
+Phase 3 uses no new Call ID column and no UUIDs. Record fingerprint = normalised call date + call time + customer email (duplicate detection and draft association only, not unique). Different times on the same day = separate calls, rows and drafts; exact collisions flagged for review (FINGERPRINT_COLLISION), nothing merged or discarded; row numbers are references only. Draft schema now 21 columns. New OD-46 (collision resolution, not a gate); OD-44 resolved. Open for you: whether Phase 4+ still needs a persistent ID. Nothing read or written in any spreadsheet.
+
+## Phase 3 draft destination decided (2026-11-01, uncommitted, D-035): documentation only
+Draft spreadsheet 1_TxhedZ_sPTLXGPo36pFnoSNDCIWHU8uRtmhfXm2L40 (GID 0) is the only place for generated drafts; the source stays read only; backup untouched. Phase 3 = read-only source, write-enabled draft sheet, Gmail-disabled, customer-send-disabled, manual (not scheduled). Design, proposed 22-column schema and de-duplication: docs/phase3-draft-destination.md. New OD-45 (headers and access), R-15 (OD-44 interim Call ID superseded by D-036). Nothing was read or written in either spreadsheet; Phase 3 not started; awaiting your approval and the gates in that document's section 9.
+
+## Roadmap consolidated to seven phases (2026-11-01, uncommitted, D-034)
+Phases 0-2 completed (Phase 2 = synthetic implementation baseline, latest refinements untested); Phases 3-7 not started: 3 Real Data Integration, 4 Tracking & Gmail, 5 Shadow & Production Readiness, 6 Live Automation & Scheduling, 7 Dashboard. Phase 3 needs your approval and OD-12 data-handling approval first. Documentation only; no tests, no external access. Phase 2 was committed as 817fe0e and pushed.
+
+## Phase 2 final changes (2026-11-01, D-033): NOT tested by design
 Per your instruction, no regression runs. Done: UTF-8 instruction in email-generation 1.4.0 (+ encoding check documented in `docs/validation-rules.md`; the check already existed in `tests/unit/checks.js`); P2-03 `must_not_include` narrowed to `we (have )?fixed|has been fixed|was fixed` (original preserved in `tests/fixtures/_history/`); language refinements in customer-summary 1.3.0, email-generation 1.4.0, email-validation 1.4.0. Business logic unchanged. Report §11 of `docs/phase2-final-report.md`. Nothing committed or pushed; Phase 3 not started. Re-test before relying on the new wording.
 
 ## Final policy implementation and regression (2026-11-01, uncommitted): S-11 CLOSED by your decision (D-032)

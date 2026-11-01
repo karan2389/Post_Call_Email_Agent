@@ -108,7 +108,7 @@ A no-show with no transcript and no `call_status` waits for the deferral window 
 Runs after eligibility because these checks need a valid email and a parsed URL list.
 - Call ID already `SENT` in the logs → `SKIPPED` `DUPLICATE_ALREADY_SENT` (defensive; the terminal guard should already prevent this).
 - The same Call ID appears in more than one source row → `SKIPPED` `DUPLICATE_CALL_ID_IN_SOURCE` (`call-id-strategy.md` §7).
-- **Duplicate entry:** another Call ID with the same `source_fingerprint` (email + date + time) is `SENT`, `SENDING`, `VALIDATING` or `PROCESSING`, or is an earlier row in the same snapshot → `SKIPPED` `DUPLICATE_SOURCE_ROW`.
+- **Phase 3 (D-036, proposed):** no Call ID exists. Duplicate detection uses the record fingerprint (normalised Call Date + Call Time + Customer Email) against the draft spreadsheet and the snapshot. Same customer, same day, different times = separate calls (separate drafts and rows). Already-drafted fingerprint with the same recording URLs: no new row, no overwrite. Exact collision: flag for review (`FINGERPRINT_COLLISION`), no draft, nothing merged or discarded; this replaces the automatic `DUPLICATE_SOURCE_ROW` skip below while Phase 3 lasts. Details: `docs/phase3-draft-destination.md` section 6. (email + date + time) is `SENT`, `SENDING`, `VALIDATING` or `PROCESSING`, or is an earlier row in the same snapshot → `SKIPPED` `DUPLICATE_SOURCE_ROW`.
 - **Shared recording URL across rows:** a URL in this row's `fathom_urls` also appears in any other source row with a **different** fingerprint. The rows are **not** assumed to be the same call; each keeps its own Call ID. Because emailing another customer's recording would be a privacy breach, this row → `SKIPPED` `RECORDING_URL_CONFLICT`, with the other Call ID(s) in `reason_detail` for human review. The other row gets the same treatment when it is evaluated, unless it is already `SENT` (OD-31).
 - Duplicate URLs **within one cell** are not a duplicate call; they were already deduplicated during parsing (D-025).
 - Passed → **claim**: `PENDING → PROCESSING` with lease, `attempt_count += 1`.
@@ -203,8 +203,8 @@ The job is safe to run any number of times for the same day, or concurrently by 
 
 | Mode | Used in | Reads real sheet | Writes Call IDs (AD) | Gmail | Customer receives email |
 |---|---|---|---|---|---|
-| `dry_run` | Phase 1–2 | Read-only (validation) or synthetic fixtures | No | None | Never |
-| `test` | Phase 3–4 | Test copy only | Test copy only | Drafts or sends to `RECIPIENT_ALLOWLIST` (internal) only | Never |
+| `dry_run` | Phase 1–3 | Read-only (Phase 1 validation; Phase 3 real `Calls DONE`) or synthetic fixtures (Phase 2) | None, except Phase 3 (approved): validated drafts and skip/failure records to the dedicated draft spreadsheet only (`phase3-draft-destination.md`, D-035) | None (Gmail disabled) | Never |
+| `test` | Phase 4 | Test copy only | Test copy only | Drafts or sends to `RECIPIENT_ALLOWLIST` (internal) only | Never |
 | `shadow` | Phase 5 | Yes | Yes (approved) | None (drafts stored in the logs; Gmail drafts optional, OD-34) | **Never.** The manual process continues unchanged |
 | `live` | Phase 6 go-live onwards | Yes | Yes | Sends | Yes, for calls on/after `GO_LIVE_DATE` that pass every check |
 
