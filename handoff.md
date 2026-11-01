@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 — Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6–8 is committed._
 
+## Send logic built and tested with mocks (2026-11-01, D-054)
+Send Log design + code, Gmail request/search builders, reference sender, CLI helpers; tests: phase3 28, phase4 10, sender 18 (mocked Gmail). Docs: phase4-tracking-schema, idempotency, error-handling, architecture. Not live-tested, not exactly-once. **Needs you (not before):** go-ahead for the first real internal test send to `karan.s@flexifunnels.com` (it will also show the real From address) and approval to create the `Send Log` worksheet. Next: scheduling investigation, remaining Phase 4 docs (requirements, acceptance criteria, pilot report, go-live checklist). Customer sending off; nothing sent.
+
 ## Phase 3 CLOSED after the controlled storage test (2026-11-01, D-052)
 One synthetic row written to the destination through the guard, read back (0 mismatches), existing 15 rows unchanged, planner idempotent, test row cleared, `writes_enabled` false again. Report sections 11-12. Phase 3 complete with documented limitations. **Next (Phase 4):** tracking schema, then Gmail wrapper with mocked responses, scheduling investigation, docs. Sender `supportcore@flexifunnels.com` and internal test recipient `karan.s@flexifunnels.com` APPROVED (D-053); no test send authorised yet. Nothing sent; source untouched; customer sending off.
 

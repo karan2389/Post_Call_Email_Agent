@@ -12,6 +12,7 @@
 //   node src/p3.js plan          < {sources:[...], dest:[[...]]} -> idempotent write plan
 //   node src/p3.js build-row     < row object                    -> 21 cell values (storage rules enforced)
 //   node src/p3.js review        < AnalysisResult JSON           -> sensitive-topic / skip handling
+//   node src/p3.js presend | send-request | search-query | reconcile | event-row | send-key   (Phase 4, stdin JSON; no Gmail or sheet access)
 //   node src/p3.js extract-transcript <agent-log.jsonl> <sourceRow> [outFile]  -> exact transcript hash from the recorded connector result (D-043)
 
 const fs = require('fs');
@@ -22,6 +23,9 @@ const D = require('./lib/destination');
 const P = require('./lib/policy');
 const T = require('./lib/transcript');
 const G = require('./lib/guard');
+const S = require('./lib/sendstate');
+const SL = require('./lib/sendlog');
+const GM = require('./lib/gmail');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -90,6 +94,13 @@ async function main() {
   if (cmd === 'plan') return out(D.plan(json.sources, D.parseDestination(json.dest)));
   if (cmd === 'build-row') return out({ values: D.buildRow(json) });
   if (cmd === 'review') return out(P.reviewDecision(json));
+  // Phase 4 helpers (D-054): pure; the session performs the Gmail and spreadsheet calls
+  if (cmd === 'presend') return out(S.preSendChecks(json.record, json.ctx));                      // {record, ctx} -> {ok, failed[]}
+  if (cmd === 'send-request') return out(GM.buildSendRequest(json));                                // stored draft -> exact send_message arguments
+  if (cmd === 'search-query') return out({ query: GM.buildSearchQuery(json) });                      // attempt -> search_threads query
+  if (cmd === 'reconcile') return out(S.reconcile(json.attempt, json.sent));                        // {attempt, sent[]} -> SENT | RECONCILIATION_REQUIRED
+  if (cmd === 'event-row') return out({ values: SL.buildEventRow(json) });                           // send log event -> 19 cell values
+  if (cmd === 'send-key') return out({ send_key: S.sendKey(json.fingerprint, json.url_set_key), draft_hash: S.draftHash(json.recipient, json.subject, json.body), body_hash: SL.bodyHash(json.body) });
   if (cmd === 'guard-write') {   // exit code 0 = allowed, 4 = rejected; the session must call this before every spreadsheet write
     let t = ''; try { t = fs.readFileSync(path.join(ROOT, 'config', 'run-settings.yaml'), 'utf8'); } catch (e) { /* gates stay closed */ }
     const block = (t.match(/^draft_destination:[\s\S]*?(?=^\S|(?![\s\S]))/m) || [''])[0];

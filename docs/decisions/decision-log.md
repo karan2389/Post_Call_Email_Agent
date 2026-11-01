@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-054 — Send log, Gmail builders and reference sender, tested with mocks only (2026-11-01)
+
+**Decision:** send tracking is an append-only `Send Log` worksheet (19 columns) in the destination spreadsheet, not extra columns in `Sheet1` (the approved 21-column schema is unchanged); the worksheet is NOT created yet (needs approval). Code: `src/lib/sendlog.js`, `gmail.js`, `sender.js` and CLI helpers `presend`, `send-request`, `search-query`, `reconcile`, `event-row`, `send-key`. The durable attempt row is written before every send; only a definite connector rejection is SEND_FAILED; every other error is reconciled and never retried. 18 mocked-Gmail test groups cover success, blocked sends, tracking failures, duplicates, changed drafts, timeouts, interrupted runs, partial batches. **Not live-tested; not exactly-once.** Docs: `docs/phase4-tracking-schema.md`, `phase4-idempotency.md`, `phase4-error-handling.md`, `phase4-architecture.md`.
+
 ### D-053 — Customer-facing sender and internal Gmail test recipient approved (2026-11-01)
 
 **Decision (user, explicit):** `supportcore@flexifunnels.com` is the customer-facing sender address for all automated post-call follow-up emails; `karan.s@flexifunnels.com` is the internal test recipient for the Gmail tests. **Scope:** identity and recipient only. No internal test send is authorised yet, customer sending stays disabled, `delivery_mode` stays `dry_run`. The connector's authorisation as the sender mailbox remains an inference until the first approved test send shows the From address.
