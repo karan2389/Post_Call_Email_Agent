@@ -50,7 +50,9 @@ function buildPayload(req, env, meta) {
   if (!r.subject || !String(r.subject).trim() || !r.body || !String(r.body).trim()) throw fail('EMPTY_SUBJECT_OR_BODY', true);
   const sender = { email: N.normalizeEmail(env.BREVO_SENDER_EMAIL).value };
   if (env.BREVO_SENDER_NAME) sender.name = String(env.BREVO_SENDER_NAME);
-  const payload = { sender, to: [{ email: to.value }], subject: r.subject, textContent: r.body, htmlContent: r.htmlBody || plainToHtml(r.body) };
+  // contactPixelTrackingConsent:false = Brevo must not track opens or clicks for this recipient (per-contact consent mechanism, Brevo help article read 2026-11-02, D-063).
+  // Unproven until a raw delivered message shows original links, no pixel and no tracked unsubscribe link; link_tracking_disabled_confirmed stays the send gate.
+  const payload = { sender, to: [{ email: to.value, contactPixelTrackingConsent: false }], subject: r.subject, textContent: r.body, htmlContent: r.htmlBody || plainToHtml(r.body) };
   if (meta && meta.sendKey) payload.tags = [String(meta.sendKey)];   // Brevo-side metadata, not part of the email; lets the log be matched later
   return payload;
 }

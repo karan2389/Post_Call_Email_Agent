@@ -37,8 +37,15 @@ t('success: POST to the exact Brevo URL, api-key header, message ID extracted (a
 t('request body: only the documented fields we need, no tracking or rewriting options, no scheduling, no cc/bcc, tag = send key', async () => {
   const f = ok(); await client(f).send(req(), { sendKey: 'send_abc' }); const p = JSON.parse(f.calls[0].init.body);
   assert.deepStrictEqual(Object.keys(p).sort(), ['htmlContent', 'sender', 'subject', 'tags', 'textContent', 'to']);
-  assert.deepStrictEqual(p.tags, ['send_abc']); assert.deepStrictEqual(p.sender, { email: 'supportcore@flexifunnels.com', name: 'Support' }); assert.deepStrictEqual(p.to, [{ email: 'customer@example.com' }]);
+  assert.deepStrictEqual(p.tags, ['send_abc']); assert.deepStrictEqual(p.sender, { email: 'supportcore@flexifunnels.com', name: 'Support' }); assert.deepStrictEqual(p.to, [{ email: 'customer@example.com', contactPixelTrackingConsent: false }]);
   ['scheduledAt', 'batchId', 'cc', 'bcc', 'headers', 'params', 'templateId', 'messageVersions', 'removeTrackingPixel', 'contactPixelTrackingConsent', 'attachment'].forEach((k) => assert.ok(!(k in p), k));
+});
+t('tracking opt-out (D-063): the single recipient carries contactPixelTrackingConsent === false (boolean, never true/"unknown"/absent), test and live alike; nothing else added to it', async () => {
+  for (const r of [req(), req({ htmlBody: '<p>x</p>' }), req({ to: ['Upper.Case@Example.com'] })]) {
+    const f = ok(); await client(f).send(r, {}); const p = JSON.parse(f.calls[0].init.body);
+    assert.strictEqual(p.to.length, 1); assert.deepStrictEqual(Object.keys(p.to[0]).sort(), ['contactPixelTrackingConsent', 'email']); assert.strictEqual(p.to[0].contactPixelTrackingConsent, false);
+  }
+  assert.strictEqual(B.buildPayload(req(), ENV, {}).to[0].contactPixelTrackingConsent, false);
 });
 t('exact subject and body preserved (en dash, newlines, & < > quotes); HTML twin decodes back to the same text', async () => {
   const f = ok(); await client(f).send(req(), {}); const p = JSON.parse(f.calls[0].init.body);
@@ -183,7 +190,7 @@ t('key isolation: an internal test send uses its own test_ key, marked text and 
   const f = ok(); const env = mkEnv(f); const d = draft(1);
   const ctx = { runId: 'run-t', delivery_mode: 'test', internal_recipients: ['karan.s@flexifunnels.com'], test_recipient: 'karan.s@flexifunnels.com' };
   const r = await X.sendOne(d, undefined, ctx, env.deps); assert.strictEqual(r.outcome, 'SENT');
-  const p = JSON.parse(f.calls[0].init.body); assert.deepStrictEqual(p.to, [{ email: 'karan.s@flexifunnels.com' }]); assert.ok(p.subject.startsWith('INTERNAL TEST - ') && p.textContent.startsWith(S.TEST_BODY_BANNER));
+  const p = JSON.parse(f.calls[0].init.body); assert.deepStrictEqual(p.to, [{ email: 'karan.s@flexifunnels.com', contactPixelTrackingConsent: false }]); assert.ok(p.subject.startsWith('INTERNAL TEST - ') && p.textContent.startsWith(S.TEST_BODY_BANNER));
   const real = S.sendKey(d.fingerprint, d.url_set_key); assert.ok(p.tags[0].startsWith('test_') && p.tags[0] !== real); assert.ok(!L.fold(env.events).has(real));
   assert.deepStrictEqual(S.preSendChecks(Object.assign({}, d, { state: 'STORED', send_key: real }), live()), { ok: true, failed: [] });   // the live send is still possible
   const bad = await X.sendOne(d, undefined, Object.assign({}, ctx, { runId: 'r2', test_recipient: 'someone@example.com' }), env.deps); assert.strictEqual(bad.outcome, 'BLOCKED');

@@ -69,3 +69,7 @@ Exactly-once delivery is **not** guaranteed here either: Brevo has no documented
 
 ## 10. First real test result (2026-11-01, D-062)
 One synthetic internal email (`p4-brevotest-1`) was sent with a plain-text and an HTML part. Plain text: all URLs exactly preserved. HTML: anchors rewritten to `sendibt3.com/tr/cl/...` click-tracking links, open-tracking pixels added, plain-text URLs in HTML untouched, `List-Unsubscribe` headers added. Authentication: DKIM and SPF pass on Brevo's domains only, DMARC fail for `flexifunnels.com` (p=NONE). Consequence: tracking is on despite the account settings the user believed were off, so `link_tracking_disabled_confirmed` stays false. Next: turn click and open tracking off in Brevo (transactional settings; Brevo support if the toggle is missing), then repeat ONE test using the production HTML twin with a Fathom-style URL, and compare the raw message again. DNS records for `flexifunnels.com` are needed before any customer sending.
+
+## 11. Tracking opt-out field (D-063, mocked only)
+Every request now carries `contactPixelTrackingConsent: false` on the single recipient (requires the account setting in Settings > Contacts > Per-contact pixel tracking consent). It is an attempt to stop the click rewriting, open pixel and tracked unsubscribe link seen in D-062 and is unproven until a second raw message confirms it.
+

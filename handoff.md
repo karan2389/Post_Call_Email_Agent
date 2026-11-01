@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## Brevo tracking opt-out added, mocked only (2026-11-02, D-063)
+Adapter sends `contactPixelTrackingConsent:false` per recipient; Brevo per-contact consent is on in the account. Suites pass (brevo 26/26). **Needs you:** confirm the Brevo setting was saved, then approve ONE repeat internal test; the tracking flag stays false until its raw message is clean.
+
 ## First real Brevo test done: tracking is ON, flag stays false (2026-11-01, D-062)
 One synthetic internal email sent via Brevo (Send Log rows 11-13 SENT). Raw message: text part URLs intact; HTML anchors rewritten to sendibt3 click links; open pixel added; DMARC fail for flexifunnels.com (Brevo-domain DKIM/SPF pass). **Needs you:** turn click and open tracking off in Brevo, DNS records for the domain; then approve one repeat test.
 
