@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## B11 worked: OD-10 and OD-32 resolved, deferred transcripts still empty (2026-11-02, D-071)
+Two bounded read-only cell reads of the source (AB15453, AB15454 plus their date/time): both transcripts still empty (31 Oct calls, 7-day window to 7 Nov); no content read, nothing written. You confirmed OD-10 (all calls treated as support calls, 40-char floor, 7 days, opt-out via suppression list) and adopted OD-32, now `greetingName()` in `src/lib/normalize.js` (`tests/unit/phase3-greeting.test.js` 7/7; `tests/unit/checks.js` uses it; Phase 2 25/25 and focused 9/9 unchanged; p3 command `greeting-name`). You chose to wait for a natural sensitive-topic case, so that path stays unproven on real data. `docs/b11-phase3-leftovers.md`. Not wired yet: the runbook prompt (`workflows/phase3-record-worker.md`) still gets `greeting_name` from the session. Next by your order: B1-B3 and B9 (business confirmations), B5, B6, B8.
+
 ## B4 designed and implemented: verified local confidence record (2026-11-02, D-070)
 `src/lib/confidence.js` (+ `tests/unit/phase4-confidence.test.js` 8/8 and pilot 12/12, mutation-checked): confidence = min(model declaration, computed from evidence counts); record bound to call, send key, draft hash, transcript hash and skill versions, sealed, hashes and counts only (no transcript text), 14-day expiry, fail closed on any defect; pool and review card read it only through `resolveConfidence`; p3 commands `confidence-record` and `confidence-check`; design in `docs/confidence-artifact.md`. No record exists yet; the 7 stored drafts need re-analysis of their transcripts (customer data, needs your explicit authorisation) before they can enter a C1 pool. No gate, sheet, email or schedule changed. Next blockers by your order: B11 (Phase 3 leftovers), B1-B3 and B9 (business), B5, B6, B8.
 

@@ -104,6 +104,7 @@ async function main() {
     try { const sel = PV.selectProvider(cfg); return out({ provider: sel, readiness_blockers: PV.gmailReadiness(cfg) }); }
     catch (e) { out({ provider: null, error: e.code || 'PROVIDER_NOT_ALLOWED' }); process.exit(5); }
   }
+  if (cmd === 'greeting-name') return out(N.greetingName(json.name));   // {name} -> {value, valid, reason, used} (OD-32, D-071)
   if (cmd === 'confidence-record') return out(CFD.buildRecord(json.analysis, json.ctx));   // {analysis, ctx{callRef,sendKey,draftHash,transcriptHash,skillVersions,createdAt}} -> record for local/confidence.json (hashes and counts only)
   if (cmd === 'confidence-check') return out(CFD.resolveConfidence(json.records, json.expected));   // {records[], expected{...,now}} -> {ok, derived|code}; fails closed
   if (cmd === 'verify-urls') return out(UC.verifyDeliveredUrls(json.delivered, json.canonical));   // {delivered, canonical[]} -> per-URL verdict (canonical equality vs delivered representation)

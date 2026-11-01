@@ -106,7 +106,25 @@ function daysBetween(a, b) {
   return Math.round((f(b) - f(a)) / 86400000);
 }
 
+// OD-32 (resolved D-071): the name used in "Hi {name},". Title-case every word (after a hyphen or apostrophe too), collapse an immediately repeated word,
+// greet with the full normalised name when the first word is a single initial, and refuse anything that is not plainly a name (digits, "@", URLs, too long,
+// a lone initial) instead of guessing. Returns { value, valid, reason, used }; an invalid result means the call goes to review, never a guessed greeting.
+function greetingName(raw) {
+  const s = cleanSpace(raw);
+  if (!s) return { value: '', valid: false, reason: 'MISSING_CUSTOMER_NAME', used: null };
+  if (s.length > 60) return { value: '', valid: false, reason: 'CUSTOMER_NAME_TOO_LONG', used: null };
+  const words = s.split(' ');
+  if (!words.every((w) => /^[\p{L}\p{M}'’.-]+$/u.test(w))) return { value: '', valid: false, reason: 'CUSTOMER_NAME_NOT_A_NAME', used: null };   // digits, @, URLs, symbols
+  const title = (w) => w.toLowerCase().replace(/(^|[-'’])(\p{L})/gu, (m, p, c) => p + c.toUpperCase());
+  const tokens = []; for (const w of words) { const t = title(w); if (!tokens.length || tokens[tokens.length - 1].toLowerCase() !== t.toLowerCase()) tokens.push(t); }   // "John John Smith" -> "John Smith"
+  const letters = (t) => t.replace(/[^\p{L}]/gu, '');
+  if (tokens.length === 1 && letters(tokens[0]).length < 2) return { value: '', valid: false, reason: 'CUSTOMER_NAME_IS_A_SINGLE_INITIAL', used: null };
+  const full = tokens.join(' ');
+  if (letters(tokens[0]).length === 1) return { value: full, valid: true, reason: null, used: 'full' };   // an initial is not a greeting name
+  return { value: tokens[0], valid: true, reason: null, used: 'first' };
+}
+
 module.exports = {
-  cleanSpace, normalizeDate, normalizeTime, normalizeEmail, parseRecordingUrls, urlSetKey, fingerprint, sha256,
+  greetingName, cleanSpace, normalizeDate, normalizeTime, normalizeEmail, parseRecordingUrls, urlSetKey, fingerprint, sha256,
   kolkataDate, kolkataIso, addDays, daysBetween,
 };

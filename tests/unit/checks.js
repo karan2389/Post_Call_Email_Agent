@@ -77,8 +77,9 @@ function deterministicChecks({ email, meta, analysis, policy }) {
   const subject = email.subject || '';
   const body = email.body_text || '';
   const fathom = parseRecordingUrls(meta['Recording URL']);
-  const nameParts = String(meta['Customer Name']).trim().split(/\s+/).map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
-  const first = nameParts[0].length === 1 && nameParts.length > 1 ? nameParts.join(' ') : nameParts[0]; // OD-32: title-case; an initial is not a greeting name
+  const gn = require('../../src/lib/normalize').greetingName(meta['Customer Name']);   // OD-32 (D-071): the shared production helper, no private copy of the rule
+  const first = gn.valid ? gn.value : '(no valid greeting name)';
+  if (!gn.valid) add('NAME_MISMATCH', gn.reason);
   const agentFirst = String(meta['Call lead by(who took the call)']).trim().split(/\s+/)[0];
   const signature = policy.signatureTemplate.replace('{support_agent_first_name}', agentFirst);
 

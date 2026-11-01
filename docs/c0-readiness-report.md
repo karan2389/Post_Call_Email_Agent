@@ -29,7 +29,7 @@ No email, internal test, draft, sheet write, customer-record change, scheduled t
 | B8 | Scheduling: Task Scheduler cannot reach the connectors; desktop task unattended access untested; run time, failure watcher, approval to create a dry-run-only task | User | Before any automation, not C1 | Open |
 | B9 | Fathom link sharing setting (public with the link?) and retention period | Support lead / DPO | C1 | Open |
 | B10 | Authorisations to set `gmail_adapter_enabled`, `customer_sending_authorised`, `pilot.c1_authorised`, `delivery_mode: live` for C1 | User | C1 | Closed on purpose |
-| B11 | Phase 3 leftovers: transcripts for 15453 and 15454, OD-10, OD-32; the sensitive-topic path is untested on real data; source read-only and destination sharing are user-confirmed only | User + agent | Go-live | Open |
+| B11 | Phase 3 leftovers (D-071, `docs/b11-phase3-leftovers.md`). **OD-10 resolved** (confirmed by the user) and **OD-32 resolved** (helper built and tested). **15453 and 15454:** transcripts still empty on 2026-11-02 (31 Oct calls, window until 7 Nov); they stay deferred and out of the pool; processing them needs your authorisation when the transcripts arrive. **Sensitive-topic path on real data:** you chose to wait for a natural case, so it stays unproven on real data (open, accepted). Still user-confirmed only: source read-only and destination sharing | User + agent | Go-live | Partly resolved; transcripts and real sensitive case open |
 | B12 | The real customer send path has only been exercised by an internal test; first live use is C1 itself | Agent | C1 | Accepted, mitigated by individual approval |
 
 ## 3. Other risks (no blocker)
