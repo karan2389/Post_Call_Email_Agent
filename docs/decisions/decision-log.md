@@ -141,6 +141,10 @@ _The Phase 0 documentation and the previous-day design (D-001 … D-016) were ap
 - Claude plan usage is consumed and limited (R-09).
 - New open decisions OD-37 … OD-41; OD-07, OD-16, OD-22 superseded; OD-12, OD-17, OD-21, OD-23, OD-36 revised.
 
+### D-055 — Send Log worksheet created; Gmail identity checked; internal test send held (2026-11-01)
+
+**Done on the user's explicit authorisation (two operations only):** (1) worksheet `Send Log` (sheet ID 1001) created in the destination spreadsheet through the write guard with the gate open only for that step and closed straight after; 19 headers written and verified by read-back; `Sheet1` untouched; source untouched. (2) Gmail identity checked read-only (no profile endpoint exists; converging sent-sender and delivered-to evidence, `docs/phase4-gmail-integration.md` section 5). **Held:** the internal test send, because no stored, validated draft addressed to `karan.s@flexifunnels.com` exists, and creating one would write to `Sheet1` and needs a stored validation, neither of which was authorised. Nothing was sent; no scheduled task created; customer sending still disabled.
+
 ### D-054 — Send log, Gmail builders and reference sender, tested with mocks only (2026-11-01)
 
 **Decision:** send tracking is an append-only `Send Log` worksheet (19 columns) in the destination spreadsheet, not extra columns in `Sheet1` (the approved 21-column schema is unchanged); the worksheet is NOT created yet (needs approval). Code: `src/lib/sendlog.js`, `gmail.js`, `sender.js` and CLI helpers `presend`, `send-request`, `search-query`, `reconcile`, `event-row`, `send-key`. The durable attempt row is written before every send; only a definite connector rejection is SEND_FAILED; every other error is reconciled and never retried. 18 mocked-Gmail test groups cover success, blocked sends, tracking failures, duplicates, changed drafts, timeouts, interrupted runs, partial batches. **Not live-tested; not exactly-once.** Docs: `docs/phase4-tracking-schema.md`, `phase4-idempotency.md`, `phase4-error-handling.md`, `phase4-architecture.md`.

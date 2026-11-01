@@ -30,3 +30,7 @@ The most recent message in `in:sent` was sent by `supportcore@flexifunnels.com` 
 - Customer-facing sender for all automated post-call follow-up emails: `supportcore@flexifunnels.com` (approved by the user).
 - Internal test recipient (Stage B only): `karan.s@flexifunnels.com` (approved by the user). Test mode refuses every other address.
 - Not yet authorised: any internal test send (needs the user's go-ahead in chat), customer sending, scheduling. `config/run-settings.yaml` `gmail:` block holds these values; `delivery_mode` is `dry_run` and `gmail_enabled` is `false`.
+
+## 5. Identity check before the first test send (2026-11-01, read-only)
+
+The connector has **no profile or identity tool**, so an exact "profile lookup" is not possible. Converging read-only metadata evidence was used instead: all 11 messages in `in:sent` have the sender `supportcore@flexifunnels.com` (one distinct sender); `deliveredto:supportcore@flexifunnels.com` matches 172 threads; `deliveredto:karan.s@flexifunnels.com` matches none (so the approved test recipient is a different mailbox from the sending mailbox). This supports, but is not a direct statement by the connector of, the identity `supportcore@flexifunnels.com`; the first sent test message will show the From address. **No email has been sent yet.** The test send is on hold because a prerequisite is missing: there is no stored, validated draft addressed to the approved internal recipient (see D-055 and `handoff.md`).
