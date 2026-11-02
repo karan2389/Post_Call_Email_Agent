@@ -1,6 +1,6 @@
 ---
 name: email-generation
-version: 1.6.1
+version: 1.7.0
 stage: generation
 output_schema: EmailDraft
 ---
@@ -40,7 +40,8 @@ The customer's email address is not provided; the runtime sets the recipient.
      `Part 1: {url_1}`
      `Part 2: {url_2}`
    - Always one email, never one email per recording.
-9. **Close:** one line inviting them to reply if anything is unclear. Then the `signature_block` exactly as provided.
+9. **Close:** one line inviting them to reply if anything is unclear. Then the approved opt-out paragraph (see 9a), then the `signature_block` exactly as provided.
+9a. **Opt-out sentence (business-approved, mandatory, every email including `neutral_fallback`).** Add exactly this sentence, character for character, once, as its own paragraph (blank line before and after) directly before the `signature_block`, and nothing else with it: `If you prefer not to receive further automated post-call follow-up emails, simply reply to this email and let us know.` Never reword, shorten, translate, repeat or move it, and never add a company name, address or link to it. It is fixed text, not content: it is not counted in the word limit and is not a summary statement.
 10. Use short section labels in plain text (e.g. `What you can do next:`). No markdown, no HTML, no bold, no emoji.
 11. Length follows the shared policy (`preferred_max_words` 250, `permitted_max_words` 350, review above 350; words counted as whitespace-separated tokens of the body excluding the signature, including greeting, labels, list markers and URLs; at least `min_words`). First remove repetition, filler and unnecessary explanations. Never omit an unresolved issue, an important completed action or a pending action only to meet the limit. Up to 250 is normal; 251–350 is allowed only when needed to keep important customer information; above 350 write the complete email anyway and set `length_status` to `review_required` (a human reviews it; it is not sent automatically).
 12. List every summary entry you used in `referenced_item_ids` (union of their `source_item_ids`).
@@ -166,6 +167,7 @@ Wrong (forbidden): "Here are the recordings of our two calls" (segments are one 
 
 ## Changelog
 
+- 1.7.0 (2026-11-02) - Business-approved opt-out sentence (B3.3/A7, "simply reply") added as its own paragraph before the signature in every email (instruction 9a); excluded from the word count. **Not regression-tested with regenerated emails**: the deterministic check is unit-tested; the model's compliance still needs a regeneration run.
 - 1.6.1 (2026-11-01) - Found in the Phase 4 regression (F5, validator OWNER_MISATTRIBUTED): the "done" heading must be owner-neutral ("What was completed during the call:"), never "What we completed/resolved", because the bullets may credit the customer. Heading wording only.
 - 1.6.0 (2026-11-01) — Coverage-first generation (D-044; refined after the focused tests: fallback subject without a topic, no padding to reach a minimum, a date the call itself states may be repeated, status words once per unresolved issue rather than once per email): `summary.mode` handling with a **neutral fallback** email for calls with nothing reliable (thank-you, invitation to reply, recording link, no content claims); unclear outcomes produce cautious wording and `caveats` instead of blocking (`review_flags`/`STATUS_UNCLEAR` retired); sensitive-information rule (no passwords, codes, tokens; no unsupported legal/financial/security commitments); 80-word minimum exempts `neutral_fallback`; output fields `mode` and `caveats`. **Not regression-tested before the focused tests of the same date.**
 - 1.5.0 (2026-11-01) — Wording and status refinement after the first real-data draft review (D-041). Four distinct statement kinds (completed / explained / customer to do / status unclear) with explicit rules; "still open" wording only for pending or unresolved summary entries, once per email, never on guidance-only bullets; no contradictions between sections; one action and outcome per bullet; concrete wording and no unsupported promises of future help; customer-owned follow-ups under the customer next steps; optional `review_flags: ["STATUS_UNCLEAR"]` for unclear key outcomes; heading suggestions updated ("What we completed during the call", "What we discussed", "What you need to do next"); example rewritten. No change to ownership, recordings, UTF-8, length policy or validation. **Not regression-tested** (one real-data dry run only). Upstream cause noted, not changed here: guided on-screen actions can be classified `explained` by transcript-analysis/customer-summary when the transcript is garbled.

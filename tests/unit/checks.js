@@ -116,7 +116,9 @@ function deterministicChecks({ email, meta, analysis, policy }) {
   }
 
   // length, placeholders, banned, contacts, signature, format
-  const wc = wordsExcludingSignature(body, signature.split('\n')[0]);
+  const OO = require('../../src/lib/optout');
+  const optOutRequired = process.env.PHASE2_OPTOUT !== 'off';   // 'off' only to replay saved pre-1.7.0 emails
+  const wc = wordsExcludingSignature(optOutRequired ? OO.withoutOptOut(body) : body, signature.split('\n')[0]);
   const legacyMode = process.env.PHASE2_OWNER_RULE === 'legacy';
   let lengthStatus = 'within_preferred';
   if (legacyMode) {
@@ -145,10 +147,11 @@ function deterministicChecks({ email, meta, analysis, policy }) {
     }
   }
   if (/\[[^\]]*\]|\{\{|\}\}|<[A-Za-z ]+>|\bTBD\b|\bXXX\b|Lorem/.test(subject + '\n' + body)) add('PLACEHOLDER_PRESENT', 'placeholder-like text');
-  const lower = (subject + '\n' + body).toLowerCase();
+  const lower = (subject + '\n' + (optOutRequired ? OO.withoutOptOut(body) : body)).toLowerCase();   // the fixed approved sentence contains "automated"; only that exact sentence is exempt
   policy.banned.forEach((p) => { if (lower.includes(p)) add('BANNED_PHRASE', p); });
   if (/[\w.+-]+@[\w-]+\.[\w.-]+/.test(body) || /(?:\+\d[\d\s-]{8,}\d|\b\d{10}\b)/.test(body)) add('UNAPPROVED_CONTACT_DETAIL', 'email address or phone number in body');
   if (!body.trimEnd().endsWith(signature)) add('SIGNATURE_MISSING', 'configured signature block not at the end');
+  if (optOutRequired) { const r = OO.checkOptOut(body, signature); if (r) add('OPT_OUT_MISSING', r); }
   if (/\*\*|^#{1,6}\s|<\/?(html|p|b|br|div)\b/im.test(body)) add('FORMAT_INVALID', 'markdown or HTML');
   if (/\u00e2\u20ac|\u00c3[\u0080-\u00bf]|\ufffd/.test(subject + '\n' + body)) add('FORMAT_INVALID', 'mojibake / broken UTF-8 in subject or body');
 

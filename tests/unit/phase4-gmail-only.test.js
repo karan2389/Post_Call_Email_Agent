@@ -48,7 +48,7 @@ const draft = (i, o) => Object.assign({ stored: true, stored_recipient: `custome
   auto_send_eligible: true, sensitive_review_required: false, fingerprint: `2026-10-30|1${i}:00|customer${i}@example.com`, url_set_key: FA + '\n' + FB, destination_row: i + 1,
   validated_draft_hash: S.draftHash(`customer${i}@example.com`, SUBJ, BODY) }, o || {});
 const key = (i) => S.sendKey(draft(i).fingerprint, draft(i).url_set_key);
-const approval = (i, o) => A.createApproval(Object.assign({ send_key: key(i), recipient: `customer${i}@example.com`, draft_hash: S.draftHash(`customer${i}@example.com`, SUBJ, BODY), stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z' }, o || {})).record;
+const approval = (i, o) => A.createApproval(Object.assign({ send_key: key(i), recipient: `customer${i}@example.com`, draft_hash: S.draftHash(`customer${i}@example.com`, SUBJ, BODY), stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z', recording_permission_verified_by: 'Karan', dnc_lists_checked_by: 'Karan' }, o || {})).record;
 const live = (approvals, extra) => P.sendContext(CFG, Object.assign({ runId: 'run-g', delivery_mode: 'live', live_authorized: true, approvals: approvals || [], now: '2026-11-02T03:10:00Z' }, extra || {}));
 const states = (env) => env.events.map((e) => e.to);
 
@@ -199,7 +199,7 @@ t('approval rules: revoked, expired, test keys, missing approver or hash, invali
   assert.strictEqual(A.checkApproval([approval(1, { expires_at: '2026-11-02T03:09:00Z' })], rec, ctx).code, 'APPROVAL_EXPIRED');
   assert.strictEqual(A.checkApproval([approval(1)], rec, Object.assign({}, ctx, { stage_sent_counts: { C1: 5 } })).code, 'APPROVAL_STAGE_CAP_REACHED'); assert.strictEqual(A.checkApproval([approval(1, { stage: 'C2' })], rec, Object.assign({}, ctx, { stage_sent_counts: { C2: 15 } })).code, 'APPROVAL_STAGE_CAP_REACHED');
   assert.strictEqual(A.checkApproval([approval(1)], Object.assign({}, rec, { send_key: 'test_abc' }), ctx).code, 'APPROVAL_INVALID_SEND_KEY');
-  for (const bad of [{ send_key: 'test_abc' }, { recipient: 'nope' }, { draft_hash: '' }, { stage: 'C3' }, { stage: 'C0' }, { approved_by: ' ' }, { approved_at: 'x' }]) assert.strictEqual(A.createApproval(Object.assign({ send_key: key(1), recipient: 'a@example.com', draft_hash: 'h', stage: 'C1', approved_by: 'K', approved_at: '2026-11-02T03:00:00Z' }, bad)).ok, false, JSON.stringify(bad));
+  for (const bad of [{ send_key: 'test_abc' }, { recipient: 'nope' }, { draft_hash: '' }, { stage: 'C3' }, { stage: 'C0' }, { approved_by: ' ' }, { approved_at: 'x' }]) assert.strictEqual(A.createApproval(Object.assign({ send_key: key(1), recipient: 'a@example.com', draft_hash: 'h', stage: 'C1', approved_by: 'K', approved_at: '2026-11-02T03:00:00Z', recording_permission_verified_by: 'K', dnc_lists_checked_by: 'K' }, bad)).ok, false, JSON.stringify(bad));
   const six = [1, 2, 3, 4, 5, 6].map((i) => ({ send_key: 'send_' + i, stage: 'C1', approved_by: 'K', approved_at: 'x' })); assert.ok(A.validateApprovalSet(six).issues.some((i) => i.code === 'STAGE_CAP_EXCEEDED'));
   assert.ok(A.validateApprovalSet([six[0], six[0]]).issues.some((i) => i.code === 'DUPLICATE_ACTIVE_APPROVAL')); assert.strictEqual(A.validateApprovalSet(six.slice(0, 5)).ok, true); assert.deepStrictEqual(A.parseApprovals('not json'), []);
 });
@@ -219,6 +219,15 @@ t('source guarantees: no auto-approval path, provider.js reads no environment, n
   assert.ok(!/require\(['"]\.\/brevo['"]\)/.test(rd('sender.js')));
 });
 
+t('per-email attestations (D-075): an approval needs the approver\'s statement that recording permission was verified and the recipient was checked against all do-not-contact lists; without both it cannot be created and a record lacking them never counts at send time', async () => {
+  const base = { send_key: key(1), recipient: 'customer1@example.com', draft_hash: S.draftHash('customer1@example.com', SUBJ, BODY), stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z' };
+  for (const [o, code] of [[{}, 'APPROVAL_RECORDING_PERMISSION_ATTESTATION_REQUIRED'], [{ recording_permission_verified_by: ' ', dnc_lists_checked_by: 'K' }, 'APPROVAL_RECORDING_PERMISSION_ATTESTATION_REQUIRED'], [{ recording_permission_verified_by: 'K' }, 'APPROVAL_DNC_ATTESTATION_REQUIRED'], [{ recording_permission_verified_by: 'K', dnc_lists_checked_by: '' }, 'APPROVAL_DNC_ATTESTATION_REQUIRED']]) assert.strictEqual(A.createApproval(Object.assign({}, base, o)).code, code, JSON.stringify(o));
+  const ok = A.createApproval(Object.assign({}, base, { recording_permission_verified_by: 'Priya', dnc_lists_checked_by: 'Sam' })); assert.deepStrictEqual(ok.record.attestations, { recording_permission_verified_by: 'Priya', dnc_lists_checked_by: 'Sam' });
+  const legacy = Object.assign({}, approval(1)); delete legacy.attestations;   // an old-style record, or one edited by hand
+  const env = mkEnv(); const r = await X.sendOne(draft(1), undefined, live([legacy]), env.deps); assert.strictEqual(r.outcome, 'BLOCKED'); assert.ok(r.failed.includes('APPROVAL_ATTESTATION_MISSING')); assert.strictEqual(env.sendCalls, 0); assert.strictEqual(env.events.length, 0);
+  const half = Object.assign({}, approval(1), { attestations: { recording_permission_verified_by: 'Priya', dnc_lists_checked_by: '' } }); assert.strictEqual(A.checkApproval([half], { send_key: key(1), recipient: 'customer1@example.com', draft_hash: half.draft_hash }, { authorised_stages: ['C1'], now: '2026-11-02T03:10:00Z' }).code, 'APPROVAL_ATTESTATION_MISSING');
+  assert.strictEqual((await X.sendOne(draft(1), undefined, live([approval(1)]), mkEnv().deps)).outcome, 'SENT');   // with both attestations the send proceeds
+});
 t('secrets hygiene (D-069): .env.example holds placeholders only, no tracked file has a real-shaped Brevo key, and the Gmail send path never reads the environment or .env', () => {
   const root = path.join(__dirname, '../..'); const ex = fs.readFileSync(path.join(root, '.env.example'), 'utf8').split(/\r?\n/).filter((l) => l.trim() && !/^\s*#/.test(l));
   assert.ok(ex.every((l) => /^[A-Za-z_][A-Za-z0-9_]*=\s*$/.test(l)), 'every uncommented assignment must be empty'); assert.ok(!/xkeysib-[A-Za-z0-9]{20,}/.test(fs.readFileSync(path.join(root, '.env.example'), 'utf8')));

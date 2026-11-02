@@ -1,6 +1,6 @@
 ---
 name: email-validation
-version: 1.5.0
+version: 1.6.0
 stage: validation
 output_schema: ValidationResult
 ---
@@ -24,7 +24,7 @@ Deterministic checks (every recording URL present, in order and with `Part n` la
 
 ## Instructions
 
-1. Split the email body into individual statements (sentences or list entries). Ignore greeting, recording lines, generic close and signature. The opening sentence that restates why the customer called is **not** ignored.
+1. Split the email body into individual statements (sentences or list entries). Ignore greeting, recording lines, generic close, the fixed opt-out sentence (`If you prefer not to receive further automated post-call follow-up emails, simply reply to this email and let us know.`) and signature. The opt-out sentence is checked in code (`OPT_OUT_MISSING`: present once, exact, own paragraph before the signature); if you see it missing, altered, repeated or misplaced, report `FORMAT_INVALID`. The opening sentence that restates why the customer called is **not** ignored.
 2. For each statement, find the supporting analysis item(s) or, for the opening purpose sentence, the supporting analysis issue(s) (`problem_statement`). Record the mapping.
    - No supporting item or issue → `UNSUPPORTED_CLAIM`. This includes any symptom, error, cause or detail that appears only in the summary or email and not in the analysis (the analysis is the source of truth, so a summary that added a detail makes the email fail). An apology or acknowledgement of inconvenience (see Edge Cases) is not a factual claim. A statement supported **only** by an analysis item with `confidence: low`, or by something the summary lists in `omitted_item_ids` or `analysis_gaps`, is also `UNSUPPORTED_CLAIM`: unreliable content must not be stated as fact.
 3. For each mapped statement, compare the status the email conveys with the item's category:
@@ -143,6 +143,7 @@ I1 is `completed`, `owner: customer`, `guided_by: support`. "We enabled the orde
 
 ## Changelog
 
+- 1.6.0 (2026-11-02) - Approved opt-out sentence is fixed text, ignored by the semantic statement check and enforced in code (`OPT_OUT_MISSING`). Not regression-tested with regenerated emails.
 - 1.5.0 (2026-11-01) — Coverage-first validation (D-044): transcript confidence is never a condition; statements resting only on low-confidence items are `UNSUPPORTED_CLAIM`; `neutral_fallback` emails are valid when they contain no content claim; contradictions and status errors (5d), invented or confidently stated technical content (5e), sensitive information (5f, new code `SENSITIVE_INFO_INCLUDED`) and semantic identity/tone (5g) checked; output `email_class` (`full`/`conservative`/`neutral_fallback`/`unsafe`). Existing ownership, coverage, commitment, intent, timeline and recording checks unchanged. **Not regression-tested before the focused tests of the same date.**
 - 1.4.0 (2026-11-01) — Phase 2 final changes, **not regression-tested** (no runs by decision). Tolerates the friendlier headings, opening paragraph and natural timeline wording of email-generation 1.4.0 (style only), while judging meaning: a "done" heading over non-`completed` content, an unclear open state, or a label that swaps the owner still fail with the existing codes. Notes that character encoding is checked in code. No new codes; no change to ownership, coverage, commitment, intent, timeline or recording checks.
 - 1.3.0 (2026-10-31) — Same length policy as the code; coverage of unresolved issues and completed items (`KEY_OUTCOME_OMITTED`); customer-intent statements must be supported (found with P2-03 "wanted this fixed"); relative timelines read against `call_date`.

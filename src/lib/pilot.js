@@ -48,7 +48,7 @@ function candidatePool(records, opts) {
     if (key && inLog.has(key)) codes.push('ALREADY_IN_SEND_LOG');
     if (key) {   // confidence must come from a verified record bound to this exact draft (D-070)
       const cf = CF.resolveConfidence(o.confidenceRecords, { callRef: String(r.sourceRow), sendKey: key, draftHash: S.draftHash(rc.value, r.subject || '', r.body || ''), transcriptHash: r.transcriptHash, skillVersions: r.skillVersions, now: o.now, maxAgeDays: o.maxAgeDays });
-      if (!cf.ok) codes.push(cf.code); else if (!['medium', 'high'].includes(cf.derived)) codes.push('CONFIDENCE_TOO_LOW');
+      if (!cf.ok) codes.push(cf.code); else if (!(o.allowLowWithReview ? ['low', 'medium', 'high'] : ['medium', 'high']).includes(cf.derived)) codes.push('CONFIDENCE_TOO_LOW');   // allowLowWithReview: the user's written choice (D-078); a verified record is still required
     }
     const ref = String(r.sourceRow);
     if (codes.length) { excluded.push({ call_ref: ref, codes }); continue; }
@@ -79,7 +79,8 @@ function approvalCard(record, extra) {
     confidence_status: cf.ok ? 'VERIFIED' : cf.code, confidence_declared: cf.ok ? cf.record.declared : null,
     generation_mode: cf.ok ? cf.record.evidence.generation_mode : 'NOT_AVAILABLE', sensitive_topic: r.sensitive === true ? 'YES' : r.sensitive === false ? 'NO' : 'NOT_AVAILABLE', send_key: sendKey,
     draft_hash: rc.ok ? S.draftHash(rc.value, r.subject || '', r.body || '') : null, stage: x.stage || null, suppressed: rc.ok ? isSuppressed(rc.value, x.suppressed) : false };
-  card.approvable = !!(card.recipient && card.send_key && card.draft_hash && card.validation_status === 'PASSED' && card.processing_status === 'DRAFT_READY' && ['medium', 'high'].includes(card.confidence) && card.sensitive_topic === 'NO' && !card.suppressed);
+  card.attestations_required = ['RECORDING_PERMISSION_VERIFIED', 'DNC_LISTS_CHECKED'];   // the approver states both for THIS recipient (D-075); the agent cannot infer them
+  card.approvable = !!(card.recipient && card.send_key && card.draft_hash && card.validation_status === 'PASSED' && card.processing_status === 'DRAFT_READY' && (x.allowLowWithReview ? ['low', 'medium', 'high'] : ['medium', 'high']).includes(card.confidence) && card.sensitive_topic === 'NO' && !card.suppressed);
   card.binding = { send_key: card.send_key, recipient: card.recipient, draft_hash: card.draft_hash };
   return card;
 }
@@ -88,7 +89,7 @@ function approvalCard(record, extra) {
 function renderCard(c) {
   return ['EMAIL FOR INDIVIDUAL APPROVAL' + (c.stage ? ' (' + c.stage + ')' : ''), `Customer: ${c.customer_name}`, `Recipient: ${c.recipient}`, `Call reference: ${c.call_ref} (${c.call_date} ${c.call_time})`, `Subject: ${c.subject}`,
     `Fathom URL(s): ${c.fathom_urls.join(' , ')}`, `Validation: ${c.validation_status} / ${c.processing_status}`, `Confidence: ${c.confidence} [${c.confidence_status}] (model declared ${c.confidence_declared}; mode ${c.generation_mode})`, `Sensitive topic: ${c.sensitive_topic}`,
-    `Send key: ${c.send_key}`, `Draft hash: ${c.draft_hash}`, `Approvable: ${c.approvable ? 'yes' : 'NO'}`, '--- body ---', c.body, '--- end ---'].join('\n');
+    `Send key: ${c.send_key}`, `Draft hash: ${c.draft_hash}`, `Approvable: ${c.approvable ? 'yes' : 'NO'}`, `To approve, state: APPROVE ${c.stage || '<stage>'} ${c.send_key} ${c.draft_hash} ${c.attestations_required.join(' ')}`, '--- body ---', c.body, '--- end ---'].join('\n');
 }
 
 module.exports = { C1_MAX, DEFERRED_SOURCE_ROWS, singleRecipient, isSuppressed, candidatePool, validateAllowlist, approvalCard, renderCard };

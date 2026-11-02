@@ -73,6 +73,8 @@ t('review card carries every field the approver must see (confidence from the ve
   const c = card(rec(1), { stage: 'C1' }); const need = ['customer_name', 'recipient', 'call_ref', 'subject', 'body', 'fathom_urls', 'validation_status', 'confidence', 'confidence_status', 'sensitive_topic', 'send_key', 'draft_hash'];
   need.forEach((k) => assert.ok(c[k] !== undefined && c[k] !== null && c[k] !== '', k)); assert.strictEqual(c.approvable, true); assert.strictEqual(c.confidence_status, 'VERIFIED'); assert.strictEqual(c.generation_mode, 'full');
   assert.deepStrictEqual(c.binding, { send_key: c.send_key, recipient: c.recipient, draft_hash: c.draft_hash });
+  assert.deepStrictEqual(c.attestations_required, ['RECORDING_PERMISSION_VERIFIED', 'DNC_LISTS_CHECKED']);   // the approver states both for this recipient (D-075)
+  assert.ok(PL.renderCard(c).includes(`APPROVE C1 ${c.send_key} ${c.draft_hash} RECORDING_PERMISSION_VERIFIED DNC_LISTS_CHECKED`));
   const txt = PL.renderCard(c); [c.customer_name, c.recipient, c.call_ref, c.subject, c.body, c.fathom_urls[0], 'PASSED', 'high', 'VERIFIED', 'Sensitive topic: NO', c.send_key, c.draft_hash].forEach((s) => assert.ok(txt.includes(s), s));
 });
 t('a card is not approvable when anything is off: failed validation, low/missing/stale confidence, sensitive, unknown sensitivity, suppressed, bad recipient; a self-declared confidence on the row is ignored', () => {
@@ -83,7 +85,7 @@ t('a card is not approvable when anything is off: failed validation, low/missing
   assert.strictEqual(card(rec(1), { suppressed: ['person1@acme-demo.test'] }).approvable, false);
 });
 t('approval is bound to the card: any change to recipient, subject or body changes the hash and invalidates the approval; no bulk form exists', () => {
-  const c = card(rec(1)); const ap = A.createApproval({ send_key: c.send_key, recipient: c.recipient, draft_hash: c.draft_hash, stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z' }).record;
+  const c = card(rec(1)); const ap = A.createApproval({ send_key: c.send_key, recipient: c.recipient, draft_hash: c.draft_hash, stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z', recording_permission_verified_by: 'Karan', dnc_lists_checked_by: 'Karan' }).record;
   const ctx = { authorised_stages: ['C1'], now: '2026-11-02T03:10:00Z' }; assert.strictEqual(A.checkApproval([ap], c.binding, ctx).ok, true);
   for (const o of [{ body: rec(1).body + ' ' }, { subject: rec(1).subject + '!' }, { customerEmail: 'person1b@acme-demo.test' }]) {
     const c2 = PL.approvalCard(rec(1, o)); const res = A.checkApproval([ap], c2.binding, ctx); assert.strictEqual(res.ok, false, JSON.stringify(o)); assert.ok(/^APPROVAL_(DRAFT_CHANGED|RECIPIENT_MISMATCH|REQUIRED)$/.test(res.code), res.code);
@@ -92,7 +94,7 @@ t('approval is bound to the card: any change to recipient, subject or body chang
   assert.ok(!Object.keys(A).concat(Object.keys(PL)).some((k) => /bulk|approveAll|autoApprove/i.test(k)));
 });
 t('suppression blocks a live send even with a valid approval, before any log row or send call', async () => {
-  const c = card(rec(1)); const ap = A.createApproval({ send_key: c.send_key, recipient: c.recipient, draft_hash: c.draft_hash, stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z' }).record;
+  const c = card(rec(1)); const ap = A.createApproval({ send_key: c.send_key, recipient: c.recipient, draft_hash: c.draft_hash, stage: 'C1', approved_by: 'Karan', approved_at: '2026-11-02T03:00:00Z', recording_permission_verified_by: 'Karan', dnc_lists_checked_by: 'Karan' }).record;
   let sends = 0; const events = []; const deps = { now: () => '2026-11-02T03:30:00Z', log: { events: () => events, append: async (e) => { events.push(e); } }, mail: { name: 'gmail', send: async () => { sends += 1; return { id: 'x' }; } } };
   const d = { stored: true, stored_recipient: c.recipient, stored_subject: c.subject, stored_body: c.body, validation_status: 'PASSED', source_email: c.recipient, auto_send_eligible: true, sensitive_review_required: false, fingerprint: '2026-10-30|11:00|' + c.recipient, url_set_key: 'u', destination_row: 2, validated_draft_hash: c.draft_hash };
   const key = S.sendKey(d.fingerprint, d.url_set_key); const ap2 = Object.assign({}, ap, { send_key: key });
@@ -109,3 +111,16 @@ t('source guarantees: pilot.js performs no file, network or environment access a
   for (const [name, fn] of tests) { try { await fn(); n += 1; } catch (e) { console.error('FAIL: ' + name + '\n' + (e && e.stack ? e.stack.split('\n').slice(0, 5).join('\n') : e)); process.exitCode = 1; } }
   console.log(`phase4 pilot (C0 preparation): ${n}/${tests.length} test groups passed`);
 })();
+
+// D-078: low-confidence drafts enter the pool only when the user's explicit option is passed; default stays medium/high
+{
+  const PL = require('../../src/lib/pilot'); const CF = require('../../src/lib/confidence'); const S = require('../../src/lib/sendstate'); const N = require('../../src/lib/normalize');
+  const a = { items: [{ id: 'I1', category: 'explained', confidence: 'low', evidence: ['x'], owner: 'support' }], transcript_quality: 'partly_garbled', mode: 'conservative' };
+  const rec = { sourceRow: 1, customerName: 'Test', customerEmail: 'a@sample.test', callDate: '2026-11-01', callTime: '09:00', urls: ['https://fathom.video/share/x'], subject: 's', body: 'b', validationStatus: 'PASSED', processingStatus: 'DRAFT_READY', sensitive: false, transcriptHash: 'h', skillVersions: 'v' };
+  const fp = N.fingerprint('2026-11-01', '09:00', 'a@sample.test'); const key = S.sendKey(fp, N.urlSetKey(rec.urls)); const dh = S.draftHash('a@sample.test', 's', 'b');
+  const now = '2026-11-02T10:00:00+05:30'; const r = CF.buildRecord(a, { callRef: '1', sendKey: key, draftHash: dh, transcriptHash: 'h', skillVersions: 'v', createdAt: now });
+  const base = { confidenceRecords: [r], now, inSendLog: new Set() };
+  const synth = Object.assign({}, rec, { customerEmail: 'a@sample.test' });
+  const off = PL.candidatePool([synth], base); const on = PL.candidatePool([synth], Object.assign({ allowLowWithReview: true }, base));
+  require('assert').strictEqual(off.eligible.length, 0); require('assert').strictEqual(on.eligible.length, 1); console.log('ok - low confidence enters the pool only with the explicit option');
+}

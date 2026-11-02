@@ -54,6 +54,7 @@ Applied by the scheduled session as literal checklist steps (or by a helper if O
 | `UNAPPROVED_LINK` | Only the call's Fathom URLs and configured allowlisted URLs (e.g. help centre) |
 | `UNAPPROVED_CONTACT_DETAIL` | No phone numbers or email addresses other than configured support contacts |
 | `SIGNATURE_MISSING` | Configured signature block present |
+| `OPT_OUT_MISSING` | Approved opt-out sentence present once, exact, own paragraph directly before the signature (D-076); not counted in the word limit |
 | `FORMAT_INVALID` | Plain text, UTF-8, no markdown syntax (`**`, `#`), no HTML (unless OD-09 chooses HTML). **Encoding sub-check (2026-11-01):** subject and body must contain no mojibake (the sequence "â€" as in "â€“", "Ã" followed by a continuation character) and no U+FFFD replacement character. Unicode (en/em dashes, curly apostrophes, Devanagari) is valid and must be preserved. Implemented in `tests/unit/checks.js` (added 2026-11-01 after P2-10 run 1); the generator is also told to write UTF-8 explicitly (email-generation 1.4.0, instruction 13) |
 
 ## 3. Semantic checks (LLM validator + cross-reference)

@@ -17,7 +17,12 @@ function createApproval(o) {
   if (!STAGE_CAPS[a.stage]) return { ok: false, code: 'APPROVAL_INVALID_STAGE' };
   if (!a.approved_by || !String(a.approved_by).trim()) return { ok: false, code: 'APPROVAL_APPROVER_REQUIRED' };
   if (!a.approved_at || !Number.isFinite(Date.parse(a.approved_at))) return { ok: false, code: 'APPROVAL_TIME_REQUIRED' };
-  return { ok: true, record: { approval_id: a.approval_id || 'apr_' + String(a.send_key).slice(5, 17) + '_' + String(a.draft_hash).slice(0, 8), send_key: a.send_key, recipient: em(a.recipient), draft_hash: a.draft_hash,
+  // business owner conditions (D-075): the approver attests, per email, that the recording permission was verified before the link is included (B1.3)
+  // and that the recipient was checked against ALL existing do-not-contact lists (B3.2). Neither can be inferred by the agent; both are the approver's own statement.
+  const rp = a.recording_permission_verified_by; const dn = a.dnc_lists_checked_by;
+  if (!rp || !String(rp).trim()) return { ok: false, code: 'APPROVAL_RECORDING_PERMISSION_ATTESTATION_REQUIRED' };
+  if (!dn || !String(dn).trim()) return { ok: false, code: 'APPROVAL_DNC_ATTESTATION_REQUIRED' };
+  return { ok: true, record: { attestations: { recording_permission_verified_by: String(rp).trim(), dnc_lists_checked_by: String(dn).trim() }, approval_id: a.approval_id || 'apr_' + String(a.send_key).slice(5, 17) + '_' + String(a.draft_hash).slice(0, 8), send_key: a.send_key, recipient: em(a.recipient), draft_hash: a.draft_hash,
     stage: a.stage, approved_by: String(a.approved_by).trim(), approved_at: a.approved_at, expires_at: a.expires_at || null, revoked: false } };
 }
 
@@ -30,6 +35,8 @@ function checkApproval(approvals, rec, ctx) {
   if (!live.length) return { ok: false, code: 'APPROVAL_REVOKED' };
   const a = live.slice().sort((x, y) => Date.parse(y.approved_at) - Date.parse(x.approved_at))[0];
   if (!a.approved_by || !STAGE_CAPS[a.stage]) return { ok: false, code: 'APPROVAL_INVALID' };
+  const at = a.attestations || {};
+  if (!String(at.recording_permission_verified_by || '').trim() || !String(at.dnc_lists_checked_by || '').trim()) return { ok: false, code: 'APPROVAL_ATTESTATION_MISSING' };   // an approval without both attestations never counts (D-075)
   if (em(a.recipient) !== em(rec.recipient)) return { ok: false, code: 'APPROVAL_RECIPIENT_MISMATCH' };
   if (a.draft_hash !== rec.draft_hash) return { ok: false, code: 'APPROVAL_DRAFT_CHANGED' };
   if (!(c.authorised_stages || []).includes(a.stage)) return { ok: false, code: 'APPROVAL_STAGE_NOT_ACTIVE' };
