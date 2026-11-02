@@ -2,6 +2,9 @@
 
 _Last updated: 2026-10-31 â€” Phase 1 partly done (read-only). Awaiting review. Nothing from Tasks 6â€“8 is committed._
 
+## Business owner approval received and recorded line by line (2026-11-02, D-074)
+Approval by Saurabh Bhatnagar (Business Owner), evidence link given (not opened). Confirmed: B1.1 service-only, B9.1 unauthenticated links, B9.3 storage and access. Partial: B2.1 (teams, not individuals), B9.2 (no retention period set). Open tasks: B1.2 to B1.5, B2.5. "NA": B2.2 to B2.4 and all of B3 (no opt-out method, owner, lists, wording or suppression owner). The document does not authorise sending, scheduling or C1 to C3. **C1 stays blocked.** **Needs you / the owner:** real answers for the NA items (or an explicit written acceptance of the risk), the B1 documents, a named individual accountable for replies, the B9.1 clarification, and approvers for B5.
+
 ## Business owner approval reported, specifics pending (2026-11-02, D-073)
 The user said the business owner approved all the blockers. Recorded as reported in `docs/business-confirmations-record.md` and the C0 report; no line is marked CONFIRMED because no names, answers or evidence were supplied. **Needs you:** paste or point me to the owner's actual answers (reply owner and backup, check times and response target, opt-out process and who runs it, opt-out sentence yes/no and wording, existing do-not-contact lists and owner, Fathom sharing accepted, retention period, countries, exclusions, frequency limit) and the approvers for B5. Then I record each line and re-assess C1 readiness.
 
